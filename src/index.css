@@ -1,3 +1,9 @@
+@import 'antd/dist/reset.css';
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 body {
   margin: 0;
   padding: 0;
@@ -6,4 +12,85 @@ body {
 
 html {
   font-size: 62.5%;
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Nunito", serif;
+  font-optical-sizing: auto;
+}
+
+.container {
+  width: 1200px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.grid_row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -12px;
+  margin-right: -12px;
+}
+
+.grid_column_2 {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 16.666667%;
+}
+
+.grid_column_2_4 {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 20%;
+}
+
+.grid_column_3 {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 25%;
+}
+
+.grid_column_3_5 {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 29.1666667%;
+}
+
+.grid_column_4 {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 33.33333%;
+}
+
+.grid_column_5 {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 41.666667%;
+}
+
+.grid_column_6 {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 50%;
+}
+
+
+.grid_column_10 {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 83.333333%;
+}
+
+@keyframes GrowthAnimation {
+  from {
+      opacity: 0;
+      transform: scale(0);
+  }
+
+  to {
+      opacity: 1;
+      transform: scale(1);
+  }
 }

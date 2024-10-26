@@ -1,0 +1,100 @@
+.main { 
+    height: 100vh;
+    background-color: rgba(250, 134, 56, 0.2);
+    padding: 50px 0;
+    background-image: url('../../assets/images/dogAndCat.svg');
+    // background-repeat: no-repeat;
+    background-size: contain;
+    // background-position: top 100px left;
+    background-position: bottom;
+}
+
+.signIn {
+    display: flex;
+}
+
+.title {
+    margin-top: 100px;
+
+    .paragraph {
+        margin-top: 20px;
+        font-size: 3rem;
+        line-height: 1.5;
+        font-weight: 400;
+    }
+}
+
+.formSignIn {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+
+    .other {
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        span {
+            color: rgba(165, 165, 165, 0.8);
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 10px;
+        }
+    }
+
+    span {
+        display: flex;
+        justify-content: center;
+
+        a {
+            text-decoration: none;
+            font-size: 1.8rem;
+            color: #E87428;
+
+            &:hover {
+                text-decoration: underline;
+                opacity: 0.8;
+            }
+        }
+    }
+
+    .differentOption {
+        display: flex;
+    }
+}
+
+.footer {
+    margin: 30px 0;
+
+    .agreeTerms {
+        font-size: 1.85rem;
+        line-height: 1.5;
+        text-align: center;
+        padding: 10px;
+
+        span {
+            color: #E87428;
+        }
+
+        a {
+            text-decoration: none;
+            color: #E87428;
+        }
+    }
+
+    .doNotHaveAccount {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 800;
+
+        p {
+            color: rgba(165, 165, 165, 0.8);
+        }
+
+        a {
+            text-decoration: none;
+            color: #E87428;
+        }
+    }
+}
