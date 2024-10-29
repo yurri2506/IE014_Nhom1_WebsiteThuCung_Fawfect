@@ -9,6 +9,7 @@ import { FaChevronDown, FaRegHeart } from 'react-icons/fa6'
 import { PiShoppingCartBold } from 'react-icons/pi'
 import { SearchOutlined } from '@ant-design/icons';
 import MoreComponent from '../MoreComponent/MoreComponent';
+import { TbHelpSquare } from "react-icons/tb";
 
 const HeaderComponent = () => {
   return (
@@ -30,14 +31,8 @@ const HeaderComponent = () => {
               </li>
               <li>
                 <Link to={"/"}>
-                  <BiHelpCircle />
-                  <span>Hỗ trợ</span>
-                </Link>
-              </li>
-              <li>
-                <Link to={"/"}>
-                  <GrLanguage />
-                  <span>Tiếng Việt</span>
+                  <TbHelpSquare />
+                  <span>FAQ</span>
                 </Link>
               </li>
               <li>

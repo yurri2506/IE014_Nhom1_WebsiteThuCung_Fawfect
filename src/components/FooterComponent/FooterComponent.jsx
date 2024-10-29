@@ -1,4 +1,5 @@
 import React from 'react'
+import clsx from 'clsx'
 import styles from './FooterComponent.module.scss'
 import TitleComponent from '../TitleComponent/TitleComponent'
 import UnderLineComponent from '../UnderLineComponent/UnderLineComponent'
@@ -14,8 +15,8 @@ const FooterComponent = () => {
   return (
     <div className={styles.header}>
         <div className="container">
-            <div className='grid_row'>
-              <div className='grid_column_5'>
+            <div className={clsx('grid_row', styles.wrapper)}>
+              <div className='grid_column_4'>
                 <TitleComponent 
                   title="Pawfect petcare center"
                   textAlign="left"
@@ -56,7 +57,36 @@ const FooterComponent = () => {
                   </Link>
                 </div>
               </div>
-              <div className='grid_column_3_5'>
+              <div className='grid_column_3'>
+                <div className={styles.about}>
+                  <TitleComponent 
+                    title="Về PAWFECT"
+                    textAlign="left"
+                    textTransform="none"
+                    fontSize="3rem"
+                    color="#fff"
+                    margin='30px 0 10px'
+                  />
+                  <UnderLineComponent 
+                    width="150px"
+                    height="3px"
+                    background="#fff"
+                    borderRadisus="2px"
+                  />
+                  <div className={styles.more}>
+                    <Link to={"/"}>
+                      Giới thiệu về PAWFECT
+                    </Link>
+                    <Link to={"/"}>
+                      Điều khoản chung
+                    </Link>
+                    <Link to={"/"}>
+                      Chính sách bảo mật
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <div className='grid_column_2'>
                 <div className={styles.support}>
                   <TitleComponent 
                     title="Hỗ trợ"
@@ -73,12 +103,6 @@ const FooterComponent = () => {
                     borderRadisus="2px"
                   />
                   <div className={styles.more}>
-                    <Link to={"/terms"}>
-                      Điều khoản chung
-                    </Link>
-                    <Link to={"/"}>
-                      Chính sách bảo mật
-                    </Link>
                     <Link to={"/"}>
                       Trung tâm trợ giúp
                     </Link>
@@ -88,10 +112,13 @@ const FooterComponent = () => {
                     <Link to={"/"}>
                       Chính sách trả hàng và hoàn tiền
                     </Link>
+                    <Link to={"/"}>
+                      FAQ+
+                    </Link>
                   </div>
                 </div>
               </div>
-              <div className='grid_column_3_5'>
+              <div className='grid_column_3'>
                 <div className={styles.location}>
                   <TitleComponent 
                     title="Địa chỉ cửa hàng"
@@ -115,7 +142,9 @@ const FooterComponent = () => {
                 </div>
               </div>
             </div>
-            <p className={styles.copyRight}>© 2022 All rights reserved. Reliance Retail Ltd.</p>
+        </div>
+        <div className={styles.copyRight}>
+          <p>2024 - Bản quyền thuộc Công ty PAWFECT PETCARE CENTER</p>
         </div>
     </div>
   )

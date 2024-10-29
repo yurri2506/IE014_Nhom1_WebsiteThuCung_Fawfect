@@ -10,6 +10,8 @@ import InputFormComponent from '../../components/InputFormComponent/InputFormCom
 import { MdPhonePaused } from 'react-icons/md'
 import facebook_2 from '../../assets/images/facebook_2.svg'
 import google from '../../assets/images/google.svg'
+import { RiLockPasswordFill } from "react-icons/ri";
+
 
 const SignInPage = () => {
   return (
@@ -61,8 +63,8 @@ const SignInPage = () => {
                 margin="0 0 20px"
               />
               <InputFormComponent 
-                placeholder="Số điện thoại"
-                icon={<MdPhonePaused />}
+                placeholder="Mật khẩu"
+                icon={<RiLockPasswordFill />}
                 margin="0 0 30px"
               />
               <ButtonComponent 

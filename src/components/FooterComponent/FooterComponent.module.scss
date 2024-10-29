@@ -1,18 +1,13 @@
 .header {
     background-color: #E87428;
-    height: 500px;
     background-image: url('../../assets//images/footer.svg');
     background-size: contain;
     background-position: bottom right;
     background-repeat: no-repeat;
-    display: flex;
+}
 
-    .copyRight {
-        color: #fff;
-        font-size: 1.6rem;
-        justify-self: center;
-        margin-top: 20px;
-    }
+.wrapper {
+    margin: 0 0 30px;
 }
 
 .info {
@@ -48,6 +43,20 @@
     }
 }
 
+.about {
+    .more {
+        margin: 20px 0;
+    }
+
+    a {
+        display: block;
+        font-size: 1.6rem;
+        color: #fff;
+        text-decoration: none;
+        margin-bottom: 12px;
+    }
+}
+
 .support {
     .more {
         margin: 20px 0;
@@ -71,5 +80,17 @@
         font-size: 1.6rem;
         color: #fff;
         line-height: 1.4;
+    }
+}
+
+.copyRight {
+    background-color: #D86C27;
+    height: 50px;
+
+    p {
+        color: #fff;
+        font-size: 1.6rem;
+        text-align: center;
+        line-height: 5rem;
     }
 }
