@@ -57,7 +57,7 @@ const FooterComponent = () => {
                   </Link>
                 </div>
               </div>
-              <div className='grid_column_3'>
+              <div className='grid_column_2_5'>
                 <div className={styles.about}>
                   <TitleComponent 
                     title="Về PAWFECT"
@@ -86,7 +86,7 @@ const FooterComponent = () => {
                   </div>
                 </div>
               </div>
-              <div className='grid_column_2'>
+              <div className='grid_column_2_5'>
                 <div className={styles.support}>
                   <TitleComponent 
                     title="Hỗ trợ"

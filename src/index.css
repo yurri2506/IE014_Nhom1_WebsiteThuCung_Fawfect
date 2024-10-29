@@ -46,6 +46,12 @@ h1, h2, h3, h4, h5, h6 {
   width: 20%;
 }
 
+.grid_column_2_5 {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 20.8333333%;
+}
+
 .grid_column_3 {
   padding-left: 12px;
   padding-right: 12px;
