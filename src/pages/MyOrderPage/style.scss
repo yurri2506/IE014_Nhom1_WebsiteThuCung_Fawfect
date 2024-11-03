@@ -1,0 +1,67 @@
+:where(.css-dev-only-do-not-override-apn68).ant-tabs-large >.ant-tabs-nav .ant-tabs-tab{
+  font-size: 20px;
+}
+
+:where(.css-dev-only-do-not-override-apn68){
+  .ant-input {
+  font-size: 18px;
+  }
+
+
+  .ant-image {
+    object-fit: cover;
+    object-position: center;
+    height: 300px;
+
+  }
+
+  .ant-input-search >.ant-input-group >.ant-input-group-addon:last-child .ant-input-search-button{
+    height: 40px;
+  }
+
+  .img-product img{
+    width: 120px;       
+    height: 120px;
+    object-fit: cover;     
+    object-position: center;  
+    border-radius: 8px;
+  }
+
+  .title-description {
+    font-size: 17px;
+    margin: 10px 0px;
+  }
+
+  .status-product {
+    text-align: right;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+
+  .order-card .ant-card-body{
+    padding: 5px 20px 20px 20px;
+  }
+
+  .title-price-card {
+    text-align: right;
+    font-size: 18px;
+    color: orange;
+
+    .title-price {
+      color:black
+    }
+  }
+
+  .button-order-card {
+    align-items: center;
+    text-align: right;
+    button{
+      font-size: 22px;
+      height: 35px;
+      width: 120px;
+      text-align: right;
+      margin-left: 25px;
+    }
+  }
+
+}
