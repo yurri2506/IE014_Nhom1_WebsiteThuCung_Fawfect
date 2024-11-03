@@ -31,10 +31,8 @@ import brand12 from '../../assets/images/brand12.svg'
 import brand13 from '../../assets/images/brand13.svg'
 import brand14 from '../../assets/images/brand14.svg'
 import brand15 from '../../assets/images/brand15.svg'
-import BackComponent from '../../components/BackComponent/BackComponent'
-import NextComponent from '../../components/NextComponent/NextComponent'
-import FeedBackComponent from '../../components/FeedBackComponent/FeedBackComponent'
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
+import CustomerReviewsComponent from '../../components/CustomerReviewsComponent/CustomerReviewsComponent'
 
 const HomePage = () => {
   return (
@@ -323,7 +321,7 @@ const HomePage = () => {
             textAlign="left"
             fontSize="4rem"
           />
-          <div className={styles.btn}>
+          {/* <div className={styles.btn}>
             <BackComponent 
               fontSize="5rem"
               color="#000"
@@ -332,9 +330,9 @@ const HomePage = () => {
               fontSize="5rem"
               color="#000"
             />
-          </div>
+          </div> */}
         </div>
-        <div className='grid_row' style={{marginBottom: "50px"}}>
+        {/* <div className='grid_row' style={{marginBottom: "50px"}}>
           <div className='grid_column_4'>
             <FeedBackComponent 
               customer="Sarah M."
@@ -353,6 +351,9 @@ const HomePage = () => {
               review='"Điểm đến ưa thích mỗi khi muốn shopping cho boss nhà mình!!"'
             />
             </div>
+        </div> */}
+        <div style={{marginBottom: "50px"}}>
+          <CustomerReviewsComponent />
         </div>
       </div>
   )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import dogAndCat from '../../assets/images/dogAndCat.svg'
 import styles from './SignInPage.module.scss'
 import TitleComponent from '../../components/TitleComponent/TitleComponent'
@@ -58,14 +58,22 @@ const SignInPage = () => {
                 margin="50px 0 30px"
               />
               <InputFormComponent 
-                placeholder="Số điện thoại"
+                placeholder="Số điện thoại/Email"
                 icon={<MdPhonePaused />}
                 margin="0 0 20px"
+                positionProps={{
+                  mainSpan: { top: "16px", left: "90px" }
+                }}
               />
-              <InputFormComponent 
+              <InputFormComponent
+                type="password"
                 placeholder="Mật khẩu"
                 icon={<RiLockPasswordFill />}
                 margin="0 0 30px"
+                positionProps={{
+                  mainSpan: { top: "16px", left: "90px" },
+                  otherSpan: {top: "16px", left: "385px"}
+                }}
               />
               <ButtonComponent 
                 title="ĐĂNG NHẬP"
@@ -73,7 +81,7 @@ const SignInPage = () => {
                 margin="0 0 15px"
               />
               <span>
-                <Link to={"/forgot-password"}>
+                <Link to={"/reset"}>
                   Quên mật khẩu?
                 </Link>
               </span>

@@ -2,14 +2,13 @@ import React from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-const NextComponent = ({ fontSize, color }) => {
+const NextComponent = ({ onClick, ...props }) => {
   return (
     <div>
-      <Link to={"/"}>
-        <FaChevronRight 
-            style={{fontSize: fontSize, color: color}}
-        />
-      </Link>
+      <FaChevronRight 
+          style={{...props, cursor: "pointer"}}
+          onClick={onClick}
+      />
     </div>
   )
 }

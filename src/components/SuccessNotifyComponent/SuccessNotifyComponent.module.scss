@@ -1,0 +1,49 @@
+.main { 
+    height: 100vh;
+    background-color: rgba(250, 134, 56, 0.2);
+    padding: 50px 0;
+    background-image: url('../../assets/images/dogs.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    // background-position: top 100px left;
+    background-position: bottom;
+}
+
+.step {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    position: relative;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+
+    .choice {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        .title {
+            flex: 1;
+        }
+    }
+}
+
+.icon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.img {
+    display: flex;
+    height: 250px;
+
+    img {
+        margin: 0 auto;
+        // scale: 1.5;
+    }
+}

@@ -4,14 +4,13 @@ import { FaChevronLeft } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 
-const BackComponent = ({ fontSize, color }) => {
+const BackComponent = ({ onClick, ...props }) => {
   return (
     <div>
-        <Link to={"/"}>
-          <FaChevronLeft 
-              style={{fontSize: fontSize, color: color}}
-          />
-        </Link>
+      <FaChevronLeft 
+          style={{...props, cursor: "pointer"}}
+          onClick={onClick}
+      />
     </div>
   )
 }
