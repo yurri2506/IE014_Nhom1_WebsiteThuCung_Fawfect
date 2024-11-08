@@ -43,7 +43,7 @@ const SetPasswordComponent = ({onClick}) => {
         <div className={styles.form}>
             <FormComponent 
                 width="650px"
-                height="480px"
+                height="550px"
                 background="rgba(255, 255, 255, 0.8)"
                 borderRadius="20px"
                 border="1px solid #000"
@@ -69,6 +69,16 @@ const SetPasswordComponent = ({onClick}) => {
             </div>
             <InputFormComponent 
                 placeholder="Mật khẩu"
+                icon={<RiLockPasswordFill />}
+                margin="30px 0 0"
+                type="password"
+                positionProps={{
+                    mainSpan: { top: "45px", left: "165px" },
+                    otherSpan: {top: "45px", left:"460px"}
+                }}
+            />
+            <InputFormComponent 
+                placeholder="Xác nhận mật khẩu"
                 icon={<RiLockPasswordFill />}
                 margin="30px 0 0"
                 type="password"

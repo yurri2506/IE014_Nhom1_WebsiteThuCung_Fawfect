@@ -69,7 +69,7 @@ const HeaderComponent = () => {
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to={"/my-cart"}>
                   <PiShoppingCartBold />
                   <span>Giỏ hàng</span>
                 </Link>
@@ -100,7 +100,7 @@ const HeaderComponent = () => {
               <MoreComponent className={styles.moreCat} />
             </li>
             <li>
-              <Link>
+              <Link to={"/about"}>
                   Về chúng tôi
               </Link>
             </li>       

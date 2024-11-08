@@ -2,7 +2,14 @@ import React from 'react'
 import clsx from 'clsx'
 import styles from './ButtonComponent.module.scss'
 
-const ButtonComponent = ({ title, icon, margin, primary, iconSmall, iconLarge, ...props }) => {
+const ButtonComponent = ({ title, icon, margin, 
+  width,
+  height,
+  borderRadius = "0", 
+  primary, 
+  iconSmall, 
+  iconLarge, 
+  ...props }) => {
 
   const classes = clsx(styles.btn, {
     [styles.primary]: primary,
@@ -19,9 +26,10 @@ const ButtonComponent = ({ title, icon, margin, primary, iconSmall, iconLarge, .
       margin: margin
     }}
     >
-      <button 
+      <button
         type="button" 
         className={classes}
+        style={{borderRadius: borderRadius, width: width, height: height}}
         {...props}
       >
         <img src={icon} alt="" />

@@ -1,0 +1,32 @@
+.main {
+    display: flex;
+    align-items: center;
+    margin: 50px 0;
+}
+
+.img {
+
+    img {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+.aboutMore {
+    h3 {
+        font-size: 4.5rem;
+        font-weight: 700;
+        margin-left: 100px;
+    }
+
+    ul {
+        margin-left: 10px;
+    }
+
+    li {
+        font-size: 2rem;
+        text-align: justify;
+        line-height: 1.5;
+        margin: 10px 0;
+    }
+}

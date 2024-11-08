@@ -24,7 +24,7 @@ const CustomerReviewsComponent = () => {
         fontSize = "5rem"
         color = "#000"
         position = "absolute"
-        z-index = "2"
+        zIndex = "2"
         top = "-80px"
         right = "0"
     />,
@@ -32,7 +32,7 @@ const CustomerReviewsComponent = () => {
         fontSize = "5rem"
         color = "#000"
         position = "absolute"
-        z-index = "2"
+        zIndex = "2"
         top = "-80px"
         right = "50px"
     />

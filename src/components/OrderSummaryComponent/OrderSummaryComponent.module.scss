@@ -1,0 +1,76 @@
+.orderSummary {
+    margin-left: 30px;
+    width: 500px;
+    height: 350px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    position: relative;
+    // display: flex;
+    // flex-direction: column;
+    // flex: 1;
+
+    h3 {
+        font-size: 2.4rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    input {
+        padding: 0;
+        border: 0;
+        width: 270px;
+        height: 50px;
+        background-color: #F0F0F0;
+        border-radius: 20px;
+        outline: none;
+        padding-left: 40px;
+        color: rgba(0, 0, 0, 0.4);
+        font-size: 1.8rem;
+    }
+
+    span {
+        position: absolute;
+        font-size: 2rem;
+        top: 84px;
+        left: 30px;
+        color: rgba(0, 0, 0, 0.4);
+    }
+
+    .btn {
+        width: 120px;
+        height: 50px;
+        border-radius: 20px;
+        margin-left: 15px;
+        background-color: #000;
+        border: none;
+        color: #fff;
+        font-size: 1.7rem;
+        cursor: pointer;
+    
+        &:hover {
+            opacity: 0.8;
+        }
+    }   
+
+    p {
+        font-size: 1.8rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 5px 0;
+        font-weight: 600;
+    }
+
+    .discount {
+        color: #E12525;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .total {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+}

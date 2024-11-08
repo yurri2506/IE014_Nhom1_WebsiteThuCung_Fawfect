@@ -77,10 +77,10 @@ const FooterComponent = () => {
                     <Link to={"/"}>
                       Giới thiệu về PAWFECT
                     </Link>
-                    <Link to={"/"}>
+                    <Link to={"/general-terms"}>
                       Điều khoản chung
                     </Link>
-                    <Link to={"/"}>
+                    <Link to={"/privacy-policy"}>
                       Chính sách bảo mật
                     </Link>
                   </div>
@@ -106,10 +106,10 @@ const FooterComponent = () => {
                     <Link to={"/"}>
                       Trung tâm trợ giúp
                     </Link>
-                    <Link to={"/"}>
+                    <Link to={"/guarantee"}>
                       Chính sách bảo hành
                     </Link>
-                    <Link to={"/"}>
+                    <Link to={"/return-policy"}>
                       Chính sách trả hàng và hoàn tiền
                     </Link>
                     <Link to={"/"}>

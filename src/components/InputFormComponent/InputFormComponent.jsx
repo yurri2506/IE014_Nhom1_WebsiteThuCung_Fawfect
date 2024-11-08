@@ -8,7 +8,7 @@ import { MdOutlineVisibilityOff } from "react-icons/md"
 const InputFormComponent = ({ type = "text", 
     placeholder, 
     icon, 
-    margin = "0", 
+    margin = "0",
     isPassword = false,
     positionProps = {},
     ...props }) => {
@@ -24,7 +24,8 @@ const InputFormComponent = ({ type = "text",
       <input 
         style={{margin: margin}} 
         type={type === "password" && showPassword ? "text" : type}
-        required 
+        required
+        // value={value}
         placeholder={placeholder} 
         {...props}
       />

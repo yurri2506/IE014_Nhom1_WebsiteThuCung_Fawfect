@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UnderLineComponent = ({ width, height, background,
+const UnderLineComponent = ({ width, height, background, margin = "0",
   display = "block", 
   borderRadisus = "none" }) => {
   return (
@@ -9,7 +9,8 @@ const UnderLineComponent = ({ width, height, background,
       height: height, 
       backgroundColor: background,
       display: display,
-      borderRadius: borderRadisus
+      borderRadius: borderRadisus,
+      margin: margin
     }}>
     </div>
   )

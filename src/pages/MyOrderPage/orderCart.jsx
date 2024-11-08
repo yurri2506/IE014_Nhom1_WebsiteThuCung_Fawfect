@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.scss";
+import "./styles.scss";
 import {
   Row,
   Col, 
@@ -42,3 +42,5 @@ export const OrderCart = ({ order_status, src_img, product_title, product_descri
     </>
   );
 };
+
+export default OrderCart;

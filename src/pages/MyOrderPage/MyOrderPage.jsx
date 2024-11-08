@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Tabs, Input, Card, Button, Typography, Row, Col } from "antd";
 import myAvatar from "../../assets/images/avatar.jpg";
-import "./style.scss";
-import ProfileUser from "./profileUser.jsx";
-import { OrderCart } from "./orderCart.jsx";
+import "./styles.scss";
+import ProfileUser from  "./UserProfile.jsx";
+import OrderCart from  "./OrderCart.jsx";
 
 const { TabPane } = Tabs;
 const { Text } = Typography;

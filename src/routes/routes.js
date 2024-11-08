@@ -2,15 +2,17 @@ import HomePage from "../pages/HomePage/HomePage";
 import OrderPage from "../pages/OrderPage/OrderPage";
 import ProductsPage from "../pages/ProductsPage/ProducstPage"
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage"
-import TermsPage from "../pages/TermsPage/TermsPage"
+import GeneralTermsPage from "../pages/GeneralTermsPage/GeneralTermsPage"
 import SignInPage from "../pages/SignInPage/SignInPage"
 import SignUpPage from "../pages/SignUpPage/SignUpPage"
 import ProductDetailsPage from "../pages/ProductDetailsPage/ProductDetailsPage"
-<<<<<<< HEAD
 import ResetPasswordPage from "../pages/ResetPasswordPage/ResetPasswordPage"
-=======
 import MyOrderPage from "../pages/MyOrderPage/MyOrderPage"
->>>>>>> 15fc56281db4a473c70ba5f0372ae96d9b0c0ff9
+import AboutPage from "../pages/AboutPage/AboutPage";
+import GuaranteePage from "../pages/GuaranteePage/GuaranteePage";
+import ReturnPolicyPage from "../pages/ReturnPolicyPage/ReturnPolicyPage";
+import PrivacyPolicyPage from "../pages/PrivacyPolicyPage/PrivacyPolicyPage";
+import MyCart from "../pages/MyCart/MyCart";
 
 export const routes = [
     {
@@ -29,8 +31,8 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/terms',
-        page: TermsPage,
+        path: '/general-terms',
+        page: GeneralTermsPage,
         isShowHeader: true
     },
     {
@@ -60,6 +62,31 @@ export const routes = [
     {
         path: '/reset',
         page: ResetPasswordPage,
+        isShowHeader: true
+    },
+    {
+        path: '/about',
+        page: AboutPage,
+        isShowHeader: true
+    },
+    {
+        path: '/guarantee',
+        page: GuaranteePage,
+        isShowHeader: true
+    },
+    {
+        path: '/return-policy',
+        page: ReturnPolicyPage,
+        isShowHeader: true
+    },
+    {
+        path: '/privacy-policy',
+        page: PrivacyPolicyPage,
+        isShowHeader: true
+    },
+    {
+        path: '/my-cart',
+        page: MyCart,
         isShowHeader: true
     }
 ]

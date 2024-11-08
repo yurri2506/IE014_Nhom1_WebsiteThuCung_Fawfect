@@ -1,0 +1,43 @@
+.guarantee {
+    padding: 50px 0;
+    line-height: 1.5;
+
+    h2 {
+        font-size: 4rem;
+        font-weight: 800;
+    }
+
+    h2 + p {
+        font-size: 2.4rem;
+        margin-left: 30px;
+        text-align: justify;
+    }
+
+    ul {
+        list-style-type: decimal;
+        background-color: #fff;
+        font-size: 2.4rem;
+        font-weight: bold;
+        text-align: justify;
+
+        p {
+            font-size: 2.4rem;
+            margin: 15px 0;
+            font-weight: normal;
+            padding-left: 25px;
+        }
+    }
+
+    .plus {
+        margin-left: 50px;
+    }
+
+    span {
+        display: block;
+        margin-top: 30px;
+        color: #E87428;
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+}
