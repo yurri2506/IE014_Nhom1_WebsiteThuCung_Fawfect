@@ -1,20 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import styles from './CheckOutPage.module.scss'
 import { FaLocationDot } from "react-icons/fa6";
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
+import UnderLineComponent from '../../components/UnderLineComponent/UnderLineComponent';
 import momo from '../../assets/images/momo.svg'
 import visa from '../../assets/images/visa.svg'
 import applePay from '../../assets/images/applePay.svg'
+import SelectAddressComponent from '../../components/SelectAddressComponent/SelectAddressComponent';
 
 
 const CheckOutPage = () => {
     const location = useLocation();   
-    const { cartItems = [], checkedItems = [], discount = 0, shippingFee = 0 } = location.state || {};
+    const { cartItems = [], checkedItems = [], discount = 0, shippingFee = 0, selectedAddress } = location.state || {};
     const selectedItems = cartItems.filter(item => checkedItems.includes(item.id));
     const totalItemsPrice = selectedItems.reduce((total, item) => total + item.price * item.quantity, 0);
     const totalAmount = Math.max(0, totalItemsPrice + shippingFee - discount);
-    // const [address, setAddress] = useState()
+
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = (event) => {
+      event.preventDefault(); 
+      setIsModalOpen(true); 
+      window.history.pushState(null, "", "/check-out"); 
+    };
+
+    const closeModal = () => setIsModalOpen(false);
   return (
     <div className={styles.main}>
       <div className="container">
@@ -26,18 +37,24 @@ const CheckOutPage = () => {
             <h3>Địa chỉ nhận hàng</h3>
           </div>
           <div className={styles.infoAddress}>
-            <p>Phương Uyên</p>
-            <p>(+84) 382868383</p>
+            <p>{selectedAddress.name}</p>
+            <p>{selectedAddress.phone}</p>
             <div className={styles.info}>
-              <p>324 Xô Viết Nghệ Tĩnh, Phường 24, Quận Bình Thạnh, TP. Hồ Chí Minh</p>
+              <p>{selectedAddress.address}</p>
               <div className={styles.change}>
                 <span>Mặc định</span>
-                <Link to={"/"}>Thay đổi</Link>
+                <Link to={"/check-out"} onClick={openModal}>Thay đổi</Link>
               </div>
             </div>
           </div>
         </div>
-
+        {
+          isModalOpen && 
+          <SelectAddressComponent 
+            closeModal={closeModal}
+          />
+        }
+        
         <div className={styles.productCheckOut}>
           <table className={styles.productTable}>
             <thead>
@@ -139,10 +156,17 @@ const CheckOutPage = () => {
               <span>{totalAmount.toLocaleString('vi-VN')}₫</span>
             </p>
           </div>
+          <UnderLineComponent 
+            width="100%"
+            height="1px"
+            background="rgba(0, 0, 0, 0.1"
+            margin='20px 0'
+          />
           <ButtonComponent 
             title="Đặt hàng"
             width="500px"
             primary
+            margin="30px 0"
           />
         </div>
       </div>
