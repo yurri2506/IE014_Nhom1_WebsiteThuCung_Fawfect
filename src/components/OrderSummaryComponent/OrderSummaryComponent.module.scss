@@ -1,7 +1,7 @@
 .orderSummary {
     margin-left: 30px;
     width: 500px;
-    height: 350px;
+    height: 450px;
     background-color: #fff;
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -63,13 +63,13 @@
         font-weight: 600;
     }
 
-    .discount {
-        color: #E12525;
+    .total {
+        color:#E87428;
         font-size: 2rem;
         font-weight: 700;
     }
 
-    .total {
+    .normal {
         font-size: 2rem;
         font-weight: 700;
     }

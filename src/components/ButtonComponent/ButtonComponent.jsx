@@ -7,6 +7,7 @@ const ButtonComponent = ({ title, icon, margin,
   height,
   borderRadius = "0", 
   primary, 
+  showIcon = true,
   iconSmall, 
   iconLarge, 
   ...props }) => {
@@ -32,8 +33,10 @@ const ButtonComponent = ({ title, icon, margin,
         style={{borderRadius: borderRadius, width: width, height: height}}
         {...props}
       >
-        <img src={icon} alt="" />
-        {title}
+        {showIcon && <img src={icon} alt="" />}
+        <div>
+          {title} 
+        </div>
       </button>
     </div>
   )

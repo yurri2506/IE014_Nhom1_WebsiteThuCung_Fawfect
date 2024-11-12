@@ -4,7 +4,7 @@ import { RiCoupon3Line } from "react-icons/ri";
 import ButtonComponent from '../ButtonComponent/ButtonComponent';
 import UnderLineComponent from '../UnderLineComponent/UnderLineComponent';
 
-const OrderSummaryComponent = ({ totalAmount, discount }) => {
+const OrderSummaryComponent = ({ totalAmount, discount, shippingFee, safe, onClick }) => {
     const [coupon, setCoupon] = useState('');
 
     const handleApplyCoupon = () => {
@@ -29,13 +29,16 @@ const OrderSummaryComponent = ({ totalAmount, discount }) => {
           background= "rgba(0, 0, 0, 0.2)"
           margin= "30px 0 20px"
         />
-        <p>Giảm giá: <p className={styles.discount}>  {discount.toLocaleString()} VNĐ</p></p>
+        <p>Giảm giá: <p className={styles.normal}>  {discount.toLocaleString()} VNĐ</p></p>
+        <p>Phí vận chuyển <p className={styles.normal}>{shippingFee.toLocaleString()} VNĐ</p></p>
+        <p>Tiết kiệm <p className={styles.normal}>{safe.toLocaleString()} VNĐ</p></p>
         <p>Tổng thanh toán: <p className={styles.total}>{totalAmount.toLocaleString()} VNĐ</p></p>
         <div style={{margin: "30px 0"}}>
           <ButtonComponent 
             primary
             title="Mua hàng"
             width="80%"
+            onClick={onClick}
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './AboutMeComponent.module.scss'
 
-const AboutMeComponent = ({avt, aboutName, aboutPara1, aboutPara2, aboutPara3}) => {
+const AboutMeComponent = ({avt, aboutName, aboutPara1, aboutPara2, aboutPara3 }) => {
   return (
     <div className={styles.main}>
         <div className={styles.img}>

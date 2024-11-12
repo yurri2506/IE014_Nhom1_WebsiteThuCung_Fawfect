@@ -15,7 +15,10 @@ const CartItemComponent = ({ item, onQuantityChange, onRemove, onCheck, isChecke
         </div>
         <div className={styles.details}>
           <p>{item.name}</p>
-          <p>{item.price.toLocaleString()} VNĐ</p>
+          <div className={styles.price}>
+            <p>{item.oldPrice.toLocaleString()} VNĐ</p>
+            <p>{item.price.toLocaleString()} VNĐ</p>
+          </div>
         </div>
         <div className={styles.changeItem}>
           <button onClick={() => onRemove(item.id)}>

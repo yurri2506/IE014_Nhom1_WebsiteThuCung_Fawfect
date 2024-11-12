@@ -12,7 +12,8 @@ import AboutPage from "../pages/AboutPage/AboutPage";
 import GuaranteePage from "../pages/GuaranteePage/GuaranteePage";
 import ReturnPolicyPage from "../pages/ReturnPolicyPage/ReturnPolicyPage";
 import PrivacyPolicyPage from "../pages/PrivacyPolicyPage/PrivacyPolicyPage";
-import MyCart from "../pages/MyCart/MyCart";
+import MyCartPage from "../pages/MyCartPage/MyCartPage";
+import CheckOutPage from "../pages/CheckOutPage/CheckOutPage";
 
 export const routes = [
     {
@@ -86,7 +87,12 @@ export const routes = [
     },
     {
         path: '/my-cart',
-        page: MyCart,
+        page: MyCartPage,
+        isShowHeader: true
+    },
+    {
+        path: '/check-out',
+        page: CheckOutPage,
         isShowHeader: true
     }
 ]
