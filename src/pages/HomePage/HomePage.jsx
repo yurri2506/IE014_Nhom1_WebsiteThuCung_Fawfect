@@ -38,7 +38,7 @@ const HomePage = () => {
   return (
       <div className='container'>
         <div className={styles.sliderImg}>
-          <SliderComponent arrImages={[slider1, slider2]}/>
+          <SliderComponent arrImages={[slider1, slider2]} />
         </div>
         <div className='grid_row'>
           <div className='grid_column_3'>

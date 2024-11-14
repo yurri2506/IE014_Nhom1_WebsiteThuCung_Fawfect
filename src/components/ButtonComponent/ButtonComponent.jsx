@@ -5,6 +5,10 @@ import styles from './ButtonComponent.module.scss'
 const ButtonComponent = ({ title, icon, margin, 
   width,
   height,
+  className,
+  widthDiv = "100%",
+  minWidth,
+  fontSize,
   borderRadius = "0", 
   primary, 
   showIcon = true,
@@ -16,11 +20,11 @@ const ButtonComponent = ({ title, icon, margin,
     [styles.primary]: primary,
     [styles.iconSmall]: iconSmall,
     [styles.iconLarge]: iconLarge
-  })
+  }, className)
   return (
     <div 
       style={{
-      width: "100%", 
+      width: widthDiv, 
       display: "flex", 
       justifyContent: "center", 
       alignItems: "center",
@@ -30,11 +34,11 @@ const ButtonComponent = ({ title, icon, margin,
       <button
         type="button" 
         className={classes}
-        style={{borderRadius: borderRadius, width: width, height: height}}
+        style={{borderRadius: borderRadius, width: width, height: height, minWidth: minWidth}}
         {...props}
       >
         {showIcon && <img src={icon} alt="" />}
-        <div>
+        <div style={{fontSize: fontSize}}>
           {title} 
         </div>
       </button>

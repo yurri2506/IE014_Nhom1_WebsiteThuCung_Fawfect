@@ -81,7 +81,7 @@ const HeaderComponent = () => {
           <Col className={styles.nav} span={16} offset={4}>
           <ul>
             <li>
-              <Link>
+              <Link to={"/"}>
                 Trang chủ
               </Link>
             </li>

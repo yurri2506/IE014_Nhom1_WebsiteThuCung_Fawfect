@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const AddressPage = ({closeModal}) => {
   const navigate = useNavigate();
   const [addresses, setAddresses] = useState([
-    { id: 1, name: 'Phương Uyên', phone: '0382868383', address: '324 Xô Viết Nghệ Tĩnh Phường 24, Quận Bình Thạnh, TP. Hồ Chí Minh' },
+    { id: 1, name: 'Võ Văn', phone: '0382868383', address: '324 Xô Viết Nghệ Tĩnh Phường 24, Quận Bình Thạnh, TP. Hồ Chí Minh' },
     { id: 2, name: 'Phi Thông', phone: '0987654321', address: '324 Xô Viết Nghệ Tĩnh Phường 24, Quận Bình Thạnh, TP. Hồ Chí Minh' },
   ]);
   const [selectedAddress, setSelectedAddress] = useState(null);

@@ -12,7 +12,7 @@ import SelectAddressComponent from '../../components/SelectAddressComponent/Sele
 
 const CheckOutPage = () => {
     const location = useLocation();   
-    const { cartItems = [], checkedItems = [], discount = 0, shippingFee = 0, selectedAddress } = location.state || {};
+    const { cartItems = [], checkedItems = [], discount = 0, shippingFee = 0, selectedAddress = {} } = location.state || {};
     const selectedItems = cartItems.filter(item => checkedItems.includes(item.id));
     const totalItemsPrice = selectedItems.reduce((total, item) => total + item.price * item.quantity, 0);
     const totalAmount = Math.max(0, totalItemsPrice + shippingFee - discount);

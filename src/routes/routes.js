@@ -94,5 +94,10 @@ export const routes = [
         path: '/check-out',
         page: CheckOutPage,
         isShowHeader: true
+    },
+    {
+        path: '/product-details',
+        page: ProductDetailsPage,
+        isShowHeader: true
     }
 ]
