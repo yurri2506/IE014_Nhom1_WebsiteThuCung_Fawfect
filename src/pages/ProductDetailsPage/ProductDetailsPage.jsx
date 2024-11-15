@@ -20,19 +20,22 @@ import feedbackImg2 from '../../assets/images/feedbackImg2.svg'
 import product1 from '../../assets/images/product1.svg'
 import product2 from '../../assets/images/product2.svg'
 import product3 from '../../assets/images/product3.svg'
-import { Col, Row } from 'antd'
+import { Col, Pagination, Row } from 'antd'
+import Slider from 'react-slick';
 import { IoIosStar } from "react-icons/io"
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
 import UnderLineComponent from '../../components/UnderLineComponent/UnderLineComponent'
 import CardComponent from '../../components/CardComponent/CardComponent'
-import SliderComponent from '../../components/SliderComponent/SliderComponent'
 import { Link } from 'react-router-dom'
 import ProductFeedBackComponent from '../../components/ProductFeedBackComponent/ProductFeedBackComponent'
+import BackComponent from '../../components/BackComponent/BackComponent'
+import NextComponent from '../../components/NextComponent/NextComponent'
+import './ProductDetailsPage.scss'
 
 const ProductDetailsPage = () => {
     const [mainImage, setMainImage] = useState(mainProduct);
 
-    const thumbnails = [subProduct1, subProduct2, subProduct3, subProduct4, subProduct5];
+    const thumbnails = [subProduct1, subProduct2, subProduct3, subProduct4, subProduct5, subProduct5, subProduct5];
 
     const [count, setCount] = useState(1);
 
@@ -117,6 +120,30 @@ const ProductDetailsPage = () => {
       { src: product3, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
       // Các sản phẩm khác...
     ];
+
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 5,
+      slidesToScroll: 1,
+      nextArrow: <NextComponent
+        fontSize = "2rem"
+        color = "#000"
+        position = "absolute"
+        zIndex = "2"
+        top = "42px"
+        right = "-15px"
+    />,
+    prevArrow: <BackComponent
+        fontSize = "2rem"
+        color = "#000"
+        position = "absolute"
+        zIndex = "2"
+        top = "42px"
+        left = "-15px"
+    />
+    };
   
     return (
       <div className='container'>
@@ -126,16 +153,19 @@ const ProductDetailsPage = () => {
               <img src={mainImage} alt="Product main"/>
             </div>
             <div className={styles.thumbnails}>
-              {thumbnails.map((thumb, index) => (
-                    <img
-                      key={index}
-                      src={thumb}
-                      alt={`Thumbnail ${index + 1}`}
-                      onClick={() => setMainImage(thumb)}
-                      className={styles.thumbnail}
-                    />
-              ))}
+            <Slider {...settings}>
+            {thumbnails.map((thumb, index) => {
+              return (
+                <img src={thumb} alt={`Thumbnail ${index + 1}`} className={styles.thumbnail} />)
+})}
+          </Slider>
             </div>
+            <Slider {...settings}>
+            {thumbnails.map((thumb, index) => {
+              return (
+                <img src={thumb} alt={`Thumbnail ${index + 1}`} className={styles.thumbnail} />)
+})}
+          </Slider>
           </div>
           <div className='grid_column_8'>
           <div className={styles.productInfo}>
@@ -226,20 +256,17 @@ const ProductDetailsPage = () => {
           <div className={styles.mainImage}>
             <img src={mainImage} alt="Product main"/>
           </div>
-            <Row style={{paddingTop: "10px"}}>
-            <div className={styles.thumbnails}>
-              {thumbnails.map((thumb, index) => (
-                  <Col span={4.8}>
-                    <img
-                      key={index}
-                      src={thumb}
-                      alt={`Thumbnail ${index + 1}`}
-                      onClick={() => setMainImage(thumb)}
-                      className={styles.thumbnail}
-                    />
-                </Col>
-              ))}
-            </div>
+          <Slider {...settings} className={styles.thumbnails}>
+            {thumbnails.map((thumb, index) => (
+                  <img
+                    key={index}
+                    src={thumb}
+                    alt={`Thumbnail ${index + 1}`}
+                    onClick={() => setMainImage(thumb)}
+                    className={styles.thumbnail}
+                  />
+            ))}
+          </Slider>
             <div className={styles.contact}>
               <span>Chia sẻ sản phẩm qua:</span>
               <Link to={"/"}>
@@ -255,7 +282,6 @@ const ProductDetailsPage = () => {
                 <img src={zalo} alt="" />
               </Link>
             </div>
-            </Row>
           </Col>
 
           <Col span={14}>
@@ -560,6 +586,9 @@ Cả một bầu trời phụ kiện tất tần tật những gì để cho cá
               </div>
             ))}
           </div>
+          <div className={styles.panigation}>
+            <Pagination defaultCurrent={1} total={50}/>
+          </div>
           <div className={styles.otherProduct}>
             <div className={styles.title}>
               <h2>Các sản phẩm tương tự</h2>
@@ -578,7 +607,7 @@ Cả một bầu trời phụ kiện tất tần tật những gì để cho cá
               height="50px"
               title="Xem thêm"
               color="#000"
-              border="1px solid #000"
+              border="2px solid #000"
               borderRadius="15px"
               fontSize="2rem"
               margin="0 0 40px 0"

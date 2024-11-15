@@ -2,7 +2,7 @@ import { Image } from 'antd';
 import React from 'react'
 import Slider from 'react-slick'
 
-const SliderComponent = ({ arrImages, dots = false, arrows = false }) => {
+const SliderComponent = ({ arrImages, dots = false, arrows = false, ...props }) => {
     var settings = {
         dots: dots,
         infinite: true,
@@ -25,6 +25,7 @@ const SliderComponent = ({ arrImages, dots = false, arrows = false }) => {
                         preview={false}
                         width="100%"
                         height="100%"
+                        {...props}
                     />
                 )
             })}
