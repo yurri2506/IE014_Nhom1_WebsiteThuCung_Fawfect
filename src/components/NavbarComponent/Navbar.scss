@@ -1,0 +1,33 @@
+.NavbarComponent_choice__wI4q\+ {
+
+    :where(.css-dev-only-do-not-override-apn68).ant-checkbox-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    :where(.css-dev-only-do-not-override-apn68).ant-checkbox-wrapper {
+        font-size: 1.5rem;
+        margin: 5px 0;
+    }
+
+    :where(.css-dev-only-do-not-override-apn68).ant-checkbox-checked .ant-checkbox-inner {
+        border: 1px solid #E87428;
+        background-color:#E87428;
+    }
+
+    :where(.css-dev-only-do-not-override-apn68).ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-checked:not(.ant-checkbox-disabled) .ant-checkbox-inner {
+        background-color:#E87428;
+    }
+    
+    :where(.css-dev-only-do-not-override-apn68).ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-inner, :where(.css-dev-only-do-not-override-apn68).ant-checkbox:not(.ant-checkbox-disabled):hover .ant-checkbox-inner {
+        border: 1px solid #E87428;
+    }
+}
+
+.NavbarComponent_star__doRFL {
+
+    :where(.css-dev-only-do-not-override-apn68).ant-rate {
+        color: #FFC633;
+        margin: 5px 0;
+    }
+}

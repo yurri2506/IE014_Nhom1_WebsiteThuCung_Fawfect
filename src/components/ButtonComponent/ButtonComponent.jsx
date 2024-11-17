@@ -9,7 +9,6 @@ const ButtonComponent = ({ title, icon, margin,
   widthDiv = "100%",
   minWidth,
   fontSize,
-  borderRadius = "0", 
   primary, 
   showIcon = true,
   iconSmall, 
@@ -34,7 +33,7 @@ const ButtonComponent = ({ title, icon, margin,
       <button
         type="button" 
         className={classes}
-        style={{borderRadius: borderRadius, width: width, height: height, minWidth: minWidth}}
+        style={{width: width, height: height, minWidth: minWidth}}
         {...props}
       >
         {showIcon && <img src={icon} alt="" />}

@@ -31,6 +31,8 @@ import ProductFeedBackComponent from '../../components/ProductFeedBackComponent/
 import BackComponent from '../../components/BackComponent/BackComponent'
 import NextComponent from '../../components/NextComponent/NextComponent'
 import './ProductDetailsPage.scss'
+import NavbarComponent from '../../components/NavbarComponent/NavbarComponent'
+import SortProductComponent from '../../components/SortProductComponent/SortProductComponent'
 
 const ProductDetailsPage = () => {
     const [mainImage, setMainImage] = useState(mainProduct);
