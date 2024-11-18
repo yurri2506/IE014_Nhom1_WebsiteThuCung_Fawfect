@@ -14,6 +14,8 @@ import ReturnPolicyPage from "../pages/ReturnPolicyPage/ReturnPolicyPage";
 import PrivacyPolicyPage from "../pages/PrivacyPolicyPage/PrivacyPolicyPage";
 import MyCartPage from "../pages/MyCartPage/MyCartPage";
 import CheckOutPage from "../pages/CheckOutPage/CheckOutPage";
+import AccountPage from "../pages/AccountPage/AccountPage";
+import ChangePassword from "../pages/ChangePassword/ChangePassword";
 
 export const routes = [
     {
@@ -93,6 +95,16 @@ export const routes = [
     {
         path: '/check-out',
         page: CheckOutPage,
+        isShowHeader: true
+    },
+    {
+        path: '/account',
+        page: AccountPage,
+        isShowHeader: true
+    },
+    {
+        path: '/password',
+        page: ChangePassword,
         isShowHeader: true
     },
     {
