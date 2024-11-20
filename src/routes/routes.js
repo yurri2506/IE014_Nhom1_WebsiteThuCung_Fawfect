@@ -14,7 +14,6 @@ import ReturnPolicyPage from "../pages/ReturnPolicyPage/ReturnPolicyPage";
 import PrivacyPolicyPage from "../pages/PrivacyPolicyPage/PrivacyPolicyPage";
 import MyCartPage from "../pages/MyCartPage/MyCartPage";
 import CheckOutPage from "../pages/CheckOutPage/CheckOutPage";
-import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
 
 export const routes = [
     {
@@ -99,11 +98,6 @@ export const routes = [
     {
         path: '/product-details',
         page: ProductDetailsPage,
-        isShowHeader: true
-    },
-    {
-        path: '/type',
-        page: TypeProductPage,
         isShowHeader: true
     }
 ]
