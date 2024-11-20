@@ -14,6 +14,11 @@ import ReturnPolicyPage from "../pages/ReturnPolicyPage/ReturnPolicyPage";
 import PrivacyPolicyPage from "../pages/PrivacyPolicyPage/PrivacyPolicyPage";
 import MyCartPage from "../pages/MyCartPage/MyCartPage";
 import CheckOutPage from "../pages/CheckOutPage/CheckOutPage";
+<<<<<<< HEAD
+=======
+import AccountPage from "../pages/AccountPage/AccountPage";
+import ChangePassword from "../pages/ChangePassword/ChangePassword";
+>>>>>>> c817fa579faf3adcd0f0660600e7b435d4659bbc
 
 export const routes = [
     {
@@ -96,8 +101,21 @@ export const routes = [
         isShowHeader: true
     },
     {
+        path: '/account',
+        page: AccountPage,
+        isShowHeader: true
+<<<<<<< HEAD
+=======
+    },
+    {
+        path: '/password',
+        page: ChangePassword,
+        isShowHeader: true
+    },
+    {
         path: '/product-details',
         page: ProductDetailsPage,
         isShowHeader: true
+>>>>>>> c817fa579faf3adcd0f0660600e7b435d4659bbc
     }
 ]
