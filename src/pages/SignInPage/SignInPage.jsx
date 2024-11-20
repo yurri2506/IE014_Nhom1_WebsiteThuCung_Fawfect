@@ -1,150 +1,74 @@
-import React, { useState } from 'react'
-import dogAndCat from '../../assets/images/dogAndCat.svg'
-import styles from './SignInPage.module.scss'
-import TitleComponent from '../../components/TitleComponent/TitleComponent'
-import UnderLineComponent from '../../components/UnderLineComponent/UnderLineComponent'
-import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
-import { Link, useNavigate } from 'react-router-dom'
-import FormComponent from '../../components/FormComponent/FormComponent'
-import InputFormComponent from '../../components/InputFormComponent/InputFormComponent'
-import { MdPhonePaused } from 'react-icons/md'
-import facebook_2 from '../../assets/images/facebook_2.svg'
-import google from '../../assets/images/google.svg'
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./SignInPage.module.scss";
+import TitleComponent from "../../components/TitleComponent/TitleComponent";
+import UnderLineComponent from "../../components/UnderLineComponent/UnderLineComponent";
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import FormComponent from "../../components/FormComponent/FormComponent";
+import InputFormComponent from "../../components/InputFormComponent/InputFormComponent";
+import { MdPhonePaused } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-
+import PopupComponent from "../../components/PopupComponent/PopupComponent";
+import { loginUser } from "../../services/User.service"; // Hàm gọi API đăng nhập
+import Cookies from "js-cookie";
+import facebook_2 from "../../assets/images/facebook_2.svg";
+import google from "../../assets/images/google.svg";
 
 const SignInPage = () => {
-//   const [phone, setPhone] = useState('');
-//   const [password, setPassword] = useState('');
-//   const negative = useNavigate();
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
 
-//   const handleSubmit = async (event) => {
-//     event.preventDefault(); // Ngăn chặn reload trang
-
-//     try {
-//         // Gọi API đăng nhập với fetch
-//         const response = await fetch('http://localhost:3001/api/user/signIn', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({ phone, password }) // Gửi dữ liệu người dùng nhập vào
-//         });
-
-//         if (response.ok) {
-//             const data = await response.json();
-            
-//             // Lưu accessToken và refreshToken vào localStorage
-//             localStorage.setItem('accessToken', data.accessToken);
-//             localStorage.setItem('refreshToken', data.refreshToken);
-
-//             // Chuyển hướng người dùng đến trang dashboard hoặc thực hiện hành động khác
-//             console.log('Đăng nhập thành công');
-//             window.location.href = '/dashboard';
-//         } else {
-//             const errorData = await response.json();
-//             console.error('Đăng nhập thất bại:', errorData.message);
-//             alert('Đăng nhập thất bại: ' + errorData.message);
-//         }
-//     } catch (error) {
-//         console.error('Lỗi khi gọi API đăng nhập:', error);
-//         alert('Có lỗi xảy ra khi đăng nhập. Vui lòng thử lại sau.');
-//     }
-// };
-
-
-
-
-// const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [password, setPassword] = useState('');
-    
-    // State để lưu trữ các lỗi
-    const [errorMessage, setErrorMessage] = useState({});
-
-const handleSubmit = async (event) => {
+  // Hàm xử lý đăng nhập
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!phone.trim() || !password.trim()) {
+      setErrorMessage("Vui lòng nhập đầy đủ thông tin đăng nhập.");
+      setShowPopup(true);
+      return;
+    }
+
     try {
-        const response = await fetch('http://localhost:3001/api/user/signIn', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ phone, password })
-        });
+      // Gọi API đăng nhập
+      const data = await loginUser(phone, password);
 
-        if (response.ok) {
-            console.log('Đăng nhập thành công');
-            setErrorMessage({}); // Xóa sạch lỗi khi đăng nhập thành công
-        } else {
-            const errorData = await response.json();
-            
-                    if (errorData.status === 'ERROR') {
-                    // Đặt lỗi vào state dựa vào field trả về
-                    const errorMessages = {};
-                    if (errorData.errors) {
-                        // Nếu lỗi từ controller, cấu trúc lỗi là errors[field]: message
-                        Object.keys(errorData.errors).forEach(field => {
-                            errorMessages[field] = errorData.errors[field];
-                        });
-                    } else if (errorData.field) {
-                        // Nếu lỗi từ userService, cấu trúc lỗi là { field: 'field_name', message: 'message' }
-                        errorMessages[errorData.field] = errorData.message;
-                    }
-                    setErrorMessage(errorMessages);
-                    console.log("errors", errorMessage)
-                }
-    }
+      // Lưu accessToken vào localStorage
+      localStorage.setItem("accessToken", data.ACCESS_TOKEN);
+
+      // Lưu refreshToken vào cookie
+      Cookies.set("refreshToken", data.REFRESH_TOKEN, {
+        expires: 1, // Token có hiệu lực trong 1 ngày
+        secure: true, // Chỉ gửi qua HTTPS
+        sameSite: "Strict", // Ngăn chặn CSRF
+      });
+
+      console.log("Access Token (localStorage):", data.ACCESS_TOKEN);
+      console.log("Refresh Token (Cookie):", Cookies.get("refreshToken"));
+
+      // Điều hướng qua trang chủ
+      navigate("/");
     } catch (error) {
-        console.error('Lỗi khi gọi API:', error);
+      setErrorMessage(error.response?.data?.message || "Có lỗi xảy ra khi đăng nhập.");
+      setShowPopup(true);
     }
-};
+  };
 
-
-  //   const handleSubmit = async (event) => {
-  //     event.preventDefault(); // Ngăn chặn reload trang
-  
-  //     try {
-  //         // Gọi API đăng nhập với fetch
-  //         const response = await fetch('http://localhost:3001/api/user/signIn', {
-  //             method: 'POST',
-  //             headers: {
-  //                 'Content-Type': 'application/json'
-  //             },
-  //             body: JSON.stringify({ phone, password }) // Gửi dữ liệu người dùng nhập vào
-  //         });
-  
-  //         if (response.ok) {
-  //             const data = await response.json();
-              
-  //             // Lưu accessToken và refreshToken vào localStorage
-  //             localStorage.setItem('accessToken', data.accessToken);
-  //             localStorage.setItem('refreshToken', data.refreshToken);
-  
-  //             // Chuyển hướng người dùng đến trang dashboard hoặc thực hiện hành động khác
-  //             console.log('Đăng nhập thành công');
-  //             window.location.href = '/sign-up';
-  //         } else {
-  //             const errorData = await response.json();
-  //             if (errorData.status === 'ERROR') {
-  //               setErrors(errorData.errors || {});
-  //           }
-  //         }
-  //     } catch (error) {
-  //         console.error('Lỗi khi gọi API đăng nhập:', error);
-  //         alert('Có lỗi xảy ra khi đăng nhập. Vui lòng thử lại sau.');
-  //     }
-  // };
-
+  // Đóng popup thông báo lỗi
+  const closePopup = () => {
+    setShowPopup(false);
+    setErrorMessage("");
+  };
 
   return (
     <div className={styles.main}>
-      <div className='container'>
+      <div className="container">
         <div className={styles.signIn}>
           <div className={styles.introduce}>
             <div className={styles.title}>
-              <TitleComponent 
+              <TitleComponent
                 title="Chào mừng bạn"
                 textTransform="none"
                 textAlign="left"
@@ -152,22 +76,18 @@ const handleSubmit = async (event) => {
                 margin="0 0 20px"
                 fontWeight="800"
               />
-              <UnderLineComponent 
-                width="150px"
-                height="1px"
-                background="#000"
-              />
+              <UnderLineComponent width="150px" height="1px" background="#000" />
               <div className={styles.paragraph}>
                 <p>
-                Tiếp tục Đăng Nhập nào!!! <br />
-                Trải nghiệm thời gian mua sắm hiện đại và <br />
-                tiện ích mà chúng tôi mang lại <br />
-              </p>
+                  Tiếp tục Đăng Nhập nào!!! <br />
+                  Trải nghiệm thời gian mua sắm hiện đại và <br />
+                  tiện ích mà chúng tôi mang lại
+                </p>
               </div>
             </div>
           </div>
           <div className={styles.formSignIn}>
-            <FormComponent 
+            <FormComponent
               width="500px"
               height="650px"
               background="#fff"
@@ -189,7 +109,7 @@ const handleSubmit = async (event) => {
                   icon={<MdPhonePaused />}
                   margin="0 0 20px"
                   positionProps={{
-                    mainSpan: { top: "16px", left: "90px" }
+                    mainSpan: { top: "16px", left: "90px" },
                   }}
                 />
                 <InputFormComponent
@@ -201,10 +121,10 @@ const handleSubmit = async (event) => {
                   margin="0 0 30px"
                   positionProps={{
                     mainSpan: { top: "16px", left: "90px" },
-                    otherSpan: {top: "16px", left: "385px"}
+                    otherSpan: { top: "16px", left: "385px" },
                   }}
                 />
-                <ButtonComponent 
+                <ButtonComponent
                   title="ĐĂNG NHẬP"
                   primary
                   margin="0 0 15px"
@@ -212,31 +132,21 @@ const handleSubmit = async (event) => {
                 />
               </form>
               <span>
-                <Link to={"/reset"}>
-                  Quên mật khẩu?
-                </Link>
+                <Link to={"/reset"}>Quên mật khẩu?</Link>
               </span>
               <div className={styles.other}>
-                <UnderLineComponent 
-                  width="190px"
-                  height="1px"
-                  background="#B7B6B5"
-                />
+                <UnderLineComponent width="190px" height="1px" background="#B7B6B5" />
                 <span>HOẶC</span>
-                <UnderLineComponent 
-                  width="190px"
-                  height="1px"
-                  background="#B7B6B5"
-                />
+                <UnderLineComponent width="190px" height="1px" background="#B7B6B5" />
               </div>
               <div className={styles.differentOption}>
-                <ButtonComponent 
+                <ButtonComponent
                   title="Facebook"
                   iconSmall
                   icon={facebook_2}
                   margin="30px 0 0"
                 />
-                <ButtonComponent 
+                <ButtonComponent
                   title="Google"
                   iconSmall
                   icon={google}
@@ -245,10 +155,9 @@ const handleSubmit = async (event) => {
               </div>
               <div className={styles.footer}>
                 <div className={styles.doNotHaveAccount}>
-                  <p>Bạn mới đến PAWFECT?&nbsp;
-                    <Link to={"/sign-up"}>
-                      Đăng Ký
-                    </Link>
+                  <p>
+                    Bạn mới đến PAWFECT?&nbsp;
+                    <Link to={"/sign-up"}>Đăng Ký</Link>
                   </p>
                 </div>
               </div>
@@ -256,8 +165,11 @@ const handleSubmit = async (event) => {
           </div>
         </div>
       </div>
-    </div>
-  )
-}
 
-export default SignInPage
+      {/* Popup Thông Báo */}
+      {showPopup && <PopupComponent message={errorMessage} onClose={closePopup} />}
+    </div>
+  );
+};
+
+export default SignInPage;
