@@ -124,12 +124,14 @@ const HeaderComponent = () => {
               </li>
               {user ? (
                 <li className={styles.userInfo}>
-                  <img
-                    src={user.avatar}
-                    alt="User Avatar"
-                    className={styles.avatar}
-                  />
+                  <Link to={"/my-order"}>
+                    <img
+                      src={user.avatar}
+                      alt="User Avatar"
+                      className={styles.avatar}
+                    />
                   <span>{user.name}</span>
+                 </Link>
                 </li>
               ) : (
                 <>

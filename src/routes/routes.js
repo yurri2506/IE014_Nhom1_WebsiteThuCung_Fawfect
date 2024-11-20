@@ -15,9 +15,7 @@ import PrivacyPolicyPage from "../pages/PrivacyPolicyPage/PrivacyPolicyPage";
 import MyCartPage from "../pages/MyCartPage/MyCartPage";
 import CheckOutPage from "../pages/CheckOutPage/CheckOutPage";
 import AccountPage from "../pages/AccountPage/AccountPage";
-import ChangePassword from "../pages/ChangePassword/ChangePassword";
-import AccountPage from "../pages/AccountPage/AccountPage";
-import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import ChangePassword from "../pages/ChangePassword/ChangePassword"; 
 
 export const routes = [
     {
