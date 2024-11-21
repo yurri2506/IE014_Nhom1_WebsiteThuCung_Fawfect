@@ -18,6 +18,8 @@ import LogoutPage from "../pages/LogoutPage/LogoutPage";
 import AccountInfo from "../pages/AccountPage/AccountInfo";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
 import EditAccount from "../pages/AccountPage/EditAccount";
+import GeneralPolicy from "../pages/GeneralPolicy/GeneralPolicy"
+import GuaranteePolicy from "../pages/GuaranteePolicy/Guarantee";
 
 export const routes = [
     {
@@ -119,6 +121,16 @@ export const routes = [
         page: ProductDetailsPage,
         isShowHeader: true
     }, 
+    {
+        path: '/generalpolicy',
+        page: GeneralPolicy,
+        isShowHeader: true
+    },
+    {
+        path: '/generalpolicy',
+        page: GuaranteePolicy,
+        isShowHeader: true
+    },
     {
         path: '/logout',
         page: LogoutPage,

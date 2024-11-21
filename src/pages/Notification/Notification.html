@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Notification Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .btn-detail {
+            color: #ff5722;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .text-orange {
+            color: #ff5722; 
+        }
+
+        .breadcrumb-item a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-item + .breadcrumb-item::before {
+            float: left;
+            padding-right: var(--bs-breadcrumb-item-padding-x);
+            color: var(--bs-breadcrumb-divider-color);
+            content: " > "; 
+        }
+
+        .text-orange {
+            text-decoration: none;
+        }
+
+        .btn-link {
+            text-decoration: none;
+            color: black;
+            width: 15%;
+            font-weight: bold;
+        }
+
+        .btn-link.active {
+            color: orange;
+        }
+
+        .btn-link span {
+            display: block;
+            background: #c4c6cc;
+            border-radius: 5px;
+        }
+
+        .notification-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .notification-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: box-shadow 0.3s;
+        }
+
+        .notification-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .notification-content h6 {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .notification-content p {
+            margin: 10px 0 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .btn-outline-danger {
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            text-transform: uppercase;
+            border-radius: 5px;
+        }
+
+        .list-group-item {
+            border: none;
+            text-align: left;
+        }
+
+
+        @media (max-width: 576px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+
+            .breadcrumb {
+                justify-content: center;
+            }
+
+            .btn-link {
+                text-decoration: none;
+                color: black;
+                font-weight: bold;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-tabs {
+                flex-wrap: wrap; 
+                justify-content: center; 
+            }
+
+            .btn-link {
+                width: auto; 
+                flex: 1 1 30%; 
+                text-align: center; 
+                padding: 5px 5px; 
+                font-size: 0.9rem; 
+                margin-bottom: 5px; 
+                border-radius: 5px; 
+            }
+
+            .btn-link span {
+                display: block;
+                background: #c4c6cc;
+                border-radius: 5px;
+                width: 90px;
+            }
+
+            .btn-outline-danger {
+                font-size: 0.7rem;
+                padding: 0px 8px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+
+    <div class="breadcrumb-css">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text-orange">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-orange">Trang cá nhân</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Thông báo</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-12 col-md-3 mb-4">
+            <div class="text-center">
+                <img src="https://i.vgt.vn/2024/5/4/pam-yeu-oi-em-be-quoc-dan-gay-sot-cong-dong-mang-so-huu-gan-2-trieu-fans-73c-7155448.png" alt="Avatar" class="profile-avatar mb-3">
+                <h6 class="fw-bold">Pamela</h6>
+                <p class="text-muted">pamyeuoi</p>
+            </div>
+            <nav class="list-group">
+                <a href="" class="list-group-item list-group-item-action">
+                    <i class="fas fa-user me-2"></i>Thông tin cá nhân
+                </a>
+                <a href="" class="list-group-item list-group-item-action">
+                    <i class="fas fa-box-open me-2"></i>Đơn hàng
+                </a>
+                <a href="" class="list-group-item list-group-item-action">
+                    <i class="fas fa-bell me-2"></i>Thông báo
+                </a>
+                <a href="" class="list-group-item list-group-item-action">
+                    <i class="fas fa-gift me-2"></i>Kho voucher
+                </a>
+
+                <a href="" class="list-group-item list-group-item-action">
+                </a>
+                <a href="" class="list-group-item list-group-item-action">
+                </a>
+                <a href="" class="list-group-item list-group-item-action">
+                </a>
+
+                <a href="" class="list-group-item list-group-item-action">
+                    <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                </a>
+            </nav>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-12 col-md-9">
+            <div class="justify-content-between align-items-center mb-3" style="border: solid 1px #ddd;">
+                <nav class="nav nav-tabs" id="myTabs" style="display:contents;">
+                    <a class="btn btn-link active" id="all-tab" data-bs-toggle="tab" href="#all">Tất cả</a>
+                    <a class="btn btn-link" id="promotions-tab" data-bs-toggle="tab" href="#promotions">Khuyến mãi</a>
+                    <a class="btn btn-link" id="orders-tab" data-bs-toggle="tab" href="#orders">Đơn mua</a>
+                    <a class="btn btn-link" id="chat-tab" data-bs-toggle="tab" href="#chat">Trò chuyện</a>
+                    <a class="btn btn-link" id="marked-tab" data-bs-toggle="tab" href="#marked">
+                        <span>Đánh dấu</span>
+                    </a>
+                    <a class="btn btn-link" id="read-tab" data-bs-toggle="tab" href="#read">
+                        <span>Đã đọc</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Tất cả -->
+                <div class="tab-pane fade show active" id="all" role="tabpanel">
+                    <div class="notification-card d-flex align-items-start">
+                        <img src="https://chiaki.vn/upload/news/content/2021/05/thuc-an-cho-cho-con-pedigree-jpg-1620290242-06052021153722.jpg" alt="Notification Image" class="notification-image me-3">
+                        <div class="notification-content flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h6 class="fw-bold text-danger mb-2">KIỆN HÀNG ĐANG TRÊN ĐƯỜNG VẬN CHUYỂN</h6>
+                                <a href="/details" class="btn btn-sm btn-outline-danger">Xem chi tiết</a>
+                            </div>
+                            <p>🎉 Kiện hàng đã chuyển thành công cho đơn vị vận chuyển. Shipper sẽ sớm liên hệ bạn!</p>
+                        </div>
+                    </div>
+                    <div class="notification-card d-flex align-items-start">
+                        <img src="https://i.pinimg.com/736x/21/b3/e6/21b3e6294c5c83008fdbb4cc7e0a17ac.jpg" alt="Notification Image" class="notification-image me-3">
+                        <div class="notification-content flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h6 class="fw-bold text-danger mb-2">SĂN SIÊU SALE THÁNG 10 - QUÀ TẶNG BẤT NGỜ</h6>
+                                <a href="/details" class="btn btn-sm btn-outline-danger">Xem chi tiết</a>
+                            </div>
+                            <p>🎉 Có thêm mã giảm giá 40K, 70K quá hời 💖 Quần áo chó bé xinh xắn - Cùng chơi thoả thích 🎁 Mua là có quà - Chốt đơn ngay!</p>
+                        </div>
+                    </div>
+                    <div class="notification-card d-flex align-items-start">
+                        <img src="https://paddy.vn/cdn/shop/files/hat-cho-cho-truong-thanh-dr-healmedix-ho-tro-suc-khoe-1-5kg.png?v=1704522143" alt="Notification Image" class="notification-image me-3">
+                        <div class="notification-content flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h6 class="fw-bold text-danger mb-2">GIAO KIỆN HÀNG THÀNH CÔNG</h6>
+                                <a href="/details" class="btn btn-sm btn-outline-danger">Xem chi tiết</a>
+                            </div>
+                            <p>Kiện hàng SPXVN0008230123 của đơn hàng NTJCTM2310578 đã giao thành công đến bạn.</p>
+                            <p>09:08 10/08/2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Khuyến mãi -->
+                <div class="tab-pane fade" id="promotions" role="tabpanel">
+                    <div class="notification-card d-flex align-items-start">
+                        <img src="https://i.pinimg.com/736x/21/b3/e6/21b3e6294c5c83008fdbb4cc7e0a17ac.jpg" alt="Notification Image" class="notification-image me-3">
+                        <div class="notification-content flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h6 class="fw-bold text-danger mb-2">SĂN SIÊU SALE THÁNG 11 - QUÀ TẶNG BẤT NGỜ</h6>
+                                <a href="/details" class="btn btn-sm btn-outline-danger">Xem chi tiết</a>
+                            </div>
+                            <p>🎉 Có thêm mã giảm giá 40K, 70K quá hời 💖 Quần áo cho bé xinh xắn - Cùng chơi thỏa thích 🎁 Mua là có quà - Chốt đơn ngay!</p>
+                        </div>
+                    </div>
+                    <div class="notification-card d-flex align-items-start">
+                        <img src="https://media.istockphoto.com/id/1194343598/vi/vec-to/bi%E1%BB%83u-ng%E1%BB%AF-mega-sale-hi%E1%BB%87n-%C4%91%E1%BA%A1i-t%C6%B0%C6%A1i-s%C3%A1ng-%C4%91%E1%BB%83-gi%E1%BA%A3m-gi%C3%A1-qu%E1%BA%A3ng-c%C3%A1o-m%E1%BA%ABu-vector-%C4%91%E1%BB%83-thi%E1%BA%BFt-k%E1%BA%BF-%C3%A1p-ph%C3%ADch.jpg?s=1024x1024&w=is&k=20&c=4OuMIRQsnO51jkiF3LjDxrhCk_pLQbBMidzf2p_5Qcc=" alt="Notification Image" class="notification-image me-3">
+                        <div class="notification-content flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h6 class="fw-bold text-danger mb-2">NGÀY HỘI THÚ CƯNG - ĐẾN LÀ CÓ QUÀ</h6>
+                                <a href="/details" class="btn btn-sm btn-outline-danger">Xem chi tiết</a>
+                            </div>
+                            <p>📢 Với vô số giảm giá, quay số nhận quà hót hòn họn. Còn chần chờ gì không tham gia ngay! ✨ Diễn ra xuyên suốt từ các ngày 08 đến 10 tháng 7 này</p>
+                        </div>
+                    </div>
+                    <div class="notification-card d-flex align-items-start">
+                        <img src="https://img.freepik.com/premium-vector/mega-sale-banner-discount-promotion-template_7087-2396.jpg" alt="Notification Image" class="notification-image me-3">
+                        <div class="notification-content flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h6 class="fw-bold text-danger mb-2">KHUYẾN MÃI 1/6 - MUÔN VÀN ƯU ĐÃI CHO BOSS</h6>
+                                <a href="/details" class="btn btn-sm btn-outline-danger">Xem chi tiết</a>
+                            </div>
+                            <p>🎊 Chiếc deal khuyến mãi sock với muôn vàn ưu đãi từ sản phẩm dinh dưỡng, đồ chơi, đồ dùng sinh hoạt,... đa dạng mẫu mã! 🛒 Nhanh tay chốt đơn </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Đơn mua -->
+                <div class="tab-pane fade" id="orders" role="tabpanel">
+                    <div class="notification-card d-flex align-items-start">
+                        <img src="https://paddy.vn/cdn/shop/files/123.jpg?v=1692494835" alt="Notification Image" class="notification-image me-3">
+                        <div class="notification-content flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h6 class="fw-bold text-danger mb-2">KIỆN HÀNG ĐANG TRÊN ĐƯỜNG VẬN CHUYỂN</h6>
+                                <a href="/details" class="btn btn-sm btn-outline-danger">Xem chi tiết</a>
+                            </div>
+                            <p>Kiện hàng đã chuyển thành công cho bên vận chuyển. Shipper sẽ sớm liên hệ bạn!</p>
+                        </div>
+                    </div>
+                    <div class="notification-card d-flex align-items-start">
+                        <img src="https://paddy.vn/cdn/shop/files/hat-cho-cho-truong-thanh-dr-healmedix-ho-tro-suc-khoe-1-5kg.png?v=1704522143" alt="Notification Image" class="notification-image me-3">
+                        <div class="notification-content flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h6 class="fw-bold text-danger mb-2">GIAO KIỆN HÀNG THÀNH CÔNG</h6>
+                                <a href="/details" class="btn btn-sm btn-outline-danger">Xem chi tiết</a>
+                            </div>
+                            <p>Kiện hàng SPXVN0008230123 của đơn hàng NTJCTM2310578 đã giao thành công đến bạn.</p>
+                            <p>09:08 10/08/2024</p>
+                        </div>
+                    </div>
+                    
+                    </div>
+                </div>
+
+                <!-- Trò chuyện -->
+                <div class="tab-pane fade" id="chat" role="tabpanel">
+                    <div class="notification-card d-flex align-items-start">
+                        <img src="https://paddy.vn/cdn/shop/files/hat-cho-cho-truong-thanh-dr-healmedix-ho-tro-suc-khoe-1-5kg.png?v=1704522143" alt="Notification Image" class="notification-image me-3">
+                        <div class="notification-content flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h6 class="fw-bold text-danger mb-2">PAWFECT PETCARE CENTER</h6>
+                                <a href="/details" class="btn btn-sm btn-outline-danger">Xem chi tiết</a>
+                            </div>
+                            <p>Hạt này dành cho cún trưởng thành, giá 200k 1 túi ạ.</p>
+                        </div>
+                    </div>
+                    
+                  
+                </div>
+
+                <!-- Đánh dấu -->
+                <div class="tab-pane fade" id="marked" role="tabpanel">
+                    <!-- // -->
+                </div>
+
+                <!-- Đã đọc -->
+                <div class="tab-pane fade" id="read" role="tabpanel">
+                    <!-- T// -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
