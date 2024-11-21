@@ -9,13 +9,13 @@ export const axiosJWT = axios.create();
 const API_URL = "http://localhost:3001/api/user";
 
 // Đăng nhập 
-export const loginUser = async (phone, password) => {
+export const loginUser = async (identifier, password) => {
   const response = await fetch(`${API_URL}/signIn`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ phone, password }),
+    body: JSON.stringify({ identifier, password }),
   });
 
   if (!response.ok) {

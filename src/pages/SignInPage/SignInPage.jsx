@@ -15,7 +15,7 @@ import facebook_2 from "../../assets/images/facebook_2.svg";
 import google from "../../assets/images/google.svg";
 
 const SignInPage = () => {
-  const [phone, setPhone] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showPopup, setShowPopup] = useState(false);
@@ -25,7 +25,7 @@ const SignInPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!phone.trim() || !password.trim()) {
+    if (!identifier.trim() || !password.trim()) {
       setErrorMessage("Vui lòng nhập đầy đủ thông tin đăng nhập.");
       setShowPopup(true);
       return;
@@ -33,7 +33,7 @@ const SignInPage = () => {
 
     try {
       // Gọi API đăng nhập
-      const data = await loginUser(phone, password);
+      const data = await loginUser(identifier, password);
 
       // Lưu accessToken vào localStorage
       localStorage.setItem("accessToken", data.ACCESS_TOKEN);
@@ -103,8 +103,8 @@ const SignInPage = () => {
               />
               <form>
                 <InputFormComponent
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  value={identifier}
+                  onChange={(e) => setIdentifier(e.target.value)}
                   placeholder="Số điện thoại/Email"
                   icon={<MdPhonePaused />}
                   margin="0 0 20px"
