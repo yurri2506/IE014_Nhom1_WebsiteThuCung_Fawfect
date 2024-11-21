@@ -15,7 +15,8 @@ import PrivacyPolicyPage from "../pages/PrivacyPolicyPage/PrivacyPolicyPage";
 import MyCartPage from "../pages/MyCartPage/MyCartPage";
 import CheckOutPage from "../pages/CheckOutPage/CheckOutPage";
 import AccountPage from "../pages/AccountPage/AccountPage";
-import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import ChangePassword from "../pages/ChangePassword/ChangePassword"; 
+import LogoutPage from "../pages/LogoutPage/LogoutPage";
 
 export const routes = [
     {
@@ -110,6 +111,11 @@ export const routes = [
     {
         path: '/product-details',
         page: ProductDetailsPage,
+        isShowHeader: true
+    }, 
+    {
+        path: '/logout',
+        page: LogoutPage,
         isShowHeader: true
     }
 ]

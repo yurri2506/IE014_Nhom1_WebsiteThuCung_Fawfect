@@ -13,6 +13,8 @@ import { loginUser } from "../../services/User.service"; // Hàm gọi API đăn
 import Cookies from "js-cookie";
 import facebook_2 from "../../assets/images/facebook_2.svg";
 import google from "../../assets/images/google.svg";
+import { updateUser } from "../../redux/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const SignInPage = () => {
   const [phone, setPhone] = useState("");
@@ -20,7 +22,7 @@ const SignInPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   // Hàm xử lý đăng nhập
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,7 +46,7 @@ const SignInPage = () => {
         secure: true, // Chỉ gửi qua HTTPS
         sameSite: "Strict", // Ngăn chặn CSRF
       });
-
+      dispatch(updateUser(data));
       console.log("Access Token (localStorage):", data.ACCESS_TOKEN);
       console.log("Refresh Token (Cookie):", Cookies.get("refreshToken"));
 
