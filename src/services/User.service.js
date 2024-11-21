@@ -10,21 +10,32 @@ const API_URL = "http://localhost:3001/api/user";
 
 // Đăng nhập 
 export const loginUser = async (identifier, password) => {
-  const response = await fetch(`${API_URL}/signIn`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ identifier, password }),
-  });
+  try {
+    const response = await fetch(`${API_URL}/signIn`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ identifier, password }),
+    });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Đăng nhập không thành công.");
+    // Kiểm tra nếu response không OK (status không phải 2xx)
+    if (!response.ok) {
+      const errorData = await response.json(); // Lấy nội dung lỗi từ body
+      throw errorData; // Ném lỗi để xử lý ở phần `catch`
+    }
+
+    // Nếu thành công, trả về dữ liệu
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    // Lỗi sẽ được xử lý ở đây
+    console.error("Error in loginUser:", error);
+    throw error; // Ném lỗi để component phía trên tiếp tục xử lý
   }
-
-  return response.json();
 };
+
+
 
 // Lấy thông tin người dùng
 export const getUserDetails = async (userId, token) => {

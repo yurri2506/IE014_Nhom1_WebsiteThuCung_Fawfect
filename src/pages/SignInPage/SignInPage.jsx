@@ -53,7 +53,8 @@ const SignInPage = () => {
       // Điều hướng qua trang chủ
       navigate("/");
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || "Có lỗi xảy ra khi đăng nhập.");
+      console.log(error)
+      setErrorMessage(error.err.message || "Có lỗi xảy ra khi đăng nhập.");
       setShowPopup(true);
     }
   };
