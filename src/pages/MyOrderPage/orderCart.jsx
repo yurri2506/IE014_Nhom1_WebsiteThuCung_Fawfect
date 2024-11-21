@@ -1,10 +1,6 @@
 import React from "react";
 import "./styles.scss";
-import {
-  Row,
-  Col, 
-  Typography 
-} from "antd";
+import { Row, Col, Typography, Image } from "antd"; // Added Image here
 
 const { Title, Text } = Typography;
 
@@ -18,9 +14,12 @@ export const OrderCart = ({ order_status, src_img, product_title, product_descri
       </Row>
       <Row className="product-order">
         <Col span={4}>
-          <div className="img-product">
-            <img src={src_img} alt="product" />
-          </div>
+          <Image
+            style = {{width: "120px",       
+            height: "120px"}}
+            src={src_img}
+            alt="product"
+          />
         </Col>
         <Col span={14}>
           <Title level={4}>{product_title}</Title>
