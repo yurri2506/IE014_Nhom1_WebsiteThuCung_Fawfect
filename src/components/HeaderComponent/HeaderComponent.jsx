@@ -1,5 +1,5 @@
-import React from 'react'
-import { Badge, Button, Col, Input, Row } from 'antd';
+import React, { useEffect, useState } from 'react'
+import { Badge, Button, Col, Grid, Input, Row } from 'antd';
 import { Link } from 'react-router-dom'
 import styles from './HeaderComponent.module.scss'
 import { GrNotification, GrLanguage } from 'react-icons/gr'
@@ -12,9 +12,29 @@ import MoreComponent from '../MoreComponent/MoreComponent';
 import { TbHelpSquare } from "react-icons/tb";
 
 const HeaderComponent = () => {
+  const [span, setSpan] = useState(21);
+  const [offset, setOffset] = useState(2);
+
+  const handleResize = () => {
+    const width = window.innerWidth;
+    if (width >= 740 && width <= 1023) {
+      setSpan(23);
+      setOffset(1);
+    } else {
+      setSpan(21);
+      setOffset(2);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Gọi ngay lần đầu
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  
   return (
     <div className={styles.header}>
-      <div className="container">
+      <div style={{position: "relative"}} className="grid wide">
         <div className={styles.logo}>
           <Link to={"/"}>
             <img src={whiteLogo} alt="" />
@@ -49,7 +69,7 @@ const HeaderComponent = () => {
           </Col>
         </Row>
         <Row className={styles.search}>
-          <Col span={12} offset={6}>
+          <Col span={13} offset={5}>
             <Input
               placeholder="Tìm kiếm sản phẩm..."
               suffix={
@@ -78,7 +98,7 @@ const HeaderComponent = () => {
           </Col>
         </Row>
         <Row>
-          <Col className={styles.nav} span={16} offset={4}>
+          <Col className={styles.nav} span={span} offset={offset}>
           <ul>
             <li>
               <Link to={"/"}>
