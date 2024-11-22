@@ -12,39 +12,38 @@ import { RiLockPasswordFill } from 'react-icons/ri'
 const SetPasswordComponent = ({onClick}) => {
   return (
     <div className={styles.main}>
-      <div className="container">
+      <div className="grid wide">
         <div className={styles.step}>
           <StatusComponent
             number="1"
             title="Xác minh số điện thoại"
             success
+            className={styles.stt}
           />
           <NextArrowComponent
-            position = "absolute"
-            top = "30px"
-            left = "330px"
+            className={styles.arrow1}
           />
           <StatusComponent 
             number="2"
             title="Tạo mật khẩu"
             success
+            className={styles.stt}
           />
           <NextArrowComponent 
-            position = "absolute"
-            top = "30px"
-            left = "660px"
+            className={styles.arrow2}
           />
           <StatusComponent 
             number="✔"
             title="Hoàn thành"
             unSuccess
+            className={styles.stt}
           />
         </div>
         <div className={styles.form}>
             <FormComponent 
                 width="650px"
                 height="550px"
-                background="rgba(255, 255, 255, 0.8)"
+                background="#fff"
                 borderRadius="20px"
                 border="1px solid #000"
             >
