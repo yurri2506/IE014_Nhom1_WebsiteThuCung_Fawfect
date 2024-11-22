@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { clsx } from 'clsx'
 import SliderComponent from '../../components/SliderComponent/SliderComponent'
 import slider1 from '../../assets/images/slider1.svg'
@@ -34,44 +34,67 @@ import brand15 from '../../assets/images/brand15.svg'
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
 import CustomerReviewsComponent from '../../components/CustomerReviewsComponent/CustomerReviewsComponent'
 
+
 const HomePage = () => {
+  const services = [
+    { src: service1, alt: "Miễn phí vận chuyển", text: "Miễn phí vận chuyển" },
+    { src: service2, alt: "Sản phẩm chính hãng", text: "Sản phẩm chính hãng" },
+    { src: service3, alt: "Thanh toán tiện lợi", text: "Thanh toán tiện lợi" },
+    { src: service4, alt: "Hỗ trợ tận tâm", text: "Hỗ trợ tận tâm", width: "110px" },
+  ];
+  
+  const [visibleCount, setVisibleCount] = useState(6);
+  const [isInViewport, setIsInViewport] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 740px) and (max-width: 1023px)');
+    const handleViewportChange = () => setIsInViewport(mediaQuery.matches);
+
+    handleViewportChange();
+    mediaQuery.addEventListener('change', handleViewportChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleViewportChange);
+    };
+  }, []);
+
+  const handleShowMore = () => {
+    setVisibleCount(brands.length);
+  };
+
+  const handleShowLess = () => {
+    setVisibleCount(6); 
+  };
+  const brands = [
+    { src: brand1, alt: 'ROYAL CANIN' },
+    { src: brand2, alt: 'ROYAL CANIN' },
+    { src: brand3, alt: 'ROYAL CANIN' },
+    { src: brand4, alt: 'ROYAL CANIN' },
+    { src: brand5, alt: 'ROYAL CANIN' },
+    { src: brand6, alt: 'ROYAL CANIN' },
+    { src: brand7, alt: 'ROYAL CANIN' },
+    { src: brand8, alt: 'ROYAL CANIN' },
+    { src: brand9, alt: 'ROYAL CANIN' },
+    { src: brand10, alt: 'ROYAL CANIN' },
+    { src: brand11, alt: 'ROYAL CANIN' },
+    { src: brand12, alt: 'ROYAL CANIN' },
+    { src: brand13, alt: 'ROYAL CANIN' },
+    { src: brand14, alt: 'ROYAL CANIN' },
+    { src: brand15, alt: 'ROYAL CANIN' },
+  ];
   return (
-      <div className='container'>
+      <div className={clsx('grid wide')}>
         <div className={styles.sliderImg}>
           <SliderComponent arrImages={[slider1, slider2]} />
         </div>
-        <div className='grid_row'>
-          <div className='grid_column_3'>
-            <ServiceComponent 
-              src={service1} 
-              alt="Miễn phí vận chuyển" 
-              text="Miễn phí vận chuyển"
-            />
-          </div>
-          <div className='grid_column_3'>
-            <ServiceComponent 
-              src={service2} 
-              alt="Sản phẩm chính hãng" 
-              text="Sản phẩm chính hãng"
-            />
-          </div>
-          <div className='grid_column_3'>
-            <ServiceComponent 
-              src={service3} 
-              alt="Thanh toán tiện lợi" 
-              text="Thanh toán tiện lợi"
-            />
-          </div>
-          <div className='grid_column_3'>
-            <ServiceComponent 
-              src={service4} 
-              alt="Hỗ trợ tận tâm" 
-              text="Hỗ trợ tận tâm"
-              width="110px"
-            />
-          </div>
+        <div className={clsx('row', styles.service)}>
+          {services.map((service, index) => (
+            <div key={index} className="col l-3 m-0">
+              <ServiceComponent {...service} />
+            </div>
+          ))}
         </div>
-        <div className={styles.underLine}>
+        <div className={clsx(styles.underLine, styles.underNew)}>
           <UnderLineComponent
             width="100%"
             height="1px"
@@ -84,8 +107,8 @@ const HomePage = () => {
           textAlign="center"
           fontSize="4rem"
         />
-        <div className='grid_row'>
-          <div className='grid_column_3'>
+        <div className='row'>
+          <div className={clsx('col l-3 m-4')}>
             <CardComponent 
               src={product1}
               alt="ABCD"
@@ -96,7 +119,7 @@ const HomePage = () => {
               percent="10"
             />
           </div>
-          <div className='grid_column_3'>
+          <div className={clsx('col l-3 m-4')}>
             <CardComponent 
               src={product2}
               alt="ABCD"
@@ -107,7 +130,7 @@ const HomePage = () => {
               percent="10"
             />
           </div>
-          <div className='grid_column_3'>
+          <div className={clsx('col l-3 m-4')}>
             <CardComponent 
               src={product3}
               alt="ABCD"
@@ -118,7 +141,7 @@ const HomePage = () => {
               percent="10"
             />
           </div>
-          <div className='grid_column_3'>
+          <div className={clsx('col l-3 m-4')}>
             <CardComponent 
               src={product1}
               alt="ABCD"
@@ -153,8 +176,8 @@ const HomePage = () => {
           textAlign="center"
           fontSize="4rem"
         />
-        <div className='grid_row'>
-          <div className='grid_column_3'>
+        <div className='row'>
+          <div className={clsx('col l-3 m-4')}>
             <CardComponent 
               src={product1}
               alt="ABCD"
@@ -165,7 +188,7 @@ const HomePage = () => {
               percent="10"
             />
           </div>
-          <div className='grid_column_3'>
+          <div className={clsx('col l-3 m-4')}>
             <CardComponent 
               src={product1}
               alt="ABCD"
@@ -176,7 +199,7 @@ const HomePage = () => {
               percent="10"
             />
           </div>
-          <div className='grid_column_3'>
+          <div className={clsx('col l-3 m-4')}>
             <CardComponent 
               src={product1}
               alt="ABCD"
@@ -187,7 +210,7 @@ const HomePage = () => {
               percent="10"
             />
           </div>
-          <div className='grid_column_3'>
+          <div className={clsx('col l-3 m-4')}>
             <CardComponent 
               src={product1}
               alt="ABCD"
@@ -222,140 +245,58 @@ const HomePage = () => {
           textAlign="center"
           fontSize="4rem"
         />
-        <div className='grid_row'>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand1}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand2}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand3}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand4}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand5}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand6}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand7}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand8}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand9}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand10}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand11}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand12}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand13}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand14}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand15}
-              alt="ROYAL CANIN"
-            />
-          </div>
-        </div>
-        <div className={styles.feedbacks}>
-          <TitleComponent
-            title="Khách yêu của PAWFECT nói gì"
-            textTransform="none"
-            textAlign="left"
-            fontSize="4rem"
-          />
-          {/* <div className={styles.btn}>
-            <BackComponent 
-              fontSize="5rem"
-              color="#000"
-            /> 
-            <NextComponent 
-              fontSize="5rem"
-              color="#000"
-            />
-          </div> */}
-        </div>
-        {/* <div className='grid_row' style={{marginBottom: "50px"}}>
-          <div className='grid_column_4'>
-            <FeedBackComponent 
-              customer="Sarah M."
-              review='"Rất nhiều sản phẩm cho cún yêu có ở cửa hàng, mình có thể tìm thấy mọi thứ ở đây."'
-            />
-          </div>
-          <div className='grid_column_4'>
-            <FeedBackComponent 
-              customer="Alex K."
-              review='"Điểm đến ưa thích mỗi khi muốn shopping cho boss nhà mình!!"'
-            />
-          </div>
-          <div className='grid_column_4'>
-            <FeedBackComponent 
-              customer="James L."
-              review='"Điểm đến ưa thích mỗi khi muốn shopping cho boss nhà mình!!"'
-            />
+        <div className="row">
+        {isInViewport ? (
+          brands.slice(0, visibleCount).map((brand, index) => (
+            <div key={index} className={clsx('col l-2-4 m-4')}>
+              <BrandComponent src={brand.src} alt={brand.alt} />
             </div>
-        </div> */}
-        <div style={{marginBottom: "50px"}}>
-          <CustomerReviewsComponent />
+          ))
+        ) : (
+          brands.slice(0, 15).map((brand, index) => (
+            <div key={index} className={clsx('col l-2-4 m-4')}>
+              <BrandComponent src={brand.src} alt={brand.alt} />
+            </div>
+          ))
+        )}
         </div>
+        {isInViewport && (
+        visibleCount < brands.length ? (
+          <ButtonComponent 
+            width="200px"
+            height="50px"
+            title="Xem thêm"
+            color="#000"
+            border="1px solid #000"
+            background="#fff"
+            borderRadius="15px"
+            fontSize="2rem"
+            onClick={handleShowMore}
+          />
+        ) : (
+          <ButtonComponent 
+            width="200px"
+            height="50px"
+            title="Ẩn bớt"
+            color="#000"
+            border="1px solid #000"
+            background="#fff"
+            borderRadius="15px"
+            fontSize="2rem"
+            onClick={handleShowLess}
+          />
+        )
+      )}
+      <TitleComponent
+        title="Khách yêu của PAWFECT nói gì"
+        textTransform="none"
+        textAlign="left"
+        fontSize="4rem"
+      />
+      <div style={{marginBottom: "50px"}}>
+        <CustomerReviewsComponent />
       </div>
+    </div>
   )
 }
 
