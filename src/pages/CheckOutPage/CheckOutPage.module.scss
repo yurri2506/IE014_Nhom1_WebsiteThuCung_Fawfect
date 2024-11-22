@@ -232,3 +232,17 @@
         }
     }
 }
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .main {
+    
+        h2 {
+            font-size: 3rem;
+        }
+    
+    }
+
+    .productTable td:nth-child(1) {
+        text-align: left !important;
+    }
+}

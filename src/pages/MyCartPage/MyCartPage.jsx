@@ -86,7 +86,7 @@ const MyCartPage = () => {
   
     return (
       <div className={styles.main}>
-        <div className='container'>
+        <div className='grid wide'>
             <h2>GIỎ HÀNG CỦA BẠN</h2>
             <div className={styles.checkAll}>
               <input 
@@ -109,13 +109,13 @@ const MyCartPage = () => {
                   />
                 ))}
               </div>
-            <OrderSummaryComponent 
-              onClick={handleCheckout}
-              totalAmount={totalAmount} 
-              discount={discount} 
-              shippingFee={shippingFee} 
-              safe={safe}
-            />
+              <OrderSummaryComponent 
+                onClick={handleCheckout}
+                totalAmount={totalAmount} 
+                discount={discount} 
+                shippingFee={shippingFee} 
+                safe={safe}
+              />
             </div>
         </div>
       </div>

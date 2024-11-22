@@ -8,6 +8,7 @@ import momo from '../../assets/images/momo.svg'
 import visa from '../../assets/images/visa.svg'
 import applePay from '../../assets/images/applePay.svg'
 import SelectAddressComponent from '../../components/SelectAddressComponent/SelectAddressComponent';
+import clsx from 'clsx';
 
 
 const CheckOutPage = () => {
@@ -28,7 +29,7 @@ const CheckOutPage = () => {
     const closeModal = () => setIsModalOpen(false);
   return (
     <div className={styles.main}>
-      <div className="container">
+      <div className="grid wide">
         <h2>Thanh toán</h2>
 
         <div className={styles.address}>
@@ -100,8 +101,48 @@ const CheckOutPage = () => {
 
         <div className={styles.payment}>
           <h3>Phương thức thanh toán</h3>
-          <div className={styles.method}>
-            <ButtonComponent 
+          <div className={clsx(styles.method, 'row')}>
+            <div className='col l-3 m-6'>
+              <ButtonComponent 
+                title="Momo"
+                iconSmall
+                icon={momo}
+                margin="30px 0 0"
+                width="220px"
+                height="80px"
+              />
+            </div>
+            <div className='col l-3 m-6'>
+              <ButtonComponent 
+                title="Thẻ tín dụng/ghi nợ"
+                iconSmall
+                icon={visa}
+                margin="30px 0 0"
+                width="220px"
+                height="80px"
+              />
+            </div>
+            <div className='col l-3 m-6'>
+              <ButtonComponent 
+                title="ApplePay"
+                iconSmall
+                icon={applePay}
+                margin="30px 0 0"
+                width="220px"
+                height="80px"
+              />
+            </div>
+            <div className='col l-3 m-6'>
+              <ButtonComponent 
+                title="Thanh toán khi nhận hàng"
+                iconSmall
+                margin="30px 0 0"
+                width="220px"
+                height="80px"
+                showIcon={false}
+              />
+            </div>
+            {/* <ButtonComponent 
               title="Momo"
               iconSmall
               icon={momo}
@@ -132,7 +173,7 @@ const CheckOutPage = () => {
               width="220px"
               height="80px"
               showIcon={false}
-            />
+            /> */}
           </div>
         </div>
 
