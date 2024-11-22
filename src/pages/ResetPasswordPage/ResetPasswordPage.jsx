@@ -39,7 +39,7 @@ const ResetPasswordPage = () => {
    <div>
     {currentStep === 1 && (
         <div className={styles.main}>
-            <div className="container">
+            <div className="grid wide">
                 <div className={styles.support}>
                     <Link to={""}>
                         Bạn cần trợ giúp?
@@ -49,7 +49,7 @@ const ResetPasswordPage = () => {
                 <FormComponent
                     width="650px"
                     height="330px"
-                    background="rgba(255, 255, 255, 0.8)"
+                    background="#fff"
                     borderRadius="20px"
                     border="1px solid #000"
                 >

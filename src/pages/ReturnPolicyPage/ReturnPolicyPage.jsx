@@ -3,7 +3,7 @@ import styles from './ReturnPolicyPage.module.scss'
 
 const ReturnPolicyPage = () => {
   return (
-    <div className='container'>
+    <div className='grid wide'>
         <div className={styles.guarantee}>
             <div>
                 <div>
