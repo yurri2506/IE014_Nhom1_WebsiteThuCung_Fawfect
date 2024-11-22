@@ -41,7 +41,7 @@ const RegisterPage = () => {
     <div>
       {currentStep === 1 && (
       <div className={styles.main}>
-        <div className='container'>
+        <div className='grid wide'>
           <div className={styles.signUp}>
             <div className={styles.introduce}>
               <div className={styles.title}>
@@ -71,7 +71,7 @@ const RegisterPage = () => {
               <FormComponent 
                 width="500px"
                 height="650px"
-                background="rgba(255, 255, 255, 0.8)"
+                background="#fff"
                 borderRadius="20px"
                 border="1px solid #000"
               >

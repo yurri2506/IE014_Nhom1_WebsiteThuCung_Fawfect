@@ -140,7 +140,7 @@ const handleSubmit = async (event) => {
 
   return (
     <div className={styles.main}>
-      <div className='container'>
+      <div className='grid wide'>
         <div className={styles.signIn}>
           <div className={styles.introduce}>
             <div className={styles.title}>
