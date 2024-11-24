@@ -20,29 +20,30 @@ const CustomerReviewsComponent = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
-    nextArrow: <NextComponent 
-        fontSize = "5rem"
-        color = "#000"
-        position = "absolute"
-        zIndex = "2"
-        top = "-80px"
-        right = "0"
-    />,
-    prevArrow: <BackComponent 
-        fontSize = "5rem"
-        color = "#000"
-        position = "absolute"
-        zIndex = "2"
-        top = "-80px"
-        right = "50px"
-    />
+    arrows: false
+    // nextArrow: <NextComponent 
+    //     fontSize = "5rem"
+    //     color = "#000"
+    //     position = "absolute"
+    //     zIndex = "2"
+    //     top = "-80px"
+    //     right = "0"
+    // />,
+    // prevArrow: <BackComponent 
+    //     fontSize = "5rem"
+    //     color = "#000"
+    //     position = "absolute"
+    //     zIndex = "2"
+    //     top = "-80px"
+    //     right = "50px"
+    // />
   };
 
   return (
     <div>
       <Slider {...settings}>
         {reviews.map((review) => (
-            <div key={review.id} className='grid_column_4'>
+            <div key={review.id} className='col'>
                 <FeedBackComponent 
                     customer={review.name}
                     review={review.review}

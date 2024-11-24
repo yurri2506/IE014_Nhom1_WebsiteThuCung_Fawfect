@@ -76,7 +76,7 @@ const TypeProductPage = () => {
                     </div>
                 </div>
             </div>
-            {showNavbar && (
+            {showNavbar && isInViewport && (
                 <div>
                     <div onClick={handleNavbar} className={styles.overlay}></div>
                     <div className={styles.navbar}>

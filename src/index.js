@@ -9,18 +9,22 @@ import RegisterPage from './pages/RegisterPage';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const queryClient = new QueryClient()
 root.render(
   // <React.StrictMode>
+  <GoogleOAuthProvider clientId="67490570542-f7q55e842gm0q45cakgturtr64usveoj.apps.googleusercontent.com">
   <QueryClientProvider client={queryClient}>
     <Provider store={store}>
       <App />
     </Provider>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
+
+  </GoogleOAuthProvider>
   // </React.StrictMode>
 );
 

@@ -29,10 +29,10 @@
     &::before {
         content: "";
         position: absolute;
-        top: -10px;
+        top: -15px;
         left: 0;
         width: 220px;
-        height: 20px;
+        height: 15px;
     }
 }
 
@@ -46,6 +46,12 @@
         opacity: 1;
         transform: scale(1);
     }
-  }
-  
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .more {
+        width: 180px;
+    }
+}
+
 
