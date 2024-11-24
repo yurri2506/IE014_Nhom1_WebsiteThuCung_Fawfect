@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './ProductDetailsPage.module.scss'
 import mainProduct from '../../assets/images/mainProduct.svg'
 import subProduct1 from '../../assets/images/subProduct1.svg'
@@ -33,6 +33,7 @@ import NextComponent from '../../components/NextComponent/NextComponent'
 import './ProductDetailsPage.scss'
 import NavbarComponent from '../../components/NavbarComponent/NavbarComponent'
 import SortProductComponent from '../../components/SortProductComponent/SortProductComponent'
+import clsx from 'clsx'
 
 const ProductDetailsPage = () => {
     const [mainImage, setMainImage] = useState(mainProduct);
@@ -146,9 +147,32 @@ const ProductDetailsPage = () => {
         left = "-15px"
     />
     };
+
+    const settings2 = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false
+    };
+
+    const [isInViewport, setIsInViewport] = useState(false);
+
+    useEffect(() => {
+      const mediaQuery = window.matchMedia('(min-width: 740px) and (max-width: 1023px)');
+      const handleViewportChange = () => setIsInViewport(mediaQuery.matches);
+
+      handleViewportChange();
+      mediaQuery.addEventListener('change', handleViewportChange);
+
+      return () => {
+        mediaQuery.removeEventListener('change', handleViewportChange);
+      };
+    }, []);
   
     return (
-      <div className='container'>
+      <div className='grid wide'>
         {/* <div className='grid_row'>
           <div className='grid_column_4'>
             <div className={styles.mainImage}>
@@ -254,8 +278,8 @@ const ProductDetailsPage = () => {
           </div>
         </div> */}
         <Row style={{padding: "16px"}}>
-          <Col span={10} style={{padding: "16px"}}>
-          <div className={styles.mainImage}>
+          <Col span={isInViewport ? 24 : 10} style={{padding: "16px"}}>
+          {/* <div className={styles.mainImage}>
             <img src={mainImage} alt="Product main"/>
           </div>
           <Slider {...settings} className={styles.thumbnails}>
@@ -268,8 +292,39 @@ const ProductDetailsPage = () => {
                     className={styles.thumbnail}
                   />
             ))}
-          </Slider>
-            <div className={styles.contact}>
+          </Slider> */}
+          {isInViewport ? (
+            <div>
+              <Slider {...settings2}>
+                {thumbnails.map((thumb, index) => (
+                  <div key={index}>
+                    {/* <img src={thumb} onClick={()=>setMainImage(thumb)} alt={`Product view ${index + 1}`} /> */}
+                    <div className={styles.mainImage}>
+                      <img src={thumb} alt="Product main" />
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+            </div>
+            ) : (
+              <>
+                <div className={styles.mainImage}>
+                  <img src={mainImage} alt="Product main" />
+                </div>
+                <Slider {...settings} className={styles.thumbnails}>
+                  {thumbnails.map((thumb, index) => (
+                    <img
+                      key={index}
+                      src={thumb}
+                      alt={`Thumbnail ${index + 1}`}
+                      onClick={() => setMainImage(thumb)}
+                      className={styles.thumbnail}
+                    />
+                  ))}
+                </Slider>
+              </>
+            )}
+            <div className={clsx(styles.contact, 'm-0', 'l-12')}>
               <span>Chia sẻ sản phẩm qua:</span>
               <Link to={"/"}>
                 <img src={facebook} alt="" />
@@ -286,7 +341,7 @@ const ProductDetailsPage = () => {
             </div>
           </Col>
 
-          <Col span={14}>
+          <Col span={isInViewport ? 24 : 14}>
             <div className={styles.productInfo}>
               <h2>Mũ len cosplay dễ thương cho thú cưng</h2>
               <div className={styles.rating}>
@@ -596,9 +651,9 @@ Cả một bầu trời phụ kiện tất tần tật những gì để cho cá
               <h2>Các sản phẩm tương tự</h2>
             </div>
             <div>
-              <div className='grid_row'>
+              <div className='row'>
                 {products.map((product, index) => (
-                  <div key={index} className='grid_column_2_4'>
+                  <div key={index} className='col l-2-4 m-4'>
                     <CardComponent {...product}/>
                   </div>
                 ))}
