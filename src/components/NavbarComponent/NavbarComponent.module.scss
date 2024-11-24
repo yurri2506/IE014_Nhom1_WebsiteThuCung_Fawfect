@@ -3,7 +3,8 @@
     flex-direction: column;
     background-color: #F3EFEF;
     padding: 20px;
-    width: 300px;
+    // width: 300px;
+    border-radius: 10px;
 }
 
 .productCategory {
@@ -75,5 +76,12 @@
             font-size: 1.3rem;
             margin-left: 6px;
         }
+    }
+}
+
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .main {
+        border-radius: 0;
     }
 }

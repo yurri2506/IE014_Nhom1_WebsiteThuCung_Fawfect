@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Checkbox, Rate } from 'antd'
 import styles from './NavbarComponent.module.scss'
 import './Navbar.scss'
 import { Slider } from 'antd';
+import ButtonComponent from '../ButtonComponent/ButtonComponent'
 
 const NavbarComponent = () => {
     const [showAllBrands, setShowAllBrands] = useState(false);
@@ -78,6 +79,20 @@ const NavbarComponent = () => {
                 return null;
         }
     }
+
+    const [isInViewport, setIsInViewport] = useState(false);
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(min-width: 740px) and (max-width: 1023px)');
+        const handleViewportChange = () => setIsInViewport(mediaQuery.matches);
+    
+        handleViewportChange();
+        mediaQuery.addEventListener('change', handleViewportChange);
+    
+        return () => {
+            mediaQuery.removeEventListener('change', handleViewportChange);
+        };
+    }, []);
+    
   return (
     <div className={styles.main}>
         <div className={styles.productCategory}>
@@ -125,6 +140,17 @@ const NavbarComponent = () => {
                 {renderContent("star", ['5', '4', '3', '2', '1'])}
             </div>
         </div>
+        {isInViewport ? (
+             <ButtonComponent 
+                primary
+                title="Áp dụng"
+                width="70%"
+                height="40px"
+                textAlign="center"
+                margin="10px 0 0 0"
+                className={styles.btn}
+           />
+        ) : null}
     </div>
   )
 }

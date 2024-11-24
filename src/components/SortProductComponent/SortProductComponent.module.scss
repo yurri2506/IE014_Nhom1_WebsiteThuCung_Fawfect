@@ -3,12 +3,13 @@
     display: flex;
     align-items: center;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
 
     span {
         font-size: 2rem;
         display: inline-block;
         margin-right: 20px;
+        flex: 1;
     }
 
     .allBtn {
@@ -30,6 +31,7 @@
         justify-content: space-between;
         padding: 20px;
         position: relative;
+        margin-left: 5px;
 
         &:hover ul {
             display: block;
@@ -51,7 +53,6 @@
             z-index: 2;
             top: 100%;
             left: 0;
-            margin-top: 1px;
             padding: 0;
             display: none;
 
@@ -76,6 +77,108 @@
 
                     &:hover {
                         color: #E87428;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); // Overlay mờ
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; // Đảm bảo nằm trên các thành phần khác
+}
+
+.navbarContainer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%; // Tùy chỉnh kích thước
+  max-width: 400px; // Giới hạn chiều rộng
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.filter {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-left: 10px;
+
+    .icon {
+        color: #E87428;
+        font-size: 2rem;
+    }
+
+    span {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+    }
+}
+
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .sort {
+        justify-content: flex-start;
+
+        .btn {
+            margin: 5px;
+        }
+    
+        .price {
+            width: 170px;
+
+            ul {
+    
+                li {
+                    width: 170px;
+    
+                    a {
+                        font-size: 1.4rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 64em) and (max-width: 77.4375em) {
+    .sort {
+
+        .btn {
+            margin: 5px;
+        }
+    
+        .price {
+            width: 180px;
+            ul {
+    
+                li {
+                    width: 180px;
+    
+                    a {
+                        font-size: 1.5rem;
                     }
                 }
             }
