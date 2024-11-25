@@ -33,6 +33,10 @@ import brand14 from '../../assets/images/brand14.svg'
 import brand15 from '../../assets/images/brand15.svg'
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
 import CustomerReviewsComponent from '../../components/CustomerReviewsComponent/CustomerReviewsComponent'
+import NewProductComponent from '../../components/NewProductComponent/NewProductComponent'
+import BestSellingComponent from '../../components/BestSellingComponent/BestSellingComponent'
+import AllBrandsComponent from '../../components/AllBrandsComponent/AllBrandsComponent'
+
 
 
 const HomePage = () => {
@@ -42,6 +46,21 @@ const HomePage = () => {
     { src: service3, alt: "Thanh toán tiện lợi", text: "Thanh toán tiện lợi" },
     { src: service4, alt: "Hỗ trợ tận tâm", text: "Hỗ trợ tận tâm", width: "110px" },
   ];
+
+  const products = [
+    // Danh sách sản phẩm (có thể thay đổi hoặc lấy từ API)
+    { src: product1, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product2, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product3, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product1, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product2, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product3, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product1, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product2, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product3, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product3, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    // Các sản phẩm khác...
+  ];
   
   const [visibleCount, setVisibleCount] = useState(6);
   const [isInViewport, setIsInViewport] = useState(false);
@@ -49,6 +68,19 @@ const HomePage = () => {
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 740px) and (max-width: 1023px)');
     const handleViewportChange = () => setIsInViewport(mediaQuery.matches);
+
+    handleViewportChange();
+    mediaQuery.addEventListener('change', handleViewportChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleViewportChange);
+    };
+  }, []);
+
+  const [isInMobile, setisInMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 739px)');
+    const handleViewportChange = () => setisInMobile(mediaQuery.matches);
 
     handleViewportChange();
     mediaQuery.addEventListener('change', handleViewportChange);
@@ -82,6 +114,7 @@ const HomePage = () => {
     { src: brand14, alt: 'ROYAL CANIN' },
     { src: brand15, alt: 'ROYAL CANIN' },
   ];
+
   return (
       <div className={clsx('grid wide')}>
         <div className={styles.sliderImg}>
@@ -89,7 +122,7 @@ const HomePage = () => {
         </div>
         <div className={clsx('row', styles.service)}>
           {services.map((service, index) => (
-            <div key={index} className="col l-3 m-0">
+            <div key={index} className="col l-3 m-0 c-0">
               <ServiceComponent {...service} />
             </div>
           ))}
@@ -101,68 +134,9 @@ const HomePage = () => {
             background="rgba(0, 0, 0, 0.1)"
           />
         </div>
-        <TitleComponent
-          title="Hàng mới về"
-          textTransform="uppercase"
-          textAlign="center"
-          fontSize="4rem"
+        <NewProductComponent 
+          products={products}
         />
-        <div className='row'>
-          <div className={clsx('col l-3 m-4')}>
-            <CardComponent 
-              src={product1}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <div className={clsx('col l-3 m-4')}>
-            <CardComponent 
-              src={product2}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <div className={clsx('col l-3 m-4')}>
-            <CardComponent 
-              src={product3}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <div className={clsx('col l-3 m-4')}>
-            <CardComponent 
-              src={product1}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <ButtonComponent 
-            width="200px"
-            height="50px"
-            title="Xem thêm"
-            color="#000"
-            border="1px solid #000"
-            background="#fff"
-            borderRadius="15px"
-            fontSize="2rem"
-          />
-        </div>
         <div className={styles.underLine}>
           <UnderLineComponent
             width="100%"
@@ -170,68 +144,9 @@ const HomePage = () => {
             background="rgba(0, 0, 0, 0.1)"
           />
         </div>
-        <TitleComponent
-          title="Sản phẩm bán chạy"
-          textTransform="uppercase"
-          textAlign="center"
-          fontSize="4rem"
+        <BestSellingComponent 
+          products={products}
         />
-        <div className='row'>
-          <div className={clsx('col l-3 m-4')}>
-            <CardComponent 
-              src={product1}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <div className={clsx('col l-3 m-4')}>
-            <CardComponent 
-              src={product1}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <div className={clsx('col l-3 m-4')}>
-            <CardComponent 
-              src={product1}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <div className={clsx('col l-3 m-4')}>
-            <CardComponent 
-              src={product1}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <ButtonComponent 
-              width="200px"
-              height="50px"
-              title="Xem thêm"
-              color="#000"
-              border="1px solid #000"
-              background="#fff"
-              borderRadius="15px"
-              fontSize="2rem"
-            />
-        </div>
         <div className={styles.underLine}>
           <UnderLineComponent
             width="100%"
@@ -239,63 +154,21 @@ const HomePage = () => {
             background="rgba(0, 0, 0, 0.1)"
           />
         </div>
-        <TitleComponent
-          title="100+ thương hiệu boss thích"
-          textTransform="uppercase"
-          textAlign="center"
-          fontSize="4rem"
-        />
-        <div className="row">
-        {isInViewport ? (
-          brands.slice(0, visibleCount).map((brand, index) => (
-            <div key={index} className={clsx('col l-2-4 m-4')}>
-              <BrandComponent src={brand.src} alt={brand.alt} />
-            </div>
-          ))
-        ) : (
-          brands.slice(0, 15).map((brand, index) => (
-            <div key={index} className={clsx('col l-2-4 m-4')}>
-              <BrandComponent src={brand.src} alt={brand.alt} />
-            </div>
-          ))
+        {isInMobile ? (null) : (
+          <AllBrandsComponent 
+            isInViewport={isInViewport}
+            brands={brands}
+            visibleCount={visibleCount}
+            handleShowMore={handleShowMore}
+            handleShowLess={handleShowLess}
+          />
         )}
+        <div style={{marginBottom: "50px"}}>
+          <CustomerReviewsComponent 
+            isInViewport={isInViewport}
+            isInMobile={isInMobile}
+          />
         </div>
-        {isInViewport && (
-        visibleCount < brands.length ? (
-          <ButtonComponent 
-            width="200px"
-            height="50px"
-            title="Xem thêm"
-            color="#000"
-            border="1px solid #000"
-            background="#fff"
-            borderRadius="15px"
-            fontSize="2rem"
-            onClick={handleShowMore}
-          />
-        ) : (
-          <ButtonComponent 
-            width="200px"
-            height="50px"
-            title="Ẩn bớt"
-            color="#000"
-            border="1px solid #000"
-            background="#fff"
-            borderRadius="15px"
-            fontSize="2rem"
-            onClick={handleShowLess}
-          />
-        )
-      )}
-      <TitleComponent
-        title="Khách yêu của PAWFECT nói gì"
-        textTransform="none"
-        textAlign="left"
-        fontSize="4rem"
-      />
-      <div style={{marginBottom: "50px"}}>
-        <CustomerReviewsComponent />
-      </div>
     </div>
   )
 }

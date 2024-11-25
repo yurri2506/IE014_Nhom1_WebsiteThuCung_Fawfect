@@ -14,7 +14,7 @@ const BestSellingComponent = ({products}) => {
         />
         <div className='row'>
             {products.map((product, index) => (
-                <div key={index} className='col l-3 m-4'>
+                <div key={index} className='col l-3 m-4 c-6'>
                     <CardComponent {...product} />
                 </div>
             ))}

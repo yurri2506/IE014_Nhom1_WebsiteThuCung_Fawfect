@@ -16,13 +16,13 @@ const AllBrandsComponent = ({isInViewport, brands, visibleCount, handleShowMore,
         <div className="row">
             {isInViewport ? (
             brands.slice(0, visibleCount).map((brand, index) => (
-                <div key={index} className={clsx('col l-2-4 m-4')}>
+                <div key={index} className={clsx('col l-2-4 m-4 c-0')}>
                 <BrandComponent src={brand.src} alt={brand.alt} />
                 </div>
             ))
             ) : (
             brands.slice(0, 15).map((brand, index) => (
-                <div key={index} className={clsx('col l-2-4 m-4')}>
+                <div key={index} className={clsx('col l-2-4 m- c-0')}>
                 <BrandComponent src={brand.src} alt={brand.alt} />
                 </div>
             ))

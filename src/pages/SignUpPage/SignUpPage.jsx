@@ -13,7 +13,6 @@ import google from '../../assets/images/google.svg'
 import VerifyMethodComponent from '../../components/VerifyMethodComponent/VerifyMethodComponent'
 import SetPasswordComponent from '../../components/SetPasswordComponent/SetPasswordComponent'
 import SuccessNotifyComponent from '../../components/SuccessNotifyComponent/SuccessNotifyComponent'
-import LoginGoogle from '../../components/Login/LoginGoogle'
 
 const RegisterPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
