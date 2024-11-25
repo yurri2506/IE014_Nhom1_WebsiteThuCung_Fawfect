@@ -65,7 +65,7 @@
     justify-content: space-between;
     // flex: 1;
 
-    p:first-of-type {
+    > p:first-of-type {
         font-size: 1.6rem;
         font-weight: 600;
         margin-top: 5px;
@@ -149,6 +149,103 @@
         }
     } 
 }
+
+
+@media screen and (max-width: 46.1875em) {
+    .carts {
+        width: 100%;
+        margin: 0 0 10px 0;
+        padding: 0 10px;
+
+        input {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+
+            &:checked::after {
+                font-size: 1rem;
+                left: 6px;
+            }
+        }
+
+        .img {
+            width: 90px;
+            height: 90px;
+
+            img {
+                width: 75px;
+                height: 75px;
+            }
+        }
+    }
+
+    .details {
+        // width: 150px;
+        flex: 1 !important;
+        > p:first-of-type {
+            font-size: 1.2rem;
+            margin-top: 17px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+        
+        .price {
+    
+            p:first-of-type {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+    
+            p:last-of-type {
+                font-size: 1.2rem;
+                color: #E87428;
+                margin-bottom: 15px;
+            }
+        }
+    
+    }
+
+    .changeItem {
+        flex: 0;
+    
+        button {
+            font-size: 1.5rem;
+            margin-top: 17px;
+        }
+    
+        .quantity {
+    
+            button {
+                width: 20px;
+                height: 20px;
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+    
+            button:first-of-type {
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+            }
+    
+            button:last-of-type {
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+            }
+    
+            span {
+                font-size: 1.2rem;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+            }
+        } 
+    }
+}
+
 
 @media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
     .carts {

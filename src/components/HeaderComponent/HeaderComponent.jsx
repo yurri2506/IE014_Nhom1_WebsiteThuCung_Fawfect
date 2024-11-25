@@ -20,6 +20,8 @@ import { MdNavigateNext } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import { FaProductHunt } from "react-icons/fa";
 import { FaBookOpen } from "react-icons/fa";
+import { FaDog } from "react-icons/fa6";
+import { FaCat } from "react-icons/fa";
 
 const HeaderComponent = () => {
   const [span, setSpan] = useState(21);
@@ -192,7 +194,7 @@ const HeaderComponent = () => {
                   <li className={styles.forDog}>
                     <Link>
                       <div className={styles.iconNav}>
-                        <FaProductHunt className={styles.iconForNav}/>
+                        <FaDog className={styles.iconForNav}/>
                         Sản phẩm cho chó
                       </div>
                       <MdNavigateNext className={styles.icon} />
@@ -202,7 +204,7 @@ const HeaderComponent = () => {
                   <li className={styles.forCat}>
                     <Link>
                       <div className={styles.iconNav}>
-                        <FaProductHunt className={styles.iconForNav}/>
+                        <FaCat className={styles.iconForNav}/>
                         Sản phẩm cho mèo
                       </div>
                       <MdNavigateNext className={styles.icon} />

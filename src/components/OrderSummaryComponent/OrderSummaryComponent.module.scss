@@ -79,6 +79,49 @@
     }
 }
 
+@media screen and (max-width: 46.1875em) {
+    .orderSummary {
+        width: 100%;
+        height: 100%;   
+        margin: 0;
+
+        input {
+            width: 200px;
+            height: 40px;
+            font-size: 1.3rem;
+        }
+
+        span {
+            font-size: 1.5rem;
+            top: 80px;
+            left: 35px;
+        }
+
+        .btn {
+            width: 100px;
+            height: 40px;
+            font-size: 1.5rem;
+        }
+    
+        p {
+            font-size: 1.5rem;
+        }
+    
+        .normal, .total {
+            font-size: 1.7rem;
+        }
+    
+        .btnBuy {
+            width: 50% !important;
+            height: 40px !important;
+        }
+    
+        .wrapBtn {
+            margin: 15px 0;
+        }
+      }
+}
+
 
 @media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
     .orderSummary {
