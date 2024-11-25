@@ -30,3 +30,35 @@
         font-weight: 500;
     }
 }
+
+@media screen and (max-width: 46.1875em) {
+    .aboutImg {
+        min-height: 500px;
+    }
+    
+    .info {
+        top: 25px;
+        left: 20px;
+    
+        h3 {
+            font-size: 2.5rem;
+        }
+    
+        h2 {
+            font-size: 3rem;
+        }
+    
+        p {
+            font-size: 2.5rem;
+        }
+    }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .info {
+        position: absolute;
+        text-align: center;
+        top: 15px;
+        left: -10px;
+    }
+}

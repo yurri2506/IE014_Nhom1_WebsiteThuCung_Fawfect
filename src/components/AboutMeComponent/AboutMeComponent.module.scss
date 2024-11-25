@@ -31,6 +31,41 @@
     }
 }
 
+@media screen and (max-width: 46.1875em) {
+    .main {
+        flex-direction: column;
+    }
+
+
+    .img {
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+
+    .aboutMore {
+        h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 10px 0 0 0;
+        }
+    
+        ul {
+            margin: 0;
+            list-style-type: none;
+            padding: 0 6px;
+        }
+    
+        li {
+            text-indent: 30px;
+            text-align: justify;
+        }
+    }
+}
+
 @media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
     .main {
         flex-direction: column;
