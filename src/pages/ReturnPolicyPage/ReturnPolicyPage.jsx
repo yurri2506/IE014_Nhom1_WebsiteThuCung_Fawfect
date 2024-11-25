@@ -47,7 +47,7 @@ const ReturnPolicyPage = () => {
                         </li>
                     </ul>
                 </div>
-                <div style={{paddingTop: "30px"}}>
+                <div>
                     <h2>CHÍNH SÁCH HOÀN TIỀN</h2>
                     <p>Chào mừng quý khách đến với Pawfect Petcare Center! Chúng tôi luôn mong muốn mang đến trải nghiệm mua sắm hài lòng cho quý khách. Nếu vì bất kỳ lý do nào quý khách không hài lòng với sản phẩm hoặc dịch vụ, vui lòng tham khảo các điều kiện hoàn tiền dưới đây.</p>
                     <ul>

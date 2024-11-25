@@ -28,7 +28,7 @@ const FooterComponent = () => {
     <div className={styles.header}>
         <div className="grid wide">
             <div className={clsx('row', styles.wrapper)}>
-              <div className={clsx('col l-4 m-5')}>
+              <div className={clsx('col l-4 m-5 c-12')}>
                 <TitleComponent 
                   title="Pawfect petcare center"
                   textAlign="left"
@@ -117,7 +117,7 @@ const FooterComponent = () => {
                 ) :
                 (
                   <>
-                  <div className='col l-2-5'>
+                  <div className='col l-2-5 c-12'>
                     <div className={styles.about}>
                       <TitleComponent 
                         title="Về PAWFECT"
@@ -126,6 +126,7 @@ const FooterComponent = () => {
                         fontSize="3rem"
                         color="#fff"
                         margin='20px 0 10px'
+                        className={styles.title2}
                       />
                       <UnderLineComponent 
                         width="150px"
@@ -146,7 +147,7 @@ const FooterComponent = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='col l-2-5'>
+                  <div className='col l-2-5 c-12'>
                     <div className={styles.support}>
                       <TitleComponent 
                         title="Hỗ trợ"
@@ -155,6 +156,7 @@ const FooterComponent = () => {
                         fontSize="3rem"
                         color="#fff"
                         margin='20px 0 10px'
+                        className={styles.title2}
                       />
                       <UnderLineComponent 
                         width="150px"
@@ -181,7 +183,7 @@ const FooterComponent = () => {
                   </>
                 )
               }
-              <div className={clsx('col l-3 m-4')}>
+              <div className={clsx('col l-3 m-4 c-12')}>
                 <div className={styles.location}>
                   <TitleComponent 
                     title="Địa chỉ cửa hàng"

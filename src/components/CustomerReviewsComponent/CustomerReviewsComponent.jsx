@@ -61,7 +61,7 @@ const CustomerReviewsComponent = ({isInViewport, isInMobile}) => {
       <TitleComponent
         title="Khách yêu của PAWFECT nói gì"
         textTransform="none"
-        textAlign="left"
+        textAlign={(isInViewport || isInMobile) ? "center" : "left"}
         fontSize="4rem"
       />
       <Slider {...settings}>

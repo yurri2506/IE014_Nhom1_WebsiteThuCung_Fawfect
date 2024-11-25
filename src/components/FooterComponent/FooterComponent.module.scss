@@ -96,6 +96,43 @@
 }
 
 //Responsive 
+@media screen and (max-width: 46.1875em) {
+    .wrapper {
+        margin: 0;
+        padding: 20px;
+    }
+
+    .title {
+        font-size: 2.5rem !important;
+    }
+
+    .title2 {
+        font-size: 2.2rem !important;
+    }
+
+    .info {
+        h3 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        p {
+            color: #fff;
+            font-size: 1.5rem;
+            line-height: 1.5;
+        }
+    
+        a {
+            font-size: 1.5rem;
+            line-height: 1.5;
+    
+            .icon {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
 @media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
     .title {
         font-size: 2.5rem !important;
