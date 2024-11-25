@@ -102,7 +102,7 @@ const CheckOutPage = () => {
         <div className={styles.payment}>
           <h3>Phương thức thanh toán</h3>
           <div className={clsx(styles.method, 'row')}>
-            <div className='col l-3 m-6'>
+            <div className='col l-3 m-6 c-6'>
               <ButtonComponent 
                 title="Momo"
                 iconSmall
@@ -110,9 +110,10 @@ const CheckOutPage = () => {
                 margin="30px 0 0"
                 width="220px"
                 height="80px"
+                className={styles.methodBtn}
               />
             </div>
-            <div className='col l-3 m-6'>
+            <div className='col l-3 m-6 c-6'>
               <ButtonComponent 
                 title="Thẻ tín dụng/ghi nợ"
                 iconSmall
@@ -120,9 +121,10 @@ const CheckOutPage = () => {
                 margin="30px 0 0"
                 width="220px"
                 height="80px"
+                className={styles.methodBtn}
               />
             </div>
-            <div className='col l-3 m-6'>
+            <div className='col l-3 m-6 c-6'>
               <ButtonComponent 
                 title="ApplePay"
                 iconSmall
@@ -130,9 +132,10 @@ const CheckOutPage = () => {
                 margin="30px 0 0"
                 width="220px"
                 height="80px"
+                className={styles.methodBtn}
               />
             </div>
-            <div className='col l-3 m-6'>
+            <div className='col l-3 m-6 c-6'>
               <ButtonComponent 
                 title="Thanh toán khi nhận hàng"
                 iconSmall
@@ -140,6 +143,7 @@ const CheckOutPage = () => {
                 width="220px"
                 height="80px"
                 showIcon={false}
+                className={styles.methodBtn}
               />
             </div>
             {/* <ButtonComponent 
