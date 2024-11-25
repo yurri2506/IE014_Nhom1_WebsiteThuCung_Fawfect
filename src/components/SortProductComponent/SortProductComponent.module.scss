@@ -9,7 +9,7 @@
         font-size: 2rem;
         display: inline-block;
         margin-right: 20px;
-        flex: 1;
+        // flex: 1;
     }
 
     .allBtn {
@@ -134,6 +134,49 @@
         font-size: 1.5rem;
         font-weight: 700;
         margin: 0;
+    }
+}
+
+.newNav {
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    margin: 10px 0 20px 0;
+    flex: 1;
+
+    li {
+        font-size: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+
+        .icon {
+            margin-left: 5px;
+        }
+    }
+}
+
+.active {
+    color: #E87428;
+    font-weight: bold;
+}
+
+
+
+@media screen and (max-width: 46.1875em) {
+    .sort {
+        display: block;
+        padding: 0;
+        justify-content: space-between;
+        background-color: #fff;
+
+        .btn {
+            margin: 0;
+            // width: 80px !important;
+        }
+    }
+
+    .filter {
+        margin-left: 25px;
     }
 }
 

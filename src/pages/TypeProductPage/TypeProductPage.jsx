@@ -51,34 +51,59 @@ const TypeProductPage = () => {
         }
     }, [showNavbar]);
 
+    const [isInMobile, setisInMobile] = useState(false);
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 739px)');
+        const handleViewportChange = () => setisInMobile(mediaQuery.matches);
+
+        handleViewportChange();
+        mediaQuery.addEventListener('change', handleViewportChange);
+
+        return () => {
+        mediaQuery.removeEventListener('change', handleViewportChange);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (showNavbar) {
+          document.body.classList.add("no-scroll");
+        } else {
+          document.body.classList.remove("no-scroll");
+        }
+    }, [showNavbar]);
 
   return (
     <div className={styles.main}>
         <div className='grid wide'>
             <div className='row'>
-                <div className='col l-3 m-0'>
+                <div className='col l-3 m-0 c-0'>
                     <NavbarComponent />
                 </div>
-                <div className='col l-9 m-12'>
+                <div className='col l-9 m-12 c-12'>
                     <div className='row'>
-                        <div className={clsx('col l-12 m-12', styles.sort)}>
+                        <div className={clsx('col l-12 m-12 c-12', styles.sort)}>
                             <SortProductComponent
                                 handleNavbar={handleNavbar}
+                                isInViewport={isInViewport}
+                                isInMobile={isInMobile}
                             />
                         </div>
                         {products.map((product, index) => (
-                            <div className='col l-4 m-4'>
+                            <div className='col l-4 m-4 c-6'>
                                 <CardComponent {...product}/>
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
-            {showNavbar && isInViewport && (
+            {showNavbar && (isInViewport || isInMobile) && (
                 <div>
                     <div onClick={handleNavbar} className={styles.overlay}></div>
                     <div className={styles.navbar}>
-                        <NavbarComponent />
+                        <NavbarComponent 
+                            isInViewport={isInViewport}
+                            isInMobile={isInMobile}
+                        />
                     </div>
                 </div>
             )}
