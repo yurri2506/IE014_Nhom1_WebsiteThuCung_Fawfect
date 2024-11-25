@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { Badge, Button, Col, Grid, Input, Row } from 'antd';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import clsx from 'clsx';
 import styles from './HeaderComponent.module.scss'
+import './HeaderComponent.scss'
 import { GrNotification, GrLanguage } from 'react-icons/gr'
 import { BiHelpCircle } from 'react-icons/bi'
 import whiteLogo from '../../assets/images/whiteLogo.svg'
-import { FaChevronDown, FaRegHeart } from 'react-icons/fa6'
+import { FaChevronDown, FaHeart, FaRegHeart } from 'react-icons/fa6'
 import { PiShoppingCartBold } from 'react-icons/pi'
 import { SearchOutlined } from '@ant-design/icons';
 import MoreComponent from '../MoreComponent/MoreComponent';
 import { TbHelpSquare } from "react-icons/tb";
+import { FaAlignJustify } from "react-icons/fa6";
+import { FaRegUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
+import { MdNavigateNext } from "react-icons/md";
+import { FaHome } from "react-icons/fa";
+import { FaProductHunt } from "react-icons/fa";
+import { FaBookOpen } from "react-icons/fa";
 
 const HeaderComponent = () => {
   const [span, setSpan] = useState(21);
   const [offset, setOffset] = useState(2);
+  const navigate = useNavigate();
 
   const handleResize = () => {
     const width = window.innerWidth;
@@ -32,9 +43,39 @@ const HeaderComponent = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   
+  const [isInMobile, setIsInMobile] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(false);
+
+  useEffect(() => {
+  const mediaQuery = window.matchMedia('(max-width: 739px)');
+  const handleViewportChange = () => setIsInMobile(mediaQuery.matches);
+
+  handleViewportChange();
+  mediaQuery.addEventListener('change', handleViewportChange);
+
+  return () => {
+      mediaQuery.removeEventListener('change', handleViewportChange);
+  };
+  }, []);
+
+  const handleNavbar = () => {
+      setShowNavbar(!showNavbar);
+  };
+
+  useEffect(() => {
+      if (showNavbar) {
+        document.body.classList.add("no-scroll");
+      } else {
+        document.body.classList.remove("no-scroll");
+      }
+  }, [showNavbar]);
+
   return (
     <div className={styles.header}>
-      <div style={{position: "relative"}} className="grid wide">
+      <div className={clsx("grid wide", styles.main)}>
+        <div onClick={handleNavbar} className={styles.bar}>
+            <FaAlignJustify />
+        </div>
         <div className={styles.logo}>
           <Link to={"/"}>
             <img src={whiteLogo} alt="" />
@@ -97,6 +138,14 @@ const HeaderComponent = () => {
             </ul>
           </Col>
         </Row>
+        <div className={styles.userAndCart}>
+          <div onClick={() => navigate('/sign-up')} className={styles.cUser}>
+            <FaUser />
+          </div>
+          <div onClick={() => navigate('/my-cart')} className={styles.cCart}>
+            <FaShoppingCart />
+          </div>
+        </div>
         <Row>
           <Col className={styles.nav} span={span} offset={offset}>
           <ul>
@@ -127,6 +176,59 @@ const HeaderComponent = () => {
           </ul>
           </Col>
         </Row>
+        {showNavbar && isInMobile && (
+          <div>
+              <div onClick={handleNavbar} className={styles.overlay}></div>
+              <div className={styles.navbar}>
+                <ul onClick={handleNavbar}>
+                  <li>
+                    <Link to={"/"}>
+                    <div className={styles.iconNav}>
+                      <FaHome className={styles.iconForNav}/>  
+                      Trang chủ
+                    </div>
+                    </Link>
+                  </li>
+                  <li className={styles.forDog}>
+                    <Link>
+                      <div className={styles.iconNav}>
+                        <FaProductHunt className={styles.iconForNav}/>
+                        Sản phẩm cho chó
+                      </div>
+                      <MdNavigateNext className={styles.icon} />
+                    </Link>
+                    <MoreComponent className={styles.moreDog} />
+                  </li>
+                  <li className={styles.forCat}>
+                    <Link>
+                      <div className={styles.iconNav}>
+                        <FaProductHunt className={styles.iconForNav}/>
+                        Sản phẩm cho mèo
+                      </div>
+                      <MdNavigateNext className={styles.icon} />
+                    </Link>
+                    <MoreComponent className={styles.moreCat} />
+                  </li>
+                  <li>
+                    <Link to={"/about"}>
+                      <div className={styles.iconNav}>
+                          <FaBookOpen className={styles.iconForNav}/>
+                          Về chúng tôi
+                      </div>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link>
+                      <div className={styles.iconNav}>
+                        <FaHeart className={styles.iconForNav}/>
+                        Sản phẩm yêu thích
+                      </div>
+                    </Link>
+                  </li>      
+                </ul>
+              </div>
+          </div>
+        )}
       </div>
     </div>
   )

@@ -134,7 +134,8 @@ const HomePage = () => {
             background="rgba(0, 0, 0, 0.1)"
           />
         </div>
-        <NewProductComponent 
+        <NewProductComponent
+          isInMobile={isInMobile}
           products={products}
         />
         <div className={styles.underLine}>
@@ -145,6 +146,7 @@ const HomePage = () => {
           />
         </div>
         <BestSellingComponent 
+          isInMobile={isInMobile}
           products={products}
         />
         <div className={styles.underLine}>

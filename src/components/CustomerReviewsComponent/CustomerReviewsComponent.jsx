@@ -47,8 +47,35 @@ const CustomerReviewsComponent = ({isInViewport, isInMobile}) => {
         speed: 500,
         slidesToShow: 2,
         slidesToScroll: 2,
-        arrows: false,
+        arrows: false
       });
+    }
+    else {
+      setSettings(
+        {
+          dots: true,
+          infinite: true,
+          speed: 500,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          nextArrow: <NextComponent 
+              fontSize="5rem"
+              color="#000"
+              position="absolute"
+              zIndex="2"
+              top="-80px"
+              right="0"
+          />,
+          prevArrow: <BackComponent 
+              fontSize="5rem"
+              color="#000"
+              position="absolute"
+              zIndex="2"
+              top="-80px"
+              right="50px"
+          />
+        }
+      )
     }
   };
 
@@ -68,8 +95,8 @@ const CustomerReviewsComponent = ({isInViewport, isInMobile}) => {
         {reviews.map((review) => (
             <div key={review.id} className='col'>
                 <FeedBackComponent 
-                    customer={review.name}
-                    review={review.review}
+                  customer={review.name}
+                  review={review.review}
                 />
             </div>
         ))}

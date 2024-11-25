@@ -6,9 +6,7 @@ import CardComponent from '../../components/CardComponent/CardComponent'
 import product1 from '../../assets/images/product1.svg'
 import product2 from '../../assets/images/product2.svg'
 import product3 from '../../assets/images/product3.svg'
-import { Col, Row } from 'antd'
 import clsx from 'clsx'
-import { CiFilter } from "react-icons/ci";
 
 const TypeProductPage = () => {
     const products = [

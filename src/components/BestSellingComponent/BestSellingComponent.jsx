@@ -3,7 +3,7 @@ import ButtonComponent from '../ButtonComponent/ButtonComponent'
 import CardComponent from '../CardComponent/CardComponent'
 import TitleComponent from '../TitleComponent/TitleComponent'
 
-const BestSellingComponent = ({products}) => {
+const BestSellingComponent = ({products, isInMobile}) => {
   return (
     <div>
         <TitleComponent
@@ -12,7 +12,7 @@ const BestSellingComponent = ({products}) => {
           textAlign="center"
           fontSize="4rem"
         />
-        <div className='row'>
+        <div style={isInMobile ? { margin: "0 4px" } : undefined} className='row'>
             {products.map((product, index) => (
                 <div key={index} className='col l-3 m-4 c-6'>
                     <CardComponent {...product} />

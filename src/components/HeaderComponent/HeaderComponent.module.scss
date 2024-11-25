@@ -1,6 +1,13 @@
 .header {
     background-color: #E87428;
     height: 150px;
+}
+
+.main {
+    position: relative;
+}
+
+.bar, .userAndCart {
     display: none;
 }
 
@@ -152,158 +159,143 @@
     }
 }
 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 2;
+}
+
+.navbar {
+    background: #fff;
+    position: absolute;
+    top: -70px;
+    left: -20px;
+    z-index: 3;
+    width: 80%; 
+    height: 100vh;   
+    overflow-y: auto; 
+
+    ul {
+        list-style-type: none;
+        padding: 20px;
+
+        li {
+            padding: 15px 0;
+            font-size: 1.8rem;
+            font-weight: 800;
+
+            a {
+                text-decoration: none;
+                color: #000;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .icon {
+                    font-size: 2.3rem;
+                    font-weight: 800;
+                }
+            }
+        }
+
+        .iconNav {
+            display: flex;
+            align-items: center;
+
+            .iconForNav {
+                margin-right: 4px;
+            }
+        }
+
+        .moreDog,
+        .moreCat {
+            display: none;
+            width: 100%;
+
+            ul {
+                display: block;
+            }
+        }
+
+        .forDog:hover .moreDog,
+        .forCat:hover .moreCat {
+            display: block;
+        }
+    }
+}
+
+:global {
+    body.no-scroll {
+      overflow: hidden;
+    }
+  }
+
 //Responsive
 @media screen and (max-width: 46.1875em) {
     .header {
-        // height: 150px;
+        padding: 20px;
+        height: 100%;
+    }
+
+    .main {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 50px !important;
+    }
+
+    .bar {
+        font-size: 2.4rem;
+        color: #fff;
+        display: block;
     }
     
     .logo {
         position: absolute;
-        top: 0;
-        // left: 150px;
+        top: -250%;
+        left: 50%;
+        transform: translateX(-50%);
     
         img {
-            width: 300px;
+            width: 150px;
             height: 150px;
         }
     }
     
     .userOptions {
-      padding: 10px 0;
-    
-      ul {
-        display: flex;
-        justify-content: flex-end;
-        list-style-type: none;
-    
-        li {
-            margin-left: 15px;
-    
-        }
-    
-        li:hover a{
-            color: hsla(0,0%,100%,.7);
-        }
-    
-        li:last-child::before {
-            content: "";
-            display: inline-block;
-            width: 1px;
-            height: 18px;
-            background-color: #fff;
-            margin-right: 4px;
-            vertical-align: middle;
-            margin-bottom: 5px;
-            margin-right: 10px;
-        }
-    
-        a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 1.6rem;
-        }
-    
-        span {
-            margin: 0 3px;
-        }
-      }
+      display: none;
     }
     
     .search {
-        .searchButton {
-          background-color: #fb6603; 
-          color: white;
-          width: 50px;
-          margin-right: -8px;
-          border: none;
-    
-          .icon {
-            padding: 4px 12px;
-          }
-        }
-        .searchButton:hover {
-            background-color: #fb6603 !important;
-            color: #fff !important;
-            opacity: 0.9;
+        margin: 0;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .userAndCart {
+        display: flex;
+        font-size: 2.2rem;
+        color: #fff;
+        align-items: center;
+        z-index: 2;
+
+        .cUser {
+            margin: 0 20px 0 0;
         }
     }
     
     .cart {
-        ul {
-            display: flex;
-            list-style-type: none;
-        }
-    
-        li {
-            margin-left: 20px;
-        }
-    
-        li:hover a {
-            color: hsla(0,0%,100%,.7);
-        }
-    
-        a {
-            text-decoration: none;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 2.5rem;
-    
-            span {
-                font-size: 1.6rem;
-                white-space: nowrap;
-            }
-        }
+        display: none;
     }
     
     
     .nav {
-        ul {
-            display: flex;
-            justify-content: space-around;
-            list-style-type: none;
-            margin: 0;
-        }
-    
-        a:hover {
-            opacity: 0.8;
-        }
-    
-        .forDog {
-            position: relative;
-        }
-    
-        .moreDog,
-        .moreCat {
-            position: absolute;
-            top: 30px;
-            z-index: 2;
-            display: none;
-    
-            ul {
-                display: block;
-            }
-        }
-    
-        .forDog:hover .moreDog,
-        .forCat:hover .moreCat {
-            display: block;
-        }
-    
-        a {
-            text-decoration: none;
-            text-transform: uppercase;
-            color: #fff;
-            margin: 10px 0;
-            font-size: 1.7rem;
-            font-weight: 700;
-    
-            .icon {
-                margin-left: 4px;
-            }
-        }
+        display: none;
     }
 }
 
