@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import styles from "./SignInPage.module.scss";
 import TitleComponent from "../../components/TitleComponent/TitleComponent";
 import UnderLineComponent from "../../components/UnderLineComponent/UnderLineComponent";
@@ -9,12 +9,14 @@ import InputFormComponent from "../../components/InputFormComponent/InputFormCom
 import { MdPhonePaused } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import PopupComponent from "../../components/PopupComponent/PopupComponent";
-import { loginUser } from "../../services/User.service"; // Hàm gọi API đăng nhập
+import { loginUser, getUserDetails } from "../../services/User.service"; // Hàm gọi API đăng nhập
 import Cookies from "js-cookie";
 import facebook_2 from "../../assets/images/facebook_2.svg";
 import google from "../../assets/images/google.svg";
 import { updateUser } from "../../redux/slices/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
+import { useMutationHooks } from '../../hooks/useMutationHook'
 
 const SignInPage = () => {
   const [identifier, setIdentifier] = useState("");
@@ -23,43 +25,97 @@ const SignInPage = () => {
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // Hàm xử lý đăng nhập
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const location = useLocation();
+  const user = useSelector((state) => state.user);
 
-    if (!identifier.trim() || !password.trim()) {
-      setErrorMessage("Vui lòng nhập đầy đủ thông tin đăng nhập.");
+  const mutation = useMutationHooks((data) =>
+    loginUser(data.identifier, data.password)
+  );
+  const { data, isLoading, isSuccess, isError, error } = mutation;
+
+  // Theo dõi thay đổi Redux Store
+  useEffect(() => {
+    console.log("Redux Store updated:", user);
+  }, [user]);
+
+  // Xử lý khi đăng nhập thành công
+  useEffect(() => {
+    if (isSuccess) {
+      console.log("Login success, data received:", data);
+
+      // Lưu Access Token
+      if (data?.ACCESS_TOKEN) {
+        localStorage.setItem("accessToken", data.ACCESS_TOKEN);
+      }
+
+      // Lưu Refresh Token vào Cookie
+      Cookies.set("refreshToken", data.REFRESH_TOKEN, {
+        expires: 1,
+        secure: true,
+        sameSite: "Strict",
+      });
+
+      // Lấy thông tin người dùng
+      if (data?.ACCESS_TOKEN) {
+        const decoded = jwtDecode(data.ACCESS_TOKEN);
+        if (decoded?.id) {
+          handleGetDetailsUser(decoded.id);
+        } else {
+          console.error("Decoded token does not have an id.");
+        }
+      } else {
+        console.error("ACCESS_TOKEN is missing in the response data.");
+      }
+
+      // Điều hướng sau khi đăng nhập
+      if (location?.state) {
+        navigate(location.state);
+      } else {
+        navigate("/");
+      }
+    }
+
+    if (isError) {
+      setErrorMessage(error.message.message || "Đăng nhập thất bại.");
+      setShowPopup(true);
+    }
+  }, [isSuccess, isError, data, error]);
+
+  // Lấy thông tin người dùng từ API
+  const handleGetDetailsUser = async (id) => {
+    const accessToken = localStorage.getItem("accessToken");
+    try {
+      const res = await getUserDetails(id, accessToken);
+      console.log("Fetched user details:", res.data);
+
+      const refreshToken = Cookies.get("refreshToken");
+      dispatch(
+        updateUser({
+          ...res?.data,
+          access_token: accessToken,
+          refreshToken: refreshToken,
+        })
+      );
+    } catch (error) {
+      console.error("Error in handleGetDetailsUser:", error);
+    }
+  };
+
+  const handleNavigateSignUp = () => {
+    navigate("/sign-up");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!identifier || !password) {
+      setErrorMessage("Vui lòng nhập đầy đủ thông tin.");
       setShowPopup(true);
       return;
     }
 
-    try {
-      // Gọi API đăng nhập
-      const data = await loginUser(identifier, password);
-
-      // Lưu accessToken vào localStorage
-      localStorage.setItem("accessToken", data.ACCESS_TOKEN);
-
-      // Lưu refreshToken vào cookie
-      Cookies.set("refreshToken", data.REFRESH_TOKEN, {
-        expires: 1, // Token có hiệu lực trong 1 ngày
-        secure: true, // Chỉ gửi qua HTTPS
-        sameSite: "Strict", // Ngăn chặn CSRF
-      });
-      dispatch(updateUser(data));
-      console.log("Access Token (localStorage):", data.ACCESS_TOKEN);
-      console.log("Refresh Token (Cookie):", Cookies.get("refreshToken"));
-
-      // Điều hướng qua trang chủ
-      navigate("/");
-    } catch (error) {
-      console.log(error)
-      setErrorMessage(error.err.message || "Có lỗi xảy ra khi đăng nhập.");
-      setShowPopup(true);
-    }
+    mutation.mutate({ identifier, password });
   };
 
-  // Đóng popup thông báo lỗi
   const closePopup = () => {
     setShowPopup(false);
     setErrorMessage("");
@@ -67,6 +123,35 @@ const SignInPage = () => {
 
   return (
     <div className={styles.main}>
+      {/* Hiển thị trạng thái đang tải */}
+      {isLoading && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%", 
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+          }}
+        >
+          <div
+            style={{
+              width: "50px",
+              height: "50px",
+              border: "5px solid #fff",
+              borderTop: "5px solid #007bff",
+              borderRadius: "50%",
+              animation: "spin 1s linear infinite",
+            }}
+          ></div>
+        </div>
+      )}
+  
       <div className="container">
         <div className={styles.signIn}>
           <div className={styles.introduce}>
@@ -128,19 +213,28 @@ const SignInPage = () => {
                   }}
                 />
                 <ButtonComponent
-                  title="ĐĂNG NHẬP"
+                  title={isLoading ? "Đang đăng nhập..." : "ĐĂNG NHẬP"}
                   primary
                   margin="0 0 15px"
                   onClick={handleSubmit}
+                  disabled={isLoading}
                 />
               </form>
               <span>
                 <Link to={"/reset"}>Quên mật khẩu?</Link>
               </span>
               <div className={styles.other}>
-                <UnderLineComponent width="190px" height="1px" background="#B7B6B5" />
+                <UnderLineComponent
+                  width="190px"
+                  height="1px"
+                  background="#B7B6B5"
+                />
                 <span>HOẶC</span>
-                <UnderLineComponent width="190px" height="1px" background="#B7B6B5" />
+                <UnderLineComponent
+                  width="190px"
+                  height="1px"
+                  background="#B7B6B5"
+                />
               </div>
               <div className={styles.differentOption}>
                 <ButtonComponent
@@ -160,7 +254,7 @@ const SignInPage = () => {
                 <div className={styles.doNotHaveAccount}>
                   <p>
                     Bạn mới đến PAWFECT?&nbsp;
-                    <Link to={"/sign-up"}>Đăng Ký</Link>
+                    <p onClick={handleNavigateSignUp}>Đăng Ký</p>
                   </p>
                 </div>
               </div>
@@ -168,11 +262,13 @@ const SignInPage = () => {
           </div>
         </div>
       </div>
-
+  
       {/* Popup Thông Báo */}
-      {showPopup && <PopupComponent message={errorMessage} onClose={closePopup} />}
+      {showPopup && (
+        <PopupComponent message={errorMessage} onClose={closePopup} />
+      )}
     </div>
-  );
+  );  
 };
 
 export default SignInPage;

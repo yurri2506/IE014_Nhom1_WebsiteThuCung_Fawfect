@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Input, Row, Button } from "antd";
 import { Link } from "react-router-dom";
 import styles from "./HeaderComponent.module.scss";
@@ -10,86 +10,34 @@ import { SearchOutlined } from "@ant-design/icons";
 import MoreComponent from "../MoreComponent/MoreComponent";
 import whiteLogo from "../../assets/images/whiteLogo.svg";
 import { useSelector } from "react-redux";
-import { jwtDecode } from "jwt-decode";
-import { getUserDetails } from "../../services/User.service";
 import myAvatarFalse from "../../assets/images/avatar-false.jpg";
 
 const HeaderComponent = () => {
-  const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const reduxUser = useSelector((state) => state.user);
+  const [avatar, setAvatar] = useState(myAvatarFalse);
+  const [userName, setUserName] = useState("Người dùng");
 
-  // Gửi request lấy thông tin người dùng từ API
-  const fetchUserData = async (userId) => {
-    try {
-      console.log("Fetching user data for userId:", userId);
+  // Lấy thông tin từ Redux
+  const { isAuthenticated, user_name, user_avt_img } = useSelector(
+    (state) => state.user
+  );
 
-      const accessToken = localStorage.getItem("accessToken");
-      if (!accessToken) {
-        console.error("AccessToken is missing");
-        setIsLoggedIn(false);
-        return;
-      }
-
-      const userData = await getUserDetails(userId, accessToken);
-
-      console.log("Fetched User Data:", userData);
-
-      if (
-        !userData.data ||
-        !userData.data.user_name
-      ) {
-        throw new Error("Invalid user data");
-      }
-      if (userData.data.user_avt_img){
-        setUser({
-          name: userData.data.user_name,
-          avatar: `data:image/jpeg;base64,${userData.data.user_avt_img}`,
-        });
-      } else {
-        setUser({
-          name: userData.data.user_name,
-          avatar: `${myAvatarFalse}`,
-        });
-      }
-      setIsLoggedIn(true); 
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-      setUser(null);
-      setIsLoggedIn(false);
-    }
-  };
-
-  // Kiểm tra token và lấy thông tin người dùng
+  // Xử lý avatar và tên người dùng
   useEffect(() => {
-    if (!reduxUser.isAuthenticated) {
-      // Người dùng đã đăng xuất
-      setIsLoggedIn(false);
-      setUser(null);
-    } else {
-      // Người dùng đã đăng nhập
-      const accessToken = localStorage.getItem("accessToken");
-      if (accessToken) {
-        try {
-          const decoded = jwtDecode(accessToken);
-          console.log("Decoded Token:", decoded);
-          if (decoded?.id) {
-            fetchUserData(decoded.id);
-          } else {
-            console.error("Invalid token: No userId found");
-            setIsLoggedIn(false);
-          }
-        } catch (error) {
-          console.error("Error decoding token:", error);
-          setIsLoggedIn(false);
-        }
+    if (isAuthenticated) {
+      setUserName(user_name || "Người dùng");
+      if (user_avt_img) {
+        // Xử lý hiển thị avatar từ API (base64) hoặc mặc định
+        const avatarSrc = `data:image/jpeg;base64,${user_avt_img}`;
+        setAvatar(avatarSrc);
       } else {
-        console.log("No accessToken found");
-        setIsLoggedIn(false);
+        setAvatar(myAvatarFalse);
       }
+    } else {
+      // Người dùng chưa đăng nhập
+      setAvatar(myAvatarFalse);
+      setUserName("Người dùng");
     }
-  }, [reduxUser.isAuthenticated]);
-  
+  }, [isAuthenticated, user_name, user_avt_img]);
 
   return (
     <div className={styles.header}>
@@ -117,15 +65,15 @@ const HeaderComponent = () => {
                   <span>FAQ</span>
                 </Link>
               </li>
-              {isLoggedIn ? (
+              {isAuthenticated ? (
                 <li className={styles.userInfo}>
                   <Link to={"/my-order"}>
                     <img
-                      src={user.avatar}
+                      src={avatar}
                       alt="User Avatar"
                       className={styles.avatar}
                     />
-                    <span>{user.name}</span>
+                    <span>{userName}</span>
                   </Link>
                 </li>
               ) : (

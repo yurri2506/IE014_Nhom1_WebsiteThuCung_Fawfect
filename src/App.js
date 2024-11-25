@@ -1,52 +1,62 @@
-import React, { Fragment, useEffect } from 'react'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import { routes } from './routes/routes'
-import axios from 'axios'
-import DefaultComponent from './components/DefaultComponent/DefaultComponent'
-import { useQuery } from '@tanstack/react-query'
+import React, { Fragment, useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { routes } from "./routes/routes";
+import { useDispatch } from "react-redux";
+import { resetUser } from "./redux/slices/userSlice";
+import DefaultComponent from "./components/DefaultComponent/DefaultComponent";
+import { getUserDetails, ensureValidToken } from "./services/User.service";
+import Loading from './components/LoadingComponent/LoadingComponent'
 
 function App() {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    fetchApi();
-  }, []);
-
-  const fetchApi = async () => {
-    try {
-      const data = {
-        phone: "0354982378",
-        password: "12345678"
+    const loadUserDetails = async () => {
+      try {
+        setIsLoading(true);
+        const token = await ensureValidToken(dispatch, resetUser); // Lấy token hợp lệ
+        const decoded = JSON.parse(atob(token.split(".")[1])); // Decode payload từ JWT
+        if (decoded?.id) {
+          const userDetails = await getUserDetails(decoded.id, token);
+          console.log("User details:", userDetails);
+        }
+      } catch (error) {
+        console.error("Error loading user details:", error);
+      } finally {
+        setIsLoading(false);
       }
-      const res = await axios.post(`http://localhost:3001/api/user/signIn`, data);
-      return res.data;
-    } catch (error) {
-      console.error("Error fetching API:", error);
-    }
-  };  
+    };
 
-  const query = useQuery({ queryKey: ['todos'], queryFn: fetchApi })
-  console.log(query);
-  
+    loadUserDetails();
+  }, [dispatch]);
 
   return (
     <div>
-      <Router>
-        <Routes>
-          {routes.map((route) => {
-            const Page = route.page;
-            const Layout = route.isShowHeader ? DefaultComponent : Fragment;
-            return (
-              <Route key={route.path} path={route.path} element={
-                <Layout>
-                  <Page />
-                </Layout>
-              }/>
-            )
-          })}
-        </Routes>
-      </Router>
+      <Loading isLoading={isLoading}>
+        <Router>
+          <Routes>
+            {routes.map((route) => {
+              const Page = route.page;
+              const Layout = route.isShowHeader ? DefaultComponent : Fragment;
+
+              return (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={
+                    <Layout>
+                      <Page />
+                    </Layout>
+                  }
+                />
+              );
+            })}
+          </Routes>
+        </Router>
+      </Loading>
     </div>
-  )
+  );
 }
 
 export default App;
-
