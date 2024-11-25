@@ -170,149 +170,134 @@ const ProductDetailsPage = () => {
         mediaQuery.removeEventListener('change', handleViewportChange);
       };
     }, []);
+
+    const [isInMobile, setisInMobile] = useState(false);
+    useEffect(() => {
+      const mediaQuery = window.matchMedia('(max-width: 739px)');
+      const handleViewportChange = () => setisInMobile(mediaQuery.matches);
+
+      handleViewportChange();
+      mediaQuery.addEventListener('change', handleViewportChange);
+
+      return () => {
+        mediaQuery.removeEventListener('change', handleViewportChange);
+      };
+    }, []);
   
     return (
-      <div className='grid wide'>
-        {/* <div className='grid_row'>
-          <div className='grid_column_4'>
-            <div className={styles.mainImage}>
+      <div className={styles.main}>
+        <div className='grid wide'>
+          {/* <div className='grid_row'>
+            <div className='grid_column_4'>
+              <div className={styles.mainImage}>
+                <img src={mainImage} alt="Product main"/>
+              </div>
+              <div className={styles.thumbnails}>
+              <Slider {...settings}>
+              {thumbnails.map((thumb, index) => {
+                return (
+                  <img src={thumb} alt={`Thumbnail ${index + 1}`} className={styles.thumbnail} />)
+  })}
+            </Slider>
+              </div>
+              <Slider {...settings}>
+              {thumbnails.map((thumb, index) => {
+                return (
+                  <img src={thumb} alt={`Thumbnail ${index + 1}`} className={styles.thumbnail} />)
+  })}
+            </Slider>
+            </div>
+            <div className='grid_column_8'>
+            <div className={styles.productInfo}>
+                <h2>Mũ len cosplay dễ thương cho thú cưng</h2>
+                <div className={styles.rating}>
+                  <div className={styles.rt}>
+                    <span>5.0</span>
+                    <IoIosStar className={styles.icon}/>
+                    <IoIosStar className={styles.icon}/>
+                    <IoIosStar className={styles.icon}/>
+                    <IoIosStar className={styles.icon}/>
+                    <IoIosStar className={styles.icon}/>
+                  </div>
+                  <div className={styles.rt}>
+                    <span>
+                      31
+                      <p>Đánh giá</p>
+                    </span>
+                  </div>
+                  <div className={styles.sell}>
+                    <span>
+                      222
+                      <p>Đã bán</p>
+                    </span>
+                  </div>
+                </div>
+                <div className={styles.price}>
+                  <span className={styles.oldPrice}>35.000đ</span>
+                  <span className={styles.currentPrice}>32.000đ</span>
+                  <div className={styles.discount}>
+                    <span>9% GIẢM</span>
+                  </div>
+                </div>
+                <div className={styles.options}>
+                  <div className={styles.option}>
+                    <label>Chọn mẫu:</label>
+                    <ButtonComponent 
+                      title="Mũ trắng"
+                      icon={productOption1}
+                      fontSize="1.2rem"
+                      width="150px"
+                      // minWidth="200px"
+                    />
+                    <ButtonComponent 
+                      title="Mũ tai mèo trắng"
+                      icon={productOption1}
+                      fontSize="1.2rem"
+                      width="150px"
+                    />
+                    <ButtonComponent 
+                      title="Mũ tai mèo trắng"
+                      icon={productOption1}
+                      fontSize="1.2rem"
+                      width="150px"
+                    />
+                    <ButtonComponent 
+                      title="Mũ tai mèo trắng trắng trắng"
+                      icon={productOption1}
+                      fontSize="1.2rem"
+                      width="150px"
+                    />
+                    <ButtonComponent 
+                      title="Mũ tai mèo trắng"
+                      icon={productOption1}
+                      fontSize="1.2rem"
+                      width="150px"
+                    />
+                  </div>
+                  <div className={styles.option}>
+                    <label>Kích thước:</label>
+                    <button className={styles.sizeButton}>Size S</button>
+                    <button className={styles.sizeButton}>Size M</button>
+                  </div>
+                  <div className={styles.quantity}>
+                    <label>Số lượng:</label>
+                    <input type="number" min="1" defaultValue="1" className={styles.quantityInput} />
+                  </div>
+                </div>
+                <div className={styles.actions}>
+                  <button className={`${styles.button} ${styles.addToCartButton}`}>Thêm vào giỏ hàng</button>
+                  <button className={`${styles.button} ${styles.buyNowButton}`}>Mua ngay</button>
+                </div>
+              </div>
+            </div>
+          </div> */}
+          <Row style={!isInMobile ? { padding: "16px" } : null}>
+            <Col span={isInViewport || isInMobile ? 24 : 10} style={!isInMobile ? { padding: "16px" } : null}>
+            {/* <div className={styles.mainImage}>
               <img src={mainImage} alt="Product main"/>
             </div>
-            <div className={styles.thumbnails}>
-            <Slider {...settings}>
-            {thumbnails.map((thumb, index) => {
-              return (
-                <img src={thumb} alt={`Thumbnail ${index + 1}`} className={styles.thumbnail} />)
-})}
-          </Slider>
-            </div>
-            <Slider {...settings}>
-            {thumbnails.map((thumb, index) => {
-              return (
-                <img src={thumb} alt={`Thumbnail ${index + 1}`} className={styles.thumbnail} />)
-})}
-          </Slider>
-          </div>
-          <div className='grid_column_8'>
-          <div className={styles.productInfo}>
-              <h2>Mũ len cosplay dễ thương cho thú cưng</h2>
-              <div className={styles.rating}>
-                <div className={styles.rt}>
-                  <span>5.0</span>
-                  <IoIosStar className={styles.icon}/>
-                  <IoIosStar className={styles.icon}/>
-                  <IoIosStar className={styles.icon}/>
-                  <IoIosStar className={styles.icon}/>
-                  <IoIosStar className={styles.icon}/>
-                </div>
-                <div className={styles.rt}>
-                  <span>
-                    31
-                    <p>Đánh giá</p>
-                  </span>
-                </div>
-                <div className={styles.sell}>
-                  <span>
-                    222
-                    <p>Đã bán</p>
-                  </span>
-                </div>
-              </div>
-              <div className={styles.price}>
-                <span className={styles.oldPrice}>35.000đ</span>
-                <span className={styles.currentPrice}>32.000đ</span>
-                <div className={styles.discount}>
-                  <span>9% GIẢM</span>
-                </div>
-              </div>
-              <div className={styles.options}>
-                <div className={styles.option}>
-                  <label>Chọn mẫu:</label>
-                  <ButtonComponent 
-                    title="Mũ tai mèo trắng"
-                    icon={productOption1}
-                    fontSize="1.2rem"
-                    width="150px"
-                    // minWidth="200px"
-                  />
-                  <ButtonComponent 
-                    title="Mũ tai mèo trắng"
-                    icon={productOption1}
-                    fontSize="1.2rem"
-                    width="150px"
-                  />
-                  <ButtonComponent 
-                    title="Mũ tai mèo trắng"
-                    icon={productOption1}
-                    fontSize="1.2rem"
-                    width="150px"
-                  />
-                  <ButtonComponent 
-                    title="Mũ tai mèo trắng trắng trắng"
-                    icon={productOption1}
-                    fontSize="1.2rem"
-                    width="150px"
-                  />
-                  <ButtonComponent 
-                    title="Mũ tai mèo trắng"
-                    icon={productOption1}
-                    fontSize="1.2rem"
-                    width="150px"
-                  />
-                </div>
-                <div className={styles.option}>
-                  <label>Kích thước:</label>
-                  <button className={styles.sizeButton}>Size S</button>
-                  <button className={styles.sizeButton}>Size M</button>
-                </div>
-                <div className={styles.quantity}>
-                  <label>Số lượng:</label>
-                  <input type="number" min="1" defaultValue="1" className={styles.quantityInput} />
-                </div>
-              </div>
-              <div className={styles.actions}>
-                <button className={`${styles.button} ${styles.addToCartButton}`}>Thêm vào giỏ hàng</button>
-                <button className={`${styles.button} ${styles.buyNowButton}`}>Mua ngay</button>
-              </div>
-            </div>
-          </div>
-        </div> */}
-        <Row style={{padding: "16px"}}>
-          <Col span={isInViewport ? 24 : 10} style={{padding: "16px"}}>
-          {/* <div className={styles.mainImage}>
-            <img src={mainImage} alt="Product main"/>
-          </div>
-          <Slider {...settings} className={styles.thumbnails}>
-            {thumbnails.map((thumb, index) => (
-                  <img
-                    key={index}
-                    src={thumb}
-                    alt={`Thumbnail ${index + 1}`}
-                    onClick={() => setMainImage(thumb)}
-                    className={styles.thumbnail}
-                  />
-            ))}
-          </Slider> */}
-          {isInViewport ? (
-            <div>
-              <Slider {...settings2}>
-                {thumbnails.map((thumb, index) => (
-                  <div key={index}>
-                    {/* <img src={thumb} onClick={()=>setMainImage(thumb)} alt={`Product view ${index + 1}`} /> */}
-                    <div className={styles.mainImage}>
-                      <img src={thumb} alt="Product main" />
-                    </div>
-                  </div>
-                ))}
-              </Slider>
-            </div>
-            ) : (
-              <>
-                <div className={styles.mainImage}>
-                  <img src={mainImage} alt="Product main" />
-                </div>
-                <Slider {...settings} className={styles.thumbnails}>
-                  {thumbnails.map((thumb, index) => (
+            <Slider {...settings} className={styles.thumbnails}>
+              {thumbnails.map((thumb, index) => (
                     <img
                       key={index}
                       src={thumb}
@@ -320,355 +305,409 @@ const ProductDetailsPage = () => {
                       onClick={() => setMainImage(thumb)}
                       className={styles.thumbnail}
                     />
+              ))}
+            </Slider> */}
+            {isInViewport || isInMobile ? (
+              <div>
+                <Slider {...settings2}>
+                  {thumbnails.map((thumb, index) => (
+                    <div key={index}>
+                      {/* <img src={thumb} onClick={()=>setMainImage(thumb)} alt={`Product view ${index + 1}`} /> */}
+                      <div className={styles.mainImage}>
+                        <img src={thumb} alt="Product main" />
+                      </div>
+                    </div>
                   ))}
                 </Slider>
-              </>
-            )}
-            <div className={clsx(styles.contact, 'm-0', 'l-12')}>
-              <span>Chia sẻ sản phẩm qua:</span>
-              <Link to={"/"}>
-                <img src={facebook} alt="" />
-              </Link>
-              <Link to={"/"}>
-                <img src={instagram} alt="" />
-              </Link>
-              <Link to={"/"}>
-                <img src={tiktok} alt="" />
-              </Link>
-              <Link to={"/"}>
-                <img src={zalo} alt="" />
-              </Link>
-            </div>
-          </Col>
-
-          <Col span={isInViewport ? 24 : 14}>
-            <div className={styles.productInfo}>
-              <h2>Mũ len cosplay dễ thương cho thú cưng</h2>
-              <div className={styles.rating}>
-                <div className={styles.rt}>
-                  <span>5.0</span>
-                  <IoIosStar className={styles.icon}/>
-                  <IoIosStar className={styles.icon}/>
-                  <IoIosStar className={styles.icon}/>
-                  <IoIosStar className={styles.icon}/>
-                  <IoIosStar className={styles.icon}/>
-                </div>
-                <div className={styles.rt}>
-                  <span>
-                    31
-                    <p>Đánh giá</p>
-                  </span>
-                </div>
-                <div className={styles.sell}>
-                  <span>
-                    222
-                    <p>Đã bán</p>
-                  </span>
-                </div>
               </div>
-              <div className={styles.price}>
-                <span className={styles.oldPrice}>35.000đ</span>
-                <span className={styles.currentPrice}>32.000đ</span>
-                <div className={styles.discount}>
-                  <span>9% GIẢM</span>
-                </div>
-              </div>
-              <div className={styles.options}>
-                <div className={styles.option}>
-                  <span>Chọn mẫu</span>
-                  <div className={styles.choice}>
-                  <ButtonComponent 
-                    title="Mũ tai mèo trắng"
-                    icon={productOption1}
-                    fontSize="1.2rem"
-                    width="170px"
-                    widthDiv="none"
-                    // minWidth="200px"
-                  />
-                  <ButtonComponent 
-                    title="Mũ tai mèo trắng"
-                    icon={productOption1}
-                    fontSize="1.2rem"
-                    width="170px"
-                    widthDiv="none"
-                    // minWidth="200px"
-                  />
-                  <ButtonComponent 
-                    title="Mũ tai mèo trắng"
-                    icon={productOption1}
-                    fontSize="1.2rem"
-                    width="170px"
-                    widthDiv="none"
-                    // minWidth="200px"
-                  />
-                  <ButtonComponent 
-                    title="Mũ tai mèo trắng"
-                    icon={productOption1}
-                    fontSize="1.2rem"
-                    width="170px"
-                    widthDiv="none"
-                    // minWidth="200px"
-                  />
-                  <ButtonComponent 
-                    title="Mũ tai mèo trắng"
-                    icon={productOption1}
-                    fontSize="1.2rem"
-                    width="170px"
-                    widthDiv="none"
-                    // minWidth="200px"
-                  />
-                  <ButtonComponent 
-                    title="Mũ tai mèo trắng"
-                    icon={productOption1}
-                    fontSize="1.2rem"
-                    width="170px"
-                    widthDiv="none"
-                    // minWidth="200px"
-                  />
+              ) : (
+                <>
+                  <div className={styles.mainImage}>
+                    <img src={mainImage} alt="Product main" />
                   </div>
-                </div>
-                <div className={styles.size}>
-                  <span>Kích thước</span>
-                  <div className={styles.choice}>
-                    <ButtonComponent 
-                      title="S"
-                      fontSize="1.2rem"
-                      width="80px"
-                      height="40px"
-                      widthDiv="none"
-                    />
-                    <ButtonComponent 
-                      title="M"
-                      fontSize="1.2rem"
-                      width="80px"
-                      height="40px"
-                      widthDiv="none"
-                    />
-                    <ButtonComponent 
-                      title="L"
-                      fontSize="1.2rem"
-                      width="80px"
-                      height="40px"
-                      widthDiv="none"
-                    />
-                    <ButtonComponent 
-                      title="XL"
-                      fontSize="1.2rem"
-                      width="80px"
-                      height="40px"
-                      widthDiv="none"
-                    />
-                  </div>
-                </div>
-                <div className={styles.quantity}>
-                  <span>Số lượng</span>
-                  <div className={styles.btn}>
-                    <button onClick={decrease} min="1" defaultValue="1">-</button>
-                    <input 
-                      value={count} 
-                      min="1" 
-                      onChange={handleInputChange} 
-                      className={styles.quantityInput}
-                    />
-                    <button onClick={increase}>+</button>
-                  </div>
-                  <div className={styles.chat}>
-                    <ButtonComponent 
-                        title="Chat Zalo"
-                        fontSize="1.2rem"
-                        width="150px"
-                        height="40px"
-                        widthDiv="none"
-                        icon={chat}
-                        primary
-                        className={styles.btn}
+                  <Slider {...settings} className={styles.thumbnails}>
+                    {thumbnails.map((thumb, index) => (
+                      <img
+                        key={index}
+                        src={thumb}
+                        alt={`Thumbnail ${index + 1}`}
+                        onClick={() => setMainImage(thumb)}
+                        className={styles.thumbnail}
                       />
+                    ))}
+                  </Slider>
+                </>
+              )}
+              <div className={clsx(styles.contact, 'm-0', 'l-12', 'c-12')}>
+                <span>Chia sẻ sản phẩm qua:</span>
+                <Link to={"/"}>
+                  <img src={facebook} alt="" />
+                </Link>
+                <Link to={"/"}>
+                  <img src={instagram} alt="" />
+                </Link>
+                <Link to={"/"}>
+                  <img src={tiktok} alt="" />
+                </Link>
+                <Link to={"/"}>
+                  <img src={zalo} alt="" />
+                </Link>
+              </div>
+            </Col>
+
+            <Col span={isInViewport || isInMobile ? 24 : 14}>
+              <div className={styles.productInfo}>
+                <h2>Mũ len cosplay dễ thương cho thú cưng</h2>
+                <div className={styles.rating}>
+                  <div className={styles.rt}>
+                    <span>5.0</span>
+                    <IoIosStar className={styles.icon}/>
+                    <IoIosStar className={styles.icon}/>
+                    <IoIosStar className={styles.icon}/>
+                    <IoIosStar className={styles.icon}/>
+                    <IoIosStar className={styles.icon}/>
+                  </div>
+                  <div className={styles.rt}>
+                    <span>
+                      31
+                      <p>Đánh giá</p>
+                    </span>
+                  </div>
+                  <div className={styles.sell}>
+                    <span>
+                      222
+                      <p>Đã bán</p>
+                    </span>
+                  </div>
+                </div>
+                <div className={styles.price}>
+                  {isInMobile ? (
+                    <div>
+                      <span className={styles.currentPrice}>32.000đ</span>
+                      <span className={styles.oldPrice}>35.000đ</span>
+                    </div>
+                  ) : (
+                    <div>
+                      <span className={styles.oldPrice}>35.000đ</span>
+                      <span className={styles.currentPrice}>32.000đ</span>
+                    </div>
+                  )}
+                  <div className={styles.discount}>
+                    <span>9% GIẢM</span>
+                  </div>
+                </div>
+                <div className={styles.options}>
+                  <div className={styles.option}>
+                    <span>Chọn mẫu</span>
+                    <div className={clsx(styles.choice, 'row')}>
+                      <div className='col c-6'>
+                        <ButtonComponent 
+                          title="Mũ trắng"
+                          icon={productOption1}
+                          fontSize="1.2rem"
+                          // width="170px"
+                          widthDiv="none"
+                          // minWidth="200px"
+                          className={styles.btnType}
+                        />
+                      </div>
+                      <div className='col c-6'>
+                        <ButtonComponent 
+                          title="Mũ trắng"
+                          icon={productOption1}
+                          fontSize="1.2rem"
+                          // width="170px"
+                          widthDiv="none"
+                          // minWidth="200px"
+                          className={styles.btnType}
+                        />
+                      </div>
+                      <div className='col c-6'>
+                        <ButtonComponent 
+                          title="Mũ trắng"
+                          icon={productOption1}
+                          fontSize="1.2rem"
+                          // width="170px"
+                          widthDiv="none"
+                          // minWidth="200px"
+                          className={styles.btnType}
+                        />
+                      </div>
+                      <div className='col c-6'>
+                        <ButtonComponent 
+                          title="Mũ trắng"
+                          icon={productOption1}
+                          fontSize="1.2rem"
+                          // width="170px"
+                          widthDiv="none"
+                          // minWidth="200px"
+                          className={styles.btnType}
+                        />
+                      </div>
+                      <div className='col c-6'>
+                        <ButtonComponent 
+                          title="Mũ trắng"
+                          icon={productOption1}
+                          fontSize="1.2rem"
+                          // width="170px"
+                          widthDiv="none"
+                          // minWidth="200px"
+                          className={styles.btnType}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.size}>
+                    <span>Kích thước</span>
+                    <div className={clsx('row', styles.choice)}>
+                      <div className='col c-3'>
+                        <ButtonComponent 
+                          title="S"
+                          fontSize="1.2rem"
+                          // width="80px"
+                          height="40px"
+                          widthDiv="none"
+                        />
+                      </div>
+                      <div className='col c-3'>
+                        <ButtonComponent 
+                          title="M"
+                          fontSize="1.2rem"
+                          // width="80px"
+                          height="40px"
+                          widthDiv="none"
+                        />
+                      </div>
+                      <div className='col c-3'>
+                        <ButtonComponent 
+                          title="L"
+                          fontSize="1.2rem"
+                          // width="80px"
+                          height="40px"
+                          widthDiv="none"
+                        />
+                      </div>
+                      <div className='col c-3'>
+                        <ButtonComponent 
+                          title="XL"
+                          fontSize="1.2rem"
+                          // width="80px"
+                          height="40px"
+                          widthDiv="none"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.quantity}>
+                    <span>Số lượng</span>
+                    <div className={styles.btn}>
+                      <button onClick={decrease} min="1" defaultValue="1">-</button>
+                      <input 
+                        value={count} 
+                        min="1" 
+                        onChange={handleInputChange} 
+                        className={styles.quantityInput}
+                      />
+                      <button onClick={increase}>+</button>
+                    </div>
+                    <div className={styles.chat}>
                       <ButtonComponent 
-                        title="Gọi Hotline"
-                        fontSize="1.2rem"
-                        width="150px"
-                        height="40px"
-                        widthDiv="none"
-                        icon={phoneChat}
-                        primary
-                        className={styles.btn}
-                      />
+                          title="Chat Zalo"
+                          fontSize="1.2rem"
+                          width="150px"
+                          height="40px"
+                          widthDiv="none"
+                          icon={chat}
+                          primary
+                          className={styles.btn}
+                        />
+                        <ButtonComponent 
+                          title="Gọi Hotline"
+                          fontSize="1.2rem"
+                          width="150px"
+                          height="40px"
+                          widthDiv="none"
+                          icon={phoneChat}
+                          primary
+                          className={styles.btn}
+                        />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className={styles.actions}>
-                <ButtonComponent 
-                  title="Thêm vào giỏ hàng"
-                  fontSize="1.2rem"
-                  width="200px"
-                  height="50px"
-                  widthDiv="none"
-                  icon={cart}
-                  className={styles.btnAdd}
-                />
-                <ButtonComponent 
-                  title="Mua ngay"
-                  fontSize="1.2rem"
-                  width="150px"
-                  height="50px"
-                  widthDiv="none"
-                  primary
-                  className={styles.btnBuy}
-                />
-              </div>
-            </div>
-          </Col>
-        </Row>
-
-        <div className={styles.productDescription}>
-          <div className={styles.title}>
-            <h2>Mô tả sản phẩm</h2>
-          </div>
-          <p>
-          Mũ len cosplay dễ thương cho mèo - Mũ trùm đầu hóa trang cho thú cưng
-😸 Mô Tả Sản Phẩm: Một phụ kiện siêu đáng yêu mà bạn không thể bỏ qua cho thú cưng của mình! Thiết kế mũ kèm 2 dây cột cố định giúp các bé mèo tinh nghịch dễ dàng vui chơi, hoạt động thoải mái hơn. Chất liệu thấm hút tốt không chỉ mang lại sự thoải mái mà còn giữ cho bé luôn khô ráo.
-☑️ Kích cỡ đường kính:     + Size S: 26-28cm    + Size M: 28-34cm
-☑️ Chất liệu: Làm từ vải len
-☑️ Công Dụng và Ưu Điểm:
-    + Thiết kế màu sắc năng động và hợp thời trang, phù hợp với mọi dịp.
-    + Hình in đáng yêu giúp thú cưng của bạn nổi bật và thu hút mọi ánh nhìn.
-    + Chất liệu vải cao cấp, an toàn cho sức khỏe, mang lại cảm giác dễ chịu khi mặc.
-Bạn có thể Giữ Ấm đầu bé khi trời trở lạnh. Thời tiết sài gòn cũng sấp chuyển sang trời lạnh rồi vì vậy hãy sấm ngay một chiếc mũ cho bé nhà mình đi nào.
-😸 THIÊN ĐƯỜNG ĐỒ CHƠI PHỤ KIỆN CHÓ MÈO - THÚ CƯNG
-Cả một bầu trời phụ kiện tất tần tật những gì để cho các boss vui là tụi mình đều có nè.. nhanh nhanh đến mua sắm nè mọi người ơi 🔥
-          </p>
-        </div>
-
-        <div className={styles.feedback}>
-          <div className={styles.title}>
-            <h2>Đánh giá sản phẩm</h2>
-          </div>
-          <div className={styles.overallRating}>
-            <div className={styles.totalStar}>
-              <span>
-                5.0
-                <p>trên 5</p>
-              </span>
-              <div className={styles.star}>
-                <IoIosStar className={styles.icon}/>
-                <IoIosStar className={styles.icon}/>
-                <IoIosStar className={styles.icon}/>
-                <IoIosStar className={styles.icon}/>
-                <IoIosStar className={styles.icon}/>
-              </div>
-            </div>
-            <div className={styles.filter}>
-              <div className={styles.haveStar}>
-                <ButtonComponent 
-                  title="Tất cả"
-                  fontSize="1.5rem"
-                  width="100px"
-                  height="32px"
-                  className={styles.btn}
-                  widthDiv="none"
-                />
-                <ButtonComponent 
-                  title="5 Sao"
-                  fontSize="1.5rem"
-                  width="100px"
-                  height="32px"
-                  className={styles.btn}
-                  widthDiv="none"
-                />
-                <ButtonComponent 
-                  title="4 Sao"
-                  fontSize="1.5rem"
-                  width="100px"
-                  height="32px"
-                  className={styles.btn}
-                  widthDiv="none"
-                />
-                <ButtonComponent 
-                  title="3 Sao"
-                  fontSize="1.5rem"
-                  width="100px"
-                  height="32px"
-                  className={styles.btn}
-                  widthDiv="none"
-                />
-                <ButtonComponent 
-                  title="2 Sao"
-                  fontSize="1.5rem"
-                  width="100px"
-                  height="32px"
-                  className={styles.btn}
-                  widthDiv="none"
-                />
-                <ButtonComponent 
-                  title="1 Sao"
-                  fontSize="1.5rem"
-                  width="100px"
-                  height="32px"
-                  className={styles.btn}
-                  widthDiv="none"
-                />
-              </div>
-              <div className={styles.noStar}>
-                <ButtonComponent 
-                  title="Có bình luận"
-                  fontSize="1.5rem"
-                  width="150px"
-                  height="32px"
-                  className={styles.btn}
-                  widthDiv="none"
-                />
-                <ButtonComponent 
-                  title="Có hình ảnh/video"
-                  fontSize="1.5rem"
-                  width="150px"
-                  height="32px"
-                  className={styles.btn}
-                  widthDiv="none"
-                />
-              </div>
-            </div>
-          </div>
-          <div className={styles.productFeedback}>
-            {feedbackList.map((data, index) => (
-              <div key={index}>
-                <ProductFeedBackComponent {...data} />
-                {index !== feedbackList.length - 1 && (
-                  <UnderLineComponent 
-                    width="100%"
-                    height="1px"
-                    background="#BFBDBC"
-                    margin="20px 0 40px 0"
+                <div className={styles.actions}>
+                  <ButtonComponent 
+                    title="Thêm vào giỏ hàng"
+                    fontSize="1.2rem"
+                    width="200px"
+                    height="50px"
+                    widthDiv="none"
+                    icon={cart}
+                    className={styles.btnAdd}
                   />
-                )}
+                  <ButtonComponent 
+                    title="Mua ngay"
+                    fontSize="1.2rem"
+                    width="150px"
+                    height="50px"
+                    widthDiv="none"
+                    primary
+                    className={styles.btnBuy}
+                  />
+                </div>
               </div>
-            ))}
-          </div>
-          <div className={styles.panigation}>
-            <Pagination defaultCurrent={1} total={50}/>
-          </div>
-          <div className={styles.otherProduct}>
+            </Col>
+          </Row>
+
+          <div className={styles.productDescription}>
             <div className={styles.title}>
-              <h2>Các sản phẩm tương tự</h2>
+              <h2>Mô tả sản phẩm</h2>
             </div>
-            <div>
-              <div className='row'>
-                {products.map((product, index) => (
-                  <div key={index} className='col l-2-4 m-4'>
-                    <CardComponent {...product}/>
-                  </div>
-                ))}
+            <p>
+            Mũ len cosplay dễ thương cho mèo - Mũ trùm đầu hóa trang cho thú cưng
+  😸 Mô Tả Sản Phẩm: Một phụ kiện siêu đáng yêu mà bạn không thể bỏ qua cho thú cưng của mình! Thiết kế mũ kèm 2 dây cột cố định giúp các bé mèo tinh nghịch dễ dàng vui chơi, hoạt động thoải mái hơn. Chất liệu thấm hút tốt không chỉ mang lại sự thoải mái mà còn giữ cho bé luôn khô ráo.
+  ☑️ Kích cỡ đường kính:     + Size S: 26-28cm    + Size M: 28-34cm
+  ☑️ Chất liệu: Làm từ vải len
+  ☑️ Công Dụng và Ưu Điểm:
+      + Thiết kế màu sắc năng động và hợp thời trang, phù hợp với mọi dịp.
+      + Hình in đáng yêu giúp thú cưng của bạn nổi bật và thu hút mọi ánh nhìn.
+      + Chất liệu vải cao cấp, an toàn cho sức khỏe, mang lại cảm giác dễ chịu khi mặc.
+  Bạn có thể Giữ Ấm đầu bé khi trời trở lạnh. Thời tiết sài gòn cũng sấp chuyển sang trời lạnh rồi vì vậy hãy sấm ngay một chiếc mũ cho bé nhà mình đi nào.
+  😸 THIÊN ĐƯỜNG ĐỒ CHƠI PHỤ KIỆN CHÓ MÈO - THÚ CƯNG
+  Cả một bầu trời phụ kiện tất tần tật những gì để cho các boss vui là tụi mình đều có nè.. nhanh nhanh đến mua sắm nè mọi người ơi 🔥
+            </p>
+          </div>
+
+          <div className={styles.feedback}>
+            <div className={styles.title}>
+              <h2>Đánh giá sản phẩm</h2>
+            </div>
+            <div className={styles.overallRating}>
+              <div className={styles.totalStar}>
+                <span>
+                  5.0
+                  <p>trên 5</p>
+                </span>
+                <div className={styles.star}>
+                  <IoIosStar className={styles.icon}/>
+                  <IoIosStar className={styles.icon}/>
+                  <IoIosStar className={styles.icon}/>
+                  <IoIosStar className={styles.icon}/>
+                  <IoIosStar className={styles.icon}/>
+                </div>
+              </div>
+              <div className={styles.filter}>
+                <div className={styles.haveStar}>
+                  <ButtonComponent 
+                    title="Tất cả"
+                    fontSize="1.5rem"
+                    width="100px"
+                    height="32px"
+                    className={styles.btn}
+                    widthDiv="none"
+                  />
+                  <ButtonComponent 
+                    title="5 Sao"
+                    fontSize="1.5rem"
+                    width="100px"
+                    height="32px"
+                    className={styles.btn}
+                    widthDiv="none"
+                  />
+                  <ButtonComponent 
+                    title="4 Sao"
+                    fontSize="1.5rem"
+                    width="100px"
+                    height="32px"
+                    className={styles.btn}
+                    widthDiv="none"
+                  />
+                  <ButtonComponent 
+                    title="3 Sao"
+                    fontSize="1.5rem"
+                    width="100px"
+                    height="32px"
+                    className={styles.btn}
+                    widthDiv="none"
+                  />
+                  <ButtonComponent 
+                    title="2 Sao"
+                    fontSize="1.5rem"
+                    width="100px"
+                    height="32px"
+                    className={styles.btn}
+                    widthDiv="none"
+                  />
+                  <ButtonComponent 
+                    title="1 Sao"
+                    fontSize="1.5rem"
+                    width="100px"
+                    height="32px"
+                    className={styles.btn}
+                    widthDiv="none"
+                  />
+                </div>
+                <div className={styles.noStar}>
+                  <ButtonComponent 
+                    title="Có bình luận"
+                    fontSize="1.5rem"
+                    width="150px"
+                    height="32px"
+                    className={styles.btn}
+                    widthDiv="none"
+                  />
+                  <ButtonComponent 
+                    title="Có hình ảnh/video"
+                    fontSize="1.5rem"
+                    width="150px"
+                    height="32px"
+                    className={styles.btn}
+                    widthDiv="none"
+                  />
+                </div>
               </div>
             </div>
-            <ButtonComponent 
-              width="400px"
-              height="50px"
-              title="Xem thêm"
-              color="#000"
-              border="2px solid #000"
-              borderRadius="15px"
-              fontSize="2rem"
-              margin="0 0 40px 0"
-            />
+            <div className={styles.productFeedback}>
+              {feedbackList.map((data, index) => (
+                <div key={index}>
+                  <ProductFeedBackComponent {...data} />
+                  {index !== feedbackList.length - 1 && (
+                    <UnderLineComponent 
+                      width="100%"
+                      height="1px"
+                      background="#BFBDBC"
+                      margin="20px 0 40px 0"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className={styles.panigation}>
+              <Pagination defaultCurrent={1} total={50}/>
+            </div>
+            <div className={styles.otherProduct}>
+              <div className={styles.title}>
+                <h2>Các sản phẩm tương tự</h2>
+              </div>
+              <div>
+                <div className='row'>
+                  {products.map((product, index) => (
+                    <div key={index} className='col l-2-4 m-4 c-6'>
+                      <CardComponent {...product}/>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <ButtonComponent 
+                width="400px"
+                height="50px"
+                title="Xem thêm"
+                color="#000"
+                border="2px solid #000"
+                borderRadius="15px"
+                fontSize="2rem"
+                margin="0 0 40px 0"
+              />
+            </div>
           </div>
         </div>
       </div>
