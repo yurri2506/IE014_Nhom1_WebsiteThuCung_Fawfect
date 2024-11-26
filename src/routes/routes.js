@@ -13,8 +13,11 @@ import GuaranteePage from "../pages/GuaranteePage/GuaranteePage";
 import ReturnPolicyPage from "../pages/ReturnPolicyPage/ReturnPolicyPage";
 import PrivacyPolicyPage from "../pages/PrivacyPolicyPage/PrivacyPolicyPage";
 import MyCartPage from "../pages/MyCartPage/MyCartPage";
-import CheckOutPage from "../pages/CheckOutPage/CheckOutPage";
-import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
+import CheckOutPage from "../pages/CheckOutPage/CheckOutPage"; 
+import LogoutPage from "../pages/LogoutPage/LogoutPage";
+import AccountInfo from "../pages/AccountPage/AccountInfo";
+import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import EditAccount from "../pages/AccountPage/EditAccount";
 
 export const routes = [
     {
@@ -48,7 +51,7 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/product-details',
+        path: '/product-details/:id',
         page: ProductDetailsPage,
         isShowHeader: true
     },
@@ -97,13 +100,28 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/product-details',
-        page: ProductDetailsPage,
+        path: '/account-info',
+        page: AccountInfo,
         isShowHeader: true
     },
     {
-        path: '/type',
-        page: TypeProductPage,
+        path: '/edit-account',
+        page: EditAccount,
+        isShowHeader: true
+    },
+    {
+        path: '/change-password',
+        page: ChangePassword,
+        isShowHeader: true
+    },
+    {
+        path: '/product-details',
+        page: ProductDetailsPage,
+        isShowHeader: true
+    }, 
+    {
+        path: '/logout',
+        page: LogoutPage,
         isShowHeader: true
     }
 ]

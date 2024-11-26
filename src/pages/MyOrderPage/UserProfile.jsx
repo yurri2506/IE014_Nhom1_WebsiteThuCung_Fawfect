@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./styles.scss";
 import {
   UserOutlined,
@@ -13,9 +14,14 @@ const { Title, Text } = Typography;
 
 const ProfileUser = ({ full_name, src_img, name }) => {
   const [selectedKey, setSelectedKey] = useState("1");
+  const navigate = useNavigate();
 
   const handleClick = (e) => {
     setSelectedKey(e.key);
+  };
+  
+  const handleLogout = (e) => {
+    navigate("/logout");
   };
 
   return (
@@ -84,6 +90,7 @@ const ProfileUser = ({ full_name, src_img, name }) => {
               alignItems: "center",
               marginTop: "30px",
             }}
+            onClick={handleLogout}
           >
             Đăng xuất
           </Menu.Item>
