@@ -9,6 +9,7 @@ import RegisterPage from './pages/RegisterPage';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,7 +18,9 @@ root.render(
   // <React.StrictMode>
   <QueryClientProvider client={queryClient}>
     <Provider store={store}>
+    <GoogleOAuthProvider clientId="900722406945-4dlftqiq3j65ehjafhpvhg80b77liihq.apps.googleusercontent.com">
       <App />
+  </GoogleOAuthProvider>  
     </Provider>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>

@@ -10,7 +10,8 @@ const ButtonComponent = ({ title, icon, margin,
   minWidth,
   fontSize,
   borderRadius = "0", 
-  primary, 
+  disabled,
+  primary,
   showIcon = true,
   iconSmall, 
   iconLarge, 
@@ -19,7 +20,8 @@ const ButtonComponent = ({ title, icon, margin,
   const classes = clsx(styles.btn, {
     [styles.primary]: primary,
     [styles.iconSmall]: iconSmall,
-    [styles.iconLarge]: iconLarge
+    [styles.iconLarge]: iconLarge,
+    [styles.disabled]: disabled
   }, className)
   return (
     <div 
