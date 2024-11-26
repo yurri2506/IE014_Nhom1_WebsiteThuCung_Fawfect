@@ -32,7 +32,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div style={{overflow: "hidden"}}>
       <Loading isLoading={isLoading}>
         <Router>
           <Routes>

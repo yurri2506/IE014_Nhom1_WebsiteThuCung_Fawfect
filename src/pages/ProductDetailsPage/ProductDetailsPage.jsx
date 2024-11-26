@@ -692,6 +692,7 @@
 //     </div>
 //   );
 // };
+
 import React, { useState } from "react";
 import styles from "./ProductDetailsPage.module.scss";
 import { Col, Row } from "antd";
@@ -1077,6 +1078,8 @@ const ProductDetailsPage = () => {
 };
 
 export default ProductDetailsPage;
+
+
 // import React, { useEffect, useState } from 'react'
 // import styles from './ProductDetailsPage.module.scss'
 // import mainProduct from '../../assets/images/mainProduct.svg'
