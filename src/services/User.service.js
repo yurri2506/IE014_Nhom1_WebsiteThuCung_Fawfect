@@ -57,29 +57,31 @@ export const refreshToken = async (accessToken) => {
 
 export const ensureValidToken = async (dispatch, resetUser) => {
   try {
-    const accessToken = localStorage.getItem("access_token");
+    const accessToken = localStorage.getItem("accessToken");
 
     if (!accessToken) {
       dispatch(resetUser());
       throw new Error("Access token not found.");
     }
 
-    const decoded = jwtDecode(JSON.parse(accessToken));
-    const currentTime = new Date().getTime() / 1000;
+    const decoded = jwtDecode(accessToken);
+    const currentTime = Date.now() / 1000;
 
     if (decoded.exp < currentTime) {
       // Access token hết hạn, làm mới token
-      const data = await refreshToken(JSON.parse(accessToken));
-      localStorage.setItem("access_token", JSON.stringify(data.access_token));
+      const data = await refreshToken();
+      localStorage.setItem("accessToken", data.access_token);
       return data.access_token;
     }
 
-    return JSON.parse(accessToken); // Trả về accessToken hợp lệ
+    return accessToken; // Trả về accessToken hợp lệ
   } catch (error) {
     console.error("Error in ensureValidToken:", error);
+    dispatch(resetUser());
     throw error;
   }
 };
+
 
 export const getUserDetails = async (userId, token) => {
   try {
