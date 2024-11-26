@@ -41,7 +41,7 @@ const ButtonComponent = ({ title, icon, margin,
       >
         {showIcon && <img src={icon} alt="" />}
         <div style={{fontSize: fontSize}}>
-          {title} 
+          <p style={{margin: "0"}}>{title}</p>
         </div>
       </button>
     </div>

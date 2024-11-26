@@ -17,6 +17,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 const queryClient = new QueryClient();
 root.render(
   // <React.StrictMode>
+  <GoogleOAuthProvider clientId="67490570542-f7q55e842gm0q45cakgturtr64usveoj.apps.googleusercontent.com">
   <QueryClientProvider client={queryClient}>
     <Provider store={store}>
 
@@ -29,6 +30,8 @@ root.render(
     </Provider>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
+
+  </GoogleOAuthProvider>
   // </React.StrictMode>
 );
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CartItemComponent from '../../components/CartItemComponent/CartItemComponent';
 import OrderSummaryComponent from '../../components/OrderSummaryComponent/OrderSummaryComponent';
 import product4 from '../../assets/images/product4.svg'
@@ -83,10 +83,23 @@ const MyCartPage = () => {
     }
     return total;
 }, 0) + discount;
+
+  const [isInMobile, setisInMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 739px)');
+    const handleViewportChange = () => setisInMobile(mediaQuery.matches);
+
+    handleViewportChange();
+    mediaQuery.addEventListener('change', handleViewportChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleViewportChange);
+    };
+  }, []);
   
     return (
       <div className={styles.main}>
-        <div className='container'>
+        <div className='grid wide'>
             <h2>GIỎ HÀNG CỦA BẠN</h2>
             <div className={styles.checkAll}>
               <input 
@@ -106,16 +119,17 @@ const MyCartPage = () => {
                     onRemove={handleRemoveItem}
                     onCheck={handleCheckItem}
                     isChecked={checkedItems.includes(item.id)}
+                    isInMobile={isInMobile}
                   />
                 ))}
               </div>
-            <OrderSummaryComponent 
-              onClick={handleCheckout}
-              totalAmount={totalAmount} 
-              discount={discount} 
-              shippingFee={shippingFee} 
-              safe={safe}
-            />
+              <OrderSummaryComponent 
+                onClick={handleCheckout}
+                totalAmount={totalAmount} 
+                discount={discount} 
+                shippingFee={shippingFee} 
+                safe={safe}
+              />
             </div>
         </div>
       </div>

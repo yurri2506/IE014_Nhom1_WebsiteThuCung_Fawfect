@@ -3,7 +3,7 @@ import styles from './PrivacyPolicyPage.module.scss'
 
 const PrivacyPolicyPage = () => {
   return (
-    <div className='container'>
+    <div className='grid wide'>
         <div className={styles.guarantee}>
             <h2>CHÍNH SÁCH BẢO MẬT THÔNG TIN NGƯỜI DÙNG</h2>
             <p>

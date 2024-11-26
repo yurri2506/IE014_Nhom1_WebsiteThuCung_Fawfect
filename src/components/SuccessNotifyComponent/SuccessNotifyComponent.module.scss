@@ -1,5 +1,4 @@
 .main { 
-    height: 100vh;
     background-color: rgba(250, 134, 56, 0.2);
     padding: 50px 0;
     background-image: url('../../assets/images/dogs.svg');
@@ -14,6 +13,18 @@
     align-items: baseline;
     justify-content: center;
     position: relative;
+}
+
+.arrow1 {
+    position: absolute;
+    top: 30px;
+    left: 330px;
+}
+
+.arrow2 {
+    position: absolute;
+    top: 30px;
+    left: 660px;
 }
 
 .form {
@@ -46,4 +57,31 @@
         margin: 0 auto;
         // scale: 1.5;
     }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .step {
+        display: none;
+    }
+
+    .form {
+        justify-content: center;
+        align-items: center;
+        margin-top: 0;
+    }
+}
+
+@media screen and (min-width: 64em) and (max-width: 77.4375em) {
+    .stt {
+        margin-right: 140px !important;
+    }
+
+    .arrow1 {
+        left: 230px !important;
+    }
+
+    .arrow2 {
+        left: 545px !important;
+    }
+
 }

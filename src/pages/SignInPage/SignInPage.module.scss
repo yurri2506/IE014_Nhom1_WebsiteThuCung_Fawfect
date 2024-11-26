@@ -1,5 +1,4 @@
 .main { 
-    height: 100vh;
     background-color: rgba(250, 134, 56, 0.2);
     padding: 50px 0;
     background-image: url('../../assets/images/dogAndCat.svg');
@@ -102,3 +101,15 @@
         }
     }
 }
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .title {
+        display: none;
+    }
+
+    .formSignIn {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
