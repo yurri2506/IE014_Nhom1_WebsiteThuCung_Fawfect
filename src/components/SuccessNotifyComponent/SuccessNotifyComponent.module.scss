@@ -27,7 +27,7 @@
     left: 660px;
 }
 
-.form {
+.forms {
     display: flex;
     justify-content: center;
     margin-top: 50px;
@@ -56,6 +56,31 @@
     img {
         margin: 0 auto;
         // scale: 1.5;
+    }
+}
+
+
+@media screen and (max-width: 46.1875em) {
+    .main { 
+        background-color: #fff;
+        background-image: none;
+        padding: 0 0 40px 0;
+        margin: 0 4px;
+    }
+
+    .step {
+        display: none;
+    }
+    
+    .forms {
+        justify-content: center;
+        align-items: center;
+
+        .form {
+            width: 100% !important;
+            height: 100% !important;
+            border: none !important;
+        }
     }
 }
 

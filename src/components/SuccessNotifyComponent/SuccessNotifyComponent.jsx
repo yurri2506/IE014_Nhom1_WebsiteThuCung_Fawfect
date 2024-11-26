@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styles from './SuccessNotifyComponent.module.scss'
 import StatusComponent from '../StatusComponent/StatusComponent'
@@ -8,6 +8,20 @@ import FormComponent from '../FormComponent/FormComponent'
 import orangeLogo from '../../assets/images/orangeLogo.svg'
 
 const SuccessNotifyComponent = () => {
+
+  const [isInMobile, setisInMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 739px)');
+    const handleViewportChange = () => setisInMobile(mediaQuery.matches);
+
+    handleViewportChange();
+    mediaQuery.addEventListener('change', handleViewportChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleViewportChange);
+    };
+  }, []);
+
   return (
     <div className={styles.main}>
       <div className="grid wide">
@@ -43,13 +57,14 @@ const SuccessNotifyComponent = () => {
             className={styles.stt}
           />
         </div>
-        <div className={styles.form}>
+        <div className={styles.forms}>
             <FormComponent 
                 width="650px"
                 height="450px"
                 background="#fff"
                 borderRadius="20px"
                 border="1px solid #000"
+                className={styles.form}
             >
             <div className={styles.choice}>
                 <div className={styles.title}>
@@ -57,7 +72,7 @@ const SuccessNotifyComponent = () => {
                         title="Đăng ký thành công"
                         textTransform="none"
                         textAlign="center"
-                        fontSize="2.5rem"
+                        fontSize={isInMobile ? "2rem" : "2.5rem"}
                     />
                 </div>
             </div>

@@ -972,7 +972,7 @@ const RegisterPage = () => {
       mediaQuery.removeEventListener('change', handleViewportChange);
     };
   }, []);
-
+  
   return (
     <div>
       {currentStep === 1 && (
@@ -1094,7 +1094,7 @@ const RegisterPage = () => {
       )}
 
         {/* Các bước tiếp theo */}
-        {currentStep === 2 && <VerifyMethodComponent onClick={handleNextStep} />}
+        {currentStep === 2 && <VerifyMethodComponent />}
         {currentStep === 3 && (
           <SetPasswordComponent
             name={name}

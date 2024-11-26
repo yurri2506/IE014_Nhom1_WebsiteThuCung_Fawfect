@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import StatusComponent from '../StatusComponent/StatusComponent'
 import NextArrowComponent from '../NextArrowComponent/NextArrowComponent'
 import TitleComponent from '../TitleComponent/TitleComponent'
@@ -11,6 +11,19 @@ import { RiLockPasswordFill } from 'react-icons/ri'
 import { MdDriveFileRenameOutline } from "react-icons/md";
 
 const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, onPasswordChange, onConfirmPasswordChange, onClick }) => {
+  const [isInMobile, setisInMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 739px)');
+    const handleViewportChange = () => setisInMobile(mediaQuery.matches);
+
+    handleViewportChange();
+    mediaQuery.addEventListener('change', handleViewportChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleViewportChange);
+    };
+  }, []);
+
   return (
     <div className={styles.main}>
       <div className="grid wide">
@@ -40,13 +53,14 @@ const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, o
             className={styles.stt}
           />
         </div>
-        <div className={styles.form}>
+        <div className={styles.forms}>
             <FormComponent 
                 width="650px"
-                height="550px"
+                height="650px"
                 background="#fff"
                 borderRadius="20px"
                 border="1px solid #000"
+                className={styles.form}
             >
             <div className={styles.choice}>
               <div className={styles.backButton}>
@@ -57,7 +71,7 @@ const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, o
                   title="Thiết lập mật khẩu"
                   textTransform="none"
                   textAlign="center"
-                  fontSize="2.5rem"
+                  fontSize={isInMobile ? "2rem" : "2.5rem"}
                 />
               </div>
             </div>
@@ -76,6 +90,9 @@ const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, o
                 mainSpan: { top: '45px', left: '165px' },
                 otherSpan: { top: '45px', left: '460px' },
               }}
+              width={isInMobile ? "70%" : "350px"}
+              borderRadius={isInMobile ? "10px" : "30px"}
+              className={styles.input}
             />
             <InputFormComponent
               placeholder="Mật khẩu"
@@ -88,6 +105,9 @@ const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, o
                 mainSpan: { top: '45px', left: '165px' },
                 otherSpan: { top: '45px', left: '460px' },
               }}
+              width={isInMobile ? "70%" : "350px"}
+              borderRadius={isInMobile ? "10px" : "30px"}
+              className={styles.input}
             />
             <InputFormComponent
               placeholder="Xác nhận mật khẩu"
@@ -100,6 +120,9 @@ const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, o
                 mainSpan: { top: '45px', left: '165px' },
                 otherSpan: { top: '45px', left: '460px' },
               }}
+              width={isInMobile ? "70%" : "350px"}
+              borderRadius={isInMobile ? "10px" : "30px"}
+              className={styles.input}
             />
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <div className={styles.notice}>
@@ -116,6 +139,7 @@ const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, o
               primary
               margin="15px 0 0"
               onClick={onClick}
+              className={styles.btn}
             />
           </FormComponent>
         </div>
