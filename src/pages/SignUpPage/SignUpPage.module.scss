@@ -172,3 +172,16 @@
         align-items: center;
     }
 }
+
+.googleLogin {
+    margin: 30px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    // Optional: Adjust the size of the button if needed
+    button {
+      width: 100%;
+      max-width: 300px; // Set a max width for the Google button
+    }
+  }

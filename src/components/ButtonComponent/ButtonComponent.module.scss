@@ -39,6 +39,15 @@
     }
 }
 
+.primary.disabled {
+    cursor: not-allowed;
+    background-color: #e8a97f;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
 .iconSmall {
     width: 200px;
     height: 70px;

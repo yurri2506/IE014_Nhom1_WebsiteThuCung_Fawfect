@@ -9,6 +9,8 @@ const ButtonComponent = ({ title, icon, margin,
   widthDiv = "100%",
   minWidth,
   fontSize,
+  borderRadius = "0", 
+  disabled,
   primary,
   showIcon = true,
   iconSmall, 
@@ -18,7 +20,8 @@ const ButtonComponent = ({ title, icon, margin,
   const classes = clsx(styles.btn, {
     [styles.primary]: primary,
     [styles.iconSmall]: iconSmall,
-    [styles.iconLarge]: iconLarge
+    [styles.iconLarge]: iconLarge,
+    [styles.disabled]: disabled
   }, className)
   return (
     <div 
@@ -33,7 +36,7 @@ const ButtonComponent = ({ title, icon, margin,
       <button
         type="button" 
         className={classes}
-        style={{width: width, height: height, minWidth: minWidth}}
+        style={{borderRadius: borderRadius, width: width, height: height, minWidth: minWidth}}
         {...props}
       >
         {showIcon && <img src={icon} alt="" />}
