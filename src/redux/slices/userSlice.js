@@ -1,24 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: null, // Lưu thông tin người dùng (id, name, avatar, etc.)
-  isAuthenticated: false, // Trạng thái đăng nhập
+  user_name: "",
+  user_email: "",
+  user_phone: "",
+  user_address: "",
+  user_avt_img: "",
+  access_token: localStorage.getItem("access_token") || "",
+  refreshToken: localStorage.getItem("refreshToken") || "",
+  isAuthenticated: !!localStorage.getItem("access_token"), // Kiểm tra token có tồn tại
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    // Cập nhật thông tin người dùng sau khi đăng nhập
     updateUser: (state, action) => {
-      state.isAuthenticated = true; // Đánh dấu là đã đăng nhập
+      const updatedState = {
+        ...state,
+        ...action.payload, // Cập nhật dữ liệu người dùng
+        isAuthenticated: true,
+      };
+
+      return updatedState;
     },
-    // Đăng xuất người dùng
-    logoutUser: (state) => {
-      state.isAuthenticated = false; // Đánh dấu trạng thái chưa đăng nhập
+    resetUser: (state) => {
+      return {
+        initialState
+      };
     },
   },
 });
 
-export const { updateUser, logoutUser } = userSlice.actions;
+export const { updateUser, resetUser } = userSlice.actions;
 export default userSlice.reducer;

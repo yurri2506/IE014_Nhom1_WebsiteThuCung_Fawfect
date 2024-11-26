@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
-import styles from './ChangePassword.module.scss';
-import SideBar from '../SideBar/SideBar.js';
+import styles from './ChangePassword.css';
+import ProfileUser from  "../MyOrderPage/UserProfile.jsx";
+import myAvatar from "../../assets/images/avatar.jpg";
+
 import {
   Button,
   Form,
@@ -10,39 +13,44 @@ import {
 
 const cx = classNames.bind(styles);
 
-// Dữ liệu ban đầu (Mật khẩu cũ là '12345678')
 const initialData = {
-  oldPassword: '12345678',  // Giá trị mặc định của mật khẩu cũ
+  oldPassword: '12345678', 
 };
 
 function ChangePassword() {
+  const navigate = useNavigate();
+
   const [form] = Form.useForm();
 
   const handleSave = (values) => {
-    alert('Thay đổi mật khẩu thành công!');
+    alert('Đổi mật khẩu thành công!');
+    navigate('/account-info');
+  };
+
+  const handleCancel = () => {
+    navigate('/account-info');
   };
 
   return (
-    <div className={cx('profile-container')}>
-      {/* Sidebar bên trái */}
-      <SideBar />
-      
-      {/* Form bên phải */}
-      <div className={cx('content')}>
-        <div className={cx('header-container')}>
-          <span className={cx('header')}>Đổi mật khẩu</span>
-        </div>
+    <div style={{ margin: "0 auto", padding: "20px" }} className={cx('container')}>
+      <div className="profile-container">
+        <ProfileUser
+          full_name="Nguyễn Lê Thanh Huyền"
+          src_img={myAvatar}
+          name="yurri_2506"
+        />
 
-        {/* Form chỉnh sửa mật khẩu */}
-        <Form
-          layout="horizontal" // Đặt layout ngang
-          labelCol={{ span: 6 }} // Chiều rộng của nhãn
-          wrapperCol={{ span: 18 }} // Chiều rộng của input box
-          className={cx('form')}
-          form={form}
-          initialValues={initialData} // Gán giá trị mặc định cho form
-          onFinish={handleSave} // Xử lý khi bấm nút "Lưu thay đổi"
-        >
+        <div className={cx('content')}>
+          <span className={cx('header')}>Đổi mật khẩu</span>
+          <Form
+            layout="horizontal" 
+            labelCol={{ span: 6 }} 
+            wrapperCol={{ span: 18 }} 
+            className={cx('form')}
+            form={form}
+            initialValues={initialData} 
+            onFinish={handleSave} 
+          >
           <Form.Item
             label="Mật khẩu hiện tại"
             name="oldPassword"
@@ -83,6 +91,7 @@ function ChangePassword() {
             <Button
               htmlType="reset"
               className={cx('cancel-button')}
+              onClick={handleCancel}
             >
               Hủy
             </Button>
@@ -96,6 +105,7 @@ function ChangePassword() {
           </Form.Item>
         </Form>
       </div>
+    </div>
     </div>
   );
 }
