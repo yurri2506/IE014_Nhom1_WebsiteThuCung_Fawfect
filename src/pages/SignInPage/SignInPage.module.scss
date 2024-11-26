@@ -1,5 +1,4 @@
 .main { 
-    height: 100vh;
     background-color: rgba(250, 134, 56, 0.2);
     padding: 50px 0;
     background-image: url('../../assets/images/dogAndCat.svg');
@@ -102,3 +101,95 @@
         }
     }
 }
+
+
+@media screen and (max-width: 46.1875em) {
+    .main { 
+        background-color: #fff;
+        background-image: none;
+        padding: 0 0 40px 0;
+        margin: 0 4px;
+    }
+
+    .title {
+        display: none;
+    }
+    
+    .formSignIn {
+        justify-content: center;
+        align-items: center;
+
+        .form {
+            width: 100% !important;
+            border: none !important;
+        }
+    }
+
+    .input {
+
+        span:first-of-type {
+            top: 20% !important;
+            left: 18% !important;
+        }
+
+        &:has(> span:first-of-type + span:last-of-type) > span:last-of-type {
+            top: 20% !important;
+            left: 75% !important;
+        }
+    }
+
+    .btn {
+        width: 70% !important;
+        font-size: 1.8rem !important;
+        border-radius: 10px !important;
+    }
+
+    .other {
+        .under {
+            width: 40% !important;
+        }
+
+        span {
+            font-size: 1.7rem !important;
+        }
+    }
+
+    .differentOption {
+        flex-wrap: wrap;
+
+        img {
+            width: 30px;
+        }
+
+        .btnOp {
+            width: 70%;
+            height: 60px;
+            margin: 0 0 0 0;
+            flex-wrap: wrap;
+        }
+    }
+
+    .agreeTerms {
+        font-size: 1.5rem !important;
+        padding: 0 !important;
+    }
+
+    .doNotHaveAccount {
+        p {
+            font-size: 1.8rem !important;
+        }
+    }
+}
+
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .title {
+        display: none;
+    }
+
+    .formSignIn {
+        justify-content: center;
+        align-items: center;
+    }
+}
+

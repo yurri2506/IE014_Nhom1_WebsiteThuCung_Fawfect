@@ -155,7 +155,7 @@ const AddressPage = ({closeModal}) => {
         </div>
       )}
       {isEditing || isAddingNew ||
-        <div style={{display: "flex", gap: "10px", margin: "30px 0 0 0"}}>
+        <div style={{display: "flex", gap: "10px", margin: "30px 0 0 0", justifyContent: "flex-end"}}>
           <button className={clsx(styles.button, styles.add)} onClick={handleAddNewAddress}>Thêm Địa Chỉ Mới</button>
           <button className={clsx(styles.button, styles.confirm)} onClick={() => {handleConfirmAddress(); closeModal()}}>Xác Nhận</button>
       </div>

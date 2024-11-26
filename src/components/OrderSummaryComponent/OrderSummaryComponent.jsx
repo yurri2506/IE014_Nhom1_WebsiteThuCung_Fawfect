@@ -33,12 +33,14 @@ const OrderSummaryComponent = ({ totalAmount, discount, shippingFee, safe, onCli
         <p>Phí vận chuyển <p className={styles.normal}>{shippingFee.toLocaleString()} VNĐ</p></p>
         <p>Tiết kiệm <p className={styles.normal}>{safe.toLocaleString()} VNĐ</p></p>
         <p>Tổng thanh toán: <p className={styles.total}>{totalAmount.toLocaleString()} VNĐ</p></p>
-        <div style={{margin: "30px 0"}}>
+        <div className={styles.wrapBtn}>
           <ButtonComponent 
             primary
             title="Mua hàng"
             width="80%"
+            textAlign="center"
             onClick={onClick}
+            className={styles.btnBuy}
           />
         </div>
       </div>
