@@ -60,6 +60,26 @@
         margin: 0 3px;
     }
   }
+
+  .forNotify {
+    position: relative;
+
+    &:hover .moreNotify {
+      display: block;
+    }
+  }
+
+  .moreNotify {
+    position: absolute;
+    // display: none;
+    top: 23px;
+    left: -305px;
+    z-index: 3;
+
+    li:last-child::before {
+      display: none;
+    }
+  }
 }
 
 .search {
