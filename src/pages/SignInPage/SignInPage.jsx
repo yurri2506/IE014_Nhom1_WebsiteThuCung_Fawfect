@@ -100,11 +100,6 @@ const SignInPage = () => {
       console.error("Error in handleGetDetailsUser:", error);
     }
   };
-
-  const handleNavigateSignUp = () => {
-    navigate("/sign-up");
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!identifier || !password) {
@@ -120,6 +115,19 @@ const SignInPage = () => {
     setShowPopup(false);
     setErrorMessage("");
   };
+
+  const [isInMobile, setisInMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 739px)');
+    const handleViewportChange = () => setisInMobile(mediaQuery.matches);
+
+    handleViewportChange();
+    mediaQuery.addEventListener('change', handleViewportChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleViewportChange);
+    };
+  }, []);
 
   return (
     <div className={styles.main}>
@@ -152,7 +160,7 @@ const SignInPage = () => {
         </div>
       )}
   
-      <div className="container">
+      <div className="grid wide">
         <div className={styles.signIn}>
           <div className={styles.introduce}>
             <div className={styles.title}>
@@ -181,12 +189,13 @@ const SignInPage = () => {
               background="#fff"
               borderRadius="20px"
               border="1px solid #000"
+              className={styles.form}
             >
               <TitleComponent
                 title="Đăng nhập"
                 textTransform="none"
                 textAlign="center"
-                fontSize="4.5rem"
+                fontSize={isInMobile ? "3rem" : "4.5rem"}
                 margin="50px 0 30px"
               />
               <form>
@@ -199,6 +208,9 @@ const SignInPage = () => {
                   positionProps={{
                     mainSpan: { top: "16px", left: "90px" },
                   }}
+                  width={isInMobile ? "70%" : "350px"}
+                  borderRadius={isInMobile ? "10px" : "30px"}
+                  className={styles.input}
                 />
                 <InputFormComponent
                   value={password}
@@ -211,6 +223,9 @@ const SignInPage = () => {
                     mainSpan: { top: "16px", left: "90px" },
                     otherSpan: { top: "16px", left: "385px" },
                   }}
+                  width={isInMobile ? "70%" : "350px"}
+                  borderRadius={isInMobile ? "10px" : "30px"}
+                  className={styles.input}
                 />
                 <ButtonComponent
                   title={isLoading ? "Đang đăng nhập..." : "ĐĂNG NHẬP"}
@@ -218,6 +233,7 @@ const SignInPage = () => {
                   margin="0 0 15px"
                   onClick={handleSubmit}
                   disabled={isLoading}
+                  className={styles.btn}
                 />
               </form>
               <span>
@@ -228,12 +244,14 @@ const SignInPage = () => {
                   width="190px"
                   height="1px"
                   background="#B7B6B5"
+                  className={styles.under}
                 />
                 <span>HOẶC</span>
                 <UnderLineComponent
                   width="190px"
                   height="1px"
                   background="#B7B6B5"
+                  className={styles.under}
                 />
               </div>
               <div className={styles.differentOption}>
@@ -242,19 +260,21 @@ const SignInPage = () => {
                   iconSmall
                   icon={facebook_2}
                   margin="30px 0 0"
+                  className={styles.btnOp}
                 />
                 <ButtonComponent
                   title="Google"
                   iconSmall
                   icon={google}
                   margin="30px 0 0"
+                  className={styles.btnOp}
                 />
               </div>
               <div className={styles.footer}>
                 <div className={styles.doNotHaveAccount}>
                   <p>
                     Bạn mới đến PAWFECT?&nbsp;
-                    <p onClick={handleNavigateSignUp}>Đăng Ký</p>
+                    <Link to={"/sign-up"}>Đăng Ký</Link>
                   </p>
                 </div>
               </div>
