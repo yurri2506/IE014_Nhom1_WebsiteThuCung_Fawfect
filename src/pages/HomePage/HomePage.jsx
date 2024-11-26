@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { clsx } from 'clsx'
 import SliderComponent from '../../components/SliderComponent/SliderComponent'
 import slider1 from '../../assets/images/slider1.svg'
@@ -33,329 +33,145 @@ import brand14 from '../../assets/images/brand14.svg'
 import brand15 from '../../assets/images/brand15.svg'
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
 import CustomerReviewsComponent from '../../components/CustomerReviewsComponent/CustomerReviewsComponent'
+import NewProductComponent from '../../components/NewProductComponent/NewProductComponent'
+import BestSellingComponent from '../../components/BestSellingComponent/BestSellingComponent'
+import AllBrandsComponent from '../../components/AllBrandsComponent/AllBrandsComponent'
+
+
 
 const HomePage = () => {
+  const services = [
+    { src: service1, alt: "Miễn phí vận chuyển", text: "Miễn phí vận chuyển" },
+    { src: service2, alt: "Sản phẩm chính hãng", text: "Sản phẩm chính hãng" },
+    { src: service3, alt: "Thanh toán tiện lợi", text: "Thanh toán tiện lợi" },
+    { src: service4, alt: "Hỗ trợ tận tâm", text: "Hỗ trợ tận tâm", width: "110px" },
+  ];
+
+  const products = [
+    // Danh sách sản phẩm (có thể thay đổi hoặc lấy từ API)
+    { src: product1, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product2, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product3, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product1, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product2, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product3, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product1, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product2, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product3, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    { src: product3, alt: "ABCD", name: "Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng", oldPrice: "55.000", newPrice: "40.000", start: "4.5/5", percent: "10" },
+    // Các sản phẩm khác...
+  ];
+  
+  const [visibleCount, setVisibleCount] = useState(6);
+  const [isInViewport, setIsInViewport] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 740px) and (max-width: 1023px)');
+    const handleViewportChange = () => setIsInViewport(mediaQuery.matches);
+
+    handleViewportChange();
+    mediaQuery.addEventListener('change', handleViewportChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleViewportChange);
+    };
+  }, []);
+
+  const [isInMobile, setisInMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 739px)');
+    const handleViewportChange = () => setisInMobile(mediaQuery.matches);
+
+    handleViewportChange();
+    mediaQuery.addEventListener('change', handleViewportChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleViewportChange);
+    };
+  }, []);
+
+  const handleShowMore = () => {
+    setVisibleCount(brands.length);
+  };
+
+  const handleShowLess = () => {
+    setVisibleCount(6); 
+  };
+  const brands = [
+    { src: brand1, alt: 'ROYAL CANIN' },
+    { src: brand2, alt: 'ROYAL CANIN' },
+    { src: brand3, alt: 'ROYAL CANIN' },
+    { src: brand4, alt: 'ROYAL CANIN' },
+    { src: brand5, alt: 'ROYAL CANIN' },
+    { src: brand6, alt: 'ROYAL CANIN' },
+    { src: brand7, alt: 'ROYAL CANIN' },
+    { src: brand8, alt: 'ROYAL CANIN' },
+    { src: brand9, alt: 'ROYAL CANIN' },
+    { src: brand10, alt: 'ROYAL CANIN' },
+    { src: brand11, alt: 'ROYAL CANIN' },
+    { src: brand12, alt: 'ROYAL CANIN' },
+    { src: brand13, alt: 'ROYAL CANIN' },
+    { src: brand14, alt: 'ROYAL CANIN' },
+    { src: brand15, alt: 'ROYAL CANIN' },
+  ];
+
   return (
-      <div className='container'>
+      <div className={clsx('grid wide')}>
         <div className={styles.sliderImg}>
           <SliderComponent arrImages={[slider1, slider2]} />
         </div>
-        <div className='grid_row'>
-          <div className='grid_column_3'>
-            <ServiceComponent 
-              src={service1} 
-              alt="Miễn phí vận chuyển" 
-              text="Miễn phí vận chuyển"
-            />
-          </div>
-          <div className='grid_column_3'>
-            <ServiceComponent 
-              src={service2} 
-              alt="Sản phẩm chính hãng" 
-              text="Sản phẩm chính hãng"
-            />
-          </div>
-          <div className='grid_column_3'>
-            <ServiceComponent 
-              src={service3} 
-              alt="Thanh toán tiện lợi" 
-              text="Thanh toán tiện lợi"
-            />
-          </div>
-          <div className='grid_column_3'>
-            <ServiceComponent 
-              src={service4} 
-              alt="Hỗ trợ tận tâm" 
-              text="Hỗ trợ tận tâm"
-              width="110px"
-            />
-          </div>
-        </div>
-        <div className={styles.underLine}>
-          <UnderLineComponent
-            width="100%"
-            height="1px"
-            background="rgba(0, 0, 0, 0.1)"
-          />
-        </div>
-        <TitleComponent
-          title="Hàng mới về"
-          textTransform="uppercase"
-          textAlign="center"
-          fontSize="4rem"
-        />
-        <div className='grid_row'>
-          <div className='grid_column_3'>
-            <CardComponent 
-              src={product1}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <div className='grid_column_3'>
-            <CardComponent 
-              src={product2}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <div className='grid_column_3'>
-            <CardComponent 
-              src={product3}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <div className='grid_column_3'>
-            <CardComponent 
-              src={product1}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <ButtonComponent 
-            width="200px"
-            height="50px"
-            title="Xem thêm"
-            color="#000"
-            border="1px solid #000"
-            background="#fff"
-            borderRadius="15px"
-            fontSize="2rem"
-          />
-        </div>
-        <div className={styles.underLine}>
-          <UnderLineComponent
-            width="100%"
-            height="1px"
-            background="rgba(0, 0, 0, 0.1)"
-          />
-        </div>
-        <TitleComponent
-          title="Sản phẩm bán chạy"
-          textTransform="uppercase"
-          textAlign="center"
-          fontSize="4rem"
-        />
-        <div className='grid_row'>
-          <div className='grid_column_3'>
-            <CardComponent 
-              src={product1}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <div className='grid_column_3'>
-            <CardComponent 
-              src={product1}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <div className='grid_column_3'>
-            <CardComponent 
-              src={product1}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <div className='grid_column_3'>
-            <CardComponent 
-              src={product1}
-              alt="ABCD"
-              name="Bánh thưởng cho mèo CIAO vị cá ngừ & ức gà nướng"
-              oldPrice="55.000"
-              newPrice="40.000"
-              start="4.5/5"
-              percent="10"
-            />
-          </div>
-          <ButtonComponent 
-              width="200px"
-              height="50px"
-              title="Xem thêm"
-              color="#000"
-              border="1px solid #000"
-              background="#fff"
-              borderRadius="15px"
-              fontSize="2rem"
-            />
-        </div>
-        <div className={styles.underLine}>
-          <UnderLineComponent
-            width="100%"
-            height="1px"
-            background="rgba(0, 0, 0, 0.1)"
-          />
-        </div>
-        <TitleComponent
-          title="100+ thương hiệu boss thích"
-          textTransform="uppercase"
-          textAlign="center"
-          fontSize="4rem"
-        />
-        <div className='grid_row'>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand1}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand2}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand3}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand4}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand5}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand6}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand7}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand8}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand9}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand10}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand11}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand12}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand13}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand14}
-              alt="ROYAL CANIN"
-            />
-          </div>
-          <div className='grid_column_2_4'>
-            <BrandComponent 
-              src={brand15}
-              alt="ROYAL CANIN"
-            />
-          </div>
-        </div>
-        <div className={styles.feedbacks}>
-          <TitleComponent
-            title="Khách yêu của PAWFECT nói gì"
-            textTransform="none"
-            textAlign="left"
-            fontSize="4rem"
-          />
-          {/* <div className={styles.btn}>
-            <BackComponent 
-              fontSize="5rem"
-              color="#000"
-            /> 
-            <NextComponent 
-              fontSize="5rem"
-              color="#000"
-            />
-          </div> */}
-        </div>
-        {/* <div className='grid_row' style={{marginBottom: "50px"}}>
-          <div className='grid_column_4'>
-            <FeedBackComponent 
-              customer="Sarah M."
-              review='"Rất nhiều sản phẩm cho cún yêu có ở cửa hàng, mình có thể tìm thấy mọi thứ ở đây."'
-            />
-          </div>
-          <div className='grid_column_4'>
-            <FeedBackComponent 
-              customer="Alex K."
-              review='"Điểm đến ưa thích mỗi khi muốn shopping cho boss nhà mình!!"'
-            />
-          </div>
-          <div className='grid_column_4'>
-            <FeedBackComponent 
-              customer="James L."
-              review='"Điểm đến ưa thích mỗi khi muốn shopping cho boss nhà mình!!"'
-            />
+        <div className={clsx('row', styles.service)}>
+          {services.map((service, index) => (
+            <div key={index} className="col l-3 m-0 c-0">
+              <ServiceComponent {...service} />
             </div>
-        </div> */}
-        <div style={{marginBottom: "50px"}}>
-          <CustomerReviewsComponent />
+          ))}
         </div>
-      </div>
+        <div className={clsx(styles.underLine, styles.underNew)}>
+          <UnderLineComponent
+            width="100%"
+            height="1px"
+            background="rgba(0, 0, 0, 0.1)"
+          />
+        </div>
+        <NewProductComponent
+          isInMobile={isInMobile}
+          products={products}
+        />
+        <div className={styles.underLine}>
+          <UnderLineComponent
+            width="100%"
+            height="1px"
+            background="rgba(0, 0, 0, 0.1)"
+          />
+        </div>
+        <BestSellingComponent 
+          isInMobile={isInMobile}
+          products={products}
+        />
+        <div className={styles.underLine}>
+          <UnderLineComponent
+            width="100%"
+            height="1px"
+            background="rgba(0, 0, 0, 0.1)"
+          />
+        </div>
+        {isInMobile ? (null) : (
+          <AllBrandsComponent 
+            isInViewport={isInViewport}
+            brands={brands}
+            visibleCount={visibleCount}
+            handleShowMore={handleShowMore}
+            handleShowLess={handleShowLess}
+          />
+        )}
+        <div style={{marginBottom: "50px"}}>
+          <CustomerReviewsComponent 
+            isInViewport={isInViewport}
+            isInMobile={isInMobile}
+          />
+        </div>
+    </div>
   )
 }
 

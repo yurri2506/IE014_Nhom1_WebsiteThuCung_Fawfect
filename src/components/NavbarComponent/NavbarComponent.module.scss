@@ -1,0 +1,114 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    background-color: #F3EFEF;
+    padding: 20px;
+    // width: 300px;
+    border-radius: 10px;
+}
+
+.productCategory {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    a {
+        text-decoration: none;
+        color: #000;
+        font-size: 1.5rem;
+        padding: 10px;
+
+        &:focus, &:active {
+            color: #E87428;
+        }
+    }
+
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    .age {
+
+        p {
+            font-size: 1.1rem;
+            margin: 5px 0;
+            display: flex;
+
+            span {
+                color: #E87428;
+                margin: 0 5px;
+                display: inline-block;
+            }
+        }
+    }
+
+    .choice {
+        margin: 0 0 0 10px;
+
+        button {
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 10px 10px 0 10px;
+        }
+    }
+
+    .star {
+        margin: 0 0 0 10px;
+
+        p {
+            display: inline-block;
+            font-size: 1.3rem;
+            margin-left: 6px;
+        }
+    }
+}
+
+@media screen and (max-width: 46.1875em) {
+    .main {
+        border-radius: 0;
+    }
+
+    .productCategory {
+    
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+    
+        a {
+            font-size: 1.3rem;
+        }
+    
+    }
+
+    .filter {
+    
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+    }
+}
+
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .main {
+        border-radius: 0;
+    }
+}

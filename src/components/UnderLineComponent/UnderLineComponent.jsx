@@ -1,10 +1,10 @@
 import React from 'react'
 
-const UnderLineComponent = ({ width, height, background, margin = "0",
+const UnderLineComponent = ({ className, width, height, background, margin = "0",
   display = "block", 
   borderRadisus = "none" }) => {
   return (
-    <div style={{
+    <div className={className} style={{
       width: width, 
       height: height, 
       backgroundColor: background,

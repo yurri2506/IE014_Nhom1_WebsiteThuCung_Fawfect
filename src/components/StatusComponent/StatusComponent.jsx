@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import styles from './StatusComponent.module.scss'
 import NextArrowComponent from '../NextArrowComponent/NextArrowComponent'
 
-const StatusComponent = ({ number, title = "", success, unSuccess, otherSuccess, ...props }) => {
+const StatusComponent = ({ className, number, title = "", success, unSuccess, otherSuccess, ...props }) => {
     const classes = clsx({
         [styles.success]: success,
         [styles.unSuccess]: unSuccess,
@@ -11,7 +11,7 @@ const StatusComponent = ({ number, title = "", success, unSuccess, otherSuccess,
     })
 
     return (
-        <div style={{...props}} className={styles.main}>
+        <div style={{...props}} className={clsx(styles.main, className)}>
             <div className={classes}>
                 <div className={styles.status}>
                     <span>{number}</span>

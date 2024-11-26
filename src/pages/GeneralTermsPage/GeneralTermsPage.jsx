@@ -3,7 +3,7 @@ import styles from './GeneralTermsPage.module.scss'
 
 const TermsPage = () => {
   return (
-    <div className='container'>
+    <div className='grid wide'>
         <div className={styles.guarantee}>
             <h2>ĐIỀU KHOẢN CHUNG - PAWFECT PETCARE CENTER</h2>
             <p>

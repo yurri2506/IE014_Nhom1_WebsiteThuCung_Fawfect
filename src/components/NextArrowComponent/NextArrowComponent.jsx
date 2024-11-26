@@ -2,9 +2,9 @@ import React from 'react'
 import UnderLineComponent from '../UnderLineComponent/UnderLineComponent';
 
 
-const NextArrowComponent = ({...props}) => {
+const NextArrowComponent = ({className, ...props}) => {
   return (
-    <div style={{display: "inline-flex", alignItems: "center", ...props
+    <div className={className} style={{display: "inline-flex", alignItems: "center", ...props
     }}>
       <UnderLineComponent 
         width="150px"

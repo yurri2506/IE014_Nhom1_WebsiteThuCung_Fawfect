@@ -1,8 +1,8 @@
 import React from 'react'
 
-const FormComponent = ({children, ...props}) => {
+const FormComponent = ({children, className, ...props}) => {
   return (
-    <div style={{...props}}>
+    <div className={className} style={{...props}}>
       {children}
     </div>
   )
