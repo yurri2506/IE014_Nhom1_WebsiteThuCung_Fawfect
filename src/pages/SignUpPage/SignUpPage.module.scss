@@ -87,6 +87,81 @@
     }
 }
 
+@media screen and (max-width: 46.1875em) {
+    .main { 
+        background-color: #fff;
+        background-image: none;
+    }
+
+    .title {
+        display: none;
+    }
+    
+    .formRegister {
+        justify-content: center;
+        align-items: center;
+
+        .form {
+            // width: 100% !important;
+            // height: 100% !important;
+        }
+    
+        .other {
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            span {
+                color: rgba(165, 165, 165, 0.8);
+                font-size: 2rem;
+                font-weight: 800;
+                margin: 0 10px;
+            }
+        }
+    
+        .differentOption {
+            display: flex;
+            align-items: center;
+        }
+    }
+    
+    .footer {
+        margin: 20px 0;
+    
+        .agreeTerms {
+            font-size: 1.85rem;
+            line-height: 1.5;
+            text-align: center;
+            padding: 10px 15px;
+    
+            span {
+                color: #E87428;
+            }
+    
+            a {
+                text-decoration: none;
+                color: #E87428;
+            }
+        }
+    
+        .haveAccount {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+    
+            p {
+                color: rgba(165, 165, 165, 0.8);
+            }
+    
+            a {
+                text-decoration: none;
+                color: #E87428;
+            }
+        }
+    }
+}
+
 @media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
     .title {
         display: none;

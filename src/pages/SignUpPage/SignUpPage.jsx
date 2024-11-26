@@ -74,6 +74,7 @@ const RegisterPage = () => {
                 background="#fff"
                 borderRadius="20px"
                 border="1px solid #000"
+                className={styles.form}
               >
                 <TitleComponent
                   title="Đăng ký"
