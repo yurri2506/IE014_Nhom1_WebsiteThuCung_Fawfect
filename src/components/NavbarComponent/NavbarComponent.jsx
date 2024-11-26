@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Checkbox, Rate } from 'antd'
 import styles from './NavbarComponent.module.scss'
-import './Navbar.scss'
+// import './Navbar.scss'
 import { Slider } from 'antd';
 import ButtonComponent from '../ButtonComponent/ButtonComponent'
 

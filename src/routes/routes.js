@@ -17,6 +17,7 @@ import CheckOutPage from "../pages/CheckOutPage/CheckOutPage";
 import LogoutPage from "../pages/LogoutPage/LogoutPage";
 import AccountInfo from "../pages/AccountPage/AccountInfo";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
 import EditAccount from "../pages/AccountPage/EditAccount";
 
 export const routes = [
@@ -122,6 +123,11 @@ export const routes = [
     {
         path: '/logout',
         page: LogoutPage,
+        isShowHeader: true
+    },
+    {
+        path: '/type',
+        page: TypeProductPage,
         isShowHeader: true
     }
 ]

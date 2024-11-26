@@ -2,11 +2,15 @@ import React, { useState } from 'react'
 import styles from './InputFormComponent.module.scss'
 import { MdOutlineVisibility } from "react-icons/md"
 import { MdOutlineVisibilityOff } from "react-icons/md"
+import clsx from 'clsx'
 {/* <MdOutlineVisibilityOff />
 <MdOutlineVisibility /> */}
 
-const InputFormComponent = ({ type = "text", 
-    placeholder, 
+const InputFormComponent = ({ className, type = "text", 
+    placeholder,
+    width,
+    height,
+    borderRadius,
     icon, 
     margin = "0",
     isPassword = false,
@@ -20,9 +24,9 @@ const InputFormComponent = ({ type = "text",
     };
 
   return (
-    <div className={styles.input}>
+    <div className={clsx(className, styles.input)}>
       <input 
-        style={{margin: margin}} 
+        style={{margin: margin, width: width, height: height, borderRadius: borderRadius}} 
         type={type === "password" && showPassword ? "text" : type}
         required
         // value={value}

@@ -862,7 +862,7 @@
 
 // export default RegisterPage;
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 import styles from './SignUpPage.module.scss';
@@ -960,6 +960,19 @@ const RegisterPage = () => {
     },
   });
 
+  const [isInMobile, setisInMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 739px)');
+    const handleViewportChange = () => setisInMobile(mediaQuery.matches);
+
+    handleViewportChange();
+    mediaQuery.addEventListener('change', handleViewportChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleViewportChange);
+    };
+  }, []);
+
   return (
     <div>
       {currentStep === 1 && (
@@ -994,15 +1007,16 @@ const RegisterPage = () => {
               <FormComponent 
                 width="500px"
                 height="650px"
-                background="rgba(255, 255, 255, 0.8)"
+                background="#fff"
                 borderRadius="20px"
                 border="1px solid #000"
+                className={styles.form}
               >
                 <TitleComponent
                   title="Đăng ký"
                   textTransform="none"
                   textAlign="center"
-                  fontSize="4.5rem"
+                  fontSize={isInMobile ? "3rem" : "4.5rem"}
                   margin="50px 0 30px"
                 />
                 <InputFormComponent 
@@ -1015,23 +1029,29 @@ const RegisterPage = () => {
                   }}
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
+                  width={isInMobile ? "70%" : "350px"}
+                  borderRadius={isInMobile ? "10px" : "30px"}
+                  className={styles.input}
                 />
                 <ButtonComponent 
                   title="TIẾP THEO"
                   primary
-                  onClick={handleSubmitPhone}
+                  className={styles.btn}
+                  // onClick={handleSubmitPhone}
                 />
                 <div className={styles.other}>
                   <UnderLineComponent 
                     width="190px"
                     height="1px"
                     background="#B7B6B5"
+                    className={styles.under}
                   />
                   <span>HOẶC</span>
                   <UnderLineComponent 
                     width="190px"
                     height="1px"
                     background="#B7B6B5"
+                    className={styles.under}
                   />
                 </div>
                 <div className={styles.differentOption}>
@@ -1040,12 +1060,14 @@ const RegisterPage = () => {
                     iconSmall
                     icon={facebook_2}
                     margin="30px 0 0"
+                    className={styles.btnOp}
                   />
                   <ButtonComponent 
                     title="Google"
                     iconSmall
                     icon={google}
                     margin="30px 0 0"
+                    className={styles.btnOp}
                   />
                 </div>
                 <div className={styles.footer}>
