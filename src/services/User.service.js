@@ -104,3 +104,61 @@ export const getUserDetails = async (userId, token) => {
   }
 };
 
+// dang ky bang so dien thoai
+export const signUpPhone = async ( phone, name, password, confirmPassword) => {
+  try {
+    const response = await fetch(`${API_URL}/signUpPhone`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ phone, name, password, confirmPassword }),
+    });
+
+    // Kiểm tra nếu response không OK (status không phải 2xx)
+    if (!response.ok) {
+      const errorData = await response.json(); // Lấy nội dung lỗi từ body
+      throw errorData; // Ném lỗi để xử lý ở phần `catch`
+    }
+
+    // Nếu thành công, trả về dữ liệu
+    const data = await response.json();
+    console.log(data)
+    return data;
+  } catch (error) {
+    // Lỗi sẽ được xử lý ở đây
+    console.error("Error in loginUser:", error);
+    throw error; // Ném lỗi để component phía trên tiếp tục xử lý
+  }
+};
+
+
+
+export const signInGoogle = async (googleToken) => {
+  try {
+    const response = await fetch(`${API_URL}/sign-in-google`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({googleToken}),
+    });
+
+    //console.log(response)
+    // Kiểm tra nếu response không OK (status không phải 2xx)
+    if (!response.ok) {
+      const errorData = await response.json(); // Lấy nội dung lỗi từ body
+      throw errorData; // Ném lỗi để xử lý ở phần `catch`
+    }
+
+    // Nếu thành công, trả về dữ liệu
+    const data = await response.json();
+    console.log(data)
+    return data;
+  } catch (error) {
+    // Lỗi sẽ được xử lý ở đây
+    console.error("Error in loginUser:", error);
+    throw error; // Ném lỗi để component phía trên tiếp tục xử lý
+  }
+};
+
