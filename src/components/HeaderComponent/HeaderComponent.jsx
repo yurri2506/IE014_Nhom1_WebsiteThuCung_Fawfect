@@ -236,6 +236,7 @@ import { FaProductHunt } from "react-icons/fa";
 import { FaBookOpen } from "react-icons/fa";
 import { FaDog } from "react-icons/fa6";
 import { FaCat } from "react-icons/fa";
+import NotifyComponent from '../NotifyComponent/NotifyComponent';
 
 const HeaderComponent = () => {
   const [span, setSpan] = useState(21);
@@ -300,11 +301,16 @@ const HeaderComponent = () => {
         <Row className={styles.userOptions}>
           <Col span={16} offset={8}>
             <ul>
-              <li>
+              <li className={styles.forNotify}>
                 <Link to={"/"}>
                   <GrNotification />
                   <span>Thông báo</span>
                 </Link>
+                <NotifyComponent 
+                  title1="Kem dưỡng trắng da OHUI Extreme White Cream có tốt không?"
+                  title2="Kem dưỡng trắng da OHUI Extreme White Cream có tốt không?"
+                  className={styles.moreNotify}
+                />
               </li>
               <li>
                 <Link to={"/"}>
@@ -375,7 +381,6 @@ const HeaderComponent = () => {
                 Sản phẩm cho chó
                 <FaChevronDown className={styles.icon}/>
               </Link>
-              <MoreComponent className={styles.moreDog} />
             </li>
             <li className={styles.forCat}>
               <Link>

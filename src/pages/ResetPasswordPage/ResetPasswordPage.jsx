@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
 import styles from './ResetPasswordPage.module.scss'
 import VerifyMethodComponent from '../../components/VerifyMethodComponent/VerifyMethodComponent'
 import SetPasswordComponent from '../../components/SetPasswordComponent/SetPasswordComponent'
@@ -35,6 +34,19 @@ const ResetPasswordPage = () => {
         handleNextStep();
     }
 
+    const [isInMobile, setisInMobile] = useState(false);
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 739px)');
+        const handleViewportChange = () => setisInMobile(mediaQuery.matches);
+
+        handleViewportChange();
+        mediaQuery.addEventListener('change', handleViewportChange);
+
+        return () => {
+        mediaQuery.removeEventListener('change', handleViewportChange);
+        };
+    }, []);
+
   return (
    <div>
     {currentStep === 1 && (
@@ -45,14 +57,15 @@ const ResetPasswordPage = () => {
                         Bạn cần trợ giúp?
                     </Link>
                 </div>
-                <div className={styles.form}>
-                <FormComponent
-                    width="650px"
-                    height="330px"
-                    background="#fff"
-                    borderRadius="20px"
-                    border="1px solid #000"
-                >
+                <div className={styles.forms}>
+                    <FormComponent
+                        width="650px"
+                        height="330px"
+                        background="#fff"
+                        borderRadius="20px"
+                        border="1px solid #000"
+                        className={styles.form}
+                    >
                     <div className={styles.choice}>
                         <div className={styles.backButton}>
                             <BackButtonComponent />
@@ -62,7 +75,7 @@ const ResetPasswordPage = () => {
                                 title="Đặt lại mật khẩu"
                                 textTransform="none"
                                 textAlign="center"
-                                fontSize="4rem"
+                                fontSize={isInMobile ? "3rem" : "4.5rem"}
                             />
                         </div>
                     </div>
@@ -76,12 +89,16 @@ const ResetPasswordPage = () => {
                         }}
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
+                        width={isInMobile ? "70%" : "350px"}
+                        borderRadius={isInMobile ? "10px" : "30px"}
+                        className={styles.input}
                     />
                     <ButtonComponent 
                         title="TIẾP THEO"
                         primary
                         margin="15px 0 15px"
                         onClick={handleResetPassword}
+                        className={styles.btn}
                     />
                 </FormComponent>
                 </div>
