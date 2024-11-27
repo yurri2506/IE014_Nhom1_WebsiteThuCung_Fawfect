@@ -29,6 +29,7 @@
     display: flex;
     justify-content: flex-end;
     list-style-type: none;
+    align-items: center;
 
     li {
       margin-left: 15px;
@@ -38,17 +39,17 @@
       color: hsla(0, 0%, 100%, 0.7);
     }
 
-    li:last-child::before {
-      content: "";
-      display: inline-block;
-      width: 1px;
-      height: 18px;
-      background-color: #fff;
-      margin-right: 4px;
-      vertical-align: middle;
-      margin-bottom: 5px;
-      margin-right: 10px;
-    }
+    // li:last-child::before {
+    //   content: "";
+    //   display: inline-block;
+    //   width: 1px;
+    //   height: 20px;
+    //   background-color: #fff;
+    //   margin-right: 4px;
+    //   vertical-align: middle;
+    //   margin-bottom: 0;
+    //   margin-right: 10px;
+    // }
 
     a {
       text-decoration: none;
@@ -78,6 +79,23 @@
 
     li:last-child::before {
       display: none;
+    }
+  }
+
+  .userInfo {
+    display: flex;
+    align-items: center;
+    img {
+      width: 30px;
+      height: 30px;
+      margin-right: 4px;
+    }
+
+    span {
+      font-size: 1.6rem;
+      line-height: 30px;
+      color: #fff;
+      font-weight: 500;
     }
   }
 }

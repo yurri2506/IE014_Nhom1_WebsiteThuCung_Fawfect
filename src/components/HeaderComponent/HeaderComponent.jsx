@@ -202,6 +202,7 @@ const HeaderComponent = () => {
                   Sản phẩm cho chó
                   <FaChevronDown className={styles.icon} />
                 </Link>
+                <MoreComponent className={styles.moreDog} />
               </li>
               <li className={styles.forCat}>
                 <Link>

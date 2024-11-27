@@ -99,6 +99,7 @@ const ResetPasswordPage = () => {
                         margin="15px 0 15px"
                         onClick={handleResetPassword}
                         className={styles.btn}
+                        showIcon={false}
                     />
                 </FormComponent>
                 </div>

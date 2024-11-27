@@ -10,7 +10,7 @@ import styles from './SetPasswordComponent.module.scss'
 import { RiLockPasswordFill } from 'react-icons/ri'
 import { MdDriveFileRenameOutline } from "react-icons/md";
 
-const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, onPasswordChange, onConfirmPasswordChange, onClick }) => {
+const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, onPasswordChange, onConfirmPasswordChange, onClick, isRegister }) => {
   const [isInMobile, setisInMobile] = useState(false);
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 739px)');
@@ -56,7 +56,7 @@ const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, o
         <div className={styles.forms}>
             <FormComponent 
                 width="650px"
-                height="650px"
+                height={isRegister ? "650px" : "550px"}
                 background="#fff"
                 borderRadius="20px"
                 border="1px solid #000"
@@ -80,20 +80,22 @@ const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, o
                 Bước cuối! Thiết lập mật khẩu để hoàn tất việc đăng ký
               </span>
             </div>
-            <InputFormComponent
-              placeholder="Nhập họ và tên"
-              margin="30px 0 0"
-              icon={<MdDriveFileRenameOutline />}
-              value={name} // Nhận giá trị từ props
-              onChange={(e) => onNameChange(e.target.value)} // Gọi callback khi thay đổi
-              positionProps={{
-                mainSpan: { top: '45px', left: '165px' },
-                otherSpan: { top: '45px', left: '460px' },
-              }}
-              width={isInMobile ? "70%" : "350px"}
-              borderRadius={isInMobile ? "10px" : "30px"}
-              className={styles.input}
-            />
+            {isRegister ? (
+              <InputFormComponent
+                placeholder="Nhập họ và tên"
+                margin="30px 0 0"
+                icon={<MdDriveFileRenameOutline />}
+                value={name} // Nhận giá trị từ props
+                onChange={(e) => onNameChange(e.target.value)} // Gọi callback khi thay đổi
+                positionProps={{
+                  mainSpan: { top: '45px', left: '165px' },
+                  otherSpan: { top: '45px', left: '460px' },
+                }}
+                width={isInMobile ? "70%" : "350px"}
+                borderRadius={isInMobile ? "10px" : "30px"}
+                className={styles.input}
+              />
+            ) : null}
             <InputFormComponent
               placeholder="Mật khẩu"
               icon={<RiLockPasswordFill />}
@@ -139,6 +141,7 @@ const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, o
               primary
               margin="15px 0 0"
               onClick={onClick}
+              showIcon={false}
               className={styles.btn}
             />
           </FormComponent>
