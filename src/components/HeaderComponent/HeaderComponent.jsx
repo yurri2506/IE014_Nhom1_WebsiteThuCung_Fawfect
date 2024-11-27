@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Button, Col, Input, Row } from "antd";
+import { Button, Col, Input, notification, Row } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import styles from "./HeaderComponent.module.scss";
@@ -116,8 +116,7 @@ const HeaderComponent = () => {
                   <span>Thông báo</span>
                 </Link>
                 <NotifyComponent
-                  title1="Kem dưỡng trắng da OHUI Extreme White Cream có tốt không?"
-                  title2="Kem dưỡng trắng da OHUI Extreme White Cream có tốt không?"
+                  // notifications={notifications}
                   className={styles.moreNotify}
                 />
               </li>

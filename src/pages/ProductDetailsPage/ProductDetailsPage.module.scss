@@ -1,6 +1,18 @@
-.mainImage img {
+.mainImage {
   width: 100%;
-  border-radius: 8px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 8px;
+  }
+
 }
 
 .thumbnails {
@@ -22,7 +34,7 @@
 }
 
 .contact {
-  margin: 30px 20px 20px 20px;
+  margin: 30px 0 0 0;
 
   span {
     font-size: 1.5rem;
@@ -113,7 +125,7 @@
   }
 
   .currentPrice {
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: #E87428;
     margin-right: 20px;
   }
@@ -148,7 +160,7 @@
   .choice {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    // gap: 10px;
     flex: 1;
   }
   
@@ -176,12 +188,13 @@
 .quantity {
   display: flex;
   margin: 20px;
+  align-items: center;
 
   span {
     font-size: 1.5rem;
     color: #767676;
     display: block;
-    margin-top: 14px;
+    // margin-top: 0;
     margin-right: 40px;
   }
 
@@ -228,6 +241,14 @@
         outline-offset: -1px;
       }
     }
+
+  }
+
+  .remain {
+    font-size: 1.3rem;
+    margin-left: 10px;
+    color: #757575;
+    margin-bottom: 0;
   }
 }
 
@@ -245,6 +266,7 @@
 
 .actions {
   display: flex;
+  justify-content: flex-start;
   margin: 20px;
   gap: 20px;
 
@@ -260,6 +282,7 @@
 
     img {
       margin-right: 10px;
+      width: 30px;
     }
   }
 
@@ -277,7 +300,6 @@
     border-radius: 10px;
     margin-bottom: 20px;
 
-
     h2 {
       font-size: 2.5rem;
       font-weight: 900;
@@ -293,6 +315,7 @@
     text-align: justify;
     line-height: 1.5;
     margin-bottom: 30px;
+    // white-space: pre-line;
   }
 }
 
@@ -389,6 +412,14 @@
     border-radius: 10px;
     margin-bottom: 20px;
   }
+
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+    margin-left: 10px;
+  }
 }
 
 @media screen and (max-width: 46.1875em) {
@@ -397,7 +428,7 @@
   }
 
   .contact {
-    margin: 30px 0 20px 10px;
+    margin: 30px 0 0 0;
   
     a {
         margin-right: 0;
@@ -491,6 +522,8 @@
 
   .actions {
     margin: 20px 0 20px 10px;
+    display: flex;
+    flex-wrap: wrap;
   }
   
   .productDescription {
