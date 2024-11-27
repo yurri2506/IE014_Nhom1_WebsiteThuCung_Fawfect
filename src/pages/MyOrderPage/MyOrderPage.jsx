@@ -67,7 +67,10 @@ const MyOrderPage = () => {
   ];
 
   return (
-    <div style={{ margin: "0 auto", padding: "20px" }} className="grid wide">
+    // <div className={styles}>
+
+    // </div>
+    <div className="grid wide">
       <Row gutter={16}>
         <ProfileUser
           full_name="Nguyễn Lê Thanh Huyền"
