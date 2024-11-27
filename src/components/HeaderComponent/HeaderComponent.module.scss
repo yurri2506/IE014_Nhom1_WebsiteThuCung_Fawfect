@@ -370,3 +370,25 @@
         left: -65px;
     }
 }
+
+/* Chắc chắn rằng các phần tử trong .userInfo được căn chỉnh ngang nhau */
+.userInfo {
+  display: flex;
+  align-items: center;  /* Căn giữa các phần tử theo chiều dọc */
+  gap: 10px;  /* Khoảng cách giữa ảnh và tên */
+}
+
+/* Đảm bảo ảnh avatar có hình tròn */
+.avatar {
+  width: 40px;  /* Đặt kích thước ảnh */
+  height: 40px;  /* Đặt kích thước ảnh */
+  border-radius: 50%;  /* Tạo hình tròn */
+  object-fit: cover;  /* Cắt ảnh sao cho phù hợp với hình tròn */
+}
+
+/* Đảm bảo tên hiển thị ngang với ảnh */
+.userInfo span {
+  font-size: 16px;  /* Cỡ chữ cho tên */
+  color: #333;  /* Màu chữ */
+  font-weight: 500;  /* Độ đậm chữ */
+}

@@ -5,26 +5,29 @@ import { useDispatch } from "react-redux";
 import { resetUser } from "./redux/slices/userSlice";
 import DefaultComponent from "./components/DefaultComponent/DefaultComponent";
 import { getUserDetails, ensureValidToken } from "./services/User.service";
-import Loading from './components/LoadingComponent/LoadingComponent'
-
+import Loading from './components/LoadingComponent/LoadingComponent' // Giả sử bạn có hàm này để đảm bảo token hợp lệ
+ 
 function App() {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadUserDetails = async () => {
       try {
-        setIsLoading(true);
-        const token = await ensureValidToken(dispatch, resetUser); // Lấy token hợp lệ
-        const decoded = JSON.parse(atob(token.split(".")[1])); // Decode payload từ JWT
+        const refreshToken = localStorage.getItem('refreshToken'); // Lấy refresh token từ localStorage
+        if (!refreshToken) return; // Nếu không có refreshToken, không làm gì cả
+
+        const token = await ensureValidToken(refreshToken); // Giả sử bạn có hàm này để lấy token hợp lệ
+        const decoded = JSON.parse(atob(token.split(".")[1])); // Giải mã JWT để lấy payload
+
         if (decoded?.id) {
-          const userDetails = await getUserDetails(decoded.id, token);
-          console.log("User details:", userDetails);
+          const userDetails = await getUserDetails(decoded.id, token); // Lấy thông tin người dùng từ API
+          dispatch(resetUser(userDetails)); // Lưu thông tin người dùng vào Redux
         }
       } catch (error) {
-        console.error("Error loading user details:", error);
+        console.error('Error loading user details:', error);
       } finally {
-        setIsLoading(false);
+        setIsLoading(false); 
       }
     };
 
