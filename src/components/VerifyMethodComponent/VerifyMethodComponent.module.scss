@@ -27,7 +27,7 @@
     left: 660px;
 }
 
-.form {
+.forms {
     display: flex;
     justify-content: center;
     margin-top: 50px;
@@ -53,6 +53,58 @@
         font-size: 2rem;
         text-align: center;
         padding: 0 50px;
+    }
+}
+
+
+@media screen and (max-width: 46.1875em) {
+    .main { 
+        background-color: #fff;
+        background-image: none;
+        padding: 0 0 40px 0;
+        margin: 0 4px;
+    }
+
+    .step {
+        display: none;
+    }
+
+    .backButton {
+
+        img {
+            width: 40px;
+        }
+    }
+
+    .forms {
+        display: block;
+        
+        .form {
+            width: 100% !important;
+            height: 100% !important;
+            border: none !important;
+        }
+    }
+
+    .choice {
+        flex-direction: column;
+
+        .backButton {
+            top: 0;
+            left: 0;
+        }
+    }
+
+    .suggest {
+        span {
+            font-size: 1.3rem;
+        }
+    }
+
+    .btn {
+        width: 70% !important;
+        font-size: 1.8rem !important;
+        border-radius: 10px !important;
     }
 }
 

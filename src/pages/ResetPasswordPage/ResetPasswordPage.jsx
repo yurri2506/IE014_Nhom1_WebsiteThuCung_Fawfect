@@ -75,7 +75,7 @@ const ResetPasswordPage = () => {
                                 title="Đặt lại mật khẩu"
                                 textTransform="none"
                                 textAlign="center"
-                                fontSize={isInMobile ? "3rem" : "4.5rem"}
+                                fontSize={isInMobile ? "2rem" : "2.5rem"}
                             />
                         </div>
                     </div>
