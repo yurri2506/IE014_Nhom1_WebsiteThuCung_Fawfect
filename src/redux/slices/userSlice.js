@@ -8,8 +8,9 @@ const initialState = {
   user_phone: "",
   user_address: "",
   user_avt_img: "",
-  accessToken: Cookies.get("accessToken"),
-  refreshToken: localStorage.getItem("refreshToken"),
+  _id: "",
+  accessToken: localStorage.getItem("accessToken"),
+  refreshToken: Cookies.get("refreshToken"),
   isAuthenticated: !!Cookies.get("accessToken"), // Check if accessToken exists
 };
 
@@ -44,6 +45,7 @@ const userSlice = createSlice({
         user_phone: "",
         user_address: "",
         user_avt_img: "",
+        _id: "",
         accessToken: "",
         refreshToken: "",
         isAuthenticated: false,

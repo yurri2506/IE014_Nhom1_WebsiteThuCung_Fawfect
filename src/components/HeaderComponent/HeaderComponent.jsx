@@ -22,6 +22,7 @@ import { FaCat } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import NotifyComponent from "../NotifyComponent/NotifyComponent";
 import myAvatarFalse from "../../assets/images/avatar-false.jpg";
+import {getAllNotification } from "../../services/Notification.service"
 
 const HeaderComponent = () => {
   const [span, setSpan] = useState(21);
@@ -30,8 +31,10 @@ const HeaderComponent = () => {
   const [avatar, setAvatar] = useState(myAvatarFalse);
   const [userName, setUserName] = useState("Người dùng");
 
+  
+
   // Lấy thông tin từ Redux
-  const { isAuthenticated, user_name, user_avt_img } = useSelector(
+  const { isAuthenticated, user_name, user_avt_img, _id} = useSelector(
     (state) => state.user
   );
 
@@ -62,6 +65,32 @@ const HeaderComponent = () => {
       setOffset(2);
     }
   };
+  const [notifications, setNotifications] = useState([]);
+
+ // Lấy thông báo khi hover vào "Thông báo"
+ const accessToken = localStorage.getItem("accessToken");
+ const handleGetAllNotification = async (_id, accessToken) => {
+  try {
+    const res = await getAllNotification(_id, accessToken);
+    setNotifications(res.data || [])
+    console.log("Fetched all notification", notifications);
+  } catch (error) {
+    console.error("Error in handleGetDetailsUser:", error);
+  }
+};
+
+// Sự kiện hover vào "Thông báo"
+const handleMouseEnter = () => {
+  if (_id && accessToken) {
+    handleGetAllNotification(_id, accessToken);
+  }
+};
+
+  // useEffect(() => {
+  //   if (_id && accessToken) {
+  //     handleGetAllNotification(_id, accessToken); 
+  //   }
+  // }, [_id, accessToken]); 
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -96,6 +125,21 @@ const HeaderComponent = () => {
     }
   }, [showNavbar]);
 
+
+  const renderNotifications = () => {
+    if (notifications && notifications.length > 0) {
+      return notifications.map((notify, index) => (
+        <div key={index}>
+          <h4>{notify.notify_title}</h4>
+          <p>{notify.notify_desc}</p>
+          <span>{new Date(notify.createdAt).toLocaleString()}</span>
+        </div>
+      ));
+    } else {
+      return <p>Không có thông báo nào</p>;
+    }
+  };
+
   return (
     <div className={styles.header}>
       <div className={clsx("grid wide", styles.main)}>
@@ -111,15 +155,15 @@ const HeaderComponent = () => {
           <Col span={16} offset={8}>
             <ul>
               <li className={styles.forNotify}>
-                <Link to={"/"}>
+                <Link to={"/"} onMouseEnter={handleMouseEnter}>
                   <GrNotification />
                   <span>Thông báo</span>
                 </Link>
+                
                 <NotifyComponent
-                  title1="Kem dưỡng trắng da OHUI Extreme White Cream có tốt không?"
-                  title2="Kem dưỡng trắng da OHUI Extreme White Cream có tốt không?"
+                  notifications={notifications} 
                   className={styles.moreNotify}
-                />
+                /> 
               </li>
               <li>
                 <Link to={"/"}>
