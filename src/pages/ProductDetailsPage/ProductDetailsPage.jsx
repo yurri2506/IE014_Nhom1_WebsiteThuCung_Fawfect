@@ -383,9 +383,9 @@ const ProductDetailsPage = () => {
         {/* Product Description */}
         <div className={styles.productDescription}>
           <div className={styles.title}>
-            <h2 >Mô tả sản phẩm</h2>
+            <h2>Mô tả sản phẩm</h2>
           </div>
-          <p>{productDetails?.product_description}</p>
+          <p style={{ whiteSpace: 'pre-line' }}>{productDetails?.product_description}</p>
         </div>
 
         {/* Feedback Section */}
@@ -527,7 +527,7 @@ const ProductDetailsPage = () => {
                     src={`data:image/png;base64,${product.product_images[1] || ""}`}
                     alt="ảnh sản phẩm"
                     name={product.product_title}
-                    oldPrice={product.price}
+                    oldPrice={product.product_price}
                     newPrice={(
                       product?.product_price *
                       (1 - product?.product_percent_discount / 100)
