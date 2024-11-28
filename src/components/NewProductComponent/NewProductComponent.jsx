@@ -39,6 +39,7 @@ const NewProductComponent = ({ products, isInMobile, title, onClick }) => {
         background="#fff"
         borderRadius="15px"
         fontSize="2rem"
+        showIcon={false}
         onClick ={onClick}
       />
     </div>

@@ -39,6 +39,7 @@ const BestSellingComponent = ({ products, isInMobile }) => {
         background="#fff"
         borderRadius="15px"
         fontSize="2rem"
+        showIcon={false}
       />
     </div>
   );

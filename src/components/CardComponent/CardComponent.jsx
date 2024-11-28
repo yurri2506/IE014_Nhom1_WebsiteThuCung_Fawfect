@@ -11,8 +11,8 @@ const CardComponent = ({ src, alt, name, oldPrice, newPrice, start, percent}) =>
         <div className={styles.info}>
             <h4>{name}</h4>
             <div className={styles.price}>
-                <span className={styles.old}>{oldPrice}VNĐ</span>
-                <span className={styles.new}>{newPrice}VNĐ</span>
+                <span className={styles.old}>{oldPrice.toLocaleString()}VNĐ</span>
+                <span className={styles.new}>{newPrice.toLocaleString()}VNĐ</span>
             </div>
             <div className={styles.star}>
                 <IoIosStar className={styles.icon}/>
@@ -25,7 +25,7 @@ const CardComponent = ({ src, alt, name, oldPrice, newPrice, start, percent}) =>
             <div className={styles.percent}>
                 <span>-{percent}%</span>
             </div>
-        </div>
+        </div>  
     </div>
   )
 }
