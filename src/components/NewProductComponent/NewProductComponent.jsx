@@ -3,11 +3,11 @@ import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import CardComponent from "../CardComponent/CardComponent";
 import TitleComponent from "../TitleComponent/TitleComponent";
 
-const NewProductComponent = ({ products, isInMobile }) => {
+const NewProductComponent = ({ products, isInMobile, title, onClick }) => {
   return (
     <div>
       <TitleComponent
-        title="Sản phẩm nổi bật"
+        title={title}
         textTransform="uppercase"
         textAlign="center"
         fontSize="4rem"
@@ -39,6 +39,7 @@ const NewProductComponent = ({ products, isInMobile }) => {
         background="#fff"
         borderRadius="15px"
         fontSize="2rem"
+        onClick ={onClick}
       />
     </div>
   );

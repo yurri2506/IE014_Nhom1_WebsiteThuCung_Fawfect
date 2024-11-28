@@ -85,15 +85,70 @@ export const getProductFeedback = async (id) => {
 };
 
 // Lấy danh sách sản phẩm
+// export const getAllProduct = async (params = {}) => {
+//   try {
+//     const { limit, page, sort, search, product_category, product_brand, product_rate, pet_age, product_famous } = params;
+
+//     // Chuẩn bị các tham số lọc riêng lẻ
+//     const url = `${API_URL}/product/get-all-product${queryString}`; // Thêm query string vào URL nếu có
+
+//     const response = await fetch(url, {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+
+//     // Kiểm tra mã trạng thái HTTP
+//     if (!response.ok) {
+//       const errorData = await response.json();
+//       console.error('API Error:', errorData); // Log thêm lỗi để dễ dàng debug
+//       throw new Error(`API Error: ${response.status} - ${response.statusText}`);
+//     }
+
+//     // Kiểm tra nếu dữ liệu trả về là JSON hợp lệ
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error("Error in getProductsList:", error);
+//     throw error; // Ném lại lỗi để các nơi khác có thể xử lý
+//   }
+// };
 export const getAllProduct = async (params = {}) => {
   try {
-    // Nếu params là một đối tượng rỗng, bỏ qua phần query string
-    const queryString = params && Object.keys(params).length > 0
-      ? `?${new URLSearchParams(params).toString()}` 
-      : ''; // Nếu không có tham số, query string sẽ là một chuỗi rỗng
+    const {
+      limit,
+      page,
+      sort,
+      search,
+      product_category,
+      product_brand,
+      product_rate,
+      pet_age,
+      product_famous,
+    } = params;
 
-    const url = `${API_URL}/product/get-all-product${queryString}`; // Thêm query string vào URL nếu có
+    // Tạo đối tượng để lưu trữ các tham số query
+    const queryParams = {};
+    console.log(params);
+    // Thêm các tham số vào queryParams nếu có
+    if (limit) queryParams.limit = limit;
+    if (page) queryParams.page = page;
+    if (sort) queryParams.sort = sort;
+    if (search) queryParams.search = search;
+    if (product_category) queryParams.product_category = product_category;
+    if (product_brand) queryParams.product_brand = product_brand;
+    if (product_rate) queryParams.product_rate = product_rate;
+    if (pet_age) queryParams.pet_age = pet_age;
+    if (product_famous !== undefined) queryParams.product_famous = product_famous; // Lọc theo product_famous
 
+    // Chuyển đối tượng queryParams thành query string
+    const queryString = new URLSearchParams(queryParams).toString();
+    
+    // Tạo URL đầy đủ với query string
+    const url = `${API_URL}/product/get-all-product?${queryString}`;
+    console.log(url);
+    // Gửi yêu cầu API
     const response = await fetch(url, {
       method: "GET",
       headers: {

@@ -1,3 +1,4 @@
+// Phần Thông code ban đầu
 // import React, { useEffect, useState } from 'react'
 // import { clsx } from 'clsx'
 // import SliderComponent from '../../components/SliderComponent/SliderComponent'
@@ -189,12 +190,6 @@ import service2 from '../../assets/images/service2.svg'
 import service3 from '../../assets/images/service3.svg'
 import service4 from '../../assets/images/service4.svg'
 import UnderLineComponent from '../../components/UnderLineComponent/UnderLineComponent'
-import CardComponent from '../../components/CardComponent/CardComponent'
-import product1 from '../../assets/images/product1.svg'
-import product2 from '../../assets/images/product2.svg'
-import product3 from '../../assets/images/product3.svg'
-import TitleComponent from '../../components/TitleComponent/TitleComponent'
-import BrandComponent from '../../components/BrandComponent/BrandComponent'
 import brand1 from '../../assets/images/brand1.svg'
 import brand2 from '../../assets/images/brand2.svg'
 import brand3 from '../../assets/images/brand3.svg'
@@ -210,30 +205,50 @@ import brand12 from '../../assets/images/brand12.svg'
 import brand13 from '../../assets/images/brand13.svg'
 import brand14 from '../../assets/images/brand14.svg'
 import brand15 from '../../assets/images/brand15.svg'
-import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
 import CustomerReviewsComponent from '../../components/CustomerReviewsComponent/CustomerReviewsComponent'
 import NewProductComponent from '../../components/NewProductComponent/NewProductComponent'
 import BestSellingComponent from '../../components/BestSellingComponent/BestSellingComponent'
 import AllBrandsComponent from '../../components/AllBrandsComponent/AllBrandsComponent'
 import { getAllProduct } from '../../services/Product.service'
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from 'react-router-dom'
 
 
 const HomePage = () => {
   const [visibleCount, setVisibleCount] = useState(6);
   const [isInViewport, setIsInViewport] = useState(false);
   const [isInMobile, setisInMobile] = useState(false);
+  const navigate = useNavigate();
    // Hàm gọi API
-   const fetchProductData = async () => {
+   const fetchProductData = async (queryKey) => {
+    queryKey = queryKey.queryKey
+    const product_famous = {
+      limit: Number(queryKey[4]),
+      product_famous: String(queryKey[1])
+    };
+    const best_seller = {
+      limit: Number(queryKey[4]),
+      sort: String(queryKey[2])
+    };
+    const product_new = {
+      limit: Number(queryKey[4]),
+      sort: String(queryKey[3])
+    };
     try {
-      const data = await getAllProduct();
+      const [famousProduct, bestProduct, newProduct ] = await Promise.all([
+        getAllProduct(product_famous),
+        getAllProduct(best_seller),
+        getAllProduct(product_new)
+      ]);
       
-      if (!data) {
+      if (!newProduct || !bestProduct || !famousProduct) {
         throw new Error('No data returned from API');
       }
-  
-      console.log('Fetched data:', data); // Kiểm tra dữ liệu lấy được
-      return data; // Trả về dữ liệu lấy được từ API
+      return {
+        newProduct: newProduct.data,
+        bestProduct: bestProduct.data,
+        famousProduct: famousProduct.data
+      }; // Trả về dữ liệu lấy được từ API
   
     } catch (error) {
       console.error('Error fetching product data:', error.message);
@@ -243,15 +258,28 @@ const HomePage = () => {
   };
   // Sử dụng useQuery để quản lý việc fetch sản phẩm
   const { data, isLoading } = useQuery({
-    queryKey: ['product-data'],  // Tạo khóa truy vấn cho dữ liệu sản phẩm
+    queryKey: ['product-data', 'true', 'best_selling', 'newest', '8'],  // Tạo khóa truy vấn cho dữ liệu sản phẩm
     queryFn: fetchProductData,   // Hàm fetch dữ liệu từ API
     refetchOnWindowFocus: false, // Không fetch lại khi chuyển tab
     keepPreviousData: true,      // Giữ dữ liệu cũ khi thay đổi tham số
   });
-  
+  const newProduct = data?.newProduct || {}
+  const famousProduct = data?.famousProduct || {}
+  const bestProduct = data?.bestProduct || {}
+
+  const handleNewProduct = () => {
+    navigate("/my-order")
+  }
+
+  const handleFamousProduct = () => {
+    navigate("/my-order")
+  }
+
+  const handleBestProduct = () => {
+    navigate("/my-order")
+  }
+
   // Xử lý sản phẩm lấy được từ API
-  const products = data.data;  
-  console.log(products)
   const services = [
     { src: service1, alt: "Miễn phí vận chuyển", text: "Miễn phí vận chuyển" },
     { src: service2, alt: "Sản phẩm chính hãng", text: "Sản phẩm chính hãng" },
@@ -328,7 +356,22 @@ const HomePage = () => {
         </div>
         <NewProductComponent
           isInMobile={isInMobile}
-          products={products}
+          products={famousProduct}
+          title="Sản phẩm nổi bật"
+          onClick={handleFamousProduct}
+        />
+        <div className={styles.underLine}>
+          <UnderLineComponent
+            width="100%"
+            height="1px"
+            background="rgba(0, 0, 0, 0.1)"
+          />
+        </div>
+        <NewProductComponent
+          isInMobile={isInMobile}
+          products={newProduct}
+          title="Sản phẩm mới"
+          onClick={handleNewProduct}
         />
         <div className={styles.underLine}>
           <UnderLineComponent
@@ -339,7 +382,8 @@ const HomePage = () => {
         </div>
         <BestSellingComponent 
           isInMobile={isInMobile}
-          products={products}
+          products={bestProduct}
+          onClick={handleBestProduct}
         />
         <div className={styles.underLine}>
           <UnderLineComponent
