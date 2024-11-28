@@ -85,25 +85,34 @@ export const getProductFeedback = async (id) => {
 };
 
 // Lấy danh sách sản phẩm
-export const getProductsList = async (params) => {
+export const getAllProduct = async (params = {}) => {
   try {
-    const response = await fetch(`${API_URL}/get-list`, {
-      method: "POST",
+    // Nếu params là một đối tượng rỗng, bỏ qua phần query string
+    const queryString = params && Object.keys(params).length > 0
+      ? `?${new URLSearchParams(params).toString()}` 
+      : ''; // Nếu không có tham số, query string sẽ là một chuỗi rỗng
+
+    const url = `${API_URL}/product/get-all-product${queryString}`; // Thêm query string vào URL nếu có
+
+    const response = await fetch(url, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(params), // Gửi kèm tham số lọc, phân trang nếu cần
     });
 
+    // Kiểm tra mã trạng thái HTTP
     if (!response.ok) {
       const errorData = await response.json();
-      throw errorData;
+      console.error('API Error:', errorData); // Log thêm lỗi để dễ dàng debug
+      throw new Error(`API Error: ${response.status} - ${response.statusText}`);
     }
 
+    // Kiểm tra nếu dữ liệu trả về là JSON hợp lệ
     const data = await response.json();
     return data;
   } catch (error) {
     console.error("Error in getProductsList:", error);
-    throw error;
+    throw error; // Ném lại lỗi để các nơi khác có thể xử lý
   }
 };
