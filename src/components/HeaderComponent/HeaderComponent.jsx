@@ -23,6 +23,7 @@ import { useSelector } from "react-redux";
 import NotifyComponent from "../NotifyComponent/NotifyComponent";
 import myAvatarFalse from "../../assets/images/avatar-false.jpg";
 import {getAllNotification } from "../../services/Notification.service"
+import BottomMenuComponent from '../BottomMenuComponent/BottomMenuComponent'
 
 const HeaderComponent = () => {
   const [span, setSpan] = useState(21);
@@ -113,6 +114,20 @@ const handleMouseEnter = () => {
     };
   }, []);
 
+  const [isInViewport, setIsInViewPort] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 740px) and (max-width: 1023px)");
+    const handleViewportChange = () => setIsInViewPort(mediaQuery.matches);
+
+    handleViewportChange();
+    mediaQuery.addEventListener("change", handleViewportChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleViewportChange);
+    };
+  }, []);
+
   const handleNavbar = () => {
     setShowNavbar(!showNavbar);
   };
@@ -124,6 +139,9 @@ const handleMouseEnter = () => {
       document.body.classList.remove("no-scroll");
     }
   }, [showNavbar]);
+
+  console.log("vp", isInViewport, "mb", isInMobile);
+  
 
   return (
     <div className={styles.header}>
@@ -214,15 +232,15 @@ const handleMouseEnter = () => {
           </Col>
         </Row>
         <div className={styles.userAndCart}>
-          <div onClick={() => navigate("/sign-up")} className={styles.cUser}>
-            <FaUser />
-          </div>
           <div onClick={() => navigate("/my-cart")} className={styles.cCart}>
             <FaShoppingCart />
           </div>
+          <div onClick={() => navigate("/sign-up")} className={styles.cUser}>
+            <FaUser />
+          </div>
         </div>
         <Row>
-          <Col className={styles.nav} span={span} offset={offset}>
+          <Col className={styles.nav} span={span} offset={offset} style={isAuthenticated ? {marginTop: "0"} : {marginTop: "10px"}}>
             <ul>
               <li>
                 <Link to={"/"}>Trang chủ</Link>
@@ -247,7 +265,7 @@ const handleMouseEnter = () => {
             </ul>
           </Col>
         </Row>
-        {showNavbar && isInMobile && (
+        {showNavbar && (isInViewport || isInMobile) && (
           <div>
             <div onClick={handleNavbar} className={styles.overlay}></div>
             <div className={styles.navbar}>
@@ -301,6 +319,7 @@ const handleMouseEnter = () => {
           </div>
         )}
       </div>
+      {(isInViewport || isInMobile) && <BottomMenuComponent />}
     </div>
   );
 };
