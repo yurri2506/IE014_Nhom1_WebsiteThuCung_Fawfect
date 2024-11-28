@@ -1,14 +1,27 @@
 @media screen and (max-width: 46.1875em) {
     .HeaderComponent_search__Aw328 {
-        :where(.css-dev-only-do-not-override-apn68).ant-col-offset-5 {
-            // margin-inline-start: 0 !important;
+        :where(.css-dev-only-do-not-override-49qm).ant-col-13 {
+            flex: 1 !important;
+            max-width: 100% !important;
         }
 
-        :where(.css-dev-only-do-not-override-apn68).ant-input-affix-wrapper {
-            margin: 0 10px;
-            min-width: 500px;
+        :where(.css-dev-only-do-not-override-49qm).ant-col-offset-5 {
+            margin-inline-start: 0;
+            margin: 0 20px;
         }
-    
     }
+}
 
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .HeaderComponent_search__Aw328 {
+        :where(.css-dev-only-do-not-override-49qm).ant-col-13 {
+            flex: 1 !important;
+            max-width: 100% !important;
+        }
+
+        :where(.css-dev-only-do-not-override-49qm).ant-col-offset-5 {
+            margin-inline-start: 0;
+            margin: 0 20px;
+        }
+    }
 }

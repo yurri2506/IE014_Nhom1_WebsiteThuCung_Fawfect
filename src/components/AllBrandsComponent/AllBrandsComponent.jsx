@@ -39,6 +39,7 @@ const AllBrandsComponent = ({isInViewport, brands, visibleCount, handleShowMore,
             background="#fff"
             borderRadius="15px"
             fontSize="2rem"
+            showIcon={false}
             onClick={handleShowMore}
           />
         ) : (
@@ -51,6 +52,7 @@ const AllBrandsComponent = ({isInViewport, brands, visibleCount, handleShowMore,
             background="#fff"
             borderRadius="15px"
             fontSize="2rem"
+            showIcon={false}
             onClick={handleShowLess}
           />
         )
