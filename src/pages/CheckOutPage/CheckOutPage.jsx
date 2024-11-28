@@ -212,6 +212,7 @@ const CheckOutPage = () => {
             width="500px"
             primary
             margin="30px 0"
+            showIcon={false}
           />
         </div>
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Form, Input, DatePicker, Select } from 'antd';
 import { useNavigate } from 'react-router-dom'; 
 import styles from './AccountPage.css';
-import ProfileUser from "../MyOrderPage/UserProfile.jsx";
+import ProfileUser from "../MyOrderPage/ProfileUser.jsx";
 import myAvatar from "../../assets/images/avatar.jpg";
 import classNames from 'classnames/bind';
 import moment from 'moment';

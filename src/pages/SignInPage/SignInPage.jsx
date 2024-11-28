@@ -234,6 +234,7 @@ const SignInPage = () => {
                   onClick={handleSubmit}
                   disabled={isLoading}
                   className={styles.btn}
+                  showIcon={false}
                 />
               </form>
               <span>

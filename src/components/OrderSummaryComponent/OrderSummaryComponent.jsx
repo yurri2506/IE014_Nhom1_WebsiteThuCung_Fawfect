@@ -41,6 +41,7 @@ const OrderSummaryComponent = ({ totalAmount, discount, shippingFee, safe, onCli
             textAlign="center"
             onClick={onClick}
             className={styles.btnBuy}
+            showIcon={false}
           />
         </div>
       </div>

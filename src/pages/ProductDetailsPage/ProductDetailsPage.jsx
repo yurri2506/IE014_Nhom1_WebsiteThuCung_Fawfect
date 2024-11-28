@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import styles from "./ProductDetailsPage.module.scss";
 import './ProductDetailsPage.scss'
@@ -522,7 +521,7 @@ const ProductDetailsPage = () => {
           <div>
             <div className="row">
               {products.map((product, index) => (
-                <div key={index} className="col l-3 m-4 c-6">
+                <div key={index} className="col l-2-4 m-4 c-6">
                   <CardComponent
                     src={`data:image/png;base64,${product.product_images[1] || ""}`}
                     alt="ảnh sản phẩm"
