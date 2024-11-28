@@ -22,6 +22,7 @@ const ProfileUser = ({ full_name, src_img, name }) => {
   
   const handleLogout = (e) => {
     navigate("/logout");
+    window.location.reload()
   };
 
   return (

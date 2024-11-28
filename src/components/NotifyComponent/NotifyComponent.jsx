@@ -87,7 +87,7 @@ const NotifyComponent = ({ notifications, className }) => {
         }else if(notify.type === 'Sản phẩm'){
             navigate(`/product-details/${notify.product_id}`)
         }
-    };
+    };  
 
     // Kiểm tra xem notifications có dữ liệu không
     if (notifications && notifications.length > 0) {

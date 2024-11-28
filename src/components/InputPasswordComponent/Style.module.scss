@@ -1,0 +1,91 @@
+.main {
+    background-color: rgba(250, 134, 56, 0.2);
+    padding: 50px 0;
+    background-image: url('../../assets/images/dogs.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom;
+  
+    @media screen and (max-width: 46.1875em) {
+      background-color: #fff;
+      background-image: none;
+      padding: 0 0 40px 0;
+      margin: 0 4px;
+    }
+  }
+  
+  .forms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  
+    .title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+  
+      @media screen and (max-width: 46.1875em) {
+        font-size: 2rem;
+      }
+    }
+  
+    .input {
+      margin: 20px 0;
+  
+      span:first-of-type {
+        top: 14px;
+        left: 20px;
+      }
+  
+      &:has(> span:first-of-type + span:last-of-type) > span:last-of-type {
+        top: 15px;
+        left: 300px;
+      }
+  
+      @media screen and (max-width: 46.1875em) {
+        width: 70%;
+        margin: 15px 0;
+  
+        span:first-of-type {
+          top: 56% !important;
+          left: 18% !important;
+        }
+  
+        &:has(> span:first-of-type + span:last-of-type) > span:last-of-type {
+          top: 58% !important;
+          left: 78% !important;
+        }
+      }
+    }
+  
+    .error {
+      color: #ff0000;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      text-align: center;
+  
+      @media screen and (max-width: 46.1875em) {
+        font-size: 1.2rem;
+      }
+    }
+  
+    .btn {
+      width: 200px;
+      padding: 10px 20px;
+      font-size: 1.5rem;
+      border-radius: 30px;
+      text-align: center;
+      background-color: #fa8638;
+      color: #fff;
+      cursor: pointer;
+  
+      @media screen and (max-width: 46.1875em) {
+        width: 70%;
+        font-size: 1.8rem;
+        border-radius: 10px !important;
+      }
+    }
+  }
+  

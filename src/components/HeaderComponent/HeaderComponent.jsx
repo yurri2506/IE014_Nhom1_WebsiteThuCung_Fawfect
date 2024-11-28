@@ -125,21 +125,6 @@ const handleMouseEnter = () => {
     }
   }, [showNavbar]);
 
-
-  const renderNotifications = () => {
-    if (notifications && notifications.length > 0) {
-      return notifications.map((notify, index) => (
-        <div key={index}>
-          <h4>{notify.notify_title}</h4>
-          <p>{notify.notify_desc}</p>
-          <span>{new Date(notify.createdAt).toLocaleString()}</span>
-        </div>
-      ));
-    } else {
-      return <p>Không có thông báo nào</p>;
-    }
-  };
-
   return (
     <div className={styles.header}>
       <div className={clsx("grid wide", styles.main)}>
@@ -161,6 +146,7 @@ const handleMouseEnter = () => {
                 </Link>
                 
                 <NotifyComponent
+                  notifications={notifications}  
                   className={styles.moreNotify}
                 /> 
               </li>
