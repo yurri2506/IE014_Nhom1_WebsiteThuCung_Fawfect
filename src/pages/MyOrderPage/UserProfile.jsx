@@ -1,27 +1,66 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./styles.scss";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   UserOutlined,
   ShoppingOutlined,
   BellOutlined,
   PercentageOutlined,
   LogoutOutlined,
+  MailOutlined,
+  PhoneOutlined,
+  LockOutlined,
 } from "@ant-design/icons";
 import { Avatar, Menu, Card, Col, Typography } from "antd";
 
 const { Title, Text } = Typography;
 
 const ProfileUser = ({ full_name, src_img, name }) => {
-  const [selectedKey, setSelectedKey] = useState("1");
+  const [selectedKey, setSelectedKey] = useState("");
+  const [openKeys, setOpenKeys] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation(); // Lấy thông tin đường dẫn hiện tại
+
+  // Đồng bộ selectedKey và openKeys với đường dẫn hiện tại
+  useEffect(() => {
+    const path = location.pathname;
+    setSelectedKey(path);
+
+    if (
+      ["/account-info", "/edit-email", "/edit-phone", "/edit-password"].includes(
+        path
+      )
+    ) {
+      setOpenKeys(["personal-info"]);
+    } else {
+      setOpenKeys([]);
+    }
+  }, [location.pathname]);
 
   const handleClick = (e) => {
-    setSelectedKey(e.key);
+    const key = e.key;
+    setSelectedKey(key);
+
+    if (
+      ["/account-info", "/edit-email", "/edit-phone", "/edit-password"].includes(
+        key
+      )
+    ) {
+      setOpenKeys(["personal-info"]);
+    } else {
+      setOpenKeys([]);
+    }
+
+    navigate(key);
   };
-  
-  const handleLogout = (e) => {
+
+  const handleLogout = () => {
     navigate("/logout");
+  };
+
+  const handleSubMenuToggle = (key) => {
+    setOpenKeys((prevKeys) =>
+      prevKeys.includes(key) ? prevKeys.filter((k) => k !== key) : [key]
+    );
   };
 
   return (
@@ -31,28 +70,75 @@ const ProfileUser = ({ full_name, src_img, name }) => {
         <Title level={4}>{full_name}</Title>
         <Text type="secondary">{name}</Text>
         <Menu
-          mode="vertical"
-          defaultSelectedKeys={["1"]}
+          mode="inline"
           style={{ borderRight: "none", marginTop: "20px" }}
           selectedKeys={[selectedKey]}
+          openKeys={openKeys}
           onClick={handleClick}
         >
-          <Menu.Item
-            key="1"
-            icon={<UserOutlined style={{ marginLeft: "25px" }} />}
-            style={{
-              color: selectedKey === "1" ? "orange" : "inherit",
-              display: "flex",
-              alignItems: "center",
-            }}
+          <Menu.SubMenu
+            key="personal-info"
+            icon={
+              <UserOutlined
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  color: selectedKey.startsWith("/personal-info")
+                    ? "orange"
+                    : "inherit",
+                }}
+              />
+            }
+            title="Thông tin cá nhân"
+            onTitleClick={() => handleSubMenuToggle("personal-info")}
           >
-            Thông tin cá nhân
-          </Menu.Item>
+            <Menu.Item
+              key="/account-info"
+              icon={<UserOutlined />}
+              style={{
+                paddingLeft: "50px",
+                color: selectedKey === "/account-info" ? "orange" : "inherit",
+              }}
+            >
+              Hồ sơ
+            </Menu.Item>
+            <Menu.Item
+              key="/edit-email"
+              icon={<MailOutlined />}
+              style={{
+                paddingLeft: "50px",
+                color: selectedKey === "/edit-email" ? "orange" : "inherit",
+              }}
+            >
+              Email
+            </Menu.Item>
+            <Menu.Item
+              key="/edit-phone"
+              icon={<PhoneOutlined />}
+              style={{
+                paddingLeft: "50px",
+                color: selectedKey === "/edit-phone" ? "orange" : "inherit",
+              }}
+            >
+              Số điện thoại
+            </Menu.Item>
+            <Menu.Item
+              key="/edit-password"
+              icon={<LockOutlined />}
+              style={{
+                paddingLeft: "50px",
+                color: selectedKey === "/edit-password" ? "orange" : "inherit",
+              }}
+            >
+              Mật khẩu
+            </Menu.Item>
+          </Menu.SubMenu>
+
           <Menu.Item
-            key="2"
-            icon={<ShoppingOutlined style={{ marginLeft: "25px" }} />}
+            key="/my-order"
+            icon={<ShoppingOutlined />}
             style={{
-              color: selectedKey === "2" ? "orange" : "inherit",
+              color: selectedKey === "/my-order" ? "orange" : "inherit",
               display: "flex",
               alignItems: "center",
             }}
@@ -60,10 +146,10 @@ const ProfileUser = ({ full_name, src_img, name }) => {
             Đơn hàng
           </Menu.Item>
           <Menu.Item
-            key="3"
-            icon={<BellOutlined style={{ marginLeft: "25px" }} />}
+            key="/notifications"
+            icon={<BellOutlined />}
             style={{
-              color: selectedKey === "3" ? "orange" : "inherit",
+              color: selectedKey === "/notifications" ? "orange" : "inherit",
               display: "flex",
               alignItems: "center",
             }}
@@ -71,10 +157,10 @@ const ProfileUser = ({ full_name, src_img, name }) => {
             Thông báo
           </Menu.Item>
           <Menu.Item
-            key="4"
-            icon={<PercentageOutlined style={{ marginLeft: "25px" }} />}
+            key="/voucher"
+            icon={<PercentageOutlined />}
             style={{
-              color: selectedKey === "4" ? "orange" : "inherit",
+              color: selectedKey === "/voucher" ? "orange" : "inherit",
               display: "flex",
               alignItems: "center",
             }}
@@ -82,8 +168,8 @@ const ProfileUser = ({ full_name, src_img, name }) => {
             Kho voucher
           </Menu.Item>
           <Menu.Item
-            key="5"
-            icon={<LogoutOutlined style={{ marginLeft: "25px" }} />}
+            key="/logout"
+            icon={<LogoutOutlined />}
             style={{
               color: "red",
               display: "flex",

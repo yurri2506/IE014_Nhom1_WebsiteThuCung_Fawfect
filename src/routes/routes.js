@@ -17,9 +17,13 @@ import CheckOutPage from "../pages/CheckOutPage/CheckOutPage";
 import LogoutPage from "../pages/LogoutPage/LogoutPage";
 import AccountInfo from "../pages/AccountPage/AccountInfo";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import ChangeEmail from "../pages/ChangeEmail/ChangeEmail";
+import ChangePhone from "../pages/ChangePhone/ChangePhone";
 import EditAccount from "../pages/AccountPage/EditAccount";
 import GeneralPolicy from "../pages/GeneralPolicy/GeneralPolicy"
 import GuaranteePolicy from "../pages/GuaranteePolicy/Guarantee";
+import NewPassword from "../pages/ChangePassword/NewPassword";
+
 
 export const routes = [
     {
@@ -112,15 +116,30 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/change-password',
+        path: '/edit-password',
         page: ChangePassword,
+        isShowHeader: true
+    },
+    {
+        path: '/edit-password/new-password',
+        page: NewPassword,
+        isShowHeader: true
+    },
+    {
+        path: '/edit-email',
+        page: ChangeEmail,
+        isShowHeader: true
+    },
+    {
+        path: '/edit-phone',
+        page: ChangePhone,
         isShowHeader: true
     },
     {
         path: '/product-details',
         page: ProductDetailsPage,
         isShowHeader: true
-    }, 
+    },  
     {
         path: '/generalpolicy',
         page: GeneralPolicy,
