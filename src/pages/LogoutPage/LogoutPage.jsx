@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../../redux/slices/userSlice";
+import { logout, resetUser } from "../../redux/slices/userSlice";
 
 function LogoutPage() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function LogoutPage() {
     });
     console.log(document.cookie);
     // Dispatch action đăng xuất
-    dispatch(logoutUser());
+    dispatch(logout());
 
     // Điều hướng về trang chủ
     navigate("/");

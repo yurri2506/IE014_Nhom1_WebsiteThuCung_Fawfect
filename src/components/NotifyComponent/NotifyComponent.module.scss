@@ -1,0 +1,123 @@
+.main {
+    width: 400px;
+    background-color: #fff;
+    animation: GrowthAnimation ease-in 0.2s;
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 !important;
+        display: flex;
+        flex-direction: column;
+        z-index: 3;
+        border: 1px solid #ccc;
+        box-shadow: 0.5px 0.5px 10px 0.5px rgba(0, 0, 0, 0.2);
+        position: relative;
+
+        li {
+            width: 100%;
+            margin: 0 !important;
+            
+            a {
+                display: flex;
+                text-decoration: none;
+                color: #000;
+                padding: 8px 12px;
+
+                &:hover {
+                    color: #000;
+                }
+
+                img {
+                    width: 48px !important;
+                    object-fit: contain !important;
+                }
+            }
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            margin-left: 5px;
+
+            span:first-of-type {
+                font-size: 1.3rem;
+                text-transform: initial;
+                margin-bottom: 4px;
+                margin-top: 10px;
+                font-weight: initial;
+
+                &:hover, &:not(:hover) {
+                    color: #000;
+                }
+            }
+
+            span:last-of-type {
+                font-size: 1.2rem;
+                text-transform: initial;
+                color: #756F6E;
+                font-weight: initial;
+            }
+        }
+
+        .more {
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid #d3cccc;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+
+            a {
+                font-size: 1.5rem;
+
+                &:hover, &:not(:hover) {
+                    color: #000;
+                }
+            }
+        }
+
+        &::before {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: transparent;
+            position: absolute;
+            top: -6px;
+            right: 0;
+        }
+    }
+}
+
+
+.isRead {
+    background: #fff;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+.isUnread {
+    background-color: rgba(238, 75, 43, 0.08);
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+
+@keyframes GrowthAnimation {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

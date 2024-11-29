@@ -17,6 +17,7 @@ import CheckOutPage from "../pages/CheckOutPage/CheckOutPage";
 import LogoutPage from "../pages/LogoutPage/LogoutPage";
 import AccountInfo from "../pages/AccountPage/AccountInfo";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
 import ChangeEmail from "../pages/ChangeEmail/ChangeEmail";
 import ChangePhone from "../pages/ChangePhone/ChangePhone";
 import EditAccount from "../pages/AccountPage/EditAccount";
@@ -57,7 +58,7 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/product-details',
+        path: '/product-details/:id',
         page: ProductDetailsPage,
         isShowHeader: true
     },
@@ -153,6 +154,11 @@ export const routes = [
     {
         path: '/logout',
         page: LogoutPage,
+        isShowHeader: true
+    },
+    {
+        path: '/get-all-product',
+        page: TypeProductPage,
         isShowHeader: true
     }
 ]

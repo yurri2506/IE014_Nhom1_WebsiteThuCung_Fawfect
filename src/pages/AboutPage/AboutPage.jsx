@@ -7,8 +7,8 @@ import UnderLineComponent from '../../components/UnderLineComponent/UnderLineCom
 
 const AboutPage = () => {
   return (
-    <div style={{background: "#FFF9E3", height: "3500px"}}>
-        <div className='container'>
+    <div style={{background: "#FFF9E3"}}>
+        <div className='grid wide'>
             <div className={styles.aboutImg}>
                 <div className={styles.info}>
                     <h3>Welcome to the</h3>

@@ -8,8 +8,6 @@ const ProductFeedBackComponent = ({
     name,
     star,
     date,
-    quanlity,
-    isDecription,
     comment, 
     imgFeedback
 }) => {
@@ -26,23 +24,10 @@ const ProductFeedBackComponent = ({
                 ))}
             </div>
             <div className={styles.date}>
-                <p>Ngày bán: {date.saleDate}</p>
-                <p>Loại sản phẩm: {date.productType}</p>
-            </div>
-            <div className={styles.quanlityAndisDecription}>
-                <span>
-                    Chất lượng sản phẩm:
-                    <p>{quanlity}</p>
-                </span>
-            </div>
-            <div className={styles.quanlityAndisDecription}>
-                <span>
-                    Đúng với mô tả:
-                    <p>{isDecription}</p>
-                </span>
+                <p>Ngày đánh giá: {date}</p>
             </div>
             <div className={styles.comment}>
-                <span>{comment}</span>
+                <span>Nội dung: {comment}</span>
             </div>
             <div className={styles.imgFeedback}>
                 {imgFeedback.map((img, index) => (

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styles from './SuccessNotifyComponent.module.scss'
 import StatusComponent from '../StatusComponent/StatusComponent'
@@ -8,43 +8,63 @@ import FormComponent from '../FormComponent/FormComponent'
 import orangeLogo from '../../assets/images/orangeLogo.svg'
 
 const SuccessNotifyComponent = () => {
+
+  const [isInMobile, setisInMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 739px)');
+    const handleViewportChange = () => setisInMobile(mediaQuery.matches);
+
+    handleViewportChange();
+    mediaQuery.addEventListener('change', handleViewportChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleViewportChange);
+    };
+  }, []);
+
   return (
     <div className={styles.main}>
-      <div className="container">
+      <div className="grid wide">
         <div className={styles.step}>
           <StatusComponent
             number="1"
             title="Xác minh số điện thoại"
             success
+            className={styles.stt}
           />
           <NextArrowComponent
             position = "absolute"
             top = "30px"
             left = "330px"
+            className={styles.arrow1}
           />
           <StatusComponent 
             number="2"
             title="Tạo mật khẩu"
             success
+            className={styles.stt}
           />
           <NextArrowComponent 
             position = "absolute"
             top = "30px"
             left = "660px"
+            className={styles.arrow2}
           />
           <StatusComponent 
             number="✔"
             title="Hoàn thành"
             success
+            className={styles.stt}
           />
         </div>
-        <div className={styles.form}>
+        <div className={styles.forms}>
             <FormComponent 
                 width="650px"
                 height="450px"
-                background="rgba(255, 255, 255, 0.8)"
+                background="#fff"
                 borderRadius="20px"
                 border="1px solid #000"
+                className={styles.form}
             >
             <div className={styles.choice}>
                 <div className={styles.title}>
@@ -52,7 +72,7 @@ const SuccessNotifyComponent = () => {
                         title="Đăng ký thành công"
                         textTransform="none"
                         textAlign="center"
-                        fontSize="2.5rem"
+                        fontSize={isInMobile ? "2rem" : "2.5rem"}
                     />
                 </div>
             </div>
