@@ -1,24 +1,68 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
+// Initial state
 const initialState = {
-  user: null, // Lưu thông tin người dùng (id, name, avatar, etc.)
-  isAuthenticated: false, // Trạng thái đăng nhập
+  user_name: "",
+  user_email: "",
+  user_phone: "",
+  user_address: "",
+  user_avt_img: "",
+  _id: "",
+  accessToken: localStorage.getItem("accessToken"),
+  refreshToken: Cookies.get("refreshToken"),
+  isAuthenticated: !!Cookies.get("accessToken"), // Check if accessToken exists
+};
+
+// Utility to filter payload fields
+const filterPayload = (payload, state) => {
+  const filteredPayload = {};
+  Object.keys(state).forEach((key) => {
+    if (key in payload) {
+      filteredPayload[key] = payload[key];
+    }
+  });
+  return filteredPayload;
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    // Cập nhật thông tin người dùng sau khi đăng nhập
     updateUser: (state, action) => {
-      state.isAuthenticated = true; // Đánh dấu là đã đăng nhập
+      const filteredPayload = filterPayload(action.payload, state);
+      return {
+        ...state,
+        ...filteredPayload,
+        isAuthenticated: true, // Ensure user is authenticated
+      };
     },
-    // Đăng xuất người dùng
-    logoutUser: (state) => {
-      state.isAuthenticated = false; // Đánh dấu trạng thái chưa đăng nhập
+    resetUser: (state) => {
+      return {
+        ...state,
+        user_name: "",
+        user_email: "",
+        user_phone: "",
+        user_address: "",
+        user_avt_img: "",
+        _id: "",
+        accessToken: "",
+        refreshToken: "",
+        isAuthenticated: false,
+      };
+    },
+    logout: () => {
+      Cookies.remove("accessToken");
+      localStorage.removeItem("refreshToken");
+      return {
+        ...initialState,
+        accessToken: "", // Clear tokens
+        refreshToken: "",
+        isAuthenticated: false,
+      };
     },
   },
 });
 
-export const { updateUser, logoutUser } = userSlice.actions;
+export const { updateUser, resetUser, logout } = userSlice.actions;
 export default userSlice.reducer;

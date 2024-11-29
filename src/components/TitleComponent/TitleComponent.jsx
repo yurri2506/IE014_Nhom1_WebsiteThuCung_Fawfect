@@ -9,6 +9,7 @@ const TitleComponent = ({
   fontWeight = "800",
   margin = "30px 0",
   color = "#000",
+  className,
   ...props
 }) => {
   return (
@@ -21,7 +22,7 @@ const TitleComponent = ({
         ...props
       }}
     >
-        <h2 style={{fontSize: fontSize, color: color, fontWeight: fontWeight}}>{title}</h2>
+        <h2 className={className} style={{fontSize: fontSize, color: color, fontWeight: fontWeight}}>{title}</h2>
     </div>
   )
 }

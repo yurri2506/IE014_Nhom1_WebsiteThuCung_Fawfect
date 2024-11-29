@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import StatusComponent from '../StatusComponent/StatusComponent'
 import NextArrowComponent from '../NextArrowComponent/NextArrowComponent'
 import styles from './VerifyMethodComponent.module.scss'
@@ -12,43 +12,56 @@ import phone from '../../assets/images/phone.svg'
 import BackButtonComponent from '../BackButtonComponent/BackButtonComponent'
 
 const VerifyAccountComponent = ({onClick, phoneNumber}) => {
+  const [isInMobile, setisInMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 739px)');
+    const handleViewportChange = () => setisInMobile(mediaQuery.matches);
+
+    handleViewportChange();
+    mediaQuery.addEventListener('change', handleViewportChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleViewportChange);
+    };
+  }, []);
+  
   return (
     <div className={styles.main}>
-      <div className="container">
+      <div className="grid wide">
         <div className={styles.step}>
           <StatusComponent
             number="1"
             title="Xác minh số điện thoại"
             success
+            className={styles.stt}
           />
           <NextArrowComponent
-            position = "absolute"
-            top = "30px"
-            left = "330px"
+            className={styles.arrow1}
           />
           <StatusComponent 
             number="2"
             title="Tạo mật khẩu"
             unSuccess
+            className={styles.stt}
           />
           <NextArrowComponent 
-            position = "absolute"
-            top = "30px"
-            left = "660px"
+            className={styles.arrow2}
           />
           <StatusComponent 
             number="✔"
             title="Hoàn thành"
             unSuccess
+            className={styles.stt}
           />
         </div>
-        <div className={styles.form}>
+        <div className={styles.forms}>
           <FormComponent 
             width="650px"
             height="500px"
-            background="rgba(255, 255, 255, 0.8)"
+            background="#fff"
             borderRadius="20px"
             border="1px solid #000"
+            className={styles.form}
           >
             <div className={styles.choice}>
               <div className={styles.backButton}>
@@ -59,7 +72,7 @@ const VerifyAccountComponent = ({onClick, phoneNumber}) => {
                   title="Chọn phương thức xác minh"
                   textTransform="none"
                   textAlign="center"
-                  fontSize="2.5rem"
+                  fontSize={isInMobile ? "2rem" : "2.5rem"}
                 />
               </div>
             </div>
@@ -76,6 +89,7 @@ const VerifyAccountComponent = ({onClick, phoneNumber}) => {
                 icon={zaloVerify}
                 margin="30px 0 0"
                 onClick={onClick}
+                className={styles.btn}
               />
               <ButtonComponent 
                 title="Tin nhắn SMS"
@@ -83,6 +97,7 @@ const VerifyAccountComponent = ({onClick, phoneNumber}) => {
                 icon={SMS}
                 margin="30px 0 0"
                 onClick={onClick}
+                className={styles.btn}
               />
               <ButtonComponent 
                 title="Cuộc gọi thoại"
@@ -90,6 +105,7 @@ const VerifyAccountComponent = ({onClick, phoneNumber}) => {
                 icon={phone}
                 margin="30px 0 0"
                 onClick={onClick}
+                className={styles.btn}
               />
             </div>
           </FormComponent>

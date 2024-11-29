@@ -36,6 +36,19 @@
         font-weight: 900;
     }
 }
+
+
+@media screen and (max-width: 46.1875em) {
+    .modal {
+      width: 100%;
+    }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .modal {
+      min-width: 500px;;
+    }
+}
   
 
   

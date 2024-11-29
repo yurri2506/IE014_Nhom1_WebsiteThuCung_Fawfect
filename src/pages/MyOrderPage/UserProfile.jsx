@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import "./MyOrderPage.scss";
+import styles from './MyOrderPage.module.scss'
 import {
   UserOutlined,
   ShoppingOutlined,
@@ -14,8 +16,8 @@ import { Avatar, Menu, Card, Col, Typography } from "antd";
 
 const { Title, Text } = Typography;
 
-const ProfileUser = ({ full_name, src_img, name }) => {
-  const [selectedKey, setSelectedKey] = useState("");
+const ProfileUser = ({ full_name, src_img, name, isInViewport, isInMobile  }) => {
+  const [selectedKey, setSelectedKey] = useState("2");
   const [openKeys, setOpenKeys] = useState([]);
   const navigate = useNavigate();
   const location = useLocation(); // Lấy thông tin đường dẫn hiện tại
@@ -55,6 +57,7 @@ const ProfileUser = ({ full_name, src_img, name }) => {
 
   const handleLogout = () => {
     navigate("/logout");
+    window.location.reload();
   };
 
   const handleSubMenuToggle = (key) => {
@@ -64,11 +67,18 @@ const ProfileUser = ({ full_name, src_img, name }) => {
   };
 
   return (
-    <Col span={6}>
-      <Card style={{ textAlign: "center" }}>
-        <Avatar size={160} src={src_img} />
-        <Title level={4}>{full_name}</Title>
-        <Text type="secondary">{name}</Text>
+    
+    <Col span={6} style={isInViewport || isInMobile ? {display: "none"} : {display: "block"}}>
+      <Card className={styles.profile}>
+        <div className={styles.info}>
+          <div>
+            <Avatar className={styles.img} src={src_img} />
+          </div>
+          <div className={styles.name}>
+            <Title>{full_name}</Title>
+            <Text type="secondary">{name}</Text>
+          </div>
+        </div>
         <Menu
           mode="inline"
           style={{ borderRight: "none", marginTop: "20px" }}
