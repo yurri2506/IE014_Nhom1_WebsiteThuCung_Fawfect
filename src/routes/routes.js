@@ -24,7 +24,6 @@ import GeneralPolicy from "../pages/GeneralPolicy/GeneralPolicy"
 import GuaranteePolicy from "../pages/GuaranteePolicy/Guarantee";
 import NewPassword from "../pages/ChangePassword/NewPassword";
 
-
 export const routes = [
     {
         path: '/',
