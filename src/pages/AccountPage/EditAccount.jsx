@@ -42,6 +42,7 @@ function EditAccount() {
   };
 
   return (
+    <div className='grid wide'>
     <div style={{ margin: "0 auto", padding: "20px" }} className={cx('container')}>
       <div className={cx('profile-container')}>
         <ProfileUser
@@ -131,6 +132,7 @@ function EditAccount() {
           </Form>
         </div>
       </div>
+    </div>
     </div>
   );
 }
