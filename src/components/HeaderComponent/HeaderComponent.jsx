@@ -140,9 +140,6 @@ const handleMouseEnter = () => {
     }
   }, [showNavbar]);
 
-  console.log("vp", isInViewport, "mb", isInMobile);
-  
-
   return (
     <div className={styles.header}>
       <div className={clsx("grid wide", styles.main)}>
@@ -164,7 +161,7 @@ const handleMouseEnter = () => {
                 </Link>
                 
                 <NotifyComponent
-                  notifications={notifications}
+                  notifications={notifications}  
                   className={styles.moreNotify}
                 /> 
               </li>

@@ -13,7 +13,7 @@ const NotifyComponent = ({ notifications, className }) => {
         } else if (notify.type === 'Sản phẩm') {
             navigate(`/product-details/${notify.product_id}`)
         }
-    };
+    };  
 
     const visibleNotifications = notifications.slice(0, 6);
 
