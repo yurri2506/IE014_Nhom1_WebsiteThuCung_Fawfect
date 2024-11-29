@@ -220,7 +220,7 @@ const handleMouseEnter = () => {
                 </Link>
               </li>
               <li>
-                <Link to={"/my-cart"}>
+                <Link to={`/my-cart/${_id}`}>
                   <PiShoppingCartBold />
                   <span>Giỏ hàng</span>
                 </Link>

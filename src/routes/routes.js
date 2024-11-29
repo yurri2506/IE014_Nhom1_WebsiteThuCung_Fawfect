@@ -96,7 +96,7 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/my-cart',
+        path: '/my-cart/:id',
         page: MyCartPage,
         isShowHeader: true
     },
