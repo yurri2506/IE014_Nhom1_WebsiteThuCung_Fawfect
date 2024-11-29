@@ -1,6 +1,8 @@
 .product {
     margin: 0 0 30px;
     position: relative;
+    cursor: pointer;
+    
     .img {
         background-color: #F0E9DF;
         border-top-left-radius: 10px;
@@ -43,10 +45,12 @@
         margin: 10px 0;
         display: flex;
         justify-content: space-between;
+        gap: 4px;
         flex-wrap: wrap;
         span {
             font-size: 1.6rem;
             font-weight: bold;
+            color: #E87428;
         }
 
         .old {
@@ -62,7 +66,6 @@
     .icon {
         font-size: 1.5rem;
         color: #FFC633;
-        // background-color: ;
     }
 
     span {
@@ -87,5 +90,18 @@
         font-size: 1.5rem;
         font-weight: bold;
         color: rgba(251, 102, 3, 0.9);
+    }
+}
+
+
+@media screen and (max-width: 46.1875em) {
+    .price {
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .price {
+        flex-direction: column;
     }
 }

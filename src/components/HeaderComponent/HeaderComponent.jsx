@@ -139,10 +139,7 @@ const handleMouseEnter = () => {
       document.body.classList.remove("no-scroll");
     }
   }, [showNavbar]);
-
-  console.log("vp", isInViewport, "mb", isInMobile);
   
-
   return (
     <div className={styles.header}>
       <div className={clsx("grid wide", styles.main)}>
