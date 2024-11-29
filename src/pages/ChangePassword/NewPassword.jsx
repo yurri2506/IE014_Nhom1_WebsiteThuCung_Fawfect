@@ -30,6 +30,7 @@ function NewPassword() {
   };
 
   return (
+    <div className='grid wide'>
     <div style={{ margin: "0 auto", padding: "20px" }} className={cx('container')}>
     <div className="profile-container">
       <ProfileUser
@@ -98,6 +99,7 @@ function NewPassword() {
               </Button>
             </Form.Item>
       </Form>
+    </div>
     </div>
     </div>
     </div>

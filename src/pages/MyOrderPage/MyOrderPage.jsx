@@ -67,6 +67,7 @@ const MyOrderPage = () => {
   ];
 
   return (
+    <div className='grid wide'>
     <div style={{ margin: "0 auto", padding: "20px" }} className="container">
       <Row gutter={16}>
         <ProfileUser
@@ -153,6 +154,7 @@ const MyOrderPage = () => {
             ))}
         </Col>
       </Row>
+    </div>
     </div>
   );
 };
