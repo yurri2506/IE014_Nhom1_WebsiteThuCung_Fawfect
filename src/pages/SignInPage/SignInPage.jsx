@@ -50,7 +50,7 @@ const SignInPage = () => {
 
       // Lưu Refresh Token vào Cookie
       Cookies.set("refreshToken", data.REFRESH_TOKEN, {
-        expires: 1,
+        expires: 7,
         secure: true,
         sameSite: "Strict",
       });

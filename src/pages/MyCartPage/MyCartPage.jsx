@@ -147,75 +147,61 @@ import { useQuery } from "@tanstack/react-query";
 import product4 from "../../assets/images/product4.svg";
 
 const MyCartPage = () => {
-  const [cartItems, setCartItems] = useState();
+  const [cartItems, setCartItems] = useState([]);
   const [discount, setDiscount] = useState(0);
   const [checkedItems, setCheckedItems] = useState([]);
   const [shippingFee, setShippingFee] = useState(0);
+  const [isInMobile, setisInMobile] = useState(false);
+
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("accessToken");
   const { id } = useParams();
-  // Hàm gọi API
-  const fetchCartData = async (queryKey) => {
-    const id = queryKey.queryKey[1];
-    const accessToken = queryKey.queryKey[2];
-    console.log("Data: ", id, accessToken, queryKey);
+
+  // Hàm fetch dữ liệu từ API
+  const fetchCartData = async ({ queryKey }) => {
+    const [ , userId, token] = queryKey; // Giải nén queryKey
     try {
-      const cartProduct = await getAllProductByUserId(id, accessToken);
-      if (!cartProduct) {
-        throw new Error("No data cart returned from API");
+      const cartProduct = await getAllProductByUserId(userId, token);
+      if (!cartProduct || !cartProduct.data) {
+        throw new Error("No cart data returned from API");
       }
-      console.log("Data2: ", cartProduct);
-      return cartProduct;
+      return cartProduct; // React Query tự động xử lý Promise này
     } catch (error) {
       console.error("Error fetching cart data:", error.message);
       throw new Error("Failed to fetch cart data");
     }
   };
 
-  const { data, isLoading } = useQuery({
+  // Sử dụng useQuery để gọi API
+  const { data, isLoading, error } = useQuery({
     queryKey: ["product-data", id, accessToken],
-    queryFn: fetchCartData, // Hàm fetch dữ liệu từ API
-    refetchOnWindowFocus: false, // Không fetch lại khi chuyển tab
-    keepPreviousData: false, // Giữ dữ liệu cũ khi thay đổi tham số
-    enabled: !!id && !!accessToken,
+    queryFn: fetchCartData,
+    enabled: !!id && !!accessToken, // Chỉ chạy khi cả id và accessToken có giá trị
+    refetchOnWindowFocus: true,
+    keepPreviousData: true,
   });
-  // console.log("Data3: ", data.data.products);
-  const initialItems = // data.data.products.map((item) => ({
-  //         id: item.product_id._id,
-  //         name: item.product_id.product_title || "Không có tên sản phẩm",
-  //         price: item.product_id.product_price || 0,
-  //         oldPrice: item.oldPrice || 0,
-  //         quantity: item.quantity || 1, // Nếu không có quantity, mặc định là 1
-  //         img:
-  //           item.product_images && item.product_images[0]
-  //             ? `data:image/jpeg;base64,${item.product_images[0]}`
-  //             : product4, // Nếu không có ảnh, sử dụng product4 làm ảnh mặc định
-  //       }))
-      //  || 
-          [{
-            id: 1, // Giả sử id mặc định là 1
-            name: "Thuốc dưỡng lông cho chó VEGEBRAND Bee Slurry Hair Beauty",
-            price: 170000,
-            oldPrice: 200000,
-            quantity: 1,
-            img: product4, // ảnh mặc định
-          },{
-            id: 2, // Giả sử id mặc định là 1
-            name: "Thuốc dưỡng lông cho chó VEGEBRAND Bee Slurry Hair Beauty",
-            price: 170000,
-            oldPrice: 200000,
-            quantity: 1,
-            img: product4, // ảnh mặc định
-          },{
-            id: 3, // Giả sử id mặc định là 1
-            name: "Thuốc dưỡng lông cho chó VEGEBRAND Bee Slurry Hair Beauty",
-            price: 170000,
-            oldPrice: 200000,
-            quantity: 1,
-            img: product4, // ảnh mặc định
-          },
-       ]
-       setCartItems(initialItems)
+  console.log("data", data); 
+  // Cập nhật cartItems khi data từ API thay đổi
+  useEffect(() => {
+    if (data?.data?.products) {
+      const items = data.data.products.map((item) => ({
+        id: item.variant,
+        name: item.product_id.product_title || "Không có tên sản phẩm",
+        oldPrice: item.product_id.product_price || 0,
+        price: (item.product_id.product_price *
+          (1 - item.product_id.product_percent_discount / 100)
+        .toLocaleString()) || 0,
+        quantity: item.quantity || 1,
+        img: 
+          item.product_id.product_images && item.product_id.product_images[0]
+            ? `data:image/jpeg;base64,${item.product_id.product_images[0]}`
+            : product4,
+      }));
+      setCartItems(items);
+    }
+  }, [data]);
+
+  // Hàm xử lý các sự kiện
   const handleCheckout = () => {
     navigate("/check-out", {
       state: { cartItems, checkedItems, discount, shippingFee },
@@ -225,7 +211,7 @@ const MyCartPage = () => {
   const handleQuantityChange = (id, amount) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + amount } : item
+        item.id === id ? { ...item, quantity: Math.max(1, item.quantity + amount) } : item
       )
     );
   };
@@ -264,27 +250,18 @@ const MyCartPage = () => {
     }
   };
 
-  let totalAmount = 0;
-  //   cartItems.reduce((total, item) => {
-  //     if (checkedItems.includes(item.id)) {
-  //       return total + item.price * item.quantity;
-  //     }
-  //     return total;
-  //   }, 0) -
-  //   discount +
-  //   shippingFee;
+  // Tính toán tổng giá trị
+  const totalAmount = checkedItems.reduce((total, id) => {
+    const item = cartItems.find((cartItem) => cartItem.id === id);
+    return item ? total + item.price * item.quantity : total;
+  }, 0) - discount + shippingFee;
 
-  // totalAmount = totalAmount < 0 ? 0 : totalAmount;
+  const safe = checkedItems.reduce((total, id) => {
+    const item = cartItems.find((cartItem) => cartItem.id === id);
+    return item ? total + (item.oldPrice - item.price) * item.quantity : total;
+  }, 0) + discount;
 
-  let safe = 0;
-  // cartItems.reduce((total, item) => {
-  //   if (checkedItems.includes(item.id)) {
-  //     return total + (item.oldPrice - item.price) * item.quantity;
-  //   }
-  //   return total;
-  // }, 0) + discount;
-
-  const [isInMobile, setisInMobile] = useState(false);
+  // Xử lý hiển thị giao diện di động
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 739px)");
     const handleViewportChange = () => setisInMobile(mediaQuery.matches);
@@ -298,9 +275,8 @@ const MyCartPage = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading product details...</div>;
+    return <div>Đang tải dữ liệu giỏ hàng...</div>;
   }
-
   return (
     <div className={styles.main}>
       <div className="grid wide">
@@ -329,7 +305,7 @@ const MyCartPage = () => {
           </div>
           <OrderSummaryComponent
             onClick={handleCheckout}
-            totalAmount={totalAmount}
+            totalAmount={Math.max(totalAmount, 0)}
             discount={discount}
             shippingFee={shippingFee}
             safe={safe}
