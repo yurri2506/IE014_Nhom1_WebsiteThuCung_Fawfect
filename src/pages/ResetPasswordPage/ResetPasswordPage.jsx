@@ -267,7 +267,12 @@ const ResetPasswordPage = () => {
                                     margin="15px 0 15px"
                                     onClick={handleVerifyOtp}
                                     className={styles.btn}
-                                    disabled={!!error} // Vô hiệu hóa nút nếu có lỗi
+                                    showIcon={false}
+                                    disabled={
+                                        !! error || 
+                                        validateInput(identifier) === "invalidPhone" || 
+                                        validateInput(identifier) === "invalidEmail"
+                                    }
                                 />
                             </FormComponent>
                         </div>

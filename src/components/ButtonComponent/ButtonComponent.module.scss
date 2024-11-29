@@ -42,7 +42,8 @@
     }
 
     &:focus, &:active {
-        border: 2px solid #ec7221;
+        // border: 2px solid #ec7221;
+        border: none;   
     }
 }
 
@@ -78,4 +79,8 @@
         height: 40px;
         margin: 0 20px; 
     }
+}
+
+.disabled {
+    cursor: not-allowed;
 }
