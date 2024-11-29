@@ -3,7 +3,7 @@ import { Tabs, Input, Card, Button, Typography, Row, Col } from "antd";
 import myAvatar from "../../assets/images/avatar.jpg";
 import "./styles.scss";
 import ProfileUser from  "./UserProfile.jsx";
-import OrderCart from  "./orderCart.jsx";
+import OrderCart from  "./OrderCart.jsx";
 
 const { TabPane } = Tabs;
 const { Text } = Typography;
