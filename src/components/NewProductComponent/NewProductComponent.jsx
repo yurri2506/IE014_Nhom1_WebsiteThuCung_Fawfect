@@ -3,14 +3,14 @@ import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import CardComponent from "../CardComponent/CardComponent";
 import TitleComponent from "../TitleComponent/TitleComponent";
 
-const NewProductComponent = ({ products, isInMobile, title, onClick }) => {
+const NewProductComponent = ({ products, isInMobile, title, onClick }) => {  
   return (
     <div>
       <TitleComponent
         title={title}
         textTransform="uppercase"
         textAlign="center"
-        fontSize="4rem"
+        fontSize={isInMobile ? "3rem" : "4rem"}
       />
       <div style={isInMobile ? { margin: "0 4px" } : undefined} className="row">
         {products.map((product, index) => (

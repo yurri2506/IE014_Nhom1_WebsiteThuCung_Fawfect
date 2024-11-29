@@ -10,7 +10,7 @@ const BestSellingComponent = ({ products, isInMobile }) => {
         title="Sản phẩm bán chạy"
         textTransform="uppercase"
         textAlign="center"
-        fontSize="4rem"
+        fontSize={isInMobile ? "3rem" : "4rem"}
       />
       <div style={isInMobile ? { margin: "0 4px" } : undefined} className="row">
         {products.map((product, index) => (

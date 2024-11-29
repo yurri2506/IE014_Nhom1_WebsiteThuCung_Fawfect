@@ -365,10 +365,10 @@ const MyOrderPage = () => {
                   ))}
 
                   <Row className={styles.total}>
-                    <Col span={21}>
+                    <Col span={16}>
                       <p>Thành tiền:</p>
                     </Col>
-                    <Col span={3}>
+                    <Col span={8}>
                       <p className={styles.price}>
                         {order.products
                           .reduce(

@@ -89,7 +89,7 @@ const CustomerReviewsComponent = ({isInViewport, isInMobile}) => {
         title="Khách yêu của PAWFECT nói gì"
         textTransform="none"
         textAlign={(isInViewport || isInMobile) ? "center" : "left"}
-        fontSize="4rem"
+        fontSize={isInMobile ? "3rem" : "4rem"}
       />
       <Slider {...settings}>
         {reviews.map((review) => (
