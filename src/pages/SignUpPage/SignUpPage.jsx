@@ -893,7 +893,10 @@ const RegisterPage = () => {
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleNextStep = () => setCurrentStep(currentStep + 1);
+  const handleNextStep = () => {
+    setCurrentStep((prevStep) => prevStep + 1);
+  };
+  const isDisabled = !phoneNumber || !!errorMessage;
 
   const handlePhoneChange = (e) => {
     const value = e.target.value;
@@ -913,7 +916,7 @@ const RegisterPage = () => {
         handleNextStep();
       }
     } catch (error) {
-      setErrorMessage(error.message || "Có lỗi xảy ra.");
+      setErrorMessage(error.message.message || "Có lỗi xảy ra.");
       setShowPopup(true);
     }
   };
@@ -1028,17 +1031,19 @@ const RegisterPage = () => {
                     mainSpan: { top: "16px", left: "90px" }
                   }}
                   value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
                   width={isInMobile ? "70%" : "350px"}
                   borderRadius={isInMobile ? "10px" : "30px"}
                   className={styles.input}
-                />
+                  onChange={handlePhoneChange}
+                  />
+                {<p className={styles.error}>{errorMessage}</p>}
                 <ButtonComponent 
                   title="TIẾP THEO"
                   primary
                   className={styles.btn}
                   showIcon={false}
-                  // onClick={handleSubmitPhone}
+                  disabled={isDisabled}
+                  onClick={isDisabled ? null : handleNextStep}
                 />
                 <div className={styles.other}>
                   <UnderLineComponent 
@@ -1068,6 +1073,7 @@ const RegisterPage = () => {
                     iconSmall
                     icon={google}
                     margin="30px 0 0"
+                    onClick={googleLogin}
                     className={styles.btnOp}
                   />
                 </div>
@@ -1095,7 +1101,7 @@ const RegisterPage = () => {
       )}
 
         {/* Các bước tiếp theo */}
-        {currentStep === 2 && <VerifyMethodComponent />}
+        {currentStep === 2 && <VerifyMethodComponent onClick={handleNextStep}/>}
         {currentStep === 3 && (
           <SetPasswordComponent
             name={name}

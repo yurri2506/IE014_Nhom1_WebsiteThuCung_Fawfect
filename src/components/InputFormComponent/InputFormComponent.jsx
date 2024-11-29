@@ -3,8 +3,6 @@ import styles from './InputFormComponent.module.scss'
 import { MdOutlineVisibility } from "react-icons/md"
 import { MdOutlineVisibilityOff } from "react-icons/md"
 import clsx from 'clsx'
-{/* <MdOutlineVisibilityOff />
-<MdOutlineVisibility /> */}
 
 const InputFormComponent = ({ className, type = "text", 
     placeholder,

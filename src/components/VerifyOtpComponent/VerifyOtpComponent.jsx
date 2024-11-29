@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styles from './VerifyOtpComponent.module.scss';
 import { verifyOtp } from '../../services/Email.service';
+import StatusComponent from '../StatusComponent/StatusComponent'
+import NextArrowComponent from '../NextArrowComponent/NextArrowComponent'
+import TitleComponent from '../TitleComponent/TitleComponent'
+import ButtonComponent from '../ButtonComponent/ButtonComponent';
 
 const VerifyOtpComponent = ({ onClick, email }) => {
   const [otp, setOtp] = useState(new Array(6).fill(''));  // Mảng OTP với 6 ô
@@ -69,37 +73,73 @@ const VerifyOtpComponent = ({ onClick, email }) => {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <h2 className={styles.title}>Xác minh OTP</h2>
-        <p className={styles.subtitle}>
-          Nhập mã OTP được gửi đến email {email}.
-        </p>
-
-        <div className={styles.otpContainer}>
-          {/* Tạo các ô nhập OTP */}
-          {otp.map((digit, index) => (
-            <input
-              key={index}
-              id={`otp-input-${index}`}
-              type="text"
-              maxLength="1"
-              className={styles.otpInput}
-              value={digit}
-              onChange={(e) => handleChange(e.target, index)}  // Gọi handleChange khi giá trị thay đổi
-              onKeyDown={(e) => handleKeyDown(e, index)}  // Xử lý khi nhấn phím
-              onFocus={(e) => e.target.select()}  // Chọn nội dung khi focus vào ô
-            />
-          ))}
+    <div className={styles.main}>
+      <div className="grid wide">
+        <div className={styles.step}>
+          <StatusComponent
+            number="1"
+            title="Xác minh số điện thoại"
+            success
+            className={styles.stt}
+          />
+          <NextArrowComponent
+            className={styles.arrow1}
+          />
+          <StatusComponent
+            number="2"
+            title="Tạo mật khẩu"
+            unSuccess
+            className={styles.stt}
+          />
+          <NextArrowComponent
+            className={styles.arrow2}
+          />
+          <StatusComponent
+            number="✔"
+            title="Hoàn thành"
+            unSuccess
+            className={styles.stt}
+          />
         </div>
+        <div className={styles.container}>
+          <div className={styles.content}>
+            <h2 className={styles.title}>Xác minh OTP</h2>
+            <p className={styles.subtitle}>
+              Nhập mã OTP được gửi đến email {email}.
+            </p>
 
-        {/* Hiển thị lỗi nếu có */}
-        {error && <p className={styles.error}>{error}</p>}
+            <div className={styles.otpContainer}>
+              {/* Tạo các ô nhập OTP */}
+              {otp.map((digit, index) => (
+                <input
+                  key={index}
+                  id={`otp-input-${index}`}
+                  type="text"
+                  maxLength="1"
+                  className={styles.otpInput}
+                  value={digit}
+                  onChange={(e) => handleChange(e.target, index)}  
+                  onKeyDown={(e) => handleKeyDown(e, index)}  
+                  onFocus={(e) => e.target.select()} 
+                />
+              ))}
+            </div>
 
-        {/* Nút xác nhận */}
-        <button className={styles.verifyButton} onClick={() => handleVerify(otp.join(''))} disabled={isLoading}>
-          {isLoading ? 'Đang xác minh...' : 'Xác nhận'}
-        </button>
+            <div style={{height: "20px", margin: "20px 0"}}>
+              {error && <p className={styles.error}>{error}</p>
+              }
+            </div>
+
+            <ButtonComponent 
+              title="XÁC NHẬN"
+              showIcon={false}
+              onClick={() => handleVerify(otp.join(''))} 
+              disabled={error ? true : false}
+              className={styles.verifyButton}
+              primary
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -129,6 +129,12 @@ const SignInPage = () => {
     };
   }, []);
 
+
+  const isValidIdentifier = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$/.test(identifier) || /^\d{10,}$/.test(identifier);
+  
+  const isValidPassword = password.length > 0;
+
+  const isDisabled = !isValidIdentifier || !isValidPassword;
   return (
     <div className={styles.main}>
       {/* Hiển thị trạng thái đang tải */}
@@ -231,10 +237,10 @@ const SignInPage = () => {
                   title={isLoading ? "Đang đăng nhập..." : "ĐĂNG NHẬP"}
                   primary
                   margin="0 0 15px"
-                  onClick={handleSubmit}
-                  disabled={isLoading}
+                  onClick={isDisabled ? null : handleSubmit}
                   className={styles.btn}
                   showIcon={false}
+                  disabled={isDisabled || isLoading}
                 />
               </form>
               <span>
