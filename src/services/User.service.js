@@ -164,3 +164,31 @@ export const signInGoogle = async (googleToken) => {
   }
 };
 
+
+export const forgetAndSetPassword = async (identifier, newPassword, confirmNewPass) => {
+  try {
+    const response = await fetch(`${API_URL}/forget-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({identifier, newPassword, confirmNewPass}),
+    });
+
+    //console.log(response)
+    // Kiểm tra nếu response không OK (status không phải 2xx)
+    if (!response.ok) {
+      const errorData = await response.json(); // Lấy nội dung lỗi từ body
+      throw errorData; // Ném lỗi để xử lý ở phần `catch`
+    }
+
+    // Nếu thành công, trả về dữ liệu
+    const data = await response.json();
+    console.log(data)
+    return data;
+  } catch (error) {
+    // Lỗi sẽ được xử lý ở đây
+    console.error("Error in loginUser:", error);
+    throw error; // Ném lỗi để component phía trên tiếp tục xử lý
+  }
+};

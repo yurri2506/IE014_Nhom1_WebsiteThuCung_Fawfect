@@ -139,7 +139,7 @@ const handleMouseEnter = () => {
       document.body.classList.remove("no-scroll");
     }
   }, [showNavbar]);
-  
+
   return (
     <div className={styles.header}>
       <div className={clsx("grid wide", styles.main)}>
@@ -161,7 +161,7 @@ const handleMouseEnter = () => {
                 </Link>
                 
                 <NotifyComponent
-                  notifications={notifications}
+                  notifications={notifications}  
                   className={styles.moreNotify}
                 /> 
               </li>
