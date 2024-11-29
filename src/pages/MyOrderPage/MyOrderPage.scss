@@ -1,0 +1,54 @@
+.MyOrderPage_profile__cqkdP {
+
+  .ant-card-body {
+    padding: 20px 0;
+  }
+
+  :where(.css-dev-only-do-not-override-49qm).ant-menu-light .ant-menu-item, :where(.css-dev-only-do-not-override-49qm).ant-menu-light>.ant-menu .ant-menu-item, :where(.css-dev-only-do-not-override-49qm).ant-menu-light .ant-menu-submenu-title, :where(.css-dev-only-do-not-override-49qm).ant-menu-light>.ant-menu .ant-menu-submenu-title {
+    padding: 0;
+  }
+
+  .ant-tabs-ink-bar {
+    background-color: #E87428;
+  }
+
+  :where(.css-dev-only-do-not-override-49qm).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn, :where(.css-dev-only-do-not-override-49qm).ant-tabs .ant-tabs-tab:hover {
+    color: #E87428;
+  }
+
+  // .ant-input-group-addon, :where(.css-dev-only-do-not-override-49qm).ant-input-search >.ant-input-group >.ant-input-group-addon:last-child .ant-input-search-button:not(.ant-btn-primary):hover {
+  //   color: #E87428;
+  //   border: 1px solid #E87428;
+  // }
+
+  // :where(.css-dev-only-do-not-override-49qm).ant-input-group .ant-input:focus, :where(.css-dev-only-do-not-override-49qm).ant-input-group >.ant-input:first-child, :where(.css-dev-only-do-not-override-49qm).ant-input-group .ant-input-group-addon:first-child {
+  //   border: 1px solid #E87428;
+  //   outline: none;
+  // }
+}
+
+
+.MyOrderPage_main__Rrmsc {
+
+  :where(.css-dev-only-do-not-override-49qm).ant-col-18 {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+
+  :where(.css-dev-only-do-not-override-49qm).ant-card-bordered {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+}
+
+.MyOrderPage_card__5Ni41 {
+  margin: 20px 0;
+  
+  .ant-card-body {
+    padding: 10px;
+  }
+
+  :where(.css-dev-only-do-not-override-49qm).ant-card {
+    margin: 10px 0 !important;
+  }
+}

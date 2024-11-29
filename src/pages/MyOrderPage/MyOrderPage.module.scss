@@ -1,0 +1,154 @@
+// Profile User 
+.profile {
+    // display: none;
+
+    .info {
+        display: flex;
+        justify-content: center;
+        .img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .name {
+            margin-left: 5px;
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            span {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+//Order Cart
+.orderCart {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    align-items: center;
+    .img {
+        width: 80px;
+        height: 80px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+        // border-radius: 5px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .title {
+        flex: 1;
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        p {
+            font-size: 1.3rem;
+            color: rgba(0,0,0,.54);
+            margin-bottom: 4px;
+        }
+
+        span {
+            color: #000;
+            font-size: 1.4rem;
+        }
+    }
+
+    .price {
+        span {
+            font-size: 1.5rem;
+
+            &:first-of-type {
+                text-decoration: line-through;
+                opacity: 0.26;
+            }
+
+            &:last-of-type {
+                color: #E87428;
+                font-size: 1.7rem;
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+//Product Status
+.card {
+    .orderStatus {
+        text-align: right;
+        margin: 5px 0;
+        span {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #E87428;
+            text-transform: uppercase;
+        }
+
+    }
+    .total {
+        display: flex;
+        flex-wrap: wrap;
+        p {
+            font-size: 1.6rem;
+            font-weight: 500;
+            text-align: right;
+        }
+
+        .price {
+            color: #E87428;
+            text-align: right;
+        }
+    }
+
+    .allBtn {
+        display: flex;
+        justify-content: flex-end;
+
+        .btnDetails {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btnPrimary, .btn {
+            width: 150px;
+            height: 40px;
+            border-radius: 4px !important;
+        }
+
+        .btn {
+            border: 1px solid #ccc;
+        }
+    }
+}
+
+
+.main {
+    .tabs {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+    }
+}
+
+
+
+@media screen and (max-width: 46.1875em) {
+    .main {
+        margin: 0 4px;
+
+        .tabs {
+            border: none;
+        }
+    }
+}
+

@@ -1037,6 +1037,7 @@ const RegisterPage = () => {
                   title="TIẾP THEO"
                   primary
                   className={styles.btn}
+                  showIcon={false}
                   // onClick={handleSubmitPhone}
                 />
                 <div className={styles.other}>
@@ -1104,6 +1105,7 @@ const RegisterPage = () => {
             onPasswordChange={setPassword}
             onConfirmPasswordChange={setConfirmPassword}
             onClick={handleSignUp}
+            isRegister={true}
           />
         )}
         {currentStep === 4 && <SuccessNotifyComponent />}

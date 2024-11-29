@@ -1,176 +1,17 @@
-// import React, { useEffect, useState } from 'react'
-// import StatusComponent from '../StatusComponent/StatusComponent'
-// import NextArrowComponent from '../NextArrowComponent/NextArrowComponent'
-// import TitleComponent from '../TitleComponent/TitleComponent'
-// import ButtonComponent from '../ButtonComponent/ButtonComponent'
-// import FormComponent from '../FormComponent/FormComponent'
-// import BackButtonComponent from '../BackButtonComponent/BackButtonComponent'
-// import InputFormComponent from '../InputFormComponent/InputFormComponent'
-// import styles from './SetPasswordComponent.module.scss'
-// import { RiLockPasswordFill } from 'react-icons/ri'
-// import { MdDriveFileRenameOutline } from "react-icons/md";
+import React, { useEffect, useState } from 'react'
+import StatusComponent from '../StatusComponent/StatusComponent'
+import NextArrowComponent from '../NextArrowComponent/NextArrowComponent'
+import TitleComponent from '../TitleComponent/TitleComponent'
+import ButtonComponent from '../ButtonComponent/ButtonComponent'
+import FormComponent from '../FormComponent/FormComponent'
+import BackButtonComponent from '../BackButtonComponent/BackButtonComponent'
+import InputFormComponent from '../InputFormComponent/InputFormComponent'
+import styles from './SetPasswordComponent.module.scss'
+import { RiLockPasswordFill } from 'react-icons/ri'
+import { MdDriveFileRenameOutline } from "react-icons/md";
 
-// const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, onPasswordChange, onConfirmPasswordChange, onClick }) => {
-//   const [isInMobile, setisInMobile] = useState(false);
-//   useEffect(() => {
-//     const mediaQuery = window.matchMedia('(max-width: 739px)');
-//     const handleViewportChange = () => setisInMobile(mediaQuery.matches);
-
-//     handleViewportChange();
-//     mediaQuery.addEventListener('change', handleViewportChange);
-
-//     return () => {
-//       mediaQuery.removeEventListener('change', handleViewportChange);
-//     };
-//   }, []);
-
-//   return (
-//     <div className={styles.main}>
-//       <div className="grid wide">
-//         <div className={styles.step}>
-//           <StatusComponent
-//             number="1"
-//             title="Xác minh số điện thoại"
-//             success
-//             className={styles.stt}
-//           />
-//           <NextArrowComponent
-//             className={styles.arrow1}
-//           />
-//           <StatusComponent 
-//             number="2"
-//             title="Tạo mật khẩu"
-//             success
-//             className={styles.stt}
-//           />
-//           <NextArrowComponent 
-//             className={styles.arrow2}
-//           />
-//           <StatusComponent 
-//             number="✔"
-//             title="Hoàn thành"
-//             unSuccess
-//             className={styles.stt}
-//           />
-//         </div>
-//         <div className={styles.forms}>
-//             <FormComponent 
-//                 width="650px"
-//                 height="650px"
-//                 background="#fff"
-//                 borderRadius="20px"
-//                 border="1px solid #000"
-//                 className={styles.form}
-//             >
-//             <div className={styles.choice}>
-//               <div className={styles.backButton}>
-//                 <BackButtonComponent />
-//               </div>
-//               <div className={styles.title}>
-//                 <TitleComponent
-//                   title="Thiết lập mật khẩu"
-//                   textTransform="none"
-//                   textAlign="center"
-//                   fontSize={isInMobile ? "2rem" : "2.5rem"}
-//                 />
-//               </div>
-//             </div>
-//             <div className={styles.suggest}>
-//               <span>
-//                 Bước cuối! Thiết lập mật khẩu để hoàn tất việc đăng ký
-//               </span>
-//             </div>
-//             <InputFormComponent
-//               placeholder="Nhập họ và tên"
-//               margin="30px 0 0"
-//               icon={<MdDriveFileRenameOutline />}
-//               value={name} // Nhận giá trị từ props
-//               onChange={(e) => onNameChange(e.target.value)} // Gọi callback khi thay đổi
-//               positionProps={{
-//                 mainSpan: { top: '45px', left: '165px' },
-//                 otherSpan: { top: '45px', left: '460px' },
-//               }}
-//               width={isInMobile ? "70%" : "350px"}
-//               borderRadius={isInMobile ? "10px" : "30px"}
-//               className={styles.input}
-//             />
-//             <InputFormComponent
-//               placeholder="Mật khẩu"
-//               icon={<RiLockPasswordFill />}
-//               margin="30px 0 0"
-//               type="password"
-//               value={password} // Nhận giá trị từ props
-//               onChange={(e) => onPasswordChange(e.target.value)} // Gọi callback khi thay đổi
-//               positionProps={{
-//                 mainSpan: { top: '45px', left: '165px' },
-//                 otherSpan: { top: '45px', left: '460px' },
-//               }}
-//               width={isInMobile ? "70%" : "350px"}
-//               borderRadius={isInMobile ? "10px" : "30px"}
-//               className={styles.input}
-//             />
-//             <InputFormComponent
-//               placeholder="Xác nhận mật khẩu"
-//               icon={<RiLockPasswordFill />}
-//               margin="30px 0 0"
-//               type="password"
-//               value={confirmPassword} // Nhận giá trị từ props
-//               onChange={(e) => onConfirmPasswordChange(e.target.value)} // Gọi callback khi thay đổi
-//               positionProps={{
-//                 mainSpan: { top: '45px', left: '165px' },
-//                 otherSpan: { top: '45px', left: '460px' },
-//               }}
-//               width={isInMobile ? "70%" : "350px"}
-//               borderRadius={isInMobile ? "10px" : "30px"}
-//               className={styles.input}
-//             />
-//             <div style={{ display: 'flex', justifyContent: 'center' }}>
-//               <div className={styles.notice}>
-//                 <p>Ít nhất một ký tự viết thường.</p>
-//                 <p>Ít nhất một ký tự viết hoa.</p>
-//                 <p>Có 8 - 16 ký tự.</p>
-//                 <p>
-//                   Chỉ các chữ cái, số và ký tự phổ biến mới có thể sử dụng.
-//                 </p>
-//               </div>
-//             </div>
-//             <ButtonComponent
-//               title="ĐĂNG KÝ"
-//               primary
-//               margin="15px 0 0"
-//               onClick={onClick}
-//               className={styles.btn}
-//             />
-//           </FormComponent>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SetPasswordComponent
-
-
-
-
-
-
-
-
-
-
-import React, { useState, useEffect } from 'react';
-import InputFormComponent from '../InputFormComponent/InputFormComponent';
-import ButtonComponent from '../ButtonComponent/ButtonComponent';
-import styles from './SetPasswordComponent.module.scss';
-import { RiLockPasswordFill } from 'react-icons/ri';
-
-const SetPasswordComponent = ({ onSubmit }) => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+const SetPasswordComponent = ({ name, password, confirmPassword, onNameChange, onPasswordChange, onConfirmPasswordChange, onClick, isRegister }) => {
   const [isInMobile, setisInMobile] = useState(false);
-
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 739px)');
     const handleViewportChange = () => setisInMobile(mediaQuery.matches);
@@ -183,57 +24,131 @@ const SetPasswordComponent = ({ onSubmit }) => {
     };
   }, []);
 
-  const handleSubmit = () => {
-    if (password !== confirmPassword) {
-      setErrorMessage('Mật khẩu xác nhận không khớp!');
-    } else if (password.length < 8 || password.length > 16) {
-      setErrorMessage('Mật khẩu phải từ 8 đến 16 ký tự.');
-    } else {
-      setErrorMessage('');
-      onSubmit(password); // Gửi mật khẩu mới khi hợp lệ
-    }
-  };
-
   return (
     <div className={styles.main}>
-      <div className={styles.forms}>
-        <div className={styles.title}>
-          <h2>Thiết lập mật khẩu mới</h2>
+      <div className="grid wide">
+        <div className={styles.step}>
+          <StatusComponent
+            number="1"
+            title="Xác minh số điện thoại"
+            success
+            className={styles.stt}
+          />
+          <NextArrowComponent
+            className={styles.arrow1}
+          />
+          <StatusComponent 
+            number="2"
+            title="Tạo mật khẩu"
+            success
+            className={styles.stt}
+          />
+          <NextArrowComponent 
+            className={styles.arrow2}
+          />
+          <StatusComponent 
+            number="✔"
+            title="Hoàn thành"
+            unSuccess
+            className={styles.stt}
+          />
         </div>
-        <InputFormComponent
-          placeholder="Mật khẩu mới"
-          icon={<RiLockPasswordFill />}
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          width={isInMobile ? '70%' : '350px'}
-          borderRadius={isInMobile ? '10px' : '30px'}
-          className={styles.input}
-        />
-        <InputFormComponent
-          placeholder="Xác nhận mật khẩu mới"
-          icon={<RiLockPasswordFill />}
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          width={isInMobile ? '70%' : '350px'}
-          borderRadius={isInMobile ? '10px' : '30px'}
-          className={styles.input}
-        />
-        {errorMessage && (
-          <div className={styles.error}>
-            <span>{errorMessage}</span>
-          </div>
-        )}
-        <ButtonComponent
-          title="XÁC NHẬN"
-          primary
-          onClick={handleSubmit}
-          className={styles.btn}
-        />
+        <div className={styles.forms}>
+            <FormComponent 
+                width="650px"
+                height={isRegister ? "650px" : "550px"}
+                background="#fff"
+                borderRadius="20px"
+                border="1px solid #000"
+                className={styles.form}
+            >
+            <div className={styles.choice}>
+              <div className={styles.backButton}>
+                <BackButtonComponent />
+              </div>
+              <div className={styles.title}>
+                <TitleComponent
+                  title="Thiết lập mật khẩu"
+                  textTransform="none"
+                  textAlign="center"
+                  fontSize={isInMobile ? "2rem" : "2.5rem"}
+                />
+              </div>
+            </div>
+            <div className={styles.suggest}>
+              <span>
+                Bước cuối! Thiết lập mật khẩu để hoàn tất việc đăng ký
+              </span>
+            </div>
+            {isRegister ? (
+              <InputFormComponent
+                placeholder="Nhập họ và tên"
+                margin="30px 0 0"
+                icon={<MdDriveFileRenameOutline />}
+                value={name} // Nhận giá trị từ props
+                onChange={(e) => onNameChange(e.target.value)} // Gọi callback khi thay đổi
+                positionProps={{
+                  mainSpan: { top: '45px', left: '165px' },
+                  otherSpan: { top: '45px', left: '460px' },
+                }}
+                width={isInMobile ? "70%" : "350px"}
+                borderRadius={isInMobile ? "10px" : "30px"}
+                className={styles.input}
+              />
+            ) : null}
+            <InputFormComponent
+              placeholder="Mật khẩu"
+              icon={<RiLockPasswordFill />}
+              margin="30px 0 0"
+              type="password"
+              value={password} // Nhận giá trị từ props
+              onChange={(e) => onPasswordChange(e.target.value)} // Gọi callback khi thay đổi
+              positionProps={{
+                mainSpan: { top: '45px', left: '165px' },
+                otherSpan: { top: '45px', left: '460px' },
+              }}
+              width={isInMobile ? "70%" : "350px"}
+              borderRadius={isInMobile ? "10px" : "30px"}
+              className={styles.input}
+            />
+            <InputFormComponent
+              placeholder="Xác nhận mật khẩu"
+              icon={<RiLockPasswordFill />}
+              margin="30px 0 0"
+              type="password"
+              value={confirmPassword} // Nhận giá trị từ props
+              onChange={(e) => onConfirmPasswordChange(e.target.value)} // Gọi callback khi thay đổi
+              positionProps={{
+                mainSpan: { top: '45px', left: '165px' },
+                otherSpan: { top: '45px', left: '460px' },
+              }}
+              width={isInMobile ? "70%" : "350px"}
+              borderRadius={isInMobile ? "10px" : "30px"}
+              className={styles.input}
+            />
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div className={styles.notice}>
+                <p>Ít nhất một ký tự viết thường.</p>
+                <p>Ít nhất một ký tự viết hoa.</p>
+                <p>Có 8 - 16 ký tự.</p>
+                <p>
+                  Chỉ các chữ cái, số và ký tự phổ biến mới có thể sử dụng.
+                </p>
+              </div>
+            </div>
+            <ButtonComponent
+              title="ĐĂNG KÝ"
+              primary
+              margin="15px 0 0"
+              onClick={onClick}
+              showIcon={false}
+              className={styles.btn}
+            />
+          </FormComponent>
+        </div>
       </div>
     </div>
   );
 };
 
-export default SetPasswordComponent;
+export default SetPasswordComponent

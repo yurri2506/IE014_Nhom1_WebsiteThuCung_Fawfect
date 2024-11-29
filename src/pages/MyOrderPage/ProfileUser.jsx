@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./styles.scss";
+import "./MyOrderPage.scss";
+import styles from './MyOrderPage.module.scss'
 import {
   UserOutlined,
   ShoppingOutlined,
@@ -12,8 +13,8 @@ import { Avatar, Menu, Card, Col, Typography } from "antd";
 
 const { Title, Text } = Typography;
 
-const ProfileUser = ({ full_name, src_img, name }) => {
-  const [selectedKey, setSelectedKey] = useState("1");
+const ProfileUser = ({ full_name, src_img, name, isInViewport, isInMobile  }) => {
+  const [selectedKey, setSelectedKey] = useState("2");
   const navigate = useNavigate();
 
   const handleClick = (e) => {
@@ -22,15 +23,22 @@ const ProfileUser = ({ full_name, src_img, name }) => {
   
   const handleLogout = (e) => {
     navigate("/logout");
-    window.location.reload()
+    window.location.reload();
   };
 
   return (
-    <Col span={6}>
-      <Card style={{ textAlign: "center" }}>
-        <Avatar size={160} src={src_img} />
-        <Title level={4}>{full_name}</Title>
-        <Text type="secondary">{name}</Text>
+    
+    <Col span={6} style={isInViewport || isInMobile ? {display: "none"} : {display: "block"}}>
+      <Card className={styles.profile}>
+        <div className={styles.info}>
+          <div>
+            <Avatar className={styles.img} src={src_img} />
+          </div>
+          <div className={styles.name}>
+            <Title>{full_name}</Title>
+            <Text type="secondary">{name}</Text>
+          </div>
+        </div>
         <Menu
           mode="vertical"
           defaultSelectedKeys={["1"]}
@@ -40,7 +48,7 @@ const ProfileUser = ({ full_name, src_img, name }) => {
         >
           <Menu.Item
             key="1"
-            icon={<UserOutlined style={{ marginLeft: "25px" }} />}
+            icon={<UserOutlined style={{ marginLeft: "10px" }} />}
             style={{
               color: selectedKey === "1" ? "orange" : "inherit",
               display: "flex",
@@ -51,7 +59,7 @@ const ProfileUser = ({ full_name, src_img, name }) => {
           </Menu.Item>
           <Menu.Item
             key="2"
-            icon={<ShoppingOutlined style={{ marginLeft: "25px" }} />}
+            icon={<ShoppingOutlined style={{ marginLeft: "10px" }} />}
             style={{
               color: selectedKey === "2" ? "orange" : "inherit",
               display: "flex",
@@ -62,7 +70,7 @@ const ProfileUser = ({ full_name, src_img, name }) => {
           </Menu.Item>
           <Menu.Item
             key="3"
-            icon={<BellOutlined style={{ marginLeft: "25px" }} />}
+            icon={<BellOutlined style={{ marginLeft: "10px" }} />}
             style={{
               color: selectedKey === "3" ? "orange" : "inherit",
               display: "flex",
@@ -73,7 +81,7 @@ const ProfileUser = ({ full_name, src_img, name }) => {
           </Menu.Item>
           <Menu.Item
             key="4"
-            icon={<PercentageOutlined style={{ marginLeft: "25px" }} />}
+            icon={<PercentageOutlined style={{ marginLeft: "10px" }} />}
             style={{
               color: selectedKey === "4" ? "orange" : "inherit",
               display: "flex",
@@ -84,7 +92,7 @@ const ProfileUser = ({ full_name, src_img, name }) => {
           </Menu.Item>
           <Menu.Item
             key="5"
-            icon={<LogoutOutlined style={{ marginLeft: "25px" }} />}
+            icon={<LogoutOutlined style={{ marginLeft: "10px" }} />}
             style={{
               color: "red",
               display: "flex",

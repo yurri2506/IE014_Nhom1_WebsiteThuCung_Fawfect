@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './ChangePassword.css';
-import ProfileUser from  "../MyOrderPage/UserProfile.jsx";
+import ProfileUser from  "../MyOrderPage/ProfileUser.jsx";
 import myAvatar from "../../assets/images/avatar.jpg";
 
 import {

@@ -116,17 +116,12 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/product-details',
-        page: ProductDetailsPage,
-        isShowHeader: true
-    }, 
-    {
         path: '/logout',
         page: LogoutPage,
         isShowHeader: true
     },
     {
-        path: '/type',
+        path: '/get-all-product',
         page: TypeProductPage,
         isShowHeader: true
     }

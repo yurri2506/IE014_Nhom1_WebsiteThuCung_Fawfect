@@ -1,13 +1,18 @@
 .main {
     width: 400px;
     background-color: #fff;
+    animation: GrowthAnimation ease-in 0.2s;
 
     ul {
         list-style-type: none;
         padding: 0;
+        margin: 0 !important;
         display: flex;
         flex-direction: column;
         z-index: 3;
+        border: 1px solid #ccc;
+        box-shadow: 0.5px 0.5px 10px 0.5px rgba(0, 0, 0, 0.2);
+        position: relative;
 
         li {
             width: 100%;
@@ -28,10 +33,6 @@
                     object-fit: contain !important;
                 }
             }
-
-            &:hover {
-                background-color: rgba(238,75,43,0.08);
-            }
         }
 
         .info {
@@ -46,7 +47,7 @@
                 margin-top: 10px;
                 font-weight: initial;
 
-                &:hover {
+                &:hover, &:not(:hover) {
                     color: #000;
                 }
             }
@@ -58,5 +59,65 @@
                 font-weight: initial;
             }
         }
+
+        .more {
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid #d3cccc;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+
+            a {
+                font-size: 1.5rem;
+
+                &:hover, &:not(:hover) {
+                    color: #000;
+                }
+            }
+        }
+
+        &::before {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: transparent;
+            position: absolute;
+            top: -6px;
+            right: 0;
+        }
+    }
+}
+
+
+.isRead {
+    background: #fff;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+.isUnread {
+    background-color: rgba(238, 75, 43, 0.08);
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+
+@keyframes GrowthAnimation {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }
