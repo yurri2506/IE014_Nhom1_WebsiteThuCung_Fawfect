@@ -2,6 +2,7 @@ const { response } = require("express")
 const userService = require("../services/User.service")
 const { changePasswordSchema } = require("../validations/ChangePassword.validate")
 const {userSignUpPhone, userSignUpEmail} = require('../validations/UserSignUp.validation')
+const JwtService = require('../services/Jwt.service')
 
 const signUpPhone = async(req, res)=>{
     try{
@@ -56,93 +57,75 @@ const signUpEmail = async(req, res)=>{
 }
 
 const signIn = async(req, res) =>{
+    // try{
+    //     const { email, phone, password } = req.body;
+    //     const errors = {};
+
+    //     if (!email && !phone) {
+    //         errors.general = 'Bắt buộc nhập Email hoặc Số điện thoại';
+    //     }
+
+    //     if (email && !phone) {
+    //         const emailRegEx = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+    //         if (!emailRegEx.test(email)) {
+    //             errors.email = 'Email không hợp lệ';
+    //         }
+    //     }
+
+    //     if (phone && !email) {
+    //         const phoneRegEx = /^(0[1-9][0-9]{8}|[1-9][0-9]{9})$/;
+    //         if (!phoneRegEx.test(phone)) {
+    //             errors.phone = 'Số điện thoại không hợp lệ';
+    //         }
+    //     }
+
+    //     if (!password) {
+    //         errors.password = 'Mật khẩu là bắt buộc';
+    //     }
+
+    //     // Kiểm tra nếu có bất kỳ lỗi nào thì trả về lỗi
+    //     if (Object.keys(errors).length > 0) {
+    //         return res.status(400).json({
+    //             status: 'ERROR',
+    //             errors: errors
+    //         });
+    //     }
+
+    //     // Nếu không có lỗi, tiếp tục xử lý đăng nhập
+    //     const response = await userService.signIn(req.body);
+    //     return res.status(200).json(response);
+
+    // }catch(err){
+    //     return res.status(404).json({
+    //         message: err
+    //     })
+    // }
     try{
-        // const{email, phone, password} = req.body
 
-        // if(!email && !phone){
-        //     return res.status(400).json({
-        //         status: 'ERROR',
-        //         message: 'Bat buoc nhap Email hoac phone'
-        //     })
-        // }
-
-        // if(email && !phone){
-        //     const reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-        //     const isCheckEmail = reg.test(email)
-        //     if (!isCheckEmail) {
-        //         return res.status(400).json({
-        //             status: 'ERROR',
-        //             message: 'Email khong hop le'
-        //         })
-        //     } 
-        // }
-
-        // if (phone && !email) {
-        //     const reg = /^(0[1-9][0-9]{8}|[1-9][0-9]{9})$/; 
-        //     const isCheckPhone = reg.test(phone);
+        const { identifier, password } = req.body;
         
-        //     if (!isCheckPhone) {
-        //         return res.status(400).json({
-        //             status: 'ERROR',
-        //             message: 'So dien thoai khong hop le'
-        //         })
-        //     } 
-        // }
-
-        // if(!password){
-        //     return res.status(400).json({
-        //         status: 'ERROR',
-        //         message: 'Mat khau la bat buoc'
-        //     })
-        // }
-
-        // const response = await userService.signIn(req.body)
-
-        // return res.status(200).json(response)
-
-        const { email, phone, password } = req.body;
-        const errors = {};
-
-        if (!email && !phone) {
-            errors.general = 'Bắt buộc nhập Email hoặc Số điện thoại';
-        }
-
-        if (email && !phone) {
-            const emailRegEx = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-            if (!emailRegEx.test(email)) {
-                errors.email = 'Email không hợp lệ';
-            }
-        }
-
-        if (phone && !email) {
-            const phoneRegEx = /^(0[1-9][0-9]{8}|[1-9][0-9]{9})$/;
-            if (!phoneRegEx.test(phone)) {
-                errors.phone = 'Số điện thoại không hợp lệ';
-            }
+        if(!identifier){
+            return res.status(400).json({
+                status: 'ERROR',
+                message: 'Thong tin la bat buoc'
+            })
         }
 
         if (!password) {
-            errors.password = 'Mật khẩu là bắt buộc';
-        }
-
-        // Kiểm tra nếu có bất kỳ lỗi nào thì trả về lỗi
-        if (Object.keys(errors).length > 0) {
             return res.status(400).json({
                 status: 'ERROR',
-                errors: errors
-            });
+                message: 'Mat khau la bat buoc'
+            })
         }
 
-        // Nếu không có lỗi, tiếp tục xử lý đăng nhập
         const response = await userService.signIn(req.body);
         return res.status(200).json(response);
 
     }catch(err){
-        return res.status(404).json(
-            err
-        )
+        return res.status(404).json({
+            message: err
+        })
     }
-
 }
 
 const getDetailUser = async(req, res) =>{
@@ -182,7 +165,7 @@ const editUser = async(req, res) =>{
             message: err
         })
     }
-}
+} 
 
 const changePassword = async(req, res) => {
     try{
@@ -328,6 +311,25 @@ const signOut = async (req, res) => {
     }
 }
 
+const refreshToken = async (req, res) => {
+    try {
+        const authHeader = req.headers['authorization'];
+        const token = authHeader ? authHeader.split(' ')[1] : null; // Lấy phần token
+        if (!token) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The token is required'
+            })
+        }
+        const response = await JwtService.refreshTokenService(token)
+        return res.status(200).json(response)
+    } catch (e) {
+        console.log(e)
+        return res.status(404).json({
+            message: e
+        })
+    }
+}
 
 module.exports = {
     signUpPhone,
@@ -340,5 +342,6 @@ module.exports = {
     deleteUser,
     addAddress,
     signOut,
-    setAddressDefault
+    setAddressDefault,
+    refreshToken
 }

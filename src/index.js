@@ -7,13 +7,11 @@ const app = express();
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
 const slug = require("mongoose-slug-generator");
-const cors = require('cors');
 
 mongoose.plugin(slug);
 
-// Cấu hình CORS
+const cors = require('cors');
 app.use(cors());
-
 app.use(bodyParser.json())
 
 routes(app);
