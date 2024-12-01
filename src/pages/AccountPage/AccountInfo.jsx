@@ -1,8 +1,9 @@
 import React from 'react'; 
 import { Button, Form, Input, DatePicker, Select } from 'antd';
 import { useNavigate } from 'react-router-dom'; 
+import { EditOutlined } from '@ant-design/icons';
 import styles from './AccountPage.css';
-import ProfileUser from "../MyOrderPage/ProfileUser.jsx";
+import ProfileUser from "../MyOrderPage/UserProfile.jsx";
 import myAvatar from "../../assets/images/avatar.jpg";
 import classNames from 'classnames/bind';
 import moment from 'moment';
@@ -22,17 +23,15 @@ const AccountInfo = () => {
     Email: 'thanhhuyen@gmail.com.vn',
     Sodienthoai: '0223350604',
     DiaChi: 'Cù Bị, Châu Đức, Bà Rịa - Vũng Tàu',
+    Matkhau: 'thanhhuyen@123'
   };
 
   const handleEdit = () => {
     navigate('/edit-account');
   };
 
-  const handleChangePassword = () => {
-    navigate('/change-password');
-  };
-
   return (
+    <div className='grid wide'>
     <div style={{ margin: "0 auto", padding: "20px" }} className={cx('container')}>
       <div className="profile-container">
         <ProfileUser
@@ -62,7 +61,7 @@ const AccountInfo = () => {
             className={cx('form')}
             form={form}
             initialValues={initialData} 
-            disabled={true}  // Disable form for read-only mode
+            disabled={true} 
             style={{ position: 'relative' }} 
           >
             <Form.Item
@@ -94,34 +93,64 @@ const AccountInfo = () => {
             </Form.Item>
 
             <Form.Item
-              label="Email"
-              name="Email">
-              <Input disabled value="thanhhuyen@gmail.com.vn" />
-            </Form.Item>
-
-            <Form.Item
-              label="Số điện thoại"
-              name="Sodienthoai">
-              <Input disabled value="0223350604" />
-            </Form.Item>
-
-            <Form.Item
               label="Địa chỉ"
               name="DiaChi">
               <Input.TextArea disabled value="Cù Bị, Châu Đức, Bà Rịa - Vũng Tàu" />
             </Form.Item>
-          </Form>
-          <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
-              <Button
-                type="primary"
-                onClick={handleChangePassword}
-                className={cx('change-button')}
-              >
-                Đổi mật khẩu
-              </Button>
+
+            <Form.Item
+              label="Email"
+              name="Email"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                <Input 
+                  disabled 
+                  value="thanhhuyen@gmail.com.vn" 
+                  style={{ flex: 1, marginRight: '8px' }} 
+                />
+                <EditOutlined 
+                  onClick={() => navigate('/edit-email')}
+                  style={{ cursor: 'pointer', color: '#E87428', fontSize: '16px' }} 
+                />
+              </div>
             </Form.Item>
+
+            <Form.Item
+              label="Số điện thoại"
+              name="Sodienthoai"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                <Input 
+                  disabled 
+                  value="0223350604" 
+                  style={{ flex: 1, marginRight: '8px' }} 
+                />
+                <EditOutlined 
+                  onClick={() => navigate('/edit-phone')} 
+                  style={{ cursor: 'pointer', color: '#E87428', fontSize: '16px' }} 
+                />
+              </div>
+            </Form.Item>
+            <Form.Item
+              label="Mật khẩu"
+              name="Matkhau"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                <Input.Password 
+                  disabled 
+                  value="thanhhuyen@123" 
+                  style={{ flex: 1, marginRight: '8px' }} 
+                />
+                <EditOutlined 
+                  onClick={() => navigate('/edit-password')} 
+                  style={{ cursor: 'pointer', color: '#E87428', fontSize: '16px' }} 
+                />
+              </div>
+            </Form.Item>
+          </Form>
         </div>
       </div>
+    </div>
     </div>
   );
 };

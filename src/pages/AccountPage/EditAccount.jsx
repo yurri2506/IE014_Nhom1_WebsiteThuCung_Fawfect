@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Input, DatePicker, Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './AccountPage.css';
-import ProfileUser from "../MyOrderPage/ProfileUser.jsx";
+import ProfileUser from "../MyOrderPage/UserProfile.jsx";
 import myAvatar from "../../assets/images/avatar.jpg";
 import moment from 'moment';
 
@@ -13,23 +13,36 @@ const initialData = {
   Input: 'yurri_2506',
   HoTen: 'Nguyễn Lê Thanh Huyền',
   NgaySinh: moment('25/06/2204', 'DD/MM/YYYY'), // Đảm bảo sử dụng moment đúng cách
-  GioiTinh: 'Nữ',
-  Email: 'thanhhuyen@gmail.com.vn',
-  Sodienthoai: '0223350604',
+  GioiTinh: 'female',
   DiaChi: 'Cù Bị, Châu Đức, Bà Rịa - Vũng Tàu',
 };
 
-const EditAccount = () => {
+function EditAccount() {
   const navigate = useNavigate();
- 
+
   const [form] = Form.useForm();
+  const [isFormFilled, setIsFormFilled] = useState(false);
 
   const handleSave = (values) => {
     alert('Cập nhật thông tin thành công!');
     navigate('/account-info');
   };
 
+  const handleCancel = () => {
+    navigate('/account-info');
+  };
+
+  // Kiểm tra nếu tất cả các trường đã được nhập
+  const handleValuesChange = (_, allValues) => {
+    const requiredFields = ['Input', 'HoTen', 'NgaySinh', 'GioiTinh', 'DiaChi'];
+    const isAllFieldsFilled = requiredFields.every(
+      (field) => allValues[field] && allValues[field].toString().trim() !== ''
+    );
+    setIsFormFilled(isAllFieldsFilled);
+  };
+
   return (
+    <div className='grid wide'>
     <div style={{ margin: "0 auto", padding: "20px" }} className={cx('container')}>
       <div className={cx('profile-container')}>
         <ProfileUser
@@ -39,7 +52,7 @@ const EditAccount = () => {
         />
 
         <div className={cx('content')}>
-            <span className={cx('header')}>Sửa thông tin tài khoản</span>
+          <span className={cx('header')}>Sửa thông tin tài khoản</span>
 
           <Form
             layout="horizontal"
@@ -47,8 +60,9 @@ const EditAccount = () => {
             wrapperCol={{ span: 18 }}
             className={cx('form')}
             form={form}
-            initialValues={initialData} 
+            initialValues={initialData}
             onFinish={handleSave}
+            onValuesChange={handleValuesChange}
           >
             <Form.Item
               label="Tên người dùng"
@@ -87,22 +101,6 @@ const EditAccount = () => {
             </Form.Item>
 
             <Form.Item
-              label="Email"
-              name="Email"
-              rules={[{ required: true, message: 'Nhập email!' }]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Số điện thoại"
-              name="Sodienthoai"
-              rules={[{ required: true, message: 'Nhập số điện thoại!' }]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
               label="Địa chỉ"
               name="DiaChi"
               rules={[{ required: true, message: 'Nhập địa chỉ!' }]}
@@ -111,7 +109,23 @@ const EditAccount = () => {
             </Form.Item>
 
             <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
-              <Button type="primary" htmlType="submit" className={cx('confirm-button')}>
+              <Button
+                htmlType="reset"
+                className={cx('cancel-button')}
+                onClick={handleCancel}
+              >
+                Hủy
+              </Button>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className={cx('confirm-button')}
+                disabled={!isFormFilled} // Nút xác nhận bị vô hiệu hóa nếu form chưa đầy đủ
+                style={{
+                  backgroundColor: isFormFilled ? '#E87428' : '#d9d9d9',
+                  borderColor: isFormFilled ? '#E87428' : '#d9d9d9',
+                }}
+              >
                 Lưu thay đổi
               </Button>
             </Form.Item>
@@ -119,7 +133,8 @@ const EditAccount = () => {
         </div>
       </div>
     </div>
+    </div>
   );
-};
+}
 
 export default EditAccount;

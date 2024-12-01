@@ -1,30 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Form, Input, Button, message } from 'antd';
 import classNames from 'classnames/bind';
 import styles from './ChangePassword.css';
-import ProfileUser from  "../MyOrderPage/ProfileUser.jsx";
+import ProfileUser from "../MyOrderPage/UserProfile.jsx";
 import myAvatar from "../../assets/images/avatar.jpg";
-
-import {
-  Button,
-  Form,
-  Input,
-} from 'antd';
 
 const cx = classNames.bind(styles);
 
 const initialData = {
-  oldPassword: '12345678', 
+  oldPassword: 'thanhhuyen@123', 
 };
 
-function ChangePassword() {
+function CurrentPassword() {
   const navigate = useNavigate();
-
   const [form] = Form.useForm();
+  const [isFormFilled, setIsFormFilled] = useState(false);
 
-  const handleSave = (values) => {
-    alert('Đổi mật khẩu thành công!');
-    navigate('/account-info');
+  const handleValuesChange = (changedValues, allValues) => {
+    // Kiểm tra nếu trường "oldPassword" có giá trị
+    setIsFormFilled(!!allValues.oldPassword?.trim());
+  };
+
+  // Hàm kiểm tra mật khẩu hiện tại
+  const handleCheckPassword = (values) => {
+    if (values.oldPassword === initialData.oldPassword) {
+      alert('Mật khẩu hiện tại đúng!');
+      navigate('/edit-password/new-password'); // Điều hướng sang trang mới
+    } else {
+      message.error('Mật khẩu hiện tại không đúng!');
+    }
   };
 
   const handleCancel = () => {
@@ -32,6 +37,7 @@ function ChangePassword() {
   };
 
   return (
+    <div className='grid wide'>
     <div style={{ margin: "0 auto", padding: "20px" }} className={cx('container')}>
       <div className="profile-container">
         <ProfileUser
@@ -39,52 +45,25 @@ function ChangePassword() {
           src_img={myAvatar}
           name="yurri_2506"
         />
-
         <div className={cx('content')}>
-          <span className={cx('header')}>Đổi mật khẩu</span>
-          <Form
-            layout="horizontal" 
-            labelCol={{ span: 6 }} 
-            wrapperCol={{ span: 18 }} 
-            className={cx('form')}
-            form={form}
-            initialValues={initialData} 
-            onFinish={handleSave} 
-          >
+        <span className={cx('header')}>Đổi mật khẩu</span>
+        <Form
+          layout="horizontal"
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 18 }}
+          className={cx('form')}
+          form={form}
+          onFinish={handleCheckPassword}
+          onValuesChange={handleValuesChange} // Lắng nghe sự thay đổi trong form
+        >
           <Form.Item
             label="Mật khẩu hiện tại"
             name="oldPassword"
-            rules={[{ required: true, message: 'Nhập mật khẩu hiện tại!' }]}
-          >
-            {/* Sử dụng Input để hiển thị mật khẩu mặc định */}
-            <Input.Password defaultValue={initialData.oldPassword} />
-          </Form.Item>
-
-          <Form.Item
-            label="Mật khẩu mới"
-            name="newPassword"
-            rules={[{ required: true, message: 'Nhập mật khẩu mới!' }]}
-          >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            label="Xác nhận mật khẩu"
-            name="confirmPassword"
-            dependencies={['newPassword']}
             rules={[
-              { required: true, message: 'Xác nhận mật khẩu mới!' },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue('newPassword') === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(new Error('Mật khẩu mới không khớp!'));
-                },
-              }),
+              { required: true, message: 'Vui lòng nhập mật khẩu hiện tại!' }
             ]}
           >
-            <Input.Password />
+            <Input.Password/>
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
@@ -99,15 +78,21 @@ function ChangePassword() {
               type="primary"
               htmlType="submit"
               className={cx('confirm-button')}
+              disabled={!isFormFilled} // Nút chỉ được bật khi isFormFilled = true
+              style={{
+                backgroundColor: isFormFilled ? '#E87428' : '#d9d9d9',
+                borderColor: isFormFilled ? '#E87428' : '#d9d9d9',
+              }}
             >
-              Xác nhận
+              Tiếp tục
             </Button>
           </Form.Item>
         </Form>
       </div>
     </div>
-    </div>
+  </div>
+  </div>
   );
 }
 
-export default ChangePassword;
+export default CurrentPassword;

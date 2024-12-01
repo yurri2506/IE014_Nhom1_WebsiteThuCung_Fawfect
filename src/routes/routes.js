@@ -1,24 +1,29 @@
-import HomePage from '../pages/HomePage/HomePage'
-import OrderPage from '../pages/OrderPage/OrderPage' 
-import GeneralTermsPage from '../pages/GeneralTermsPage/GeneralTermsPage'
-import SignInPage from '../pages/SignInPage/SignInPage'
-import SignUpPage from '../pages/SignUpPage/SignUpPage'
-import ProductDetailsPage from '../pages/ProductDetailsPage/ProductDetailsPage'
-import MyOrderPage from '../pages/MyOrderPage/MyOrderPage'
-import ResetPasswordPage from '../pages/ResetPasswordPage/ResetPasswordPage'
-import AboutPage from '../pages/AboutPage/AboutPage'
-import GuaranteePage from '../pages/GuaranteePage/GuaranteePage'
-import ReturnPolicyPage from '../pages/ReturnPolicyPage/ReturnPolicyPage'
-import PrivacyPolicyPage from '../pages/PrivacyPolicyPage/PrivacyPolicyPage'
-import MyCartPage from '../pages/MyCartPage/MyCartPage'
-import CheckOutPage from '../pages/CheckOutPage/CheckOutPage'
-import AccountInfo from '../pages/AccountPage/AccountInfo'
-import EditAccount from '../pages/AccountPage/EditAccount'
-import ChangePassword from '../pages/ChangePassword/ChangePassword'
-import LogoutPage from '../pages/LogoutPage/LogoutPage'
-import TypeProductPage from '../pages/TypeProductPage/TypeProductPage'
-import NotFoundPage from '../pages/NotFoundPage/NotFoundPage'
-// import AdminDashboardPage from "../pages/Admin/AdminDashboardPage/AdminDashboardPage";   
+import HomePage from "../pages/HomePage/HomePage";
+import OrderPage from "../pages/OrderPage/OrderPage";
+import ProductsPage from "../pages/ProductsPage/ProducstPage"
+import NotFoundPage from "../pages/NotFoundPage/NotFoundPage"
+import GeneralTermsPage from "../pages/GeneralTermsPage/GeneralTermsPage"
+import SignInPage from "../pages/SignInPage/SignInPage"
+import SignUpPage from "../pages/SignUpPage/SignUpPage"
+import ProductDetailsPage from "../pages/ProductDetailsPage/ProductDetailsPage"
+import ResetPasswordPage from "../pages/ResetPasswordPage/ResetPasswordPage"
+import MyOrderPage from "../pages/MyOrderPage/MyOrderPage"
+import AboutPage from "../pages/AboutPage/AboutPage";
+import GuaranteePage from "../pages/GuaranteePage/GuaranteePage";
+import ReturnPolicyPage from "../pages/ReturnPolicyPage/ReturnPolicyPage";
+import PrivacyPolicyPage from "../pages/PrivacyPolicyPage/PrivacyPolicyPage";
+import MyCartPage from "../pages/MyCartPage/MyCartPage";
+import CheckOutPage from "../pages/CheckOutPage/CheckOutPage"; 
+import LogoutPage from "../pages/LogoutPage/LogoutPage";
+import AccountInfo from "../pages/AccountPage/AccountInfo";
+import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
+import ChangeEmail from "../pages/ChangeEmail/ChangeEmail";
+import ChangePhone from "../pages/ChangePhone/ChangePhone";
+import EditAccount from "../pages/AccountPage/EditAccount";
+import GeneralPolicy from "../pages/GeneralPolicy/GeneralPolicy"
+import GuaranteePolicy from "../pages/GuaranteePolicy/Guarantee";
+import NewPassword from "../pages/ChangePassword/NewPassword";
 
 export const routes = [
     //Routes cho User
@@ -95,7 +100,7 @@ export const routes = [
         role: "user"
     },
     {
-        path: '/my-cart',
+        path: '/my-cart/:id',
         page: MyCartPage,
         isShowHeader: true,
         role: "user"
@@ -119,10 +124,40 @@ export const routes = [
         role: "user"
     },
     {
-        path: '/change-password',
+        path: '/edit-password',
         page: ChangePassword,
         isShowHeader: true,
         role: "user"
+    },
+    {
+        path: '/edit-password/new-password',
+        page: NewPassword,
+        isShowHeader: true
+    },
+    {
+        path: '/edit-email',
+        page: ChangeEmail,
+        isShowHeader: true
+    },
+    {
+        path: '/edit-phone',
+        page: ChangePhone,
+        isShowHeader: true
+    },
+    {
+        path: '/product-details',
+        page: ProductDetailsPage,
+        isShowHeader: true
+    },  
+    {
+        path: '/generalpolicy',
+        page: GeneralPolicy,
+        isShowHeader: true
+    },
+    {
+        path: '/generalpolicy',
+        page: GuaranteePolicy,
+        isShowHeader: true
     },
     {
         path: '/logout',

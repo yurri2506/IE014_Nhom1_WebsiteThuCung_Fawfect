@@ -32,12 +32,12 @@ export const loginUser = async (identifier, password) => {
   }
 };
 
-export const refreshToken = async (accessToken) => {
+export const refreshTokenn = async (refreshToken) => {
   try {
     const response = await fetch(`${API_URL}/refresh-token`, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${accessToken}`,
+        "Authorization": `Bearer ${refreshToken}`,
         "Content-Type": "application/json",
       },
     });
@@ -48,15 +48,15 @@ export const refreshToken = async (accessToken) => {
     }
 
     const data = await response.json();
-    return data; // Trả về accessToken mới
+    console.log(data);
+    return data.ACCESS_TOKEN; // Trả về accessToken mới
   } catch (error) {
     console.error("Error in refreshToken:", error);
     throw error;
   }
 };
 
-export const ensureValidToken = async (dispatch, resetUser) => {
-  try {
+export const ensureValidToken = async (dispatch, resetUser, refreshToken) => {
     const accessToken = localStorage.getItem("accessToken");
 
     if (!accessToken) {
@@ -66,20 +66,14 @@ export const ensureValidToken = async (dispatch, resetUser) => {
 
     const decoded = jwtDecode(accessToken);
     const currentTime = Date.now() / 1000;
-
     if (decoded.exp < currentTime) {
       // Access token hết hạn, làm mới token
-      const data = await refreshToken();
-      localStorage.setItem("accessToken", data.access_token);
-      return data.access_token;
+      const data = await refreshTokenn(refreshToken);
+      localStorage.setItem("accessToken", data);
+      return data;
     }
 
     return accessToken; // Trả về accessToken hợp lệ
-  } catch (error) {
-    console.error("Error in ensureValidToken:", error);
-    dispatch(resetUser());
-    throw error;
-  }
 };
 
 
