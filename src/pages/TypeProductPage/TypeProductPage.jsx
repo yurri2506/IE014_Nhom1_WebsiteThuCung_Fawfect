@@ -205,7 +205,7 @@ import SortProductComponent from "../../components/SortProductComponent/SortProd
 import CardComponent from "../../components/CardComponent/CardComponent";
 import clsx from "clsx";
 import { Pagination } from "antd";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getAllProduct } from "../../services/Product.service";
 
@@ -432,20 +432,22 @@ const TypeProductPage = () => {
               {products.length > 0 ? (
                 products.map((product, index) => (
                   <div key={index} className="col l-4 m-4 c-6">
-                    <CardComponent
-                      src={`data:image/png;base64,${
-                        product.product_images[1] || ""
-                      }`}
-                      alt="ảnh sản phẩm"
-                      name={product.product_title}
-                      oldPrice={product.product_price}
-                      newPrice={(
-                        product?.product_price *
-                        (1 - product?.product_percent_discount / 100)
-                      ).toLocaleString()}
-                      start={product.rating}
-                      percent={product?.product_percent_discount}
-                    />
+                    <Link to={`/product-details/${product._id}`} className="product-link">
+                      <CardComponent
+                        src={`data:image/png;base64,${
+                          product.product_images[1] || ""
+                        }`}
+                        alt="ảnh sản phẩm"
+                        name={product.product_title}
+                        oldPrice={product.product_price}
+                        newPrice={(
+                          product?.product_price *
+                          (1 - product?.product_percent_discount / 100)
+                        ).toLocaleString()}
+                        start={product.rating}
+                        percent={product?.product_percent_discount}
+                      />
+                    </Link>
                   </div>
                 ))
               ) : (
