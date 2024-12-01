@@ -384,7 +384,7 @@ const ProductDetailsPage = () => {
           <div className={styles.title}>
             <h2>Mô tả sản phẩm</h2>
           </div>
-          <p style={{ whiteSpace: 'pre-line' }}>{productDetails?.product_description}</p>
+          <p style={{ whiteSpace: 'pre-wrap' }}>{productDetails?.product_description}</p>
         </div>
 
         {/* Feedback Section */}
