@@ -2,8 +2,9 @@ import React from "react";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import CardComponent from "../CardComponent/CardComponent";
 import TitleComponent from "../TitleComponent/TitleComponent";
+import { Link } from "react-router-dom";
 
-const NewProductComponent = ({ products, isInMobile, title, onClick }) => {  
+const NewProductComponent = ({ products, isInMobile, title, onClick }) => {
   return (
     <div>
       <TitleComponent
@@ -15,18 +16,23 @@ const NewProductComponent = ({ products, isInMobile, title, onClick }) => {
       <div style={isInMobile ? { margin: "0 4px" } : undefined} className="row">
         {products.map((product, index) => (
           <div key={index} className="col l-3 m-4 c-6">
-            <CardComponent
-              src={`data:image/png;base64,${product.product_images[0] || ""}`}
-              alt="ảnh sản phẩm"
-              name={product.product_title}
-              oldPrice={product.product_price}
-              newPrice={(
-                product?.product_price *
-                (1 - product?.product_percent_discount / 100)
-              ).toLocaleString()}
-              start={product.rating}
-              percent={product?.product_percent_discount}
-            />
+            <Link
+              to={`/product-details/${product._id}`}
+              className="product-link"
+            >
+              <CardComponent
+                src={`data:image/png;base64,${product.product_images[0] || ""}`}
+                alt="ảnh sản phẩm"
+                name={product.product_title}
+                oldPrice={product.product_price}
+                newPrice={(
+                  product?.product_price *
+                  (1 - product?.product_percent_discount / 100)
+                ).toLocaleString()}
+                start={product.rating}
+                percent={product?.product_percent_discount}
+              />
+            </Link>
           </div>
         ))}
       </div>
@@ -40,7 +46,7 @@ const NewProductComponent = ({ products, isInMobile, title, onClick }) => {
         borderRadius="15px"
         fontSize="2rem"
         showIcon={false}
-        onClick ={onClick}
+        onClick={onClick}
       />
     </div>
   );

@@ -268,15 +268,15 @@ const HomePage = () => {
   const bestProduct = data?.bestProduct || {}
 
   const handleNewProduct = () => {
-    navigate("/my-order")
+    navigate("/get-all-product?sort=newest")
   }
 
   const handleFamousProduct = () => {
-    navigate("/my-order")
+    navigate("/get-all-product?product_famous=true")
   }
 
   const handleBestProduct = () => {
-    navigate("/my-order")
+    navigate("/get-all-product?sort=best_selling")
   }
 
   // Xử lý sản phẩm lấy được từ API
