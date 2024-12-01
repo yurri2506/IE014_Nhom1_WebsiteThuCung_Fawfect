@@ -338,7 +338,7 @@ const HomePage = () => {
   return (
       <div className={clsx('grid wide')}>
         <div className={styles.sliderImg}>
-          <SliderComponent arrImages={[slider1, slider2]} />
+          <SliderComponent arrImages={[slider1, slider2]} defaultArrows={false}/>
         </div>
         <div className={clsx('row', styles.service)}>
           {services.map((service, index) => (

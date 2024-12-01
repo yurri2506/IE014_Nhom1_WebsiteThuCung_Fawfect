@@ -5,6 +5,10 @@ import TitleComponent from '../TitleComponent/TitleComponent'
 import UnderLineComponent from '../UnderLineComponent/UnderLineComponent'
 import { MdOutlineMailOutline, MdPhonePaused } from "react-icons/md";
 import { Link } from 'react-router-dom';
+// import facebook from '../../assets/images/facebook.svg'
+// import instagram from '../../assets/images/instagram.svg'
+// import tiktok from '../../assets/images/tiktok.svg'
+// import zalo from '../../assets/images/zalo.svg'
 import facebook from '../../assets/images/facebook.svg'
 import instagram from '../../assets/images/instagram.svg'
 import tiktok from '../../assets/images/tiktok.svg'

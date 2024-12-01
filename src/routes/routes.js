@@ -1,6 +1,5 @@
 import HomePage from "../pages/HomePage/HomePage";
 import OrderPage from "../pages/OrderPage/OrderPage";
-import ProductsPage from "../pages/ProductsPage/ProducstPage"
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage"
 import GeneralTermsPage from "../pages/GeneralTermsPage/GeneralTermsPage"
 import SignInPage from "../pages/SignInPage/SignInPage"
@@ -24,6 +23,7 @@ import EditAccount from "../pages/AccountPage/EditAccount";
 import GeneralPolicy from "../pages/GeneralPolicy/GeneralPolicy"
 import GuaranteePolicy from "../pages/GuaranteePolicy/Guarantee";
 import NewPassword from "../pages/ChangePassword/NewPassword";
+import FavoriteProductsPage from "../pages/FavoriteProductsPage/FavoriteProductsPage";
 
 export const routes = [
     //Routes cho User
@@ -168,6 +168,12 @@ export const routes = [
     {
         path: '/get-all-product',
         page: TypeProductPage,
+        isShowHeader: true,
+        role: "user"
+    },
+    {
+        path: '/favorite-products',
+        page: FavoriteProductsPage,
         isShowHeader: true,
         role: "user"
     },

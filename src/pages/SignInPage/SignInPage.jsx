@@ -11,7 +11,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import PopupComponent from "../../components/PopupComponent/PopupComponent";
 import { loginUser, getUserDetails } from "../../services/User.service"; // Hàm gọi API đăng nhập
 import Cookies from "js-cookie";
-import facebook_2 from "../../assets/images/facebook_2.svg";
+import facebook_2 from "../../assets/images/facebook.svg";
 import google from "../../assets/images/google.svg";
 import { updateUser } from "../../redux/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
