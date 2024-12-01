@@ -322,7 +322,7 @@
 // export default HeaderComponent;
 
 import React, { useEffect, useState } from "react";
-import { Button, Col, Input, notification, Row } from "antd";
+import { AutoComplete, Button, Col, Input, notification, Row } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import styles from "./HeaderComponent.module.scss";
@@ -354,6 +354,13 @@ const HeaderComponent = () => {
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState(myAvatarFalse);
   const [userName, setUserName] = useState("Người dùng");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showHistory, setShowHistory] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchHistory, setSearchHistory] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+  const [isInMobile, setIsInMobile] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(false);
 
   // Lấy thông tin từ Redux
   const { isAuthenticated, user_name, user_avt_img, _id } = useSelector(
@@ -377,6 +384,7 @@ const HeaderComponent = () => {
       setUserName("Người dùng");
     }
   }, [isAuthenticated, user_name, user_avt_img]);
+
   const handleResize = () => {
     const width = window.innerWidth;
     if (width >= 740 && width <= 1023) {
@@ -387,7 +395,6 @@ const HeaderComponent = () => {
       setOffset(2);
     }
   };
-  const [notifications, setNotifications] = useState([]);
 
   // Lấy thông báo khi hover vào "Thông báo"
   const accessToken = localStorage.getItem("accessToken");
@@ -419,9 +426,6 @@ const HeaderComponent = () => {
     handleResize(); // Gọi ngay lần đầu
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const [isInMobile, setIsInMobile] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 739px)");
@@ -462,6 +466,88 @@ const HeaderComponent = () => {
       document.body.classList.remove("no-scroll");
     }
   }, [showNavbar]);
+
+  useEffect(() => {
+    const history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+    setSearchHistory(history);
+  }, []);
+
+  // Cập nhật lịch sử tìm kiếm vào localStorage khi có thay đổi
+  useEffect(() => {
+    if (searchHistory.length > 0) {
+      localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+    }
+  }, [searchHistory]);
+
+  // Hiển thị lịch sử khi người dùng bấm vào ô tìm kiếm
+  const handleFocus = () => {
+    setShowHistory(true); // Mở lịch sử tìm kiếm khi người dùng bấm vào ô tìm kiếm
+  };
+
+  const handleBlur = () => {
+    // Tự động ẩn lịch sử khi người dùng rời khỏi ô tìm kiếm (chỉ ẩn nếu không còn nhập liệu)
+    if (!searchQuery.trim()) {
+      setShowHistory(false);
+    }
+  };
+
+  // Hàm xử lý tìm kiếm khi nhấn Enter hoặc nút tìm kiếm
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      const updatedHistory = [searchQuery, ...searchHistory].slice(0, 5); // Giới hạn tối đa 5 từ khóa
+      setSearchHistory(updatedHistory);
+      // Kiểm tra xem người dùng đã nhập gì chưa
+      navigate(`/get-all-product?search=${searchQuery}`); // Chuyển hướng tới trang tìm kiếm với query params
+    }
+  };
+
+  // Hàm xử lý thay đổi giá trị của ô nhập liệu
+  const handleSearchChange = (value) => {
+    setSearchQuery(value); // Cập nhật giá trị tìm kiếm
+    if (value.trim()) {
+      fetchSuggestions(value); // Gọi API hoặc tìm kiếm dữ liệu gợi ý khi có giá trị nhập vào
+    } else {
+      setSuggestions([]); // Nếu không có giá trị nhập vào thì xóa gợi ý
+    }
+  };
+
+  // Hàm để lấy danh sách gợi ý (có thể thay bằng API thật)
+  const fetchSuggestions = (query) => {
+    // Ví dụ: Mảng giả lập các sản phẩm
+    const allProducts = [
+      "Mèo",
+      "Chó",
+      "Thức ăn cho mèo",
+      "Thức ăn cho chó",
+      "Phụ kiện cho chó",
+      "Phụ kiện cho mèo",
+      "Vật dụng",
+      "Sản phẩm cho chó",
+      "Sản phẩm cho mèo",
+      "Vòng cổ",
+      "pate hương đào",
+      "pate",
+      "pate hương cam",
+      "hạt",
+      "áo quần",
+      "chậu cát",
+      "áo dài",
+      "đồ chơi",
+      "cầu mây",
+      "bánh",
+    ];
+
+    // Lọc các sản phẩm có chứa từ khóa tìm kiếm
+    const filteredSuggestions = allProducts.filter((item) =>
+      item.toLowerCase().includes(query.toLowerCase())
+    );
+
+    // Cập nhật danh sách gợi ý
+    setSuggestions(filteredSuggestions);
+  };
+
+  // Xác định in gợi ý hay lịch sử
+  const combinedSuggestions = searchQuery.trim() === "" ? searchHistory : suggestions;
 
   return (
     <div className={styles.header}>
@@ -524,15 +610,29 @@ const HeaderComponent = () => {
         </Row>
         <Row className={styles.search}>
           <Col span={13} offset={5}>
-            <Input
-              placeholder="Tìm kiếm sản phẩm..."
-              suffix={
-                <Button
-                  className={styles.searchButton}
-                  icon={<SearchOutlined className={styles.icon} />}
-                />
-              }
-            />
+            <AutoComplete
+              value={searchQuery}
+              onChange={handleSearchChange} // Cập nhật giá trị tìm kiếm khi người dùng nhập
+              onSelect={(value) => setSearchQuery(value)} // Chọn một gợi ý, cập nhật giá trị tìm kiếm
+              options={combinedSuggestions.map((suggestion) => ({
+                value: suggestion, // Cung cấp giá trị cho từng gợi ý hoặc lịch sử
+              }))}
+              style={{ width: "100%", maxWidth: 600 }}
+            >
+              <Input
+                placeholder="Tìm kiếm sản phẩm..."
+                onPressEnter={handleSearch} // Xử lý khi nhấn Enter
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                suffix={
+                  <Button
+                    className={styles.searchButton}
+                    icon={<SearchOutlined className={styles.icon} />}
+                    onClick={handleSearch} // Xử lý khi nhấn nút tìm kiếm
+                  />
+                }
+              />
+            </AutoComplete>
           </Col>
           <Col className={styles.cart} span={6}>
             <ul>
@@ -575,7 +675,7 @@ const HeaderComponent = () => {
                   Sản phẩm cho chó
                   <FaChevronDown className={styles.icon} />
                 </Link>
-                <MoreComponent className={styles.moreDog} parent="Chó"/>
+                <MoreComponent className={styles.moreDog} parent="Chó" />
               </li>
               <li className={styles.forCat}>
                 <Link to={"/get-all-product?category_level_1=Mèo"}>

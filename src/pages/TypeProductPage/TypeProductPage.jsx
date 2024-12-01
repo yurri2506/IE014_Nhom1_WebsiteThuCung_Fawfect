@@ -452,11 +452,13 @@ const TypeProductPage = () => {
                 <div className="col l-12 m-12 c-12">Không có sản phẩm nào</div>
               )}
             </div>
-            <Pagination
-              current={filters.page}
-              total={data?.total || 0} // Total là số lượng sản phẩm trả về từ API
-              onChange={(page) => handleFilterChange({ page })}
-            />
+            {data?.total > 12 ? (
+              <Pagination
+                current={filters.page}
+                total={data?.total || 0} // Total là số lượng sản phẩm trả về từ API
+                onChange={(page) => handleFilterChange({ page })}
+              />
+            ) : null}
           </div>
         </div>
       </div>
