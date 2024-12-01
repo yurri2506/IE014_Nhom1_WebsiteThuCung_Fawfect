@@ -1111,10 +1111,14 @@ const RegisterPage = () => {
             onPasswordChange={setPassword}
             onConfirmPasswordChange={setConfirmPassword}
             onClick={handleSignUp}
-            isRegister={true}
           />
         )}
-        {currentStep === 4 && <SuccessNotifyComponent />}
+        {currentStep === 4 && 
+          <SuccessNotifyComponent 
+            title1="Xác minh số điện thoại"
+            notify="Đăng ký thành công"
+          />
+        }
         {showPopup && <PopupComponent message={errorMessage} onClose={closePopup} />}
       </div>
   );

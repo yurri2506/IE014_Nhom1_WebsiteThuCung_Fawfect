@@ -33,7 +33,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 60vh;
+  height: 60vh  ;
 
   .content {
     text-align: center;
@@ -43,7 +43,7 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 90%;
     max-width: 650px;
-    height: 330px;
+    // height: 350px;
 
     .title {
       font-size: 2.5rem;
@@ -89,6 +89,29 @@
   font-weight: 500;
 }
 
+
+.wait {
+  font-size: 1.3rem;
+  color: rgba(0, 0, 0, .26);
+}
+
+.reSend {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  p:first-of-type {
+    font-size: 1.4rem;
+  }
+
+  p:last-of-type {
+    font-size: 1.4rem;
+    color: #E87428;
+    text-decoration: underline;
+  }
+}
+
 .verifyButton {
   width: 70%;
   // padding: 10px 20px;
@@ -99,4 +122,75 @@
   font-size: 2.2rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin: 30px 0 0 0;
+}
+
+@media screen and (max-width: 46.1875em) {
+  .main { 
+      background-color: #fff;
+      background-image: none;
+      padding: 40px 0;
+      margin: 0 4px;
+  }
+
+  .step {
+      display: none;
+  }
+
+  .backButton {
+
+      img {
+          width: 40px;
+      }
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+
+    .content {
+      height: 100%;
+    }
+  }
+
+
+  .otpContainer {
+    flex-wrap: wrap;
+
+    .otpInput {
+      margin: 0 5px;
+    }
+  }
+
+  .error {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  .verifyButton {
+      width: 70% !important;
+      font-size: 1.8rem !important;
+      border-radius: 10px !important;
+  }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+  .step {
+      display: none;
+  }
+}
+
+
+@media screen and (min-width: 64em) and (max-width: 77.4375em) {
+  .step {
+    margin-left: 0;
+  }
+
+  .arrow1 {
+    left: 230px;
+  }
+
+  .arrow2 {
+    left: 530px;
+  }
 }

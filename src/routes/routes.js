@@ -26,99 +26,108 @@ import GuaranteePolicy from "../pages/GuaranteePolicy/Guarantee";
 import NewPassword from "../pages/ChangePassword/NewPassword";
 
 export const routes = [
+    //Routes cho User
     {
         path: '/',
         page: HomePage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/order',
         page: OrderPage,
-        isShowHeader: true
-    },
-    {
-        path: '/products',
-        page: ProductsPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/general-terms',
         page: GeneralTermsPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/sign-in',
         page: SignInPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/sign-up',
         page: SignUpPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/product-details/:id',
         page: ProductDetailsPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/my-order',
         page: MyOrderPage,
-        isShowHeader: true
-    },
-    {
-        path: '*',
-        page: NotFoundPage
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/reset',
         page: ResetPasswordPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/about',
         page: AboutPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/guarantee',
         page: GuaranteePage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/return-policy',
         page: ReturnPolicyPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/privacy-policy',
         page: PrivacyPolicyPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/my-cart/:id',
         page: MyCartPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/check-out',
         page: CheckOutPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/account-info',
         page: AccountInfo,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/edit-account',
         page: EditAccount,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/edit-password',
         page: ChangePassword,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/edit-password/new-password',
@@ -153,11 +162,29 @@ export const routes = [
     {
         path: '/logout',
         page: LogoutPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/get-all-product',
         page: TypeProductPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
+    },
+
+
+    // Routes cho Admin
+    // {
+    //     path: process.env.REACT_APP_ADMIN_PATH + "/dashboard",
+    //     page: AdminDashboardPage,
+    //     isShowHeader: false,
+    //     role: "admin"
+    // },
+
+
+    // Routes cho trang không có
+    {
+        path: '*',
+        page: NotFoundPage
     }
 ]

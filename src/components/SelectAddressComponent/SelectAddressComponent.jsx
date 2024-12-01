@@ -163,7 +163,7 @@ function SelectAddressComponent({closeModal}) {
                 height="1px"
                 background="rgba(0, 0, 0, 0.2)"
             />
-            <AddressPage 
+            <AddressPage
               closeModal={closeModal}
             />
           </div>    
