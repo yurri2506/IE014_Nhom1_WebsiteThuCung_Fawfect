@@ -872,7 +872,7 @@ import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import FormComponent from '../../components/FormComponent/FormComponent';
 import InputFormComponent from '../../components/InputFormComponent/InputFormComponent';
 import { MdPhonePaused } from 'react-icons/md';
-import facebook_2 from '../../assets/images/facebook_2.svg';
+import facebook_2 from '../../assets/images/facebook.svg';
 import google from '../../assets/images/google.svg';
 import { signUpPhone, signInGoogle } from "../../services/User.service";
 import VerifyMethodComponent from '../../components/VerifyMethodComponent/VerifyMethodComponent';

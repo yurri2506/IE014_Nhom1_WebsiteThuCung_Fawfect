@@ -25,13 +25,15 @@ import {
 } from "../../services/Product.service";
 import clsx from "clsx";
 import cart from '../../assets/images/cart.svg'
-import mainProduct from '../../assets/images/mainProduct.svg'
+import { FaHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
   const [numProduct, setNumProduct] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null); // State cho hình ảnh chính
+  const [like, setLike] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -182,6 +184,11 @@ const ProductDetailsPage = () => {
     slidesToScroll: 1,
     arrows: false
   };
+
+
+  const handleLike = () => {
+    setLike(!like);
+  }
 
   return (
     <div className={styles.main}>
@@ -351,6 +358,10 @@ const ProductDetailsPage = () => {
                 </div>
                 <p className={styles.remain}>
                   Còn lại: {selectedVariant?.product_countInStock || 0} sản phẩm
+                </p>
+                <p onClick={handleLike} className={styles.like}>
+                  {like ? <FaHeart /> : <FaRegHeart />}
+                  {isInMobile ? null : <span>Yêu thích</span>}
                 </p>
               </div>
               <div className={styles.actions}>
