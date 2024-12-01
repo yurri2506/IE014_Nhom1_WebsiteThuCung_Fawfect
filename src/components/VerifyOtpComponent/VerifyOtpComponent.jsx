@@ -10,6 +10,8 @@ const VerifyOtpComponent = ({ onClick, email }) => {
   const [otp, setOtp] = useState(new Array(6).fill(''));  // Mảng OTP với 6 ô
   const [error, setError] = useState('');  // Lỗi nếu có trong quá trình nhập OTP
   const [isLoading, setIsLoading] = useState(false); // Quản lý trạng thái tải khi gửi OTP
+  const [timer, setTimer] = useState(30); // Thời gian đếm ngược gửi lại OTP
+  const [isResendDisabled, setIsResendDisabled] = useState(true);
 
   // Hàm xử lý thay đổi giá trị trong các ô OTP
   const handleChange = (element, index) => {
@@ -72,13 +74,23 @@ const VerifyOtpComponent = ({ onClick, email }) => {
     document.getElementById('otp-input-0').focus();
   }, []);
 
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+      return () => clearInterval(interval);
+    } else {
+      setIsResendDisabled(false); 
+    }
+  }, [timer]);
+
+
   return (
     <div className={styles.main}>
       <div className="grid wide">
         <div className={styles.step}>
           <StatusComponent
             number="1"
-            title="Xác minh số điện thoại"
+            title="Xác minh mã OTP"
             success
             className={styles.stt}
           />
@@ -128,14 +140,32 @@ const VerifyOtpComponent = ({ onClick, email }) => {
             <div style={{height: "20px", margin: "20px 0"}}>
               {error && <p className={styles.error}>{error}</p>
               }
+              {isResendDisabled ? (
+                <p className={styles.wait}>Vui lòng chờ {timer} giây để gửi lại</p>
+              ) : (
+                <div className={styles.reSend}>
+                  <p>Bạn vẫn chưa nhận được mã?</p>
+                  <p>Gửi lại mã</p>
+                </div>
+              )}
             </div>
-
+            {/* <div className={styles.resendOtp}>
+              {isResendDisabled ? (
+                <p>Vui lòng chờ {timer} giây để gửi lại</p>
+              ) : (
+                <div>
+                  <p>Bạn vẫn chưa nhận được mã?</p>
+                  <p>Gửi lại</p>
+                </div>
+              )}
+            </div> */}
             <ButtonComponent 
               title="XÁC NHẬN"
               showIcon={false}
               onClick={() => handleVerify(otp.join(''))} 
               disabled={error ? true : false}
               className={styles.verifyButton}
+              margin="50px 0"
               primary
             />
           </div>

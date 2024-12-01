@@ -286,7 +286,12 @@ const ResetPasswordPage = () => {
 
             {currentStep === 3 && (<InputPasswordComponent onClick={handleNextStep} identifier={identifier}/>)}
 
-            {currentStep === 4 && <SuccessNotifyComponent />}
+            {currentStep === 4 && 
+                <SuccessNotifyComponent 
+                    title1="Xác minh mã OTP"
+                    notify="Đặt lại mật khẩu thành công"
+                />
+            }
         </div>
     );
 };
