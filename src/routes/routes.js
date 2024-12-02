@@ -28,6 +28,7 @@ import NewPhone from "../pages/ChangePhone/NewPhone";
 import ChangeAddress from "../pages/ChangeAddress/ChangeAddress";
 import VerificationForm from "../components/VerificationForm/VerificationForm";
 import FavoriteProductsPage from "../pages/FavoriteProductsPage/FavoriteProductsPage";
+import NotificationPage from "../pages/Notification/Notification";
 
 export const routes = [
     //Routes cho User
@@ -198,6 +199,12 @@ export const routes = [
     {
         path: '/favorite-products',
         page: FavoriteProductsPage,
+        isShowHeader: true,
+        role: "user"
+    },
+    {
+        path: '/notifications',
+        page: NotificationPage,
         isShowHeader: true,
         role: "user"
     },
