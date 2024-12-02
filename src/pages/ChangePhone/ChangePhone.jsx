@@ -33,8 +33,8 @@ function ChangePhone() {
 
 
   const handleSave = (values) => {
-    alert('Số điện thoại đã được cập nhật!');
-    navigate('/account/profile');
+    alert('Hãy xác thực số điện thoại mới!');
+    navigate('/verification');
   };
 
   const handleCancel = () => {

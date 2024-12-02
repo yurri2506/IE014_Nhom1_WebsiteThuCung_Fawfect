@@ -28,8 +28,8 @@ function ChangeEmail() {
   };
 
   const handleSave = (values) => {
-    alert('Email đã được cập nhật!');
-    navigate('/account/profile');
+    alert('Hãy xác thực email mới!');
+    navigate('/verification');
   };
 
   const handleCancel = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./MyOrderPage.scss";
-import styles from './MyOrderPage.module.scss'
+import styles from './MyOrderPage.module.scss';
 import {
   UserOutlined,
   ShoppingOutlined,
@@ -17,11 +17,12 @@ import { Avatar, Menu, Card, Col, Typography } from "antd";
 
 const { Title, Text } = Typography;
 
-const ProfileUser = ({ full_name, src_img, name, isInViewport, isInMobile  }) => {
+const ProfileUser = ({ full_name, src_img, name, isInViewport, isInMobile }) => {
   const [selectedKey, setSelectedKey] = useState("2");
   const [openKeys, setOpenKeys] = useState([]);
+  const [avatar, setAvatar] = useState(src_img); // Lưu ảnh đại diện
   const navigate = useNavigate();
-  const location = useLocation(); 
+  const location = useLocation();
 
   useEffect(() => {
     const path = location.pathname;
@@ -34,22 +35,18 @@ const ProfileUser = ({ full_name, src_img, name, isInViewport, isInMobile  }) =>
       "/account/edit-password",
       "/account/edit-address"
     ];
-  
+
     if (submenuPaths.includes(path)) {
-      setOpenKeys(["/account"]); 
+      setOpenKeys(["/account"]);
     } else {
-      setOpenKeys([]); 
+      setOpenKeys([]);
     }
   }, [location.pathname]);
 
   const handleClick = (e) => {
     const key = e.key;
     setSelectedKey(key);
-    if (key === "/account/edit-email" || key === "/account/edit-phone") {
-      navigate("/verification", { state: { nextPage: key } });
-    } else {
-      navigate(key);
-    }
+    navigate(key);
   };
 
   const handleLogout = () => {
@@ -63,13 +60,42 @@ const ProfileUser = ({ full_name, src_img, name, isInViewport, isInMobile  }) =>
     );
   };
 
+  const handleAvatarClick = () => {
+    document.getElementById("upload-avatar").click();
+  };
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setAvatar(reader.result); 
+        alert("Đổi ảnh đại diện thành công!");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
-    
     <Col span={6}>
       <Card className={styles.profile}>
         <div className={styles.info}>
           <div>
-            <Avatar className={styles.img} src={src_img} />
+            <Avatar
+              className={styles.img}
+              src={avatar}
+              size={60}
+              icon={<UserOutlined />}
+              onClick={handleAvatarClick} 
+              style={{ cursor: "pointer" }}
+            />
+            <input
+              type="file"
+              id="upload-avatar"
+              style={{ display: "none" }}
+              accept="image/*"
+              onChange={handleAvatarChange} 
+            />
           </div>
           <div className={styles.name}>
             <Title>{full_name}</Title>

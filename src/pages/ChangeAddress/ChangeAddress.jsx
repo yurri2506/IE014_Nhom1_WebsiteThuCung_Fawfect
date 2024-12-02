@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Typography, List, Form, Modal, Checkbox, Select } from "antd";
+import { Input, Button, Typography, List, Form, Modal, Select } from "antd";
 import ProfileUser from "../MyOrderPage/UserProfile.jsx";
 import myAvatar from "../../assets/images/avatar.jpg";
 import { EditOutlined, DeleteOutlined, SettingOutlined, PlusOutlined } from "@ant-design/icons";
@@ -200,6 +200,7 @@ const ChangeAddress = () => {
           open={isModalVisible}
           onCancel={() => setIsModalVisible(false)}
           footer={null}
+          centered
         >
           <AddressForm
             initialValues={editingAddress || {}}
@@ -282,8 +283,15 @@ const AddressForm = ({ initialValues, onSubmit, provinces, districts, wards, onP
           ))}
         </Select>
       </Form.Item>
+      <Form.Item
+        name="street-detail"
+        label="Số nhà, đường"
+        rules={[{ required: true, message: "Vui lòng nhập số nhà, đường" }]}
+      >
+        <Input />
+      </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit" style={{ backgroundColor: "#E87428", color: "white" }}>
+        <Button type="primary" htmlType="submit" style={{ backgroundColor: "#E87428", color: "white"}}>
           Lưu
         </Button>
       </Form.Item>
