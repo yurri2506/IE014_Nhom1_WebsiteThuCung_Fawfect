@@ -15,7 +15,7 @@ function NewPhone() {
   const [isFormFilled, setIsFormFilled] = useState(false);
 
   const handleValuesChange = (changedValues, allValues) => {
-    if (allValues.newEmail && allValues.newEmail.trim() !== '') {
+    if (allValues.newPhone && allValues.newPhone.trim() !== '') {
       setIsFormFilled(true);
     } else {
       setIsFormFilled(false);
@@ -23,8 +23,8 @@ function NewPhone() {
   };
 
   const handleSave = (values) => {
-    alert('Số điện thoại đã được cập nhật!');
-    navigate('/account/profile');
+    alert('Hãy xác thực số điện thoại mới!');
+    navigate('/verification');
   };
 
   const handleCancel = () => {
@@ -33,8 +33,8 @@ function NewPhone() {
 
   return (
     <div className="grid wide">
-    <div style={{ margin: "0 auto", padding: "20px" }} className={cx('container')}>
-    <div className="profile-container">
+      <div style={{ margin: "0 auto", padding: "20px" }} className={cx('container')}>
+        <div className="profile-container">
           <ProfileUser
             full_name="Nguyễn Lê Thanh Huyền"
             src_img={myAvatar}
@@ -55,7 +55,10 @@ function NewPhone() {
               <Form.Item
                 label="Số điện thoại mới"
                 name="newPhone"
-                rules={[{ required: true, message: 'Nhập số điện thoại mới!' }, { pattern: /^[0-9]{10,11}$/, message: 'Số điện thoại không hợp lệ!' }]}
+                rules={[
+                  { required: true, message: 'Nhập số điện thoại mới!' },
+                  { pattern: /^[0-9]{10,11}$/, message: 'Số điện thoại không hợp lệ!' },
+                ]}
               >
                 <Input />
               </Form.Item>
@@ -84,7 +87,7 @@ function NewPhone() {
             </Form>
           </div>
         </div>
-    </div>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Input, Button, Typography, Row, Col } from "antd";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import "./VerificationForm.css";
 
@@ -13,7 +13,6 @@ const VerificationForm = ({ email, onVerificationSuccess }) => {
 
   const inputsRef = useRef([]);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleInputChange = (value, index) => {
     const newCode = [...code];
@@ -51,28 +50,26 @@ const VerificationForm = ({ email, onVerificationSuccess }) => {
   }, [timer]);
 
   const handleSubmit = () => {
-    const isVerified = true; 
+    const isVerified = true; // Giả sử mã xác minh luôn hợp lệ
     if (isVerified) {
-      const nextPage = location.state?.nextPage || "/"; 
-      navigate(nextPage);
+      navigate("/account/profile"); // Điều hướng đến trang Hồ sơ tài khoản
     }
   };
 
   return (
     <div className="verification-form-container">
       <div className="verification-form-content">
-      <Button
-        icon = {<ArrowLeftOutlined/>}
-        onClick={() => navigate(-1)}
-        style={{
-          position: "relative",
-          color:  '#e87428',
-          left: '-70px',
-          border: 'none',
-          right: '0px',
+        <Button
+          icon={<ArrowLeftOutlined />}
+          onClick={() => navigate(-1)}
+          style={{
+            position: "relative",
+            color: '#e87428',
+            left: '-70px',
+            border: 'none',
+            right: '0px',
           }}
-          >
-        </Button>
+        ></Button>
         <Text className="verification-form-title">Nhập mã xác nhận</Text>
         <p className="verification-form-description">
           Mã xác minh đã được gửi đến thiết bị của bạn <br />

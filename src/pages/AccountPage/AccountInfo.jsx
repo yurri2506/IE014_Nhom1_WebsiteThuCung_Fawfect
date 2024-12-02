@@ -15,16 +15,21 @@ const AccountInfo = () => {
 
   const [form] = Form.useForm();
 
+  // Khởi tạo dữ liệu
   const initialData = {
     Input: 'yurri_2506',
     HoTen: 'Nguyễn Lê Thanh Huyền',
     NgaySinh: moment('25/06/2204', 'DD/MM/YYYY'),
     GioiTinh: 'Nữ',
-    Email: 'thanhhuyen@gmail.com.vn',
-    Sodienthoai: '0223350604',
+    Email: '', // Để trống nếu không có
+    Sodienthoai: '', // Để trống nếu không có
     DiaChi: 'Cù Bị, Châu Đức, Bà Rịa - Vũng Tàu',
     Matkhau: 'thanhhuyen@123'
   };
+
+  // Xử lý giá trị đầu vào
+  const email = initialData.Email || "Chưa cập nhật";
+  const phone = initialData.Sodienthoai || "Chưa cập nhật";
 
   const handleEdit = () => {
     navigate('/account/edit-info');
@@ -99,11 +104,17 @@ const AccountInfo = () => {
               <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                 <Input 
                   disabled 
-                  value="thanhhuyen@gmail.com.vn" 
+                  value={email} 
                   style={{ flex: 1, marginRight: '8px' }} 
                 />
                 <EditOutlined 
-                  onClick={() => navigate('/account/edit-email')}
+                  onClick={() => {
+                    if (!initialData.Email) {
+                      navigate('/account/new-email'); // Điều hướng đến trang thêm email nếu chưa có email
+                    } else {
+                      navigate('/account/edit-email'); // Điều hướng đến trang chỉnh sửa email nếu đã có email
+                    }
+                  }}
                   style={{ cursor: 'pointer', color: '#E87428', fontSize: '16px' }} 
                 />
               </div>
@@ -116,11 +127,17 @@ const AccountInfo = () => {
               <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                 <Input 
                   disabled 
-                  value="0223350604" 
+                  value={phone} 
                   style={{ flex: 1, marginRight: '8px' }} 
                 />
                 <EditOutlined 
-                  onClick={() => navigate('/account/edit-phone')} 
+                  onClick={() => {
+                    if (!initialData.Sodienthoai) {
+                      navigate('/account/new-phone'); // Điều hướng đến trang thêm phone nếu chưa có phone
+                    } else {
+                      navigate('/account/edit-phone'); // Điều hướng đến trang chỉnh sửa phone nếu đã có phone
+                    }
+                  }}
                   style={{ cursor: 'pointer', color: '#E87428', fontSize: '16px' }} 
                 />
               </div>
