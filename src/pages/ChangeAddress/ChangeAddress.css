@@ -1,6 +1,5 @@
 .profile-container {
     display: flex;
-  }
   
   .content {
     flex: 1;
@@ -21,3 +20,4 @@
     font-weight: bold;
     margin-bottom: 20px;
   }
+}
