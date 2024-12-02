@@ -102,7 +102,7 @@ const ChangeAddress = () => {
     try {
       const response = await apiGetDistricts(provinceId);
       setDistricts(response.results || []);
-      setWards([]); // Reset danh sách phường/xã khi thay đổi tỉnh
+      setWards([]); 
     } catch (error) {
       console.error("Lỗi khi lấy danh sách quận/huyện:", error);
     }
