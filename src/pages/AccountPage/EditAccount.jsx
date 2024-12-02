@@ -12,9 +12,8 @@ const cx = classNames.bind(styles);
 const initialData = {
   Input: 'yurri_2506',
   HoTen: 'Nguyễn Lê Thanh Huyền',
-  NgaySinh: moment('25/06/2204', 'DD/MM/YYYY'), // Đảm bảo sử dụng moment đúng cách
+  NgaySinh: moment('25/06/2204', 'DD/MM/YYYY'),
   GioiTinh: 'female',
-  DiaChi: 'Cù Bị, Châu Đức, Bà Rịa - Vũng Tàu',
 };
 
 function EditAccount() {
@@ -25,16 +24,15 @@ function EditAccount() {
 
   const handleSave = (values) => {
     alert('Cập nhật thông tin thành công!');
-    navigate('/account-info');
+    navigate('/account/profile');
   };
 
   const handleCancel = () => {
-    navigate('/account-info');
+    navigate('/account/profile');
   };
 
-  // Kiểm tra nếu tất cả các trường đã được nhập
   const handleValuesChange = (_, allValues) => {
-    const requiredFields = ['Input', 'HoTen', 'NgaySinh', 'GioiTinh', 'DiaChi'];
+    const requiredFields = ['Input', 'HoTen', 'NgaySinh', 'GioiTinh'];
     const isAllFieldsFilled = requiredFields.every(
       (field) => allValues[field] && allValues[field].toString().trim() !== ''
     );
@@ -100,14 +98,6 @@ function EditAccount() {
               </Select>
             </Form.Item>
 
-            <Form.Item
-              label="Địa chỉ"
-              name="DiaChi"
-              rules={[{ required: true, message: 'Nhập địa chỉ!' }]}
-            >
-              <Input.TextArea />
-            </Form.Item>
-
             <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
               <Button
                 htmlType="reset"
@@ -120,7 +110,7 @@ function EditAccount() {
                 type="primary"
                 htmlType="submit"
                 className={cx('confirm-button')}
-                disabled={!isFormFilled} // Nút xác nhận bị vô hiệu hóa nếu form chưa đầy đủ
+                disabled={!isFormFilled} 
                 style={{
                   backgroundColor: isFormFilled ? '#E87428' : '#d9d9d9',
                   borderColor: isFormFilled ? '#E87428' : '#d9d9d9',

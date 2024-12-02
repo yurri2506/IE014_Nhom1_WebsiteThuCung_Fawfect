@@ -27,7 +27,7 @@ const AccountInfo = () => {
   };
 
   const handleEdit = () => {
-    navigate('/edit-account');
+    navigate('/account/edit-info');
   };
 
   return (
@@ -93,12 +93,6 @@ const AccountInfo = () => {
             </Form.Item>
 
             <Form.Item
-              label="Địa chỉ"
-              name="DiaChi">
-              <Input.TextArea disabled value="Cù Bị, Châu Đức, Bà Rịa - Vũng Tàu" />
-            </Form.Item>
-
-            <Form.Item
               label="Email"
               name="Email"
             >
@@ -109,7 +103,7 @@ const AccountInfo = () => {
                   style={{ flex: 1, marginRight: '8px' }} 
                 />
                 <EditOutlined 
-                  onClick={() => navigate('/edit-email')}
+                  onClick={() => navigate('/account/edit-email')}
                   style={{ cursor: 'pointer', color: '#E87428', fontSize: '16px' }} 
                 />
               </div>
@@ -126,23 +120,7 @@ const AccountInfo = () => {
                   style={{ flex: 1, marginRight: '8px' }} 
                 />
                 <EditOutlined 
-                  onClick={() => navigate('/edit-phone')} 
-                  style={{ cursor: 'pointer', color: '#E87428', fontSize: '16px' }} 
-                />
-              </div>
-            </Form.Item>
-            <Form.Item
-              label="Mật khẩu"
-              name="Matkhau"
-            >
-              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                <Input.Password 
-                  disabled 
-                  value="thanhhuyen@123" 
-                  style={{ flex: 1, marginRight: '8px' }} 
-                />
-                <EditOutlined 
-                  onClick={() => navigate('/edit-password')} 
+                  onClick={() => navigate('/account/edit-phone')} 
                   style={{ cursor: 'pointer', color: '#E87428', fontSize: '16px' }} 
                 />
               </div>

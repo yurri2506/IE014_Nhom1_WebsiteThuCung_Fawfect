@@ -24,6 +24,10 @@ import EditAccount from "../pages/AccountPage/EditAccount";
 import GeneralPolicy from "../pages/GeneralPolicy/GeneralPolicy"
 import GuaranteePolicy from "../pages/GuaranteePolicy/Guarantee";
 import NewPassword from "../pages/ChangePassword/NewPassword";
+import NewEmail from "../pages/ChangeEmail/NewEmail";
+import NewPhone from "../pages/ChangePhone/NewPhone";
+import ChangeAddress from "../pages/ChangeAddress/ChangeAddress";
+import VerificationForm from "../components/VerificationForm/VerificationForm";
 
 export const routes = [
     {
@@ -106,33 +110,48 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/account-info',
+        path: '/account/profile',
         page: AccountInfo,
         isShowHeader: true
     },
     {
-        path: '/edit-account',
+        path: '/account/edit-info',
         page: EditAccount,
         isShowHeader: true
     },
     {
-        path: '/edit-password',
+        path: '/account/edit-password',
         page: ChangePassword,
         isShowHeader: true
     },
     {
-        path: '/edit-password/new-password',
+        path: '/account/edit-password/new-password',
         page: NewPassword,
         isShowHeader: true
     },
     {
-        path: '/edit-email',
+        path: '/account/edit-email',
         page: ChangeEmail,
         isShowHeader: true
     },
     {
-        path: '/edit-phone',
+        path: '/account/new-email',
+        page: NewEmail,
+        isShowHeader: true
+    },
+    {
+        path: '/account/edit-phone',
         page: ChangePhone,
+        isShowHeader: true
+    },
+    {
+        path: '/account/new-phone',
+        page: NewPhone,
+        isShowHeader: true
+    },
+    {
+        path: '/account/edit-address',
+        page: ChangeAddress,
         isShowHeader: true
     },
     {
@@ -153,6 +172,11 @@ export const routes = [
     {
         path: '/logout',
         page: LogoutPage,
+        isShowHeader: true
+    },
+    {
+        path: '/verification',
+        page: VerificationForm,
         isShowHeader: true
     },
     {

@@ -34,11 +34,11 @@ function ChangePhone() {
 
   const handleSave = (values) => {
     alert('Số điện thoại đã được cập nhật!');
-    navigate('/account-info');
+    navigate('/account/profile');
   };
 
   const handleCancel = () => {
-    navigate('/account-info');
+    navigate('/account/profile');
   };
 
   return (

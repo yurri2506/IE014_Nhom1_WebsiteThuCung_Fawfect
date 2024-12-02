@@ -15,7 +15,7 @@ function NewPassword() {
 
   const handleSaveNewPassword = (values) => {
     alert('Đổi mật khẩu thành công!');
-    navigate('/account-info'); 
+    navigate('/account/profile'); 
   };
   const handleValuesChange = (changedValues, allValues) => {
     if (allValues.newPassword && allValues.newPassword.trim() !== '') {
@@ -26,7 +26,7 @@ function NewPassword() {
   };
 
   const handleCancel = () => {
-    navigate('/edit-password');
+    navigate('/account/edit-password');
   };
 
   return (
