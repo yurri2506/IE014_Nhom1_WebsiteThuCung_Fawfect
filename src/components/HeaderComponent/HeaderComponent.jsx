@@ -638,7 +638,7 @@ const HeaderComponent = () => {
           <Col className={styles.cart} span={6}>
             <ul>
               <li>
-                <Link>
+                <Link to={`/favorite-products/${_id}`} >
                   <FaRegHeart />
                   <span>Yêu thích</span>
                 </Link>

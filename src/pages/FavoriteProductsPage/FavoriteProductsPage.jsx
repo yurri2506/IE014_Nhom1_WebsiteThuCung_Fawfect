@@ -3,7 +3,7 @@ import CartItemComponent from "../../components/CartItemComponent/CartItemCompon
 import OrderSummaryComponent from "../../components/OrderSummaryComponent/OrderSummaryComponent";
 import styles from "./FavoriteProductsPage.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAllProductByUserId } from "../../services/Order.service";
+import { getAllFavoriteByUserId } from "../../services/Order.service";
 import { useQuery } from "@tanstack/react-query";
 import product4 from "../../assets/images/product4.svg";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
@@ -22,7 +22,7 @@ const FavoriteProductsPage = () => {
   const fetchCartData = async ({ queryKey }) => {
     const [, userId, token] = queryKey; // Giải nén queryKey
     try {
-      const cartProduct = await getAllProductByUserId(userId, token);
+      const cartProduct = await getAllFavoriteByUserId(userId, token);
       if (!cartProduct || !cartProduct.data) {
         throw new Error("No cart data returned from API");
       }
