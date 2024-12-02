@@ -1123,8 +1123,8 @@ const RegisterPage = () => {
                   <div className={styles.agreeTerms}>
                     <p>
                       Bằng việc đăng ký, bạn đã đồng ý với <span>Pawfect </span> về&nbsp;
-                      <a href='/'>Điều khoản dịch vụ</a> &&nbsp;
-                      <a href='/'>Chính sách bảo mật</a>
+                      <a href='/general-terms'>Điều khoản dịch vụ</a> &&nbsp;
+                      <a href='/privacy-policy'>Chính sách bảo mật</a>
                     </p>
                   </div>
                   <div className={styles.haveAccount}>
