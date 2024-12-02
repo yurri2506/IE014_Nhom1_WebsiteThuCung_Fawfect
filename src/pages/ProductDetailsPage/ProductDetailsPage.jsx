@@ -368,7 +368,7 @@ const ProductDetailsPage = () => {
                 <ButtonComponent
                   title="Thêm vào giỏ hàng"
                   fontSize="1.2rem"
-                  width="200px"
+                  width="170px"
                   height="50px"
                   widthDiv="none"
                   icon={cart}
@@ -378,7 +378,7 @@ const ProductDetailsPage = () => {
                 <ButtonComponent
                   title="Mua ngay"
                   fontSize="1.2rem"
-                  width="150px"
+                  width="200px"
                   height="50px"
                   showIcon={false}
                   widthDiv="none"
