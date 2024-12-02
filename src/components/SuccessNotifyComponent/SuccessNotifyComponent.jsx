@@ -6,10 +6,14 @@ import NextArrowComponent from '../NextArrowComponent/NextArrowComponent'
 import TitleComponent from '../TitleComponent/TitleComponent'
 import FormComponent from '../FormComponent/FormComponent'
 import orangeLogo from '../../assets/images/orangeLogo.svg'
+import { useNavigate } from 'react-router-dom'
 
-const SuccessNotifyComponent = () => {
+const SuccessNotifyComponent = ({title1, title2 = "Tạo mật khẩu", title3 = "Hoàn thành", notify}) => {
 
   const [isInMobile, setisInMobile] = useState(false);
+  const [countdown, setCountdown] = useState(7);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 739px)');
     const handleViewportChange = () => setisInMobile(mediaQuery.matches);
@@ -22,37 +26,51 @@ const SuccessNotifyComponent = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prev) => prev - 1); // Giảm giá trị đếm ngược mỗi giây
+    }, 1000);
+
+    // Khi đếm ngược về 0, chuyển sang trang đăng nhập
+    if (countdown === 0) {
+      clearInterval(timer); // Dừng interval
+      navigate('/sign-in'); // Thay '/sign-in' bằng đường dẫn trang đăng nhập của bạn
+    }
+
+    return () => clearInterval(timer); // Xóa timer khi component unmount
+  }, [countdown, navigate]);
+
+  const isOTP = title1 === "Xác minh mã OTP"
+
   return (
     <div className={styles.main}>
       <div className="grid wide">
-        <div className={styles.step}>
+        <div className={styles.step} style={isOTP ? {marginLeft: "100px"} : null}>
           <StatusComponent
             number="1"
-            title="Xác minh số điện thoại"
+            title={title1}
             success
             className={styles.stt}
           />
           <NextArrowComponent
             position = "absolute"
-            top = "30px"
-            left = "330px"
             className={styles.arrow1}
+            left={isOTP ? "280px" : "330px"}
           />
           <StatusComponent 
             number="2"
-            title="Tạo mật khẩu"
+            title={title2}
             success
             className={styles.stt}
           />
           <NextArrowComponent 
             position = "absolute"
-            top = "30px"
-            left = "660px"
             className={styles.arrow2}
+            left={isOTP ? "580px" : "660px"}
           />
           <StatusComponent 
             number="✔"
-            title="Hoàn thành"
+            title={title3}
             success
             className={styles.stt}
           />
@@ -69,7 +87,7 @@ const SuccessNotifyComponent = () => {
             <div className={styles.choice}>
                 <div className={styles.title}>
                     <TitleComponent
-                        title="Đăng ký thành công"
+                        title={notify}
                         textTransform="none"
                         textAlign="center"
                         fontSize={isInMobile ? "2rem" : "2.5rem"}
@@ -83,8 +101,12 @@ const SuccessNotifyComponent = () => {
                 margin="0"
               />
             </div>
-            <div className={styles.img}>
+            {/* <div className={styles.img}>
               <img src={orangeLogo} alt="" />
+            </div> */}
+            <div className={styles.error}>
+              <p>Bạn sẽ được chuyển sang trang đăng nhập sau <strong><span>{countdown}</span></strong> giây</p>
+              <p onClick={() => navigate("/sign-in")}>Đăng nhập ngay</p>
             </div>
           </FormComponent>
         </div>

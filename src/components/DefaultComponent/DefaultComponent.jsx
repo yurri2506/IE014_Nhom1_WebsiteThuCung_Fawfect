@@ -1,7 +1,6 @@
 import React from 'react'
 import HeaderComponent from '../HeaderComponent/HeaderComponent'
 import FooterComponent from '../FooterComponent/FooterComponent'
-import MyOrderPage from '../../pages/MyOrderPage/MyOrderPage';
 
 
 const DefaultComponent = ({ children }) => {

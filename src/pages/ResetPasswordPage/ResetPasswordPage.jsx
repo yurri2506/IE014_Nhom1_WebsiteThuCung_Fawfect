@@ -267,7 +267,12 @@ const ResetPasswordPage = () => {
                                     margin="15px 0 15px"
                                     onClick={handleVerifyOtp}
                                     className={styles.btn}
-                                    disabled={!!error} // Vô hiệu hóa nút nếu có lỗi
+                                    showIcon={false}
+                                    disabled={
+                                        !! error || 
+                                        validateInput(identifier) === "invalidPhone" || 
+                                        validateInput(identifier) === "invalidEmail"
+                                    }
                                 />
                             </FormComponent>
                         </div>
@@ -281,7 +286,12 @@ const ResetPasswordPage = () => {
 
             {currentStep === 3 && (<InputPasswordComponent onClick={handleNextStep} identifier={identifier}/>)}
 
-            {currentStep === 4 && <SuccessNotifyComponent />}
+            {currentStep === 4 && 
+                <SuccessNotifyComponent 
+                    title1="Xác minh mã OTP"
+                    notify="Đặt lại mật khẩu thành công"
+                />
+            }
         </div>
     );
 };

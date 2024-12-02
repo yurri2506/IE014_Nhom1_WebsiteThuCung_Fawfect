@@ -1,6 +1,5 @@
 import HomePage from "../pages/HomePage/HomePage";
 import OrderPage from "../pages/OrderPage/OrderPage";
-import ProductsPage from "../pages/ProductsPage/ProducstPage"
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage"
 import GeneralTermsPage from "../pages/GeneralTermsPage/GeneralTermsPage"
 import SignInPage from "../pages/SignInPage/SignInPage"
@@ -28,101 +27,111 @@ import NewEmail from "../pages/ChangeEmail/NewEmail";
 import NewPhone from "../pages/ChangePhone/NewPhone";
 import ChangeAddress from "../pages/ChangeAddress/ChangeAddress";
 import VerificationForm from "../components/VerificationForm/VerificationForm";
+import FavoriteProductsPage from "../pages/FavoriteProductsPage/FavoriteProductsPage";
 
 export const routes = [
+    //Routes cho User
     {
         path: '/',
         page: HomePage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/order',
         page: OrderPage,
-        isShowHeader: true
-    },
-    {
-        path: '/products',
-        page: ProductsPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/general-terms',
         page: GeneralTermsPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/sign-in',
         page: SignInPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/sign-up',
         page: SignUpPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/product-details/:id',
         page: ProductDetailsPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/my-order',
         page: MyOrderPage,
-        isShowHeader: true
-    },
-    {
-        path: '*',
-        page: NotFoundPage
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/reset',
         page: ResetPasswordPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/about',
         page: AboutPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/guarantee',
         page: GuaranteePage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/return-policy',
         page: ReturnPolicyPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/privacy-policy',
         page: PrivacyPolicyPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
-        path: '/my-cart',
+        path: '/my-cart/:id',
         page: MyCartPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/check-out',
         page: CheckOutPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/account/profile',
         page: AccountInfo,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/account/edit-info',
         page: EditAccount,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/account/edit-password',
         page: ChangePassword,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/account/edit-password/new-password',
@@ -172,7 +181,8 @@ export const routes = [
     {
         path: '/logout',
         page: LogoutPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
     },
     {
         path: '/verification',
@@ -182,6 +192,29 @@ export const routes = [
     {
         path: '/get-all-product',
         page: TypeProductPage,
-        isShowHeader: true
+        isShowHeader: true,
+        role: "user"
+    },
+    {
+        path: '/favorite-products',
+        page: FavoriteProductsPage,
+        isShowHeader: true,
+        role: "user"
+    },
+
+
+    // Routes cho Admin
+    // {
+    //     path: process.env.REACT_APP_ADMIN_PATH + "/dashboard",
+    //     page: AdminDashboardPage,
+    //     isShowHeader: false,
+    //     role: "admin"
+    // },
+
+
+    // Routes cho trang không có
+    {
+        path: '*',
+        page: NotFoundPage
     }
 ]

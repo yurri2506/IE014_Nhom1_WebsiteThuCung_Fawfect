@@ -268,15 +268,15 @@ const HomePage = () => {
   const bestProduct = data?.bestProduct || {}
 
   const handleNewProduct = () => {
-    navigate("/my-order")
+    navigate("/get-all-product?sort=newest")
   }
 
   const handleFamousProduct = () => {
-    navigate("/my-order")
+    navigate("/get-all-product?product_famous=true")
   }
 
   const handleBestProduct = () => {
-    navigate("/my-order")
+    navigate("/get-all-product?sort=best_selling")
   }
 
   // Xử lý sản phẩm lấy được từ API
@@ -338,7 +338,7 @@ const HomePage = () => {
   return (
       <div className={clsx('grid wide')}>
         <div className={styles.sliderImg}>
-          <SliderComponent arrImages={[slider1, slider2]} />
+          <SliderComponent arrImages={[slider1, slider2]} defaultArrows={false}/>
         </div>
         <div className={clsx('row', styles.service)}>
           {services.map((service, index) => (

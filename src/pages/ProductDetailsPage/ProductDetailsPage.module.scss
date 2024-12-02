@@ -45,6 +45,11 @@
 
   a {
       margin-right: 10px;
+
+      img {
+        width: 40px;
+        height: 40px;
+      }
   }
 }
 
@@ -249,6 +254,24 @@
     margin-left: 10px;
     color: #757575;
     margin-bottom: 0;
+  }
+
+  .like {
+    margin: 0;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;  
+
+    svg {
+      color: red;
+      font-size: 2rem;
+    }
+
+    span {
+      color: #000;
+      margin-left: 4px;
+      font-weight: 400;
+    }
   }
 }
 

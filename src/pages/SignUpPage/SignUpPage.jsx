@@ -863,7 +863,7 @@
 // export default RegisterPage;
 
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 import styles from './SignUpPage.module.scss';
 import TitleComponent from '../../components/TitleComponent/TitleComponent';
@@ -872,9 +872,9 @@ import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import FormComponent from '../../components/FormComponent/FormComponent';
 import InputFormComponent from '../../components/InputFormComponent/InputFormComponent';
 import { MdPhonePaused } from 'react-icons/md';
-import facebook_2 from '../../assets/images/facebook_2.svg';
+import facebook_2 from '../../assets/images/facebook.svg';
 import google from '../../assets/images/google.svg';
-import { signUpPhone, signInGoogle } from "../../services/User.service";
+import { signUpPhone, signInGoogle, getUserDetails } from "../../services/User.service";
 import VerifyMethodComponent from '../../components/VerifyMethodComponent/VerifyMethodComponent';
 import SetPasswordComponent from '../../components/SetPasswordComponent/SetPasswordComponent';
 import SuccessNotifyComponent from '../../components/SuccessNotifyComponent/SuccessNotifyComponent';
@@ -882,6 +882,7 @@ import PopupComponent from "../../components/PopupComponent/PopupComponent";
 import Cookies from "js-cookie";
 import { updateUser } from "../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
+import { jwtDecode } from 'jwt-decode';
 
 const RegisterPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -891,9 +892,14 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPopup, setShowPopup] = useState(false);
+  const location = useLocation();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleNextStep = () => setCurrentStep(currentStep + 1);
+  const handleNextStep = () => {
+    setCurrentStep((prevStep) => prevStep + 1);
+  };
+  const isDisabled = !phoneNumber || !!errorMessage;
 
   const handlePhoneChange = (e) => {
     const value = e.target.value;
@@ -913,7 +919,7 @@ const RegisterPage = () => {
         handleNextStep();
       }
     } catch (error) {
-      setErrorMessage(error.message || "Có lỗi xảy ra.");
+      setErrorMessage(error.message.message || "Có lỗi xảy ra.");
       setShowPopup(true);
     }
   };
@@ -936,16 +942,55 @@ const RegisterPage = () => {
         secure: true, // Chỉ gửi qua HTTPS
         sameSite: "Strict", // Ngăn chặn CSRF
       });
-      dispatch(updateUser(result));
+      //dispatch(updateUser(result));
+      
       console.log("Access Token (localStorage):", result.ACCESS_TOKEN);
       console.log("Refresh Token (Cookie):", Cookies.get("refreshToken"));
-      if (result) {
-        navigate('/'); // Điều hướng sau khi đăng nhập thành công
+      // if (result) {
+      //   navigate('/'); // Điều hướng sau khi đăng nhập thành công
+      // }
+
+      if (result?.ACCESS_TOKEN) {
+        const decoded = jwtDecode(result.ACCESS_TOKEN);
+        if (decoded?.id) {
+          handleGetDetailsUser(decoded.id);
+        } else {
+          console.error("Decoded token does not have an id.");
+        }
+      } else {
+        console.error("ACCESS_TOKEN is missing in the response data.");
       }
+
+      // Điều hướng sau khi đăng nhập
+      if (location?.state) {
+        navigate(location.state);
+      } else {
+        navigate("/");
+      }
+    
 
     } catch (error) {
       setErrorMessage(error.message || "Đăng nhập Google thất bại.");
       setShowPopup(true);
+    }
+  };
+
+  const handleGetDetailsUser = async (id) => {
+    const accessToken = localStorage.getItem("accessToken");
+    try {
+      const res = await getUserDetails(id, accessToken);
+      console.log("Fetched user details:", res.data);
+
+      const refreshToken = Cookies.get("refreshToken");
+      dispatch(
+        updateUser({
+          ...res?.data,
+          access_token: accessToken,
+          refreshToken: refreshToken,
+        })
+      );
+    } catch (error) {
+      console.error("Error in handleGetDetailsUser:", error);
     }
   };
 
@@ -1028,17 +1073,19 @@ const RegisterPage = () => {
                     mainSpan: { top: "16px", left: "90px" }
                   }}
                   value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
                   width={isInMobile ? "70%" : "350px"}
                   borderRadius={isInMobile ? "10px" : "30px"}
                   className={styles.input}
-                />
+                  onChange={handlePhoneChange}
+                  />
+                {<p className={styles.error}>{errorMessage}</p>}
                 <ButtonComponent 
                   title="TIẾP THEO"
                   primary
                   className={styles.btn}
                   showIcon={false}
-                  // onClick={handleSubmitPhone}
+                  disabled={isDisabled}
+                  onClick={isDisabled ? null : handleNextStep}
                 />
                 <div className={styles.other}>
                   <UnderLineComponent 
@@ -1068,6 +1115,7 @@ const RegisterPage = () => {
                     iconSmall
                     icon={google}
                     margin="30px 0 0"
+                    onClick={googleLogin}
                     className={styles.btnOp}
                   />
                 </div>
@@ -1075,8 +1123,8 @@ const RegisterPage = () => {
                   <div className={styles.agreeTerms}>
                     <p>
                       Bằng việc đăng ký, bạn đã đồng ý với <span>Pawfect </span> về&nbsp;
-                      <a href='/'>Điều khoản dịch vụ</a> &&nbsp;
-                      <a href='/'>Chính sách bảo mật</a>
+                      <a href='/general-terms'>Điều khoản dịch vụ</a> &&nbsp;
+                      <a href='/privacy-policy'>Chính sách bảo mật</a>
                     </p>
                   </div>
                   <div className={styles.haveAccount}>
@@ -1095,7 +1143,7 @@ const RegisterPage = () => {
       )}
 
         {/* Các bước tiếp theo */}
-        {currentStep === 2 && <VerifyMethodComponent />}
+        {currentStep === 2 && <VerifyMethodComponent onClick={handleNextStep}/>}
         {currentStep === 3 && (
           <SetPasswordComponent
             name={name}
@@ -1105,10 +1153,14 @@ const RegisterPage = () => {
             onPasswordChange={setPassword}
             onConfirmPasswordChange={setConfirmPassword}
             onClick={handleSignUp}
-            isRegister={true}
           />
         )}
-        {currentStep === 4 && <SuccessNotifyComponent />}
+        {currentStep === 4 && 
+          <SuccessNotifyComponent 
+            title1="Xác minh số điện thoại"
+            notify="Đăng ký thành công"
+          />
+        }
         {showPopup && <PopupComponent message={errorMessage} onClose={closePopup} />}
       </div>
   );

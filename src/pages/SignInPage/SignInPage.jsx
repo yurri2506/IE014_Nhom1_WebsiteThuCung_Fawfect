@@ -9,14 +9,15 @@ import InputFormComponent from "../../components/InputFormComponent/InputFormCom
 import { MdPhonePaused } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import PopupComponent from "../../components/PopupComponent/PopupComponent";
-import { loginUser, getUserDetails } from "../../services/User.service"; // Hàm gọi API đăng nhập
+import { loginUser, getUserDetails, signInGoogle } from "../../services/User.service"; // Hàm gọi API đăng nhập
 import Cookies from "js-cookie";
-import facebook_2 from "../../assets/images/facebook_2.svg";
+import facebook_2 from "../../assets/images/facebook.svg";
 import google from "../../assets/images/google.svg";
 import { updateUser } from "../../redux/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import { useMutationHooks } from '../../hooks/useMutationHook'
+import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 
 const SignInPage = () => {
   const [identifier, setIdentifier] = useState("");
@@ -50,7 +51,7 @@ const SignInPage = () => {
 
       // Lưu Refresh Token vào Cookie
       Cookies.set("refreshToken", data.REFRESH_TOKEN, {
-        expires: 1,
+        expires: 7,
         secure: true,
         sameSite: "Strict",
       });
@@ -116,6 +117,65 @@ const SignInPage = () => {
     setErrorMessage("");
   };
 
+  
+  const handleGoogleLoginSuccess = async (access_token) => {
+    console.log("Google token: ", access_token);
+    try {
+      const result = await signInGoogle(access_token);
+      console.log(result)
+      localStorage.setItem("accessToken", result.ACCESS_TOKEN);
+
+      // Lưu refreshToken vào cookie
+      Cookies.set("refreshToken", result.REFRESH_TOKEN, {
+        expires: 1, // Token có hiệu lực trong 1 ngày
+        secure: true, // Chỉ gửi qua HTTPS
+        sameSite: "Strict", // Ngăn chặn CSRF
+      });
+      //dispatch(updateUser(result));
+      
+      console.log("Access Token (localStorage):", result.ACCESS_TOKEN);
+      console.log("Refresh Token (Cookie):", Cookies.get("refreshToken"));
+      // if (result) {
+      //   navigate('/'); // Điều hướng sau khi đăng nhập thành công
+      // }
+
+      if (result?.ACCESS_TOKEN) {
+        const decoded = jwtDecode(result.ACCESS_TOKEN);
+        if (decoded?.id) {
+          handleGetDetailsUser(decoded.id);
+        } else {
+          console.error("Decoded token does not have an id.");
+        }
+      } else {
+        console.error("ACCESS_TOKEN is missing in the response data.");
+      }
+
+      // Điều hướng sau khi đăng nhập
+      if (location?.state) {
+        navigate(location.state);
+      } else {
+        navigate("/");
+      }
+    
+
+    } catch (error) {
+      setErrorMessage(error.message || "Đăng nhập Google thất bại.");
+      setShowPopup(true);
+    }
+  };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: (response) => {
+      console.log('Google login successful, token:', response.access_token); // In token ra để kiểm tra
+      handleGoogleLoginSuccess(response.access_token);
+    },
+    onError: () => {
+      setErrorMessage("Đăng nhập Google thất bại.");
+      setShowPopup(true);
+    },
+  });
+
+
   const [isInMobile, setisInMobile] = useState(false);
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 739px)');
@@ -129,6 +189,12 @@ const SignInPage = () => {
     };
   }, []);
 
+
+  const isValidIdentifier = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$/.test(identifier) || /^\d{10,}$/.test(identifier);
+  
+  const isValidPassword = password.length > 0;
+
+  const isDisabled = !isValidIdentifier || !isValidPassword;
   return (
     <div className={styles.main}>
       {/* Hiển thị trạng thái đang tải */}
@@ -231,10 +297,10 @@ const SignInPage = () => {
                   title={isLoading ? "Đang đăng nhập..." : "ĐĂNG NHẬP"}
                   primary
                   margin="0 0 15px"
-                  onClick={handleSubmit}
-                  disabled={isLoading}
+                  onClick={isDisabled ? null : handleSubmit}
                   className={styles.btn}
                   showIcon={false}
+                  disabled={isDisabled || isLoading}
                 />
               </form>
               <span>
@@ -263,13 +329,14 @@ const SignInPage = () => {
                   margin="30px 0 0"
                   className={styles.btnOp}
                 />
-                <ButtonComponent
-                  title="Google"
-                  iconSmall
-                  icon={google}
-                  margin="30px 0 0"
-                  className={styles.btnOp}
-                />
+                <ButtonComponent 
+                    title="Google"
+                    iconSmall
+                    icon={google}
+                    margin="30px 0 0"
+                    onClick={googleLogin}
+                    className={styles.btnOp}
+                  />
               </div>
               <div className={styles.footer}>
                 <div className={styles.doNotHaveAccount}>
