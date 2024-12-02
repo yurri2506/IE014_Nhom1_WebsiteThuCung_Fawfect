@@ -1,0 +1,174 @@
+.openModalBtn {
+    background-color: #E87428;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #e58646;
+    }
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.modalContent {
+    background: #fff;
+    padding: 20px;
+    width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h2 {
+        font-size: 2.4rem !important;
+        margin: 0;
+    }
+
+    .closeModalBtn {
+        font-size: 4rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+.voucherInput {
+    margin-bottom: 20px;
+    position: relative;
+
+    input {
+        padding: 0;
+        border: 0;
+        width: 60%;
+        height: 45px;
+        background-color: #F0F0F0;
+        border-radius: 8px;
+        outline: none;
+        padding-left: 40px;
+        color: rgba(0, 0, 0, 0.4);
+        font-size: 1.8rem;
+    }
+
+    span {
+        position: absolute;
+        font-size: 2rem;
+        top: 13px;
+        left: 13px;
+        color: rgba(0, 0, 0, 0.4);
+    }
+
+    .btn {
+        width: 35%;
+        height: 45px;
+        border-radius: 8px;
+        margin-left: 10px;
+        background-color: #000;
+        border: none;
+        color: #fff;
+        font-size: 1.7rem;
+        cursor: pointer;
+    
+        &:hover {
+            opacity: 0.8;
+        }
+    } 
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+
+    .tabBtn {
+        flex: 1;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s;
+        font-size: 1.3rem;
+
+        &:hover {
+            background-color: #e2e6ea;
+        }
+
+        &.active {
+            background-color: #E87428;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+    }
+}
+
+.tabContent {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.voucherCard {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #f8f9fa;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &.selected {
+        background-color: #f8e4d8;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h3 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 1.4rem;
+        color: rgba(0, 0, 0, 0.54);
+    }
+}
+
+.applyBtn {
+    width: 100%;
+    background-color: #E87428;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 1.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+
+    &:hover {
+        background-color: #e58646;
+    }
+}
