@@ -145,6 +145,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getAllProductByUserId } from "../../services/Order.service";
 import { useQuery } from "@tanstack/react-query";
 import product4 from "../../assets/images/product4.svg";
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 
 const MyCartPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -159,7 +160,7 @@ const MyCartPage = () => {
 
   // Hàm fetch dữ liệu từ API
   const fetchCartData = async ({ queryKey }) => {
-    const [ , userId, token] = queryKey; // Giải nén queryKey
+    const [, userId, token] = queryKey; // Giải nén queryKey
     try {
       const cartProduct = await getAllProductByUserId(userId, token);
       if (!cartProduct || !cartProduct.data) {
@@ -180,7 +181,7 @@ const MyCartPage = () => {
     refetchOnWindowFocus: true,
     keepPreviousData: true,
   });
-  console.log("data", data); 
+  console.log("data", data);
   // Cập nhật cartItems khi data từ API thay đổi
   useEffect(() => {
     if (data?.data?.products) {
@@ -190,9 +191,9 @@ const MyCartPage = () => {
         oldPrice: item.product_id.product_price || 0,
         price: (item.product_id.product_price *
           (1 - item.product_id.product_percent_discount / 100)
-        .toLocaleString()) || 0,
+            .toLocaleString()) || 0,
         quantity: item.quantity || 1,
-        img: 
+        img:
           item.product_id.product_images && item.product_id.product_images[0]
             ? `data:image/jpeg;base64,${item.product_id.product_images[0]}`
             : product4,
@@ -277,17 +278,41 @@ const MyCartPage = () => {
   if (isLoading) {
     return <div>Đang tải dữ liệu giỏ hàng...</div>;
   }
+
+  const handleRemoveAllItems = () => {
+    setCartItems([]);
+    setCheckedItems([]);
+    setDiscount(0);
+    setShippingFee(0);
+  };
+
   return (
     <div className={styles.main}>
       <div className="grid wide">
         <h2>GIỎ HÀNG CỦA BẠN</h2>
-        <div className={styles.checkAll}>
-          <input
-            type="checkbox"
-            checked={checkedItems.length === cartItems.length}
-            onChange={(e) => handleCheckAll(e.target.checked)}
-          />
-          <h3>Chọn tất cả</h3>
+        <div className={styles.allBtn}>
+          <div className={styles.checkAll}>
+            {cartItems.length > 0 && (
+              <>
+                <input
+                  type="checkbox"
+                  checked={checkedItems.length === cartItems.length}
+                  onChange={(e) => handleCheckAll(e.target.checked)}
+                />
+                <h3>Chọn tất cả</h3>
+              </>
+            )}
+          </div>
+          <div className={styles.removeAll}>
+            {cartItems.length > 0 && (
+              <button
+                className={styles.removeAllButton}
+                onClick={handleRemoveAllItems}
+              >
+                Xóa tất cả
+              </button>
+            )}
+          </div>
         </div>
         <div className={styles.cart}>
           <div className={styles.cartItems}>
