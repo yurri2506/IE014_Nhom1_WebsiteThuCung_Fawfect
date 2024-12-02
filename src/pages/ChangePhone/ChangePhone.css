@@ -1,7 +1,6 @@
 .profile-container {
     display: flex;
-  }
-  
+
   .content {
     flex: 1;
     padding: 20px;
@@ -34,4 +33,4 @@
     margin-right: 10px;
     color: white;
   }
-  
+}
