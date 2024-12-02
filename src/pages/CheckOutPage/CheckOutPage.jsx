@@ -8,25 +8,36 @@ import momo from '../../assets/images/momo.svg'
 import visa from '../../assets/images/visa.svg'
 import applePay from '../../assets/images/applePay.svg'
 import SelectAddressComponent from '../../components/SelectAddressComponent/SelectAddressComponent';
+import VoucherComponent from '../../components/VoucherComponent/VoucherComponent';
 import clsx from 'clsx';
 
 
 const CheckOutPage = () => {
-    const location = useLocation();   
-    const { cartItems = [], checkedItems = [], discount = 0, shippingFee = 0, selectedAddress = {} } = location.state || {};
-    const selectedItems = cartItems.filter(item => checkedItems.includes(item.id));
-    const totalItemsPrice = selectedItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    const totalAmount = Math.max(0, totalItemsPrice + shippingFee - discount);
+  const location = useLocation();
+  const { cartItems = [], checkedItems = [], discount = 0, shippingFee = 0, selectedAddress = {} } = location.state || {};
+  const selectedItems = cartItems.filter(item => checkedItems.includes(item.id));
+  const totalItemsPrice = selectedItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalAmount = Math.max(0, totalItemsPrice + shippingFee - discount);
 
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const openModal = (event) => {
-      event.preventDefault(); 
-      setIsModalOpen(true); 
-      window.history.pushState(null, "", "/check-out"); 
-    };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = (event) => {
+    event.preventDefault();
+    setIsModalOpen(true);
+    window.history.pushState(null, "", "/check-out");
+  };
 
-    const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => setIsModalOpen(false);
+
+
+  const [isVoucherModalOpen, setIsVoucherModalOpen] = useState(false);
+
+  const openVoucherModal = (event) => {
+    event.preventDefault();
+    setIsVoucherModalOpen(true);
+  };
+
+  const closeVoucherModal = () => setIsVoucherModalOpen(false);
   return (
     <div className={styles.main}>
       <div className="grid wide">
@@ -34,7 +45,7 @@ const CheckOutPage = () => {
 
         <div className={styles.address}>
           <div className={styles.title}>
-            <FaLocationDot style={{color: "#E87428", fontSize: "1.5rem", marginBottom: "4px"}}/>
+            <FaLocationDot style={{ color: "#E87428", fontSize: "1.5rem", marginBottom: "4px" }} />
             <h3>Địa chỉ nhận hàng</h3>
           </div>
           <div className={styles.infoAddress}>
@@ -50,12 +61,12 @@ const CheckOutPage = () => {
           </div>
         </div>
         {
-          isModalOpen && 
-          <SelectAddressComponent 
+          isModalOpen &&
+          <SelectAddressComponent
             closeModal={closeModal}
           />
         }
-        
+
         <div className={styles.productCheckOut}>
           <table className={styles.productTable}>
             <thead>
@@ -83,9 +94,10 @@ const CheckOutPage = () => {
         </div>
 
         <div className={styles.discount}>
-          <div style={{display: "flex", alignItems: "center"}}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <h3>Mã giảm giá</h3>
-            <Link to={"/"}>Chọn voucher khác</Link>
+            {/* <Link onClick={openVoucherModal}>Chọn voucher khác</Link> */}
+            <VoucherComponent />
           </div>
           <ul>
             <li>
@@ -98,12 +110,11 @@ const CheckOutPage = () => {
             </li>
           </ul>
         </div>
-
         <div className={styles.payment}>
           <h3>Phương thức thanh toán</h3>
           <div className={clsx(styles.method, 'row')}>
             <div className='col l-3 m-6 c-6'>
-              <ButtonComponent 
+              <ButtonComponent
                 title="Momo"
                 iconSmall
                 icon={momo}
@@ -114,7 +125,7 @@ const CheckOutPage = () => {
               />
             </div>
             <div className='col l-3 m-6 c-6'>
-              <ButtonComponent 
+              <ButtonComponent
                 title="Thẻ tín dụng/ghi nợ"
                 iconSmall
                 icon={visa}
@@ -125,7 +136,7 @@ const CheckOutPage = () => {
               />
             </div>
             <div className='col l-3 m-6 c-6'>
-              <ButtonComponent 
+              <ButtonComponent
                 title="ApplePay"
                 iconSmall
                 icon={applePay}
@@ -136,7 +147,7 @@ const CheckOutPage = () => {
               />
             </div>
             <div className='col l-3 m-6 c-6'>
-              <ButtonComponent 
+              <ButtonComponent
                 title="Thanh toán khi nhận hàng"
                 iconSmall
                 margin="30px 0 0"
@@ -185,29 +196,29 @@ const CheckOutPage = () => {
           <h3>Tổng kết</h3>
           <div className={styles.total}>
             <p className={styles.normal}>
-              Tổng tiền hàng: 
+              Tổng tiền hàng:
               <span>{totalItemsPrice.toLocaleString('vi-VN')}₫</span>
             </p>
             <p className={styles.normal}>
-              Tổng tiền phí vận chuyển: 
+              Tổng tiền phí vận chuyển:
               <span>{shippingFee.toLocaleString('vi-VN')}₫</span>
             </p>
             <p className={styles.normal}>
-              Tổng cộng mã giảm giá: 
+              Tổng cộng mã giảm giá:
               <span>-{discount.toLocaleString('vi-VN')}₫</span>
             </p>
             <p className={styles.final}>
-              Tổng thanh toán: 
+              Tổng thanh toán:
               <span>{totalAmount.toLocaleString('vi-VN')}₫</span>
             </p>
           </div>
-          <UnderLineComponent 
+          <UnderLineComponent
             width="100%"
             height="1px"
             background="rgba(0, 0, 0, 0.1"
             margin='20px 0'
           />
-          <ButtonComponent 
+          <ButtonComponent
             title="Đặt hàng"
             width="500px"
             primary

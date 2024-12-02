@@ -1,7 +1,7 @@
 .orderSummary {
     margin-left: 30px;
     width: 500px;
-    height: 450px;
+    // height: 450px;
     background-color: #fff;
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -77,6 +77,10 @@
     .wrapBtn {
         margin: 30px 0;
     }
+}
+
+.btnBuy {
+    border-radius: 8px !important;
 }
 
 @media screen and (max-width: 46.1875em) {

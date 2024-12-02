@@ -252,15 +252,20 @@ const MyCartPage = () => {
   };
 
   // Tính toán tổng giá trị
-  const totalAmount = checkedItems.reduce((total, id) => {
+  const frontTotal = checkedItems.reduce((total, id) => {
     const item = cartItems.find((cartItem) => cartItem.id === id);
     return item ? total + item.price * item.quantity : total;
-  }, 0) - discount + shippingFee;
+  }, 0);
 
   const safe = checkedItems.reduce((total, id) => {
     const item = cartItems.find((cartItem) => cartItem.id === id);
     return item ? total + (item.oldPrice - item.price) * item.quantity : total;
   }, 0) + discount;
+
+  const backTotal = checkedItems.reduce((total, id) => {
+    const item = cartItems.find((cartItem) => cartItem.id === id);
+    return item ? total + item.price * item.quantity : total;
+  }, 0) - discount + shippingFee;
 
   // Xử lý hiển thị giao diện di động
   useEffect(() => {
@@ -330,7 +335,8 @@ const MyCartPage = () => {
           </div>
           <OrderSummaryComponent
             onClick={handleCheckout}
-            totalAmount={Math.max(totalAmount, 0)}
+            frontTotal={Math.max(frontTotal, 0)}
+            backTotal={Math.max(backTotal, 0)}
             discount={discount}
             shippingFee={shippingFee}
             safe={safe}

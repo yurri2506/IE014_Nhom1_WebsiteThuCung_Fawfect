@@ -3,8 +3,9 @@ import styles from './OrderSummaryComponent.module.scss'
 import { RiCoupon3Line } from "react-icons/ri";
 import ButtonComponent from '../ButtonComponent/ButtonComponent';
 import UnderLineComponent from '../UnderLineComponent/UnderLineComponent';
+import VoucherComponent from '../VoucherComponent/VoucherComponent';
 
-const OrderSummaryComponent = ({ totalAmount, discount, shippingFee, safe, onClick }) => {
+const OrderSummaryComponent = ({ frontTotal, backTotal, discount, shippingFee, safe, onClick }) => {
     const [coupon, setCoupon] = useState('');
 
     const handleApplyCoupon = () => {
@@ -15,24 +16,28 @@ const OrderSummaryComponent = ({ totalAmount, discount, shippingFee, safe, onCli
     return (
       <div className={styles.orderSummary}>
         <h3>Order Summary</h3>
-        <input
-          type="text"
-          placeholder="Nhập mã giảm giá..."
-          value={coupon}
+          {/* <input
+            type="text"
+            placeholder="Nhập mã giảm giá..."
+            value={coupon}
+            onChange={(e) => setCoupon(e.target.value)}
+          />
+          <span><RiCoupon3Line /></span>
+          <button className={styles.btn} onClick={handleApplyCoupon}>Áp dụng</button> */}
+        <VoucherComponent 
+          coupon={coupon}
           onChange={(e) => setCoupon(e.target.value)}
+          onClick={handleApplyCoupon}
         />
-        <span><RiCoupon3Line /></span>
-        <button className={styles.btn} onClick={handleApplyCoupon}>Áp dụng</button>
         <UnderLineComponent 
           width= "100%"
           height= "2px"
           background= "rgba(0, 0, 0, 0.2)"
           margin= "30px 0 20px"
         />
-        <p>Giảm giá: <p className={styles.normal}>  {discount.toLocaleString()} VNĐ</p></p>
-        <p>Phí vận chuyển <p className={styles.normal}>{shippingFee.toLocaleString()} VNĐ</p></p>
+        <p>Tổng tiền hàng: <p className={styles.normal}>  {frontTotal.toLocaleString()} VNĐ</p></p>
         <p>Tiết kiệm <p className={styles.normal}>{safe.toLocaleString()} VNĐ</p></p>
-        <p>Tổng thanh toán: <p className={styles.total}>{totalAmount.toLocaleString()} VNĐ</p></p>
+        <p>Tổng thanh toán: <p className={styles.total}>{backTotal.toLocaleString()} VNĐ</p></p>
         <div className={styles.wrapBtn}>
           <ButtonComponent 
             primary
