@@ -17,12 +17,9 @@ function ChangeEmail() {
   const navigate = useNavigate();
   const [form] = Form.useForm();
 
-  // Trạng thái kiểm tra đã nhập thông tin hay chưa
   const [isFormFilled, setIsFormFilled] = useState(false);
 
-  // Hàm kiểm tra nếu có thay đổi trong form
   const handleValuesChange = (changedValues, allValues) => {
-    // Kiểm tra nếu `newEmail` đã được nhập và không rỗng
     if (allValues.newEmail && allValues.newEmail.trim() !== '') {
       setIsFormFilled(true);
     } else {
@@ -32,11 +29,11 @@ function ChangeEmail() {
 
   const handleSave = (values) => {
     alert('Email đã được cập nhật!');
-    navigate('/account-info');
+    navigate('/account/profile');
   };
 
   const handleCancel = () => {
-    navigate('/account-info');
+    navigate('/account/profile');
   };
 
   return (
@@ -50,7 +47,7 @@ function ChangeEmail() {
         />
 
         <div className={cx('content')}>
-          <span className={cx('header')}>Đổi Email</span>
+          <span className={cx('header')}>Đổi email</span>
           <Form
             layout="horizontal"
             labelCol={{ span: 6 }}
@@ -59,7 +56,7 @@ function ChangeEmail() {
             form={form}
             initialValues={initialData}
             onFinish={handleSave}
-            onValuesChange={handleValuesChange} // Theo dõi thay đổi trong form
+            onValuesChange={handleValuesChange}
           >
             <Form.Item
               label="Email hiện tại"
@@ -91,7 +88,7 @@ function ChangeEmail() {
                 type="primary"
                 htmlType="submit"
                 className={cx('confirm-button')}
-                disabled={!isFormFilled} // Nút xác nhận bị vô hiệu hóa nếu không nhập
+                disabled={!isFormFilled}
                 style={{
                   backgroundColor: isFormFilled ? '#E87428' : '#d9d9d9',
                   borderColor: isFormFilled ? '#E87428' : '#d9d9d9',

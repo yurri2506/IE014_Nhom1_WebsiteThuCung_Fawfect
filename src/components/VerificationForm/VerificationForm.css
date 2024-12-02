@@ -1,0 +1,71 @@
+.verification-form-container {
+    background-color: #222222;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+  
+    .verification-form-content {
+    width: 400px;
+    height: 340px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    margin-top: 80px;
+  }
+  
+  .verification-form-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .verification-form-description {
+    margin-top: 10px;  
+    font-size: 13px;
+    color: #333;
+  }
+  
+  .verification-form-row {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  
+  .verification-form-input {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border: 1px solid #e87428;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+  }
+  
+  .verification-form-timer {
+    font-size: 14px;
+    color: #888;
+  }
+
+  .verification-form-buttons {
+    margin-top: 20px;
+  }
+  
+  .verification-form-submit {
+    background-color: #8d8d8d;
+    border-color:  #8d8d8d;
+    width: 80%;
+  }
+  
+  .verification-form-submit.active {
+    background-color: #e87428;
+    border-color: #e87428;
+  }
+  
+  .verification-form-resend {
+    margin-top: 10px;
+    color: #e87428;
+  }
+
+
+}

@@ -18,22 +18,20 @@ function CurrentPassword() {
   const [isFormFilled, setIsFormFilled] = useState(false);
 
   const handleValuesChange = (changedValues, allValues) => {
-    // Kiểm tra nếu trường "oldPassword" có giá trị
     setIsFormFilled(!!allValues.oldPassword?.trim());
   };
 
-  // Hàm kiểm tra mật khẩu hiện tại
   const handleCheckPassword = (values) => {
     if (values.oldPassword === initialData.oldPassword) {
       alert('Mật khẩu hiện tại đúng!');
-      navigate('/edit-password/new-password'); // Điều hướng sang trang mới
+      navigate('/account/edit-password/new-password');
     } else {
       message.error('Mật khẩu hiện tại không đúng!');
     }
   };
 
   const handleCancel = () => {
-    navigate('/account-info');
+    navigate('/account/profile');
   };
 
   return (
@@ -54,7 +52,7 @@ function CurrentPassword() {
           className={cx('form')}
           form={form}
           onFinish={handleCheckPassword}
-          onValuesChange={handleValuesChange} // Lắng nghe sự thay đổi trong form
+          onValuesChange={handleValuesChange}
         >
           <Form.Item
             label="Mật khẩu hiện tại"
@@ -78,7 +76,7 @@ function CurrentPassword() {
               type="primary"
               htmlType="submit"
               className={cx('confirm-button')}
-              disabled={!isFormFilled} // Nút chỉ được bật khi isFormFilled = true
+              disabled={!isFormFilled}
               style={{
                 backgroundColor: isFormFilled ? '#E87428' : '#d9d9d9',
                 borderColor: isFormFilled ? '#E87428' : '#d9d9d9',
