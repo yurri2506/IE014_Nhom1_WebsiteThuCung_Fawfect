@@ -29,6 +29,7 @@ import ChangeAddress from "../pages/ChangeAddress/ChangeAddress";
 import VerificationForm from "../components/VerificationForm/VerificationForm";
 import FavoriteProductsPage from "../pages/FavoriteProductsPage/FavoriteProductsPage";
 import NotificationPage from "../pages/Notification/Notification";
+import FQAPage from "../pages/FQAPage/FQAPage";
 
 export const routes = [
     //Routes cho User
@@ -205,6 +206,13 @@ export const routes = [
     {
         path: '/notifications',
         page: NotificationPage,
+        isShowHeader: true,
+        role: "user"
+    },
+
+    {
+        path: '/fqa',
+        page: FQAPage,
         isShowHeader: true,
         role: "user"
     },

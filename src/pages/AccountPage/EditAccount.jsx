@@ -156,16 +156,16 @@ function EditAccount() {
   );
 
   const initialData = {
-    User_name: user_name,
-    HoTen: full_name,
-    NgaySinh: moment(user_birth),
-    GioiTinh: user_sex,
+    user_name: user_name,
+    full_name: full_name,
+    user_birth: moment(user_birth),
+    user_sex: user_sex,
   };
 
   const handleSave = (values ) => {
-    const{User_name, HoTen, NgaySinh, GioiTinh} = values
+    //const{User_name, HoTen, NgaySinh, GioiTinh} = values
     console.log('gia tri', values)
-    const res = handleUpdateUser(User_name, HoTen, user_email, user_phone, GioiTinh, NgaySinh)
+    const res = handleUpdateUser(values)
     dispatch(
       updateUser({
         ...res?.data
@@ -181,16 +181,17 @@ function EditAccount() {
   };
 
   const handleValuesChange = (_, allValues) => {
-    const requiredFields = ['User_name', 'HoTen', 'NgaySinh', 'GioiTinh'];
+    const requiredFields = ['user_name', 'full_name', 'user_birth', 'user_sex'];
     const isAllFieldsFilled = requiredFields.every(
       (field) => allValues[field] && allValues[field].toString().trim() !== ''
     );
     setIsFormFilled(isAllFieldsFilled);
   };
 
-  const handleUpdateUser = async(user_name, full_name, email, phone, sex, birth) =>{
+  const handleUpdateUser = async(userData) =>{
     try {
-      const res = await editUser(_id, access_token, user_name, full_name, email, phone, sex, birth);
+      console.log('user',userData)
+      const res = await editUser(_id, access_token, userData);
       console.log("Fetched update user", res);
       dispatch(
         updateUser({
@@ -228,7 +229,7 @@ function EditAccount() {
           >
             <Form.Item
               label="Tên người dùng"
-              name="User_name"
+              name="user_name"
               rules={[{ required: true, message: 'Nhập tên người dùng!' }]}
             >
               <Input />
@@ -236,7 +237,7 @@ function EditAccount() {
 
             <Form.Item
               label="Họ và tên"
-              name="HoTen"
+              name="full_name"
               rules={[{ required: true, message: 'Nhập họ và tên!' }]}
             >
               <Input />
@@ -244,7 +245,7 @@ function EditAccount() {
 
             <Form.Item
               label="Ngày sinh"
-              name="NgaySinh"
+              name="user_birth"
               rules={[{ required: true, message: 'Nhập ngày sinh!' }]}
             >
               <DatePicker format="DD/MM/YYYY" />
@@ -252,7 +253,7 @@ function EditAccount() {
 
             <Form.Item
               label="Giới tính"
-              name="GioiTinh"
+              name="user_sex"
               rules={[{ required: true, message: 'Chọn giới tính!' }]}
             >
               <Select>

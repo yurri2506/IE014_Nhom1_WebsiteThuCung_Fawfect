@@ -576,7 +576,7 @@ const HeaderComponent = () => {
                 />
               </li>
               <li>
-                <Link to={"/"}>
+                <Link to={"/fqa"}>
                   <TbHelpSquare />
                   <span>FAQ</span>
                 </Link>

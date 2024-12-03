@@ -188,15 +188,44 @@ export const forgetAndSetPassword = async (identifier, newPassword, confirmNewPa
 };
 
 
-export const editUser = async (id, access_token, name, full_name, email, phone, sex, birth) => {
+// export const editUser = async (id, access_token, name, full_name, email, phone, sex, birth) => {
+//   try {
+//     const response = await fetch(`${API_URL}/edit-user/${id}`, {
+//       method: "PATCH",
+//       headers: {
+//         "Authorization": `Bearer ${access_token}`,
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({name, full_name, email, phone, sex, birth}),
+//     });
+
+//     //console.log(response)
+//     // Kiểm tra nếu response không OK (status không phải 2xx)
+//     if (!response.ok) {
+//       const errorData = await response.json(); // Lấy nội dung lỗi từ body
+//       throw errorData; // Ném lỗi để xử lý ở phần `catch`
+//     }
+
+//     // Nếu thành công, trả về dữ liệu
+//     const data = await response.json();
+//     console.log(data)
+//     return data;
+//   } catch (error) {
+//     // Lỗi sẽ được xử lý ở đây
+//     console.error("Error in updateUser:", error);
+//     throw error; // Ném lỗi để component phía trên tiếp tục xử lý
+//   }
+// };
+
+export const editUser = async (id, access_token, userData) => {
   try {
     const response = await fetch(`${API_URL}/edit-user/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Authorization": `Bearer ${access_token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({name, full_name, email, phone, sex, birth}),
+      body: JSON.stringify(userData),
     });
 
     //console.log(response)
