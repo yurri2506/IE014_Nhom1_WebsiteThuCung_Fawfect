@@ -182,7 +182,6 @@ import React, { useEffect, useState } from 'react'
 import { clsx } from 'clsx'
 import SliderComponent from '../../components/SliderComponent/SliderComponent'
 import slider1 from '../../assets/images/slider1.svg'
-import slider2 from '../../assets/images/slider2.svg'
 import styles from './HomePage.module.scss'
 import ServiceComponent from '../../components/ServiceComponent/ServiceComponent'
 import service1 from '../../assets/images/service1.svg'
@@ -212,7 +211,9 @@ import AllBrandsComponent from '../../components/AllBrandsComponent/AllBrandsCom
 import { getAllProduct } from '../../services/Product.service'
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from 'react-router-dom'
-
+import slider2 from '../../assets/images/1.png'
+import slider3 from '../../assets/images/2.png'
+import slider4 from '../../assets/images/3.png'  
 
 const HomePage = () => {
   const [visibleCount, setVisibleCount] = useState(6);
@@ -336,9 +337,9 @@ const HomePage = () => {
   }
 
   return (
-      <div className={clsx('grid wide')}>
+      <div className={clsx('grid wide')}> 
         <div className={styles.sliderImg}>
-          <SliderComponent arrImages={[slider1, slider2]} defaultArrows={false}/>
+          <SliderComponent arrImages={[slider1, slider2, slider3, slider4]} defaultArrows={false}/>
         </div>
         <div className={clsx('row', styles.service)}>
           {services.map((service, index) => (

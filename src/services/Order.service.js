@@ -82,3 +82,26 @@ export const getAllProductByUserId = async (id, token) => {
     throw error;
   }
 };
+
+export const getAllFavoriteByUserId = async (id, token) => {
+  try {
+    const response = await fetch(`${API_URL}/favor/get-details/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw errorData;
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error in cart getAllProductByUserId:", error);
+    throw error;
+  }
+};

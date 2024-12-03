@@ -30,7 +30,7 @@ import VerificationForm from "../components/VerificationForm/VerificationForm";
 import FavoriteProductsPage from "../pages/FavoriteProductsPage/FavoriteProductsPage";
 import NotificationPage from "../pages/Notification/Notification";
 
-export const routes = [
+export const routes = [ 
     //Routes cho User
     {
         path: '/',
@@ -197,7 +197,7 @@ export const routes = [
         role: "user"
     },
     {
-        path: '/favorite-products',
+        path: '/favorite-products/:id',
         page: FavoriteProductsPage,
         isShowHeader: true,
         role: "user"
