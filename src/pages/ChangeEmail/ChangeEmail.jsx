@@ -126,7 +126,7 @@ function ChangeEmail() {
   const [form] = Form.useForm();
 
   const [isFormFilled, setIsFormFilled] = useState(false);
-  const { _id, isAuthenticated,user_email } = useSelector((state) => state.user); // Lấy email từ Redux
+  const { _id, isAuthenticated,user_email, user_name, full_name, user_avt_img} = useSelector((state) => state.user); // Lấy email từ Redux
   const [error, setError] = useState('');
   const initialData = {
     currentEmail: user_email,
@@ -165,9 +165,9 @@ function ChangeEmail() {
       <div style={{ margin: "0 auto", padding: "20px" }} className={cx('container')}>
         <div className="profile-container">
           <ProfileUser
-            full_name="Nguyễn Lê Thanh Huyền"
-            src_img={myAvatar}
-            name="yurri_2506"
+            full_name={full_name}
+            src_img={user_avt_img}
+            name={user_name}
           />
 
           <div className={cx('content')}>
