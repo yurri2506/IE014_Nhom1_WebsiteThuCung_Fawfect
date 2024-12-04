@@ -18,7 +18,7 @@ const NotifyComponent = ({ notifications, className }) => {
     const visibleNotifications = notifications.slice(0, 6);
 
     const handleShowMore = () => {
-        navigate("/notify")
+        navigate("/notifications")
     };
 
     // Kiểm tra xem notifications có dữ liệu không
@@ -48,7 +48,7 @@ const NotifyComponent = ({ notifications, className }) => {
                         </li>
                     ))}
                     <li onClick={handleShowMore} className={styles.more}>
-                        <Link to={"/"}>
+                        <Link to={"/notifications"}>
                             Xem thêm
                         </Link>
                     </li>

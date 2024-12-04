@@ -77,7 +77,7 @@ const SignInPage = () => {
     }
 
     if (isError) {
-      setErrorMessage(error.message.message || "Đăng nhập thất bại.");
+      setErrorMessage(error.message || "Đăng nhập thất bại.");
       setShowPopup(true);
     }
   }, [isSuccess, isError, data, error]);

@@ -3,10 +3,13 @@ import Cookies from "js-cookie";
 
 // Initial state
 const initialState = {
+  full_name: "",
+  user_birth: "",
+  user_sex: "",
   user_name: "",
   user_email: "",
   user_phone: "",
-  user_address: "",
+  user_address: [],
   user_avt_img: "",
   _id: "",
   accessToken: localStorage.getItem("accessToken"),
@@ -40,10 +43,13 @@ const userSlice = createSlice({
     resetUser: (state) => {
       return {
         ...state,
+        full_name: "",
+        user_birth: "",
+        user_sex: "",
         user_name: "",
         user_email: "",
         user_phone: "",
-        user_address: "",
+        user_address: [],
         user_avt_img: "",
         _id: "",
         accessToken: "",
