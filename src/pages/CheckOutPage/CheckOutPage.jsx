@@ -30,14 +30,36 @@ const CheckOutPage = () => {
   const closeModal = () => setIsModalOpen(false);
 
 
-  const [isVoucherModalOpen, setIsVoucherModalOpen] = useState(false);
+  // const [isVoucherModalOpen, setIsVoucherModalOpen] = useState(false);
 
-  const openVoucherModal = (event) => {
-    event.preventDefault();
-    setIsVoucherModalOpen(true);
+  // const openVoucherModal = (event) => {
+  //   event.preventDefault();
+  //   setIsVoucherModalOpen(true);
+  // };
+  // const closeVoucherModal = () => setIsVoucherModalOpen(false);
+
+
+  const [selectedVouchers, setSelectedVouchers] = useState({
+    shipping: null,
+    product: null,
+  });
+
+  const [appliedVouchers, setAppliedVouchers] = useState({
+    shipping: null,
+    product: null,
+  });
+
+  const handleVoucherSelection = (voucher, type) => {
+    setSelectedVouchers((prev) => ({
+      ...prev,
+      [type]: prev[type]?.id === voucher.id ? null : voucher,
+    }));
   };
 
-  const closeVoucherModal = () => setIsVoucherModalOpen(false);
+  const applyVouchers = () => {
+    setAppliedVouchers(selectedVouchers);
+  };
+
   return (
     <div className={styles.main}>
       <div className="grid wide">
@@ -97,17 +119,25 @@ const CheckOutPage = () => {
           <div style={{ display: "flex", alignItems: "center" }}>
             <h3>Mã giảm giá</h3>
             {/* <Link onClick={openVoucherModal}>Chọn voucher khác</Link> */}
-            <VoucherComponent />
+            <VoucherComponent
+              onVoucherSelect={handleVoucherSelection}
+              selectedVouchers={selectedVouchers}
+              applyVouchers={applyVouchers}
+            />
           </div>
           <ul>
-            <li>
-              BANMOIPAWFECT
-              <span>-{discount.toLocaleString('vi-VN')}đ</span>
-            </li>
-            <li>
-              FREESHIPBANMOI
-              <span>-{discount.toLocaleString('vi-VN')}đ</span>
-            </li>
+            {appliedVouchers.shipping && (
+              <li>
+                {appliedVouchers.shipping.code}
+                <span>- {appliedVouchers.shipping.description}</span>
+              </li>
+            )}
+            {appliedVouchers.product && (
+              <li>
+                {appliedVouchers.product.code}
+                <span>- {appliedVouchers.product.description}</span>
+              </li>
+            )}
           </ul>
         </div>
         <div className={styles.payment}>

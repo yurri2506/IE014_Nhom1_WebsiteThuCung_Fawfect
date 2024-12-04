@@ -38,6 +38,17 @@
         color: rgba(0, 0, 0, 0.4);
     }
 
+    .voucher {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .voucherDetail {
+        display: flex;
+    }
+
     .btn {
         width: 120px;
         height: 50px;
@@ -48,11 +59,11 @@
         color: #fff;
         font-size: 1.7rem;
         cursor: pointer;
-    
+
         &:hover {
             opacity: 0.8;
         }
-    }   
+    }
 
     p {
         font-size: 1.8rem;
@@ -64,7 +75,7 @@
     }
 
     .total {
-        color:#E87428;
+        color: #E87428;
         font-size: 2rem;
         font-weight: 700;
     }
@@ -86,7 +97,7 @@
 @media screen and (max-width: 46.1875em) {
     .orderSummary {
         width: 100%;
-        height: 100%;   
+        height: 100%;
         margin: 0;
 
         input {
@@ -106,31 +117,32 @@
             height: 40px;
             font-size: 1.5rem;
         }
-    
+
         p {
             font-size: 1.5rem;
         }
-    
-        .normal, .total {
+
+        .normal,
+        .total {
             font-size: 1.7rem;
         }
-    
+
         .btnBuy {
             width: 50% !important;
             height: 40px !important;
         }
-    
+
         .wrapBtn {
             margin: 15px 0;
         }
-      }
+    }
 }
 
 
 @media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
     .orderSummary {
         width: 100%;
-        height: 100%;   
+        height: 100%;
         margin: 0;
 
         input {
@@ -150,47 +162,48 @@
             height: 40px;
             font-size: 1.5rem;
         }
-    
+
         p {
             font-size: 1.5rem;
         }
-    
-        .normal, .total {
+
+        .normal,
+        .total {
             font-size: 1.7rem;
         }
-    
+
         .btnBuy {
             width: 50% !important;
             height: 40px !important;
         }
-    
+
         .wrapBtn {
             margin: 15px 0;
         }
-      }
+    }
 }
 
 @media screen and (min-width: 64em) and (max-width: 77.4375em) {
-  .orderSummary {
-    width: 100%;
-    height: 400px;   
-    margin: 0;
+    .orderSummary {
+        width: 100%;
+        height: 400px;
+        margin: 0;
 
-    // p {
-    //     font-size: 1.5rem;
-    // }
+        // p {
+        //     font-size: 1.5rem;
+        // }
 
-    // .normal, .total {
-    //     font-size: 1.7rem;
-    // }
+        // .normal, .total {
+        //     font-size: 1.7rem;
+        // }
 
-    .btnBuy {
-        width: 50% !important;
-        height: 40px !important;
+        .btnBuy {
+            width: 50% !important;
+            height: 40px !important;
+        }
+
+        .wrapBtn {
+            margin: 15px 0;
+        }
     }
-
-    .wrapBtn {
-        margin: 15px 0;
-    }
-  }
 }

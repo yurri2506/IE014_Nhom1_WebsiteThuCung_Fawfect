@@ -3,13 +3,13 @@ import styles from "./VoucherComponent.module.scss";
 import clsx from "clsx";
 import { RiCoupon3Line } from "react-icons/ri";
 
-const VoucherComponent = ({ coupon, onChange, onClick }) => {
+const VoucherComponent = ({ coupon, onChange, onClick, selectedVouchers, onVoucherSelect, applyVouchers }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [activeTab, setActiveTab] = useState("shipping");
-    const [selectedVouchers, setSelectedVouchers] = useState({
-        shipping: null,
-        product: null,
-    });
+    // const [selectedVouchers, setSelectedVouchers] = useState({
+    //     shipping: null,
+    //     product: null,
+    // });
 
     const vouchers = {
         shipping: [
@@ -51,10 +51,8 @@ const VoucherComponent = ({ coupon, onChange, onClick }) => {
     };
 
     const toggleVoucherSelection = (voucher, type) => {
-        setSelectedVouchers((prev) => ({
-            ...prev,
-            [type]: prev[type]?.id === voucher.id ? null : voucher,
-        }));
+        onVoucherSelect(voucher, type);
+        // setIsModalOpen(false);
     };
 
     const openModal = () => setIsModalOpen(true);
@@ -126,7 +124,10 @@ const VoucherComponent = ({ coupon, onChange, onClick }) => {
 
                         <button
                             className={styles.applyBtn}
-                            onClick={closeModal}
+                            onClick={() => {
+                                applyVouchers();
+                                closeModal();
+                            }}
                         >
                             Áp dụng
                         </button>
