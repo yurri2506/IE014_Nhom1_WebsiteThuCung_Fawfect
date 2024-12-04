@@ -7,7 +7,7 @@ const initialState = {
   paymentMethod: "",
   itemsPrice: 0,
   shippingPrice: 0,
-  taxPrice: 0,
+  taxPrice: 0, 
   totalPrice: 0,
   user: "",
   isPaid: false,
@@ -140,7 +140,7 @@ export const {
   removeAllOrderProduct,
   selectedOrder,
   resetOrder,
-  addToCart
+  addToCart,
 } = orderSlide.actions;
 
 export default orderSlide.reducer;

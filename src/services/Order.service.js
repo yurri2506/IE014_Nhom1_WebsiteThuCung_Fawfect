@@ -105,3 +105,29 @@ export const getAllFavoriteByUserId = async (id, token) => {
     throw error;
   }
 };
+
+// Cart
+export const updateCart = async (id, data, token) => {
+  try {
+    console.log(id);
+    const response = await fetch(`${API_URL}/cart/update/${id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw errorData;
+    }
+
+    const dataCart = await response.json();
+    return dataCart;
+  } catch (error) {
+    console.error("Error in cart updateCart:", error);
+    throw error;
+  }
+}

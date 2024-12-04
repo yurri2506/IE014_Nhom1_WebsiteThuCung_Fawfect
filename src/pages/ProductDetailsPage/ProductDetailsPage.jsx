@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ProductDetailsPage.module.scss";
-import './ProductDetailsPage.scss'
+import "./ProductDetailsPage.scss";
 import { Col, Pagination, Row } from "antd";
 import Slider from "react-slick";
 import { IoIosStar } from "react-icons/io";
@@ -24,9 +24,10 @@ import {
   getProductFeedback,
 } from "../../services/Product.service";
 import clsx from "clsx";
-import cart from '../../assets/images/cart.svg'
+import cart from "../../assets/images/cart.svg";
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
+import { updateCart } from "../../services/Order.service";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
@@ -40,29 +41,32 @@ const ProductDetailsPage = () => {
   const user = useSelector((state) => state.user);
 
   const [isInViewport, setIsInViewport] = useState(false);
+  const accessToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 740px) and (max-width: 1023px)');
+    const mediaQuery = window.matchMedia(
+      "(min-width: 740px) and (max-width: 1023px)"
+    );
     const handleViewportChange = () => setIsInViewport(mediaQuery.matches);
 
     handleViewportChange();
-    mediaQuery.addEventListener('change', handleViewportChange);
+    mediaQuery.addEventListener("change", handleViewportChange);
 
     return () => {
-      mediaQuery.removeEventListener('change', handleViewportChange);
+      mediaQuery.removeEventListener("change", handleViewportChange);
     };
   }, []);
 
   const [isInMobile, setisInMobile] = useState(false);
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 739px)');
+    const mediaQuery = window.matchMedia("(max-width: 739px)");
     const handleViewportChange = () => setisInMobile(mediaQuery.matches);
 
     handleViewportChange();
-    mediaQuery.addEventListener('change', handleViewportChange);
+    mediaQuery.addEventListener("change", handleViewportChange);
 
     return () => {
-      mediaQuery.removeEventListener('change', handleViewportChange);
+      mediaQuery.removeEventListener("change", handleViewportChange);
     };
   }, []);
 
@@ -107,20 +111,45 @@ const ProductDetailsPage = () => {
     );
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!user?.isAuthenticated) {
       navigate("/sign-in", { state: location?.pathname });
     } else if (!selectedVariant) {
       alert("Vui lòng chọn một biến thể trước khi thêm vào giỏ hàng!");
     } else {
+      // Cập nhật giỏ hàng vào Redux
       dispatch(
         addToCart({
           product_id: productDetails?._id,
-          variant_id: selectedVariant?._id,
+          variant: selectedVariant?.variant,
           quantity: numProduct,
-          variantDetails: selectedVariant,
+          product_order_type: selectedVariant,
         })
       );
+
+      // Gửi API cập nhật giỏ hàng vào DB (lấy ID của người dùng và dữ liệu giỏ hàng)
+      const cartData = {
+        product_id: productDetails?._id,
+        variant: selectedVariant?.variant,
+        quantity: numProduct,
+        product_order_type: selectedVariant,
+      };
+
+      try {
+        // Giả sử user.id là ID người dùng, bạn cần thay đổi theo cách bạn lưu trữ ID người dùng
+        const userId = user._id; // Lấy ID người dùng từ thông tin người dùng đã đăng nhập
+        const updatedCart = await updateCart(userId, cartData, accessToken); // Gửi API để cập nhật giỏ hàng
+        console.log("abc", accessToken, userId, cartData);
+        // Nếu cần, bạn có thể làm gì đó với dữ liệu trả về từ API
+        console.log("Giỏ hàng đã được cập nhật:", updatedCart);
+
+        // Cập nhật trạng thái hoặc thông báo thành công cho người dùng
+        alert("Sản phẩm đã được thêm vào giỏ hàng.");
+      } catch (error) {
+        // Xử lý lỗi nếu có
+        console.error("Lỗi khi cập nhật giỏ hàng:", error);
+        alert("Có lỗi xảy ra khi cập nhật giỏ hàng. Vui lòng thử lại.");
+      }
     }
   };
 
@@ -182,20 +211,19 @@ const ProductDetailsPage = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false
+    arrows: false,
   };
-
 
   const handleLike = () => {
     setLike(!like);
-  }
+  };
 
   return (
     <div className={styles.main}>
       <div className="grid wide">
         <Row style={!isInMobile ? { padding: "16px 0 0 0" } : null}>
           {/* Left Section */}
-          <Col span={isInViewport || isInMobile ? 24 : 10} >
+          <Col span={isInViewport || isInMobile ? 24 : 10}>
             {isInViewport || isInMobile ? (
               <div>
                 <Slider {...settings2}>
@@ -203,34 +231,39 @@ const ProductDetailsPage = () => {
                     <div key={index}>
                       {/* <img src={thumb} onClick={()=>setMainImage(thumb)} alt={`Product view ${index + 1}`} /> */}
                       <div className={styles.mainImage}>
-                        <img src={`data:image/png;base64,${thumb}`} alt="Product main" />
+                        <img
+                          src={`data:image/png;base64,${thumb}`}
+                          alt="Product main"
+                        />
                       </div>
                     </div>
                   ))}
                 </Slider>
               </div>
-              ) : (
-                <>
-                  <div className={styles.mainImage}>
-                    <img 
-                      src={`data:image/png;base64,${selectedImage}`} 
-                      alt="Product main" 
+            ) : (
+              <>
+                <div className={styles.mainImage}>
+                  <img
+                    src={`data:image/png;base64,${selectedImage}`}
+                    alt="Product main"
+                  />
+                </div>
+                <Slider {...settings} className={styles.thumbnails}>
+                  {doubledThumbnails.map((thumb, index) => (
+                    <img
+                      key={index}
+                      src={`data:image/png;base64,${thumb}`}
+                      alt={`Thumbnail ${index + 1}`}
+                      onClick={() => setSelectedImage(thumb)}
+                      className={styles.thumbnail}
                     />
-                  </div>
-                  <Slider {...settings} className={styles.thumbnails}>
-                    {doubledThumbnails.map((thumb, index) => (
-                      <img
-                        key={index}
-                        src={`data:image/png;base64,${thumb}`}
-                        alt={`Thumbnail ${index + 1}`}
-                        onClick={() => setSelectedImage(thumb)}
-                        className={styles.thumbnail}
-                      />
-                    ))}
-                  </Slider>
-                </>
-              )}
-            <div className={clsx(styles.contact, 'm-0', 'l-12', 'm-12', 'c-12')}>
+                  ))}
+                </Slider>
+              </>
+            )}
+            <div
+              className={clsx(styles.contact, "m-0", "l-12", "m-12", "c-12")}
+            >
               <span>Chia sẻ sản phẩm qua:</span>
               <Link to={"/"}>
                 <img src={facebook} alt="" />
@@ -282,26 +315,42 @@ const ProductDetailsPage = () => {
                 {isInMobile ? (
                   <div>
                     <span className={styles.currentPrice}>
-                      {(
-                        productDetails?.product_price *
-                        (1 - productDetails?.product_percent_discount / 100)
-                      ).toLocaleString()}
+                      {selectedVariant
+                        ? (
+                            selectedVariant?.product_price *
+                            (1 - productDetails?.product_percent_discount / 100)
+                          ).toLocaleString()
+                        : (
+                          productDetails?.product_price *
+                          (1 - productDetails?.product_percent_discount / 100)
+                        ).toLocaleString()}
                       đ
                     </span>
                     <span className={styles.oldPrice}>
-                      {productDetails?.product_price?.toLocaleString()}đ
+                      {selectedVariant
+                        ? selectedVariant?.product_price
+                        : productDetails?.product_price}
+                      đ
                     </span>
                   </div>
                 ) : (
-                  <div style={{display: "flex", alignItems: "center"}}>
+                  <div style={{ display: "flex", alignItems: "center" }}>
                     <span className={styles.oldPrice}>
-                      {productDetails?.product_price?.toLocaleString()}đ
+                      {selectedVariant
+                        ? selectedVariant?.product_price?.toLocaleString()
+                        : productDetails?.product_price}
+                      đ
                     </span>
                     <span className={styles.currentPrice}>
-                      {(
-                        productDetails?.product_price *
-                        (1 - productDetails?.product_percent_discount / 100)
-                      ).toLocaleString()}
+                      {selectedVariant
+                        ? (
+                            selectedVariant?.product_price *
+                            (1 - productDetails?.product_percent_discount / 100)
+                          ).toLocaleString()
+                        :(
+                          productDetails?.product_price *
+                          (1 - productDetails?.product_percent_discount / 100)
+                        ).toLocaleString()}
                       đ
                     </span>
                   </div>
@@ -310,10 +359,11 @@ const ProductDetailsPage = () => {
                   <span>{productDetails?.product_percent_discount}% GIẢM</span>
                 </div>
               </div>
+
               <div className={styles.options}>
                 <div className={styles.option}>
                   <span>Chọn loại</span>
-                  <div className={clsx(styles.choice, 'row')}>
+                  <div className={clsx(styles.choice, "row")}>
                     {productDetails?.variants?.map((variant, index) => (
                       <div className="col l-4 m-4 c-4">
                         <ButtonComponent
@@ -337,7 +387,7 @@ const ProductDetailsPage = () => {
                           widthDiv="none"
                           margin="0 0 10px 0"
                           onClick={() => handleVariantClick(variant)}
-                        /> 
+                        />
                       </div>
                     ))}
                   </div>
@@ -346,7 +396,9 @@ const ProductDetailsPage = () => {
               <div className={styles.quantity}>
                 <span>Số lượng</span>
                 <div className={styles.btn}>
-                  <button onClick={() => handleChangeCount("decrease")}>-</button>
+                  <button onClick={() => handleChangeCount("decrease")}>
+                    -
+                  </button>
                   <input
                     value={numProduct}
                     onChange={(e) => handleInputChange(e.target.value)}
@@ -354,7 +406,9 @@ const ProductDetailsPage = () => {
                     max={selectedVariant?.product_countInStock || 1}
                     className={styles.quantityInput}
                   />
-                  <button onClick={() => handleChangeCount("increase")}>+</button>
+                  <button onClick={() => handleChangeCount("increase")}>
+                    +
+                  </button>
                 </div>
                 <p className={styles.remain}>
                   Còn lại: {selectedVariant?.product_countInStock || 0} sản phẩm
@@ -383,7 +437,7 @@ const ProductDetailsPage = () => {
                   showIcon={false}
                   widthDiv="none"
                   className={styles.btnBuy}
-                  primary 
+                  primary
                 />
               </div>
             </div>
@@ -395,7 +449,9 @@ const ProductDetailsPage = () => {
           <div className={styles.title}>
             <h2>Mô tả sản phẩm</h2>
           </div>
-          <p style={{ whiteSpace: 'pre-wrap' }}>{productDetails?.product_description}</p>
+          <p style={{ whiteSpace: "pre-wrap" }}>
+            {productDetails?.product_description}
+          </p>
         </div>
 
         {/* Feedback Section */}
@@ -410,16 +466,16 @@ const ProductDetailsPage = () => {
                 <p>/ 5</p>
               </span>
               <div className={styles.star}>
-                <IoIosStar className={styles.icon}/>
-                <IoIosStar className={styles.icon}/>
-                <IoIosStar className={styles.icon}/>
-                <IoIosStar className={styles.icon}/>
-                <IoIosStar className={styles.icon}/>
+                <IoIosStar className={styles.icon} />
+                <IoIosStar className={styles.icon} />
+                <IoIosStar className={styles.icon} />
+                <IoIosStar className={styles.icon} />
+                <IoIosStar className={styles.icon} />
               </div>
             </div>
             <div className={styles.filter}>
               <div className={styles.haveStar}>
-                <ButtonComponent 
+                <ButtonComponent
                   title="Tất cả"
                   fontSize="1.5rem"
                   width="100px"
@@ -428,7 +484,7 @@ const ProductDetailsPage = () => {
                   widthDiv="none"
                   showIcon={false}
                 />
-                <ButtonComponent 
+                <ButtonComponent
                   title="5 Sao"
                   fontSize="1.5rem"
                   width="100px"
@@ -437,7 +493,7 @@ const ProductDetailsPage = () => {
                   widthDiv="none"
                   showIcon={false}
                 />
-                <ButtonComponent 
+                <ButtonComponent
                   title="4 Sao"
                   fontSize="1.5rem"
                   width="100px"
@@ -446,7 +502,7 @@ const ProductDetailsPage = () => {
                   widthDiv="none"
                   showIcon={false}
                 />
-                <ButtonComponent 
+                <ButtonComponent
                   title="3 Sao"
                   fontSize="1.5rem"
                   width="100px"
@@ -455,7 +511,7 @@ const ProductDetailsPage = () => {
                   widthDiv="none"
                   showIcon={false}
                 />
-                <ButtonComponent 
+                <ButtonComponent
                   title="2 Sao"
                   fontSize="1.5rem"
                   width="100px"
@@ -464,7 +520,7 @@ const ProductDetailsPage = () => {
                   widthDiv="none"
                   showIcon={false}
                 />
-                <ButtonComponent 
+                <ButtonComponent
                   title="1 Sao"
                   fontSize="1.5rem"
                   width="100px"
@@ -475,7 +531,7 @@ const ProductDetailsPage = () => {
                 />
               </div>
               <div className={styles.noStar}>
-                <ButtonComponent 
+                <ButtonComponent
                   title="Có bình luận"
                   fontSize="1.5rem"
                   width="150px"
@@ -484,7 +540,7 @@ const ProductDetailsPage = () => {
                   widthDiv="none"
                   showIcon={false}
                 />
-                <ButtonComponent 
+                <ButtonComponent
                   title="Có hình ảnh/video"
                   fontSize="1.5rem"
                   width="150px"
@@ -500,13 +556,23 @@ const ProductDetailsPage = () => {
             {feedbackList.map((data, index) => (
               <div key={index}>
                 <ProductFeedBackComponent
-                  img={`data:image/png;base64,${data.user_id.user_avt_img|| ""}`}
+                  img={`data:image/png;base64,${
+                    data.user_id.user_avt_img || ""
+                  }`}
                   name={data.user_id.user_name || "ẩn danh"}
                   star={data.rating || "ẩn danh"}
-                  date={new Date(data.createdAt).toLocaleDateString('vi-VN') || "ẩn danh"}
+                  date={
+                    new Date(data.createdAt).toLocaleDateString("vi-VN") ||
+                    "ẩn danh"
+                  }
                   comment={data.content || "ẩn danh"}
-                  
-                  imgFeedback={Array.isArray(data.feedback_img) ? data.feedback_img.map(img => `data:image/png;base64,${img}`) : []}
+                  imgFeedback={
+                    Array.isArray(data.feedback_img)
+                      ? data.feedback_img.map(
+                          (img) => `data:image/png;base64,${img}`
+                        )
+                      : []
+                  }
                 />
 
                 {index !== feedbackList.length - 1 && (
@@ -522,7 +588,7 @@ const ProductDetailsPage = () => {
           </div>
         </div>
         <div className={styles.panigation}>
-          <Pagination defaultCurrent={1} total={50}/>
+          <Pagination defaultCurrent={1} total={50} />
         </div>
         {/* Related Products */}
         <div className={styles.otherProduct}>
@@ -534,7 +600,9 @@ const ProductDetailsPage = () => {
               {products.map((product, index) => (
                 <div key={index} className="col l-2-4 m-4 c-6">
                   <CardComponent
-                    src={`data:image/png;base64,${product.product_images[1] || ""}`}
+                    src={`data:image/png;base64,${
+                      product.product_images[1] || ""
+                    }`}
                     alt="ảnh sản phẩm"
                     name={product.product_title}
                     oldPrice={product.product_price}
@@ -550,7 +618,7 @@ const ProductDetailsPage = () => {
             </div>
           </div>
           <ButtonComponent
-            width="400px" 
+            width="400px"
             height="50px"
             title="Xem thêm"
             color="#000"
@@ -561,7 +629,7 @@ const ProductDetailsPage = () => {
             showIcon={false}
           />
         </div>
-      </div> 
+      </div>
     </div>
   );
 };
