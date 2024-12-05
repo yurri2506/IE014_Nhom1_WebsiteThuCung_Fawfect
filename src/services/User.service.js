@@ -361,3 +361,62 @@ export const setAddressDefault = async (id, access_token, adr_id) => {
     throw error; // Ném lỗi để component phía trên tiếp tục xử lý
   }
 };
+
+
+export const checkCurrentPass = async (id, access_token, password) => {
+  try {
+    const response = await fetch(`${API_URL}/check-current-password/${id}`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({password}),
+    });
+
+    //console.log(response)
+    // Kiểm tra nếu response không OK (status không phải 2xx)
+    if (!response.ok) {
+      const errorData = await response.json(); // Lấy nội dung lỗi từ body
+      throw errorData; // Ném lỗi để xử lý ở phần `catch`
+    }
+
+    // Nếu thành công, trả về dữ liệu
+    const data = await response.json();
+    //console.log(data)
+    return data;
+  } catch (error) {
+    // Lỗi sẽ được xử lý ở đây
+    console.error("Error in set default address:", error);
+    throw error; // Ném lỗi để component phía trên tiếp tục xử lý
+  }
+};
+
+export const changePassword = async (id, access_token, newPassword, confirmNewPass) => {
+  try {
+    const response = await fetch(`${API_URL}/change-password/${id}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({newPassword, confirmNewPass}),
+    });
+
+    //console.log(response)
+    // Kiểm tra nếu response không OK (status không phải 2xx)
+    if (!response.ok) {
+      const errorData = await response.json(); // Lấy nội dung lỗi từ body
+      throw errorData; // Ném lỗi để xử lý ở phần `catch`
+    }
+
+    // Nếu thành công, trả về dữ liệu
+    const data = await response.json();
+    //console.log(data)
+    return data;
+  } catch (error) {
+    // Lỗi sẽ được xử lý ở đây
+    console.error("Error in set default address:", error);
+    throw error; // Ném lỗi để component phía trên tiếp tục xử lý
+  }
+};
