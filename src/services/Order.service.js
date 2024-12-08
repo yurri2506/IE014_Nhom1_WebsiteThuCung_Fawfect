@@ -109,6 +109,7 @@ export const getAllFavoriteByUserId = async (id, token) => {
 // Cart
 export const updateCart = async (id, data, token) => {
   try {
+    console.log("dataFE", data)
     console.log(id);
     const response = await fetch(`${API_URL}/cart/update/${id}`, {
       method: "PATCH",

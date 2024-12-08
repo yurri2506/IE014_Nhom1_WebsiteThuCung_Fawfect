@@ -117,34 +117,29 @@ const ProductDetailsPage = () => {
     } else if (!selectedVariant) {
       alert("Vui lòng chọn một biến thể trước khi thêm vào giỏ hàng!");
     } else {
-      // Cập nhật giỏ hàng vào Redux
-      dispatch(
-        addToCart({
-          product_id: productDetails?._id,
-          variant: selectedVariant?.variant,
-          quantity: numProduct,
-          product_order_type: selectedVariant,
-        })
-      );
-
       // Gửi API cập nhật giỏ hàng vào DB (lấy ID của người dùng và dữ liệu giỏ hàng)
       const cartData = {
-        product_id: productDetails?._id,
-        variant: selectedVariant?.variant,
-        quantity: numProduct,
-        product_order_type: selectedVariant,
+        products: [
+          {
+            product_id: productDetails?._id,
+            variant: selectedVariant?._id,
+            quantity: numProduct,
+            price: selectedVariant.product_price,
+          },
+        ],
       };
 
+      if (selectedVariant?.product_order_type != null) {
+        cartData.product_order_type = selectedVariant.product_order_type;
+      }
+
+      dispatch(addToCart(cartData));
       try {
-        // Giả sử user.id là ID người dùng, bạn cần thay đổi theo cách bạn lưu trữ ID người dùng
         const userId = user._id; // Lấy ID người dùng từ thông tin người dùng đã đăng nhập
         const updatedCart = await updateCart(userId, cartData, accessToken); // Gửi API để cập nhật giỏ hàng
-        console.log("abc", accessToken, userId, cartData);
-        // Nếu cần, bạn có thể làm gì đó với dữ liệu trả về từ API
-        console.log("Giỏ hàng đã được cập nhật:", updatedCart);
-
-        // Cập nhật trạng thái hoặc thông báo thành công cho người dùng
-        alert("Sản phẩm đã được thêm vào giỏ hàng.");
+        if (updatedCart) {
+          alert("Sản phẩm đã được thêm vào giỏ hàng.");
+        }
       } catch (error) {
         // Xử lý lỗi nếu có
         console.error("Lỗi khi cập nhật giỏ hàng:", error);
@@ -321,9 +316,9 @@ const ProductDetailsPage = () => {
                             (1 - productDetails?.product_percent_discount / 100)
                           ).toLocaleString()
                         : (
-                          productDetails?.product_price *
-                          (1 - productDetails?.product_percent_discount / 100)
-                        ).toLocaleString()}
+                            productDetails?.product_price *
+                            (1 - productDetails?.product_percent_discount / 100)
+                          ).toLocaleString()}
                       đ
                     </span>
                     <span className={styles.oldPrice}>
@@ -347,10 +342,10 @@ const ProductDetailsPage = () => {
                             selectedVariant?.product_price *
                             (1 - productDetails?.product_percent_discount / 100)
                           ).toLocaleString()
-                        :(
-                          productDetails?.product_price *
-                          (1 - productDetails?.product_percent_discount / 100)
-                        ).toLocaleString()}
+                        : (
+                            productDetails?.product_price *
+                            (1 - productDetails?.product_percent_discount / 100)
+                          ).toLocaleString()}
                       đ
                     </span>
                   </div>
