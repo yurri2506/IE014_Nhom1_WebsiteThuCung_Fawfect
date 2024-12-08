@@ -18,6 +18,7 @@ const CartItemComponent = ({ item, onQuantityChange, onRemove, onCheck, isChecke
       </div>
       <div className={clsx(styles.details, { [styles.detailsLike]: isLike })}>
         <p>{item.name}</p>
+        <p>Loại: {item.product_order_type}</p>
         <div className={styles.price}>
           <p>{isInMobile ? 'đ' : ''}{item.oldPrice.toLocaleString()}{isInMobile ? '' : 'VNĐ'}</p>
           <p>{isInMobile ? 'đ' : ''}{item.price.toLocaleString()}{isInMobile ? '' : 'VNĐ'}</p>

@@ -189,14 +189,20 @@ const MyCartPage = () => {
         id: item.variant,
         name: item.product_id.product_title || "Không có tên sản phẩm",
         oldPrice: item.product_id.product_price || 0,
-        price: (item.product_id.product_price *
-          (1 - item.product_id.product_percent_discount / 100)
-            .toLocaleString()) || 0,
+        price:
+          item.product_id.product_price *
+            (
+              1 -
+              item.product_id.product_percent_discount / 100
+            ).toLocaleString() || 0,
         quantity: item.quantity || 1,
         img:
           item.product_id.product_images && item.product_id.product_images[0]
             ? `data:image/jpeg;base64,${item.product_id.product_images[0]}`
             : product4,
+        product_order_type: item.product_order_type
+          ? item.product_order_type
+          : "Không rõ",
       }));
       setCartItems(items);
     }
@@ -212,7 +218,9 @@ const MyCartPage = () => {
   const handleQuantityChange = (id, amount) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, item.quantity + amount) } : item
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + amount) }
+          : item
       )
     );
   };
@@ -257,15 +265,21 @@ const MyCartPage = () => {
     return item ? total + item.price * item.quantity : total;
   }, 0);
 
-  const safe = checkedItems.reduce((total, id) => {
-    const item = cartItems.find((cartItem) => cartItem.id === id);
-    return item ? total + (item.oldPrice - item.price) * item.quantity : total;
-  }, 0) + discount;
+  const safe =
+    checkedItems.reduce((total, id) => {
+      const item = cartItems.find((cartItem) => cartItem.id === id);
+      return item
+        ? total + (item.oldPrice - item.price) * item.quantity
+        : total;
+    }, 0) + discount;
 
-  const backTotal = checkedItems.reduce((total, id) => {
-    const item = cartItems.find((cartItem) => cartItem.id === id);
-    return item ? total + item.price * item.quantity : total;
-  }, 0) - discount + shippingFee;
+  const backTotal =
+    checkedItems.reduce((total, id) => {
+      const item = cartItems.find((cartItem) => cartItem.id === id);
+      return item ? total + item.price * item.quantity : total;
+    }, 0) -
+    discount +
+    shippingFee;
 
   // Xử lý hiển thị giao diện di động
   useEffect(() => {
