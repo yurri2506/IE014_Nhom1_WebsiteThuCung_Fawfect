@@ -1,0 +1,193 @@
+.main { 
+    background-color: rgba(250, 134, 56, 0.2);
+    padding: 50px 0;
+    background-image: url('../../assets/images/dogAndCat.svg');
+    // background-repeat: no-repeat;
+    background-size: contain;
+    // background-position: top 100px left;
+    background-position: bottom;
+}
+
+.signUp {
+    display: flex;
+}
+
+.introduce {
+    display: flex;
+}
+
+.title {
+    margin: auto 0;
+
+    .paragraph {
+        margin-top: 20px;
+        font-size: 3rem;
+        line-height: 1.5;
+        font-weight: 400;
+    }
+}
+
+.formRegister {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+
+    .other {
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        span {
+            color: rgba(165, 165, 165, 0.8);
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 10px;
+        }
+    }
+
+    .differentOption {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.footer {
+    margin: 20px 0;
+
+    .agreeTerms {
+        font-size: 1.85rem;
+        line-height: 1.5;
+        text-align: center;
+        padding: 10px 15px;
+
+        span {
+            color: #E87428;
+        }
+
+        a {
+            text-decoration: none;
+            color: #E87428;
+        }
+    }
+
+    .haveAccount {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 800;
+
+        p {
+            color: rgba(165, 165, 165, 0.8);
+        }
+
+        a {
+            text-decoration: none;
+            color: #E87428;
+        }
+    }
+}
+
+.error {
+    font-size: 1.3rem;
+    color: #E87428;
+    text-align: center;
+    margin-top: -14px;
+}
+
+@media screen and (max-width: 46.1875em) {
+    .main { 
+        background-color: #fff;
+        background-image: none;
+        padding: 0;
+        margin: 0 4px;
+    }
+
+    .title {
+        display: none;
+    }
+    
+    .formRegister {
+        justify-content: center;
+        align-items: center;
+
+        .form {
+            width: 100% !important; 
+            height: 100% !important;
+            border: none !important;
+        }
+    }
+
+    .input {
+
+        span {
+            top: 20% !important;
+            left: 18% !important;
+        }   
+    }
+
+    .btn {
+        width: 70% !important;
+        font-size: 1.8rem !important;
+        border-radius: 10px !important;
+    }
+
+    .other {
+        .under {
+            width: 40% !important;
+        }
+
+        span {
+            font-size: 1.7rem !important;
+        }
+    }
+
+    .differentOption {
+        flex-wrap: wrap;
+
+        img {
+            width: 30px;
+        }
+
+        .btnOp {
+            width: 70%;
+            height: 60px;
+            margin: 0 0 0 0;
+            flex-wrap: wrap;
+        }
+    }
+
+    .agreeTerms {
+        font-size: 1.5rem !important;
+        padding: 0 !important;
+    }
+
+    .haveAccount {
+        p {
+            font-size: 1.8rem !important;
+        }
+    }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .title {
+        display: none;
+    }
+
+    .formRegister {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.googleLogin {
+    margin: 30px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    // Optional: Adjust the size of the button if needed
+    button {
+      width: 100%;
+      max-width: 300px; // Set a max width for the Google button
+    }
+  }

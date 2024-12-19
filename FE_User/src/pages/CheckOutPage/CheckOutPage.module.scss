@@ -1,0 +1,333 @@
+.main {
+    background-color: #FAFAF8;
+    padding: 50px 0;
+
+    h2 {
+        font-size: 4rem;
+        font-weight: 900;
+    }
+
+}
+
+.address {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+
+    h3 {
+        font-size: 2rem;
+        color: #E87428;
+        font-weight: 700;
+        margin: 0;
+        margin-left: 10px;
+    }
+
+    .title {
+        display: flex;
+        align-items: center;
+    }
+
+    .infoAddress {
+        margin-left: 15px;
+        margin-top: 10px;
+        font-size: 1.5rem;
+        font-weight: 600;
+
+        // p:nth-child(1),
+        // p:nth-child(2) {
+        //     font-weight: 600;
+        // }
+
+        .info {
+            display: flex;
+            align-items: baseline;
+            margin-top: -5px;
+
+            span {
+                display: block;
+                width: 80px;
+                height: 30px;
+                background-color: #E87428;
+                border-radius: 20px;
+                text-align: center;
+                line-height: 30px;
+                color: #fff;
+            }
+        }
+
+        .change {
+            display: flex;
+            margin-left: 20px;
+            align-items: center;
+
+            span {
+                width: 100px;
+            }
+
+            a {
+                margin-left: 20px;
+                text-decoration: none;
+                color: #063AF5;
+            }
+        }
+    }
+}
+
+.productCheckOut {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-top: 40px;
+
+    .productTable {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    img {
+        width: 60px;
+        height: 60px;
+        float: left;
+    }
+
+    span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 4.3rem;
+        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        margin-top: 10px;
+    }
+
+    .productTable th {
+        font-size: 2rem;
+    }
+
+    .productTable td {
+        font-size: 1.8rem;
+    }
+    
+    .productTable th, 
+    .productTable td {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .productTable td:nth-child(1) {
+        text-align: justify;
+    }
+    
+    .productTable th {
+        font-weight: bold;
+    }
+    
+    .productTable th:nth-child(1),
+    .productTable td:nth-child(1) {
+        width: 40%;
+    }
+    
+    .productTable th:nth-child(2),
+    .productTable td:nth-child(2) {
+        width: 20%;
+    }
+
+    .productTable th:nth-child(3),
+    .productTable td:nth-child(3) {
+        width: 10%;
+    }
+    
+    .productTable th:nth-child(4),
+    .productTable td:nth-child(4) {
+        width: 30%;
+    }
+  
+}
+
+.discount {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-top: 40px;
+
+    h3 {
+        font-size: 2rem;
+        color: #E87428;
+        font-weight: 700;
+        margin: 0;
+        margin-left: 10px;
+        margin-right: 20px;
+    }
+
+    a {
+        margin-left: 20px;
+        text-decoration: none;
+        color: #063AF5;
+        font-size: 1.5rem;
+    }
+
+    ul {
+        padding: 0;
+    }
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.8rem;
+        margin: 20px 0 20px 10px;
+    }
+}
+
+.payment {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-top: 40px;
+
+    h3 {
+        font-size: 2rem;
+        color: #E87428;
+        font-weight: 700;
+        margin: 0;
+        margin-left: 10px;
+    }
+
+    .method {
+        display: flex;
+        margin-bottom: 40px;
+    }
+}
+
+.sumary {
+    width: 100%;
+    background-color: rgba(240, 233, 233, 0.6);
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-top: 40px;
+
+    h3 {
+        font-size: 2rem;
+        color: #E87428;
+        font-weight: 700;
+        margin: 0;
+        margin-left: 10px;
+    }
+
+    .total {
+        display: flex;
+        flex-direction: column;
+        margin-right: 50px;
+
+        p {
+            font-size: 1.8rem;
+            margin: 15px 0 15px 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .final {
+            color: #E87428;
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+    }
+}
+
+@media screen and (max-width: 46.1875em) {
+    .main {
+        margin: 0 4px;
+        h2 {
+            font-size: 2.5rem;
+        }
+    }
+
+    .change {
+
+        span {
+            width: 100px;
+            font-size: 1.3rem;
+        }
+
+        a {
+            // font-size: 0.5rem;
+            // flex: 1;
+            // margin-left: 0 !important;
+        }
+    }
+    
+    .address, .discount, .payment, .sumary {
+        padding: 10px 0;
+    }
+
+    .productCheckOut {
+    
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    
+        span {
+            height: 2rem;
+            font-size: 1.5rem;
+            -webkit-line-clamp: 1;
+        }
+
+        .productTable th {
+            font-size: 1.5rem;
+        }
+    
+        .productTable td {
+            font-size: 1.5rem;
+        }
+
+        .productTable td:nth-child(1) {
+            text-align: left !important;
+        }
+
+        .productTable th, 
+        .productTable td {
+            text-align: center;
+            padding: 0;
+        }
+    }
+
+    .methodBtn {
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    .sumary {
+        margin-top: 0;
+    
+        .total {
+            margin-right: 0;
+    
+            p {
+                font-size: 1.5rem;
+            }
+    
+            .final {
+                font-size: 1.8rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .main {
+    
+        h2 {
+            font-size: 3rem;
+        }
+    
+    }
+
+    .productTable td:nth-child(1) {
+        text-align: left !important;
+    }
+}
