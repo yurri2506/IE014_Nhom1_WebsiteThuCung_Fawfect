@@ -1,0 +1,108 @@
+.product {
+    margin: 0 0 30px;
+    position: relative;
+    cursor: pointer;
+    
+    .img {
+        background-color: #F0E9DF;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border: 2px solid #f4e3cb;
+        height: 300px;
+
+        img {
+            height: 100%;
+            width: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    }
+}
+
+.info {
+    border-left: 2px #f4e3cb solid;
+    border-right: 2px #f4e3cb solid;
+    border-bottom: 2px #f4e3cb solid;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 5px;
+    
+    h4 {
+        margin: 0;
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin: 10px 0;
+        height: 3.8rem;
+        overflow: hidden;
+        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        color: #000;
+    }
+
+    .price {
+        margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+        flex-wrap: wrap;
+        span {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #E87428;
+        }
+
+        .old {
+            color: rgba(0, 0, 0, 0.4);
+            text-decoration: line-through;
+        }
+    }
+}
+
+.star {
+    display: flex;
+    align-items: center;
+    .icon {
+        font-size: 1.5rem;
+        color: #FFC633;
+    }
+
+    span {
+        margin-left: 5px;
+        font-size: 1.3rem;
+    }
+}
+
+.percent {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 51, 51, 0.1);
+    width: 60px;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: rgba(251, 102, 3, 0.9);
+    }
+}
+
+
+@media screen and (max-width: 46.1875em) {
+    .price {
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .price {
+        flex-direction: column;
+    }
+}

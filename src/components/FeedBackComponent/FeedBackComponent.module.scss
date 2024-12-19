@@ -1,0 +1,40 @@
+.feedback {
+    height: 200px;
+    border: 1px solid #A19C9C;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.star {
+    margin-bottom: 20px;
+
+    .icon {
+        color: #FFC633;
+        font-size: 2rem;
+        margin-right: 4px;
+    }
+}
+
+.review {
+
+    .customer {
+        margin-bottom: 10px;
+    }
+
+    span {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-right: 4px;
+    }
+
+    .icon {
+        font-size: 2rem;
+        color: #01AB31;
+        margin-bottom: -2px;
+    }
+
+    p {
+        font-size: 1.6rem;
+        color: rgba(0, 0, 0, 0.6);
+    }
+}

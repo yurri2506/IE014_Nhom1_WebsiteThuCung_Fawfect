@@ -1,0 +1,54 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    max-width: 600px;
+    background-color: white;
+    padding: 20px;
+    z-index: 3;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 4rem;
+        cursor: pointer;
+    }
+
+    h3 {
+        font-size: 2.4rem;
+        color: #000;
+        margin-bottom: 20px;
+        font-weight: 900;
+    }
+}
+
+
+@media screen and (max-width: 46.1875em) {
+    .modal {
+      width: 100%;
+    }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .modal {
+      min-width: 500px;;
+    }
+}
+  
+
+  

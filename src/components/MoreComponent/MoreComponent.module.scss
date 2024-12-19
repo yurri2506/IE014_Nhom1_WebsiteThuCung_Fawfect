@@ -1,0 +1,75 @@
+.more {
+    width: 220px;
+    background-color: #F1EEE5;
+    transform-origin: 20% top;
+    animation: GrowthAnimation ease-in 0.2s;
+
+    ul {
+        display: block;
+        padding: 0;
+
+    }
+
+    li {
+        font-size: 2.2rem;
+        font-weight: 700;
+        
+        a {
+            color: #000 !important;
+            display: block;
+            margin: 0;
+            padding: 10px 0 10px 20px;
+        }
+    }
+
+    li:hover a {
+        color: #E87428 !important;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 0;
+        width: 220px;
+        height: 15px;
+    }
+}
+
+@keyframes GrowthAnimation {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+  
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+@media screen and (max-width: 46.1875em) {
+    .more {
+        background-color: #fff;
+        animation: GrowthAnimation ease-in 0.5s;
+    
+    
+        li {
+            font-size: 1.7rem !important;
+            font-weight: 700;
+            
+            a {
+                padding-left:20px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .more {
+        width: 180px;
+    }
+}
+
+

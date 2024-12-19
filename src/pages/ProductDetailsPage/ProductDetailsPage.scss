@@ -1,0 +1,19 @@
+.ProductDetailsPage_panigation__ZYBEy {
+    .anticon {
+        font-size: 2rem;
+    }
+
+    :where(.css-dev-only-do-not-override-49qm).ant-pagination .ant-pagination-prev .ant-pagination-item-link, :where(.css-dev-only-do-not-override-49qm).ant-pagination .ant-pagination-next .ant-pagination-item-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    :where(.css-dev-only-do-not-override-49qm).ant-pagination .ant-pagination-item-active {
+        border: 1px solid #E87428; 
+    }
+
+    :where(.css-dev-only-do-not-override-49qm).ant-pagination .ant-pagination-item-active a {
+        color: #E87428;
+    }
+}

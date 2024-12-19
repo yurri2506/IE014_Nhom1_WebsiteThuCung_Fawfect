@@ -1,0 +1,78 @@
+.aboutImg {
+    background-image: url('../../assets/images/aboutMe.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    min-height: 800px;
+    position: relative;
+}
+
+.info {
+    position: absolute;
+    text-align: center;
+    top: 50px;
+    left: 100px;
+
+    h3 {
+        font-size: 5rem;
+        font-weight: 700;
+    }
+
+    h2 {
+        font-size: 5rem;
+        font-weight: 800;
+        color: #E87428;
+    }
+
+    p {
+        font-size: 3.5rem;
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 46.1875em) {
+    .aboutImg {
+        min-height: 500px;
+    }
+    
+    .info {
+        top: 25px;
+        left: 20px;
+    
+        h3 {
+            font-size: 2.5rem;
+        }
+    }
+}
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .aboutImg {
+        min-height: 500px;
+    }
+
+    .info {
+        left: 50px;
+
+        h3 {
+            font-size: 3rem;
+        }
+    
+        h2 {
+            font-size: 3rem;
+        }
+    
+        p {
+
+            font-size: 2.5rem;
+        }
+    }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .info {
+        position: absolute;
+        text-align: center;
+        top: 15px;
+        left: -10px;
+        }
+    }

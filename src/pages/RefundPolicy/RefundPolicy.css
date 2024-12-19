@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Forum&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito:wght@200..1000&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+
+/* Main Content Styles */
+.main-content {
+  padding: 120px 90px 300px 90px;
+  text-align: justify; /* Căn đều nội dung chính */
+}
+
+.policy__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #000;
+  text-align: center; /* Căn giữa tiêu đề chính */
+}
+
+.policy__content {
+  text-align: justify; /* Căn đều nội dung trong phần chính sách */
+}
+
+.policy__content h2 {
+  font-size: 1.1rem;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.policy__content h3 {
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.policy__content p, 
+.policy__content ul {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.policy__content ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.policy__additional {
+  text-align: justify; /* Căn đều nội dung */
+}
+
+.policy__additional h2 {
+  font-size: 1.1rem;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.policy__additional h3 {
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.policy__additional p, 
+.policy__additional ul {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.policy__additional ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Responsive Styles for iPad Air (820px x 1180px) */
+@media screen and (max-width: 820px) {
+  .policy__additional h2 {
+    font-size: 1rem; /* Điều chỉnh kích thước chữ */
+  }
+
+  .policy__additional p,
+  .policy__additional ul {
+    font-size: 0.95rem; /* Giảm kích thước chữ cho vừa màn hình */
+  }
+}
+
+/* Responsive Styles for iPhone 14 Pro Max (430px x 932px) */
+@media screen and (max-width: 430px) {
+  .policy__additional h2 {
+    font-size: 0.9rem; /* Điều chỉnh kích thước chữ */
+  }
+
+  .policy__additional p,
+  .policy__additional ul {
+    font-size: 0.9rem; /* Giảm kích thước chữ cho phù hợp với điện thoại */
+    margin-bottom: 15px; /* Giảm khoảng cách giữa các đoạn văn */
+  }
+
+  .policy__additional ul {
+    margin-left: 15px; /* Giảm khoảng cách lề của danh sách */
+  }
+}
+
+/* Responsive Styles for iPad Air (820px x 1180px) */
+@media screen and (max-width: 820px) {
+  .main-content {
+    padding: 80px 40px 150px 40px; /* Điều chỉnh padding cho phù hợp với tablet */
+  }
+
+  .policy__title {
+    font-size: 1.8rem; /* Giảm kích thước chữ để phù hợp với màn hình nhỏ hơn */
+  }
+
+  .policy__content h2 {
+    font-size: 1rem; /* Điều chỉnh kích thước chữ */
+  }
+
+  .policy__content p,
+  .policy__content ul {
+    font-size: 0.95rem; /* Giảm kích thước chữ cho vừa màn hình */
+  }
+}
+
+/* Responsive Styles for iPhone 14 Pro Max (430px x 932px) */
+@media screen and (max-width: 430px) {
+  .main-content {
+    padding: 60px 20px 100px 20px; /* Điều chỉnh padding cho phù hợp với điện thoại */
+  }
+
+  .policy__title {
+    font-size: 1.5rem; /* Giảm kích thước chữ để phù hợp với màn hình điện thoại */
+  }
+
+  .policy__content h2 {
+    font-size: 0.9rem; /* Điều chỉnh kích thước chữ */
+  }
+
+  .policy__content p,
+  .policy__content ul {
+    font-size: 0.9rem; /* Giảm kích thước chữ cho phù hợp với điện thoại */
+    margin-bottom: 15px; /* Giảm khoảng cách giữa các đoạn văn */
+  }
+
+  .policy__content ul {
+    margin-left: 15px; /* Giảm khoảng cách lề của danh sách */
+  }
+}

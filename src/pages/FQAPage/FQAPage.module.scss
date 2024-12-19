@@ -1,0 +1,100 @@
+// FQAPage.module.scss
+
+.fqa {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    .header {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      color: #333;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+  
+    .intro {
+      font-size: 16px;
+      color: #555;
+      text-align: justify;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+  
+    .questions {
+      .questionBlock {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background-color: #fff;
+  
+        .question {
+          font-size: 18px;
+          font-weight: bold;
+          color: #444;
+          margin-bottom: 10px;
+        }
+  
+        .answer {
+          font-size: 16px;
+          color: #555;
+          line-height: 1.6;
+          margin-bottom: 10px;
+        }
+  
+        .answerList {
+          margin-left: 20px;
+          list-style: disc;
+  
+          li {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.5;
+  
+            a {
+              color: #e87428;
+              text-decoration: none;
+  
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+  
+        .contactList {
+          margin-left: 20px;
+          list-style: none;
+  
+          li {
+            font-size: 15px;
+            color: #555;
+  
+            a {
+              color: #e87428;
+              text-decoration: none;
+  
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+    }
+  
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 16px;
+      color: #555;
+  
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+  

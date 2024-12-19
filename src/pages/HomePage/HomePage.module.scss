@@ -1,0 +1,28 @@
+.sliderImg {
+    margin: 30px;
+}
+
+.underLine {
+    margin-top: 50px;
+}
+
+// Reponsive
+@media screen and (max-width: 46.1875em) {
+    .underNew {
+        margin: 0;
+    }
+
+    .underLine {
+        margin: 20px 0;
+    }
+}
+
+@media screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .underNew {
+        margin: 0;
+    }
+
+    .underLine {
+        margin: 20px 0;
+    }
+}
